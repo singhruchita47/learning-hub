@@ -24,20 +24,20 @@ export default function Dashboard() {
       {/* Stats Row */}
       <StatCards />
 
-      {/* Second Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:h-[380px]">
-        <div className="col-span-1 lg:col-span-3 h-full">
+      {/* Second Row: Calendar | Courses | Leaderboard */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="col-span-1 lg:col-span-3">
           <CalendarWidget />
         </div>
-        <div className="col-span-1 lg:col-span-6 h-full overflow-hidden">
+        <div className="col-span-1 lg:col-span-6 min-h-[380px] overflow-hidden">
           <CourseAccess />
         </div>
-        <div className="col-span-1 lg:col-span-3 h-full">
+        <div className="col-span-1 lg:col-span-3">
           <LeaderboardWidget />
         </div>
       </div>
 
-      {/* Third Row */}
+      {/* Third Row: Study Resources | Quick Quiz — compact side-by-side */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <StudyResources />
         <QuickQuiz />
