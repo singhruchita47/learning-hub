@@ -1,0 +1,610 @@
+Create a complete frontend-only Learning Management System (LMS) Dashboard using Vite + React (JavaScript) + Tailwind CSS.
+
+The website name is:
+
+🎓 Learner Hub
+
+The UI should NOT look generic.
+
+It should look like a modern premium LMS similar to Coursera, Canvas LMS, FutureSkills Prime, Google Classroom, Udemy and Microsoft Learn.
+
+Use smooth shadows, rounded cards, gradients, modern typography, beautiful spacing, hover animations and glassmorphism where appropriate.
+
+The project should be fully responsive.
+
+------------------------------------------------
+TECH STACK
+------------------------------------------------
+
+• React (JavaScript)
+• Vite
+• Tailwind CSS
+• React Icons
+• Framer Motion
+• Recharts
+• React Router DOM
+
+Frontend only.
+
+No backend.
+
+Use dummy JSON data.
+
+------------------------------------------------
+LAYOUT
+------------------------------------------------
+
+Desktop
+
+Very narrow left sidebar (80px)
+
+Scrollable main dashboard
+
+Sticky top navbar
+
+Mobile
+
+Hamburger sidebar
+
+Responsive cards
+
+------------------------------------------------
+LEFT SIDEBAR
+------------------------------------------------
+
+Logo
+
+🎓 Learner Hub
+
+Icons only
+
+Dashboard
+
+Courses
+
+Study Resources
+
+Assignments
+
+Quizzes
+
+Calendar
+
+Leaderboard
+
+Community
+
+Certificates
+
+Profile
+
+Settings
+
+Logout
+
+Hover effects
+
+Active page indicator
+
+------------------------------------------------
+TOP NAVBAR
+------------------------------------------------
+
+Logo
+
+Navigation
+
+Dashboard
+
+Courses
+
+Study Resources
+
+Quizzes
+
+Assignments
+
+Community
+
+Search Bar
+
+Notification
+
+Messages
+
+Profile dropdown
+
+------------------------------------------------
+HERO SECTION
+------------------------------------------------
+
+Large hero section
+
+Left side
+
+Welcome Back,
+
+Arjun 👋
+
+Keep learning and achieve your goals today.
+
+Continue Learning Button
+
+Browse Courses Button
+
+Right side
+
+Large colorful cartoon education illustration
+
+Books
+
+Laptop
+
+Graduation Cap
+
+Notebook
+
+Pencil
+
+Plants
+
+Soft floating shapes
+
+Modern gradients
+
+------------------------------------------------
+STATISTICS CARDS
+------------------------------------------------
+
+4 beautiful cards
+
+Overall Progress
+
+72%
+
+Animated progress bar
+
+Blue
+
+----------------
+
+Ongoing Classes
+
+6
+
+Green
+
+----------------
+
+Upcoming Exams
+
+2
+
+Orange
+
+----------------
+
+Total Credits
+
+20
+
+Purple
+
+Each card has
+
+Icon
+
+Gradient
+
+Hover animation
+
+Rounded
+
+Shadow
+
+------------------------------------------------
+SECOND ROW
+------------------------------------------------
+
+Left
+
+Calendar Widget
+
+Mini calendar
+
+Today's schedule
+
+Database Systems
+
+9:00 AM
+
+Operating Systems Lab
+
+11:00 AM
+
+Data Structures Quiz
+
+2:00 PM
+
+------------------------------------------------
+
+Middle
+
+My Course Access
+
+Beautiful course cards
+
+Real subjects
+
+Use illustrations
+
+Subjects
+
+Data Structures
+
+Database Systems
+
+Operating Systems
+
+Computer Networks
+
+Artificial Intelligence
+
+Machine Learning
+
+Python Programming
+
+Java Programming
+
+Cloud Computing
+
+Cyber Security
+
+Software Engineering
+
+Each card
+
+Image
+
+Title
+
+Teacher
+
+Progress Bar
+
+Continue Button
+
+Hover Animation
+
+------------------------------------------------
+
+Right
+
+Leaderboard
+
+Top Learners
+
+Avatar
+
+XP
+
+Ranking
+
+Gold
+
+Silver
+
+Bronze
+
+------------------------------------------------
+NEXT ROW
+------------------------------------------------
+
+Study Resources
+
+Exactly like a real LMS
+
+Cards
+
+PDF Icon
+
+Title
+
+Size
+
+Download Button
+
+Resources
+
+Data Structures Notes
+
+Database Normalization Guide
+
+Operating Systems Concepts
+
+Computer Networks Notes
+
+AI Fundamentals
+
+Python Cheat Sheet
+
+------------------------------------------------
+Quick Quiz
+------------------------------------------------
+
+Cards
+
+Quiz Icon
+
+Title
+
+Questions
+
+Difficulty Badge
+
+Start Button
+
+Quizzes
+
+Data Structures Basics
+
+Database MCQ
+
+Operating Systems Quiz
+
+Networking Quiz
+
+AI Fundamentals Quiz
+
+------------------------------------------------
+ANNOUNCEMENTS
+------------------------------------------------
+
+Announcement cards
+
+Icons
+
+Colored dots
+
+Examples
+
+Midterm Schedule Released
+
+New Study Material Uploaded
+
+Hackathon Registration Open
+
+AI Workshop Tomorrow
+
+Placement Drive
+
+------------------------------------------------
+EXTRA SECTIONS
+------------------------------------------------
+
+Learning Activity Chart
+
+Weekly Progress
+
+Upcoming Deadlines
+
+Course Categories
+
+Certificates Earned
+
+Recent Activity Timeline
+
+------------------------------------------------
+CHARTS
+------------------------------------------------
+
+Use Recharts
+
+Weekly Progress
+
+Course Completion
+
+XP Growth
+
+------------------------------------------------
+COURSE IMAGES
+------------------------------------------------
+
+Use attractive education illustrations.
+
+Do NOT use plain icons.
+
+Each subject should have its own colorful image.
+
+Examples
+
+python
+html
+
+css
+
+javascript
+
+
+Networking
+
+
+Artificial Intelligence
+
+
+Cloud Computing
+
+
+
+Machine Learning
+
+
+------------------------------------------------
+DESIGN
+------------------------------------------------
+
+Primary
+
+#4F46E5
+
+Secondary
+
+#7C3AED
+
+Success
+
+#10B981
+
+Warning
+
+#F59E0B
+
+Danger
+
+#EF4444
+
+Background
+
+#F8FAFC
+
+Cards
+
+White
+
+Rounded-2xl
+
+Large shadow
+
+Hover lift animation
+
+Soft gradients
+
+------------------------------------------------
+TYPOGRAPHY
+------------------------------------------------
+
+Bold headings
+
+Modern font
+
+Large spacing
+
+Professional LMS appearance
+
+------------------------------------------------
+ANIMATIONS
+------------------------------------------------
+
+Framer Motion
+
+Fade In
+
+Slide Up
+
+Hover Lift
+
+Animated Progress Bars
+
+Button Ripple
+
+------------------------------------------------
+FOLDER STRUCTURE
+------------------------------------------------
+
+src
+
+assets/
+
+components/
+
+Sidebar.jsx
+
+Navbar.jsx
+
+Hero.jsx
+
+StatCard.jsx
+
+CalendarWidget.jsx
+
+CourseCard.jsx
+
+Leaderboard.jsx
+
+StudyResources.jsx
+
+QuizCard.jsx
+
+AnnouncementCard.jsx
+
+ProgressChart.jsx
+
+ActivityTimeline.jsx
+
+pages/
+
+Dashboard.jsx
+
+data/
+
+courses.js
+
+resources.js
+
+quiz.js
+
+leaderboard.js
+
+announcements.js
+
+App.jsx
+
+main.jsx
+
+------------------------------------------------
+TAILWIND
+------------------------------------------------
+
+Use Grid
+
+Flex
+
+Gap
+
+Rounded-2xl
+
+Shadow-xl
+
+Hover
+
+Transition
+
+Duration
+
+Responsive
+
+Dark mode ready
+
+------------------------------------------------
+OUTPUT
+------------------------------------------------
+
+Generate the COMPLETE project.
+
+Generate EVERY React component.
+
+Generate ALL dummy JSON data.
+
+Generate Tailwind classes.
+
+Generate React Router.
+
+Generate folder structure.
+
+Generate every file completely.
+
+Do NOT skip any component.
+
+Do NOT leave placeholders.
+
+Write production-ready clean code.
