@@ -1,63 +1,58 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { GraduationCap, BookOpen, Trophy, Clock } from "lucide-react";
+import { BookOpen, Trophy, Clock, TrendingUp } from "lucide-react";
 
-const floatAnim = {
-  animate: { y: [0, -8, 0] },
-  transition: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-};
+const float = (delay = 0) => ({
+  animate: { y: [0, -7, 0] },
+  transition: { duration: 3.5, repeat: Infinity, ease: "easeInOut", delay },
+});
 
 export default function HeroSection() {
   return (
     <div
       className="relative overflow-hidden rounded-3xl"
-      style={{
-        background: "linear-gradient(135deg, #bfcbff 0%, #d4c8ff 45%, #c2b0ff 100%)",
-      }}
+      style={{ background: "linear-gradient(135deg, #f0f4ff 0%, #f5f3ff 60%, #ede9fe 100%)" }}
     >
-      {/* Soft glow blobs */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-16 -right-16 h-72 w-72 rounded-full opacity-25"
-          style={{ background: "radial-gradient(circle, #818cf8 0%, transparent 70%)" }} />
-        <div className="absolute bottom-0 left-1/4 h-48 w-48 rounded-full opacity-20"
-          style={{ background: "radial-gradient(circle, #a78bfa 0%, transparent 70%)" }} />
-        <div className="absolute top-1/2 -left-12 h-40 w-40 rounded-full opacity-15"
-          style={{ background: "radial-gradient(circle, #818cf8 0%, transparent 70%)" }} />
-      </div>
-
-      {/* Dot grid pattern */}
-      <div className="absolute inset-0 opacity-[0.07]"
+      {/* Subtle top-right accent */}
+      <div
+        className="absolute top-0 right-0 w-[480px] h-[480px] rounded-full pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(circle, #312e81 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }} />
+          background: "radial-gradient(circle at 70% 30%, rgba(99,102,241,0.12) 0%, transparent 65%)",
+        }}
+      />
+      {/* Bottom-left accent */}
+      <div
+        className="absolute bottom-0 left-0 w-64 h-64 rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)",
+        }}
+      />
 
-      <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 px-8 py-10 md:px-14 md:py-14">
+      <div className="relative z-10 flex flex-col md:flex-row items-center gap-10 px-8 py-10 md:px-14 md:py-12">
 
-        {/* ── LEFT: Text content ── */}
+        {/* ── LEFT: Text ── */}
         <motion.div
           initial={{ opacity: 0, x: -28 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex-1 space-y-6"
+          transition={{ duration: 0.55 }}
+          className="flex-1 space-y-7"
         >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold bg-white/30 text-indigo-900 backdrop-blur-sm border border-white/40">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+          {/* Status badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-1.5 text-sm font-semibold text-indigo-700">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             6 classes ongoing today
           </div>
 
           {/* Headline */}
-          <div className="space-y-2">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-indigo-950 leading-[1.1]">
+          <div className="space-y-3">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1]" style={{ color: "#1e1b4b" }}>
               Welcome Back,{" "}
-              <span className="text-indigo-700">Arjun</span>{" "}
-              <span>👋</span>
+              <span style={{ color: "#4338ca" }}>Arjun!</span>
             </h1>
-            <p className="text-base md:text-lg text-indigo-800/80 max-w-lg leading-relaxed font-medium">
+            <p className="text-base md:text-lg font-medium leading-relaxed max-w-md" style={{ color: "#4b5563" }}>
               Keep learning and achieve your goals today. You have{" "}
-              <span className="font-bold text-indigo-900">2 upcoming deadlines</span> this week.
+              <span className="font-bold" style={{ color: "#1e1b4b" }}>2 upcoming deadlines</span> this week.
             </p>
           </div>
 
@@ -66,7 +61,8 @@ export default function HeroSection() {
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
               <Button
                 size="lg"
-                className="rounded-full px-8 text-base font-bold bg-indigo-700 hover:bg-indigo-800 text-white shadow-lg shadow-indigo-900/25 border-0"
+                className="rounded-full px-8 font-bold text-white border-0 shadow-lg"
+                style={{ background: "linear-gradient(135deg, #4338ca, #6d28d9)", boxShadow: "0 8px 24px rgba(67,56,202,0.3)" }}
               >
                 Continue Learning →
               </Button>
@@ -75,7 +71,8 @@ export default function HeroSection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-full px-8 text-base font-bold bg-white/50 hover:bg-white/80 backdrop-blur-sm border-white/60 text-indigo-900"
+                className="rounded-full px-8 font-bold bg-white hover:bg-indigo-50 border-indigo-200"
+                style={{ color: "#4338ca" }}
                 asChild
               >
                 <Link href="/courses">Browse Courses</Link>
@@ -83,87 +80,102 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Quick stats */}
-          <div className="flex flex-wrap gap-8 pt-2">
+          {/* Quick numbers */}
+          <div className="flex flex-wrap gap-8 pt-1">
             {[
-              { label: "Courses Enrolled", value: "11" },
+              { label: "Courses", value: "11" },
               { label: "Quizzes Done", value: "24" },
               { label: "Certificates", value: "3" },
             ].map((s) => (
               <div key={s.label}>
-                <div className="text-3xl font-extrabold text-indigo-900">{s.value}</div>
-                <div className="text-xs font-semibold text-indigo-700/80 mt-0.5">{s.label}</div>
+                <div className="text-3xl font-extrabold" style={{ color: "#1e1b4b" }}>{s.value}</div>
+                <div className="text-xs font-semibold mt-0.5" style={{ color: "#6b7280" }}>{s.label}</div>
               </div>
             ))}
           </div>
         </motion.div>
 
-        {/* ── RIGHT: Floating cards illustration ── */}
+        {/* ── RIGHT: Photo + floating badges ── */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, x: 20 }}
-          animate={{ opacity: 1, scale: 1, x: 0 }}
-          transition={{ duration: 0.65, delay: 0.1 }}
-          className="flex-1 flex items-center justify-center relative min-h-[280px] md:min-h-[320px]"
+          initial={{ opacity: 0, x: 28 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="flex-1 flex items-center justify-center relative min-h-[300px] md:min-h-[360px]"
         >
-          {/* Central circle */}
-          <div className="absolute h-52 w-52 rounded-full bg-white/20 backdrop-blur-sm border border-white/40" />
-          <div className="absolute h-64 w-64 rounded-full border border-white/25 border-dashed animate-spin" style={{ animationDuration: "18s" }} />
+          {/* Decorative circle behind photo */}
+          <div
+            className="absolute h-64 w-64 md:h-72 md:w-72 rounded-full"
+            style={{ background: "linear-gradient(135deg, #c7d2fe 0%, #ddd6fe 100%)" }}
+          />
 
-          {/* Center icon */}
-          <div className="relative flex h-24 w-24 items-center justify-center rounded-3xl bg-white/60 backdrop-blur-md shadow-xl border border-white/70">
-            <GraduationCap className="h-12 w-12 text-indigo-700" />
-          </div>
-
-          {/* Floating card — top left */}
-          <motion.div {...floatAnim} transition={{ ...floatAnim.transition, delay: 0 }}
-            className="absolute -top-2 left-4 md:left-8 flex items-center gap-2 rounded-2xl bg-white/80 backdrop-blur-sm px-4 py-2.5 shadow-lg border border-white/60"
+          {/* Student photo */}
+          <motion.div
+            initial={{ scale: 0.92, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="relative z-10 h-60 w-60 md:h-72 md:w-72 overflow-hidden rounded-full border-4 border-white shadow-2xl"
           >
-            <div className="h-8 w-8 rounded-xl bg-indigo-100 flex items-center justify-center">
-              <BookOpen className="h-4 w-4 text-indigo-600" />
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-800">Data Structures</p>
-              <p className="text-[10px] text-gray-500 font-medium">85% complete</p>
+            <img
+              src="https://images.unsplash.com/photo-1571260899304-425eee4c7efd?w=560&h=560&fit=crop&auto=format"
+              alt="Student learning"
+              className="h-full w-full object-cover"
+            />
+          </motion.div>
+
+          {/* Badge: top-left — Course progress */}
+          <motion.div {...float(0)} className="absolute top-2 left-2 md:left-6">
+            <div className="flex items-center gap-2 rounded-2xl bg-white px-3 py-2 shadow-lg border border-gray-100">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-indigo-100">
+                <BookOpen className="h-4 w-4 text-indigo-600" />
+              </div>
+              <div>
+                <p className="text-[11px] font-bold text-gray-800 leading-tight">Data Structures</p>
+                <p className="text-[10px] text-gray-400 font-medium">85% complete</p>
+              </div>
             </div>
           </motion.div>
 
-          {/* Floating card — right */}
-          <motion.div {...floatAnim} transition={{ ...floatAnim.transition, delay: 1.2 }}
-            className="absolute top-1/4 -right-2 md:right-0 flex items-center gap-2 rounded-2xl bg-white/80 backdrop-blur-sm px-4 py-2.5 shadow-lg border border-white/60"
-          >
-            <div className="h-8 w-8 rounded-xl bg-emerald-100 flex items-center justify-center">
-              <Trophy className="h-4 w-4 text-emerald-600" />
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-800">Rank #3</p>
-              <p className="text-[10px] text-gray-500 font-medium">Leaderboard</p>
-            </div>
-          </motion.div>
-
-          {/* Floating card — bottom right */}
-          <motion.div {...floatAnim} transition={{ ...floatAnim.transition, delay: 0.6 }}
-            className="absolute bottom-4 right-4 md:right-6 flex items-center gap-2 rounded-2xl bg-white/80 backdrop-blur-sm px-4 py-2.5 shadow-lg border border-white/60"
-          >
-            <div className="h-8 w-8 rounded-xl bg-amber-100 flex items-center justify-center">
-              <Clock className="h-4 w-4 text-amber-600" />
-            </div>
-            <div>
-              <p className="text-xs font-bold text-gray-800">Due in 2 days</p>
-              <p className="text-[10px] text-gray-500 font-medium">Database Exam</p>
+          {/* Badge: top-right — Rank */}
+          <motion.div {...float(1.1)} className="absolute top-4 right-0 md:right-4">
+            <div className="flex items-center gap-2 rounded-2xl bg-white px-3 py-2 shadow-lg border border-gray-100">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-100">
+                <Trophy className="h-4 w-4 text-amber-500" />
+              </div>
+              <div>
+                <p className="text-[11px] font-bold text-gray-800 leading-tight">Rank #3</p>
+                <p className="text-[10px] text-gray-400 font-medium">Leaderboard</p>
+              </div>
             </div>
           </motion.div>
 
-          {/* Floating card — bottom left */}
-          <motion.div {...floatAnim} transition={{ ...floatAnim.transition, delay: 1.8 }}
-            className="absolute bottom-4 left-2 md:left-6 flex items-center gap-2 rounded-2xl bg-indigo-700/90 backdrop-blur-sm px-4 py-2.5 shadow-lg"
-          >
-            <span className="text-lg">🎯</span>
-            <div>
-              <p className="text-xs font-bold text-white">72% Overall</p>
-              <p className="text-[10px] text-indigo-200 font-medium">Progress</p>
+          {/* Badge: bottom-right — Deadline */}
+          <motion.div {...float(0.6)} className="absolute bottom-6 right-0 md:right-2">
+            <div className="flex items-center gap-2 rounded-2xl bg-white px-3 py-2 shadow-lg border border-gray-100">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-rose-100">
+                <Clock className="h-4 w-4 text-rose-500" />
+              </div>
+              <div>
+                <p className="text-[11px] font-bold text-gray-800 leading-tight">Due in 2 days</p>
+                <p className="text-[10px] text-gray-400 font-medium">Database Exam</p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Badge: bottom-left — Progress pill */}
+          <motion.div {...float(1.8)} className="absolute bottom-4 left-0 md:left-4">
+            <div
+              className="flex items-center gap-2 rounded-2xl px-3 py-2 shadow-lg"
+              style={{ background: "linear-gradient(135deg, #4338ca, #6d28d9)" }}
+            >
+              <TrendingUp className="h-4 w-4 text-white" />
+              <div>
+                <p className="text-[11px] font-bold text-white leading-tight">72% Overall</p>
+                <p className="text-[10px] text-indigo-200 font-medium">Progress</p>
+              </div>
             </div>
           </motion.div>
         </motion.div>
+
       </div>
     </div>
   );
