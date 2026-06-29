@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -5,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
+import Login from "@/pages/Login";
 
 // Pages
 import Dashboard from "@/pages/Dashboard";
@@ -21,12 +23,19 @@ import Settings from "@/pages/Settings";
 
 const queryClient = new QueryClient();
 
-function Layout({ children }: { children: React.ReactNode }) {
+type Role = "student" | "faculty" | "admin";
+
+interface AuthUser {
+  name: string;
+  role: Role;
+}
+
+function Layout({ children, user, onLogout }: { children: React.ReactNode; user: AuthUser; onLogout: () => void }) {
   return (
     <div className="flex min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 selection:text-primary">
-      <Sidebar />
+      <Sidebar onLogout={onLogout} />
       <div className="flex flex-col flex-1 md:pl-20 min-w-0">
-        <Navbar />
+        <Navbar user={user} onLogout={onLogout} />
         <main className="flex-1 overflow-x-hidden">
           {children}
         </main>
@@ -35,9 +44,9 @@ function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Router() {
+function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
   return (
-    <Layout>
+    <Layout user={user} onLogout={onLogout}>
       <Switch>
         <Route path="/" component={Dashboard} />
         <Route path="/courses" component={Courses} />
@@ -57,12 +66,26 @@ function Router() {
 }
 
 export default function App() {
+  const [user, setUser] = useState<AuthUser | null>(null);
+
+  function handleLogin(role: Role, name: string) {
+    setUser({ role, name });
+  }
+
+  function handleLogout() {
+    setUser(null);
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
+        {user ? (
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router user={user} onLogout={handleLogout} />
+          </WouterRouter>
+        ) : (
+          <Login onLogin={handleLogin} />
+        )}
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>

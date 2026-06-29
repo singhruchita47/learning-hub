@@ -32,7 +32,7 @@ const bottomNavItems = [
   { icon: Settings, label: "Settings", href: "/settings" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ onLogout }: { onLogout?: () => void }) {
   const [location] = useLocation();
 
   return (
@@ -80,7 +80,7 @@ export default function Sidebar() {
         })}
         <Tooltip delayDuration={0}>
           <TooltipTrigger asChild>
-            <button className="flex h-12 w-12 items-center justify-center rounded-xl text-muted-foreground transition-all duration-200 hover:bg-destructive/10 hover:text-destructive mt-2">
+            <button onClick={onLogout} className="flex h-12 w-12 items-center justify-center rounded-xl text-muted-foreground transition-all duration-200 hover:bg-destructive/10 hover:text-destructive mt-2">
               <LogOut className="h-5 w-5" />
             </button>
           </TooltipTrigger>
