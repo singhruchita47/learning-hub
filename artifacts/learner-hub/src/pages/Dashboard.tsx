@@ -10,149 +10,132 @@ import Announcements from "@/components/Announcements";
 import ActivityCharts from "@/components/ActivityCharts";
 import DeadlinesTimeline from "@/components/DeadlinesTimeline";
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+const categories = [
+  "Computer Science", "Information Technology", "Data Science", "Cyber Security",
+  "AI & ML", "Programming", "Cloud & DevOps", "Mathematics", "Networking", "Software Engineering",
+];
+
+function SectionLabel({ children, light }: { children: React.ReactNode; light?: boolean }) {
   return (
-    <div className="flex items-center gap-3 mb-5">
-      <div className="h-5 w-1 rounded-full bg-primary" />
-      <h2 className="text-base font-extrabold text-foreground tracking-tight">{children}</h2>
-      <div className="flex-1 h-px bg-border" />
+    <div className="flex items-center gap-3 mb-6">
+      <div className={`h-5 w-1 rounded-full ${light ? "bg-white/60" : "bg-primary"}`} />
+      <h2 className={`text-base font-extrabold tracking-tight ${light ? "text-white/90" : "text-foreground"}`}>
+        {children}
+      </h2>
+      <div className={`flex-1 h-px ${light ? "bg-white/20" : "bg-border"}`} />
     </div>
   );
 }
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-const categories = [
-  "Computer Science", "Information Technology", "Data Science", "Cyber Security",
-  "AI & ML", "Programming", "Cloud & DevOps", "Mathematics", "Networking", "Software Engineering"
-];
+interface BandProps {
+  children: React.ReactNode;
+  bg: string;
+  className?: string;
+}
+function Band({ children, bg, className = "" }: BandProps) {
+  return (
+    <motion.section
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5 }}
+      className={`w-full py-10 px-4 md:px-8 lg:px-12 ${className}`}
+      style={{ background: bg }}
+    >
+      <div className="max-w-[1520px] mx-auto">
+        {children}
+      </div>
+    </motion.section>
+  );
+}
 
 export default function Dashboard() {
   return (
-    <div className="flex flex-col px-4 md:px-8 lg:px-10 pt-6 pb-16 max-w-[1600px] mx-auto space-y-12">
+    <div className="flex flex-col pb-16">
 
-      {/* ── Section 1: Hero ── */}
+      {/* ── 1. Hero — dark navy ── */}
       <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        animate="visible"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full pt-6 pb-0 px-4 md:px-8 lg:px-12"
+        style={{ background: "#0f172a" }}
       >
-        <HeroSection />
+        <div className="max-w-[1520px] mx-auto">
+          <HeroSection />
+        </div>
       </motion.section>
 
-      {/* ── Section 2: Stats ── */}
-      <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-      >
+      {/* ── 2. Stats — clean white ── */}
+      <Band bg="#ffffff">
         <SectionLabel>Your Progress At a Glance</SectionLabel>
         <StatCards />
-      </motion.section>
+      </Band>
 
-      {/* ── Section 3: Courses ── */}
-      <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-      >
+      {/* ── 3. Courses — soft blue-grey ── */}
+      <Band bg="#f0f5ff">
         <SectionLabel>My Courses</SectionLabel>
         <CourseAccess />
-      </motion.section>
+      </Band>
 
-      {/* ── Section 4: Calendar + Leaderboard ── */}
-      <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-      >
+      {/* ── 4. Schedule & Rankings — light slate ── */}
+      <Band bg="#f8fafc">
         <SectionLabel>Schedule & Rankings</SectionLabel>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <CalendarWidget />
           <LeaderboardWidget />
         </div>
-      </motion.section>
+      </Band>
 
-      {/* ── Section 5: Study Resources + Quick Quiz ── */}
-      <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-      >
+      {/* ── 5. Resources & Practice — soft violet ── */}
+      <Band bg="#faf5ff">
         <SectionLabel>Resources & Practice</SectionLabel>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <StudyResources />
           <QuickQuiz />
         </div>
-      </motion.section>
+      </Band>
 
-      {/* ── Section 6: Announcements ── */}
-      <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-      >
+      {/* ── 6. Announcements — warm cream ── */}
+      <Band bg="#fffbeb">
         <SectionLabel>Announcements</SectionLabel>
         <Announcements />
-      </motion.section>
+      </Band>
 
-      {/* ── Section 7: Activity Charts ── */}
-      <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-      >
+      {/* ── 7. Activity — soft teal-green ── */}
+      <Band bg="#f0fdf4">
         <SectionLabel>Learning Activity</SectionLabel>
         <ActivityCharts />
-      </motion.section>
+      </Band>
 
-      {/* ── Section 8: Deadlines ── */}
-      <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-      >
+      {/* ── 8. Deadlines — soft rose ── */}
+      <Band bg="#fff1f2">
         <SectionLabel>Upcoming Deadlines</SectionLabel>
         <DeadlinesTimeline />
-      </motion.section>
+      </Band>
 
-      {/* ── Section 9: Course Categories ── */}
-      <motion.section
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-      >
-        <SectionLabel>Browse by Category</SectionLabel>
+      {/* ── 9. Categories — deep navy footer feel ── */}
+      <Band bg="#0f172a" className="!py-12">
+        <SectionLabel light>Browse by Category</SectionLabel>
         <div
           className="flex gap-3 overflow-x-auto pb-2 snap-x"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {categories.map((category, i) => (
+          {categories.map((cat, i) => (
             <motion.div
-              key={category}
+              key={cat}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.04 }}
-              whileHover={{ scale: 1.04 }}
-              className="snap-start shrink-0 rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-foreground hover:border-primary hover:text-primary hover:shadow-md cursor-pointer transition-all"
+              whileHover={{ scale: 1.05, backgroundColor: "#1e3a8a" }}
+              className="snap-start shrink-0 rounded-full border border-slate-700 bg-slate-800 px-5 py-2.5 text-sm font-semibold text-slate-300 hover:text-white cursor-pointer transition-all"
             >
-              {category}
+              {cat}
             </motion.div>
           ))}
         </div>
-      </motion.section>
+      </Band>
 
     </div>
   );

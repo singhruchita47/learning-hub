@@ -12,9 +12,6 @@ function CartoonBoy() {
   return (
     <svg viewBox="0 0 420 370" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full drop-shadow-2xl">
 
-      {/* ── Background glow circle ── */}
-      <circle cx="210" cy="210" r="145" fill="#1e3a5f" opacity="0.35" />
-      <circle cx="210" cy="210" r="120" fill="#1e40af" opacity="0.12" />
 
       {/* ── Book stack (left) ── */}
       {/* Book 1 bottom */}
