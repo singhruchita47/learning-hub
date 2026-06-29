@@ -145,22 +145,8 @@ export default function HeroSection() {
   return (
     <div
       className="relative overflow-hidden rounded-3xl"
-      style={{
-        background: "linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #1a2744 100%)",
-      }}
+      style={{ background: "linear-gradient(135deg, #f0f5ff 0%, #e8f0fe 55%, #eef2ff 100%)" }}
     >
-      {/* Blue glow blobs */}
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none opacity-20"
-        style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 65%)" }} />
-      <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full pointer-events-none opacity-10"
-        style={{ background: "radial-gradient(circle, #60a5fa 0%, transparent 70%)" }} />
-
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: "linear-gradient(#94a3b8 1px, transparent 1px), linear-gradient(90deg, #94a3b8 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }} />
 
       <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 px-8 py-10 md:px-14 md:py-12">
 
@@ -172,20 +158,20 @@ export default function HeroSection() {
           className="flex-1 space-y-7"
         >
           {/* Status badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-4 py-1.5 text-sm font-semibold text-blue-300">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-semibold text-blue-700">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             6 classes ongoing today
           </div>
 
           {/* Headline */}
           <div className="space-y-3">
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1] text-white">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1] text-slate-900">
               Welcome Back,{" "}
-              <span className="text-blue-400">Arjun!</span>
+              <span className="text-blue-600">Arjun!</span>
             </h1>
-            <p className="text-base md:text-lg font-medium leading-relaxed max-w-md text-slate-400">
+            <p className="text-base md:text-lg font-medium leading-relaxed max-w-md text-slate-500">
               Keep learning and achieve your goals today. You have{" "}
-              <span className="font-bold text-white">2 upcoming deadlines</span> this week.
+              <span className="font-bold text-slate-800">2 upcoming deadlines</span> this week.
             </p>
           </div>
 
@@ -204,7 +190,7 @@ export default function HeroSection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="rounded-full px-8 font-bold border-slate-600 text-slate-200 hover:bg-slate-700 hover:text-white bg-transparent"
+                className="rounded-full px-8 font-bold border-slate-300 text-slate-700 hover:bg-slate-100 bg-white"
                 asChild
               >
                 <Link href="/courses">Browse Courses</Link>
@@ -213,15 +199,15 @@ export default function HeroSection() {
           </div>
 
           {/* Quick numbers */}
-          <div className="flex flex-wrap gap-8 pt-1 border-t border-slate-700/60">
+          <div className="flex flex-wrap gap-8 pt-1 border-t border-slate-200">
             {[
               { label: "Courses", value: "11" },
               { label: "Quizzes Done", value: "24" },
               { label: "Certificates", value: "3" },
             ].map((s) => (
               <div key={s.label} className="pt-4">
-                <div className="text-3xl font-extrabold text-white">{s.value}</div>
-                <div className="text-xs font-semibold mt-0.5 text-slate-400">{s.label}</div>
+                <div className="text-3xl font-extrabold text-slate-900">{s.value}</div>
+                <div className="text-xs font-semibold mt-0.5 text-slate-500">{s.label}</div>
               </div>
             ))}
           </div>
@@ -241,12 +227,12 @@ export default function HeroSection() {
 
           {/* Badge: top-left — Course progress */}
           <motion.div {...float(0)} className="absolute top-2 left-0 md:left-2 z-20">
-            <div className="flex items-center gap-2 rounded-2xl bg-slate-800/90 backdrop-blur-sm border border-slate-700/80 px-3 py-2 shadow-xl">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-500/20">
-                <BookOpen className="h-4 w-4 text-blue-400" />
+            <div className="flex items-center gap-2 rounded-2xl bg-white border border-slate-200 px-3 py-2 shadow-md">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-100">
+                <BookOpen className="h-4 w-4 text-blue-600" />
               </div>
               <div>
-                <p className="text-[11px] font-bold text-white leading-tight">Data Structures</p>
+                <p className="text-[11px] font-bold text-slate-800 leading-tight">Data Structures</p>
                 <p className="text-[10px] text-slate-400 font-medium">85% complete</p>
               </div>
             </div>
@@ -254,12 +240,12 @@ export default function HeroSection() {
 
           {/* Badge: top-right — Rank */}
           <motion.div {...float(1.1)} className="absolute top-4 right-0 md:right-2 z-20">
-            <div className="flex items-center gap-2 rounded-2xl bg-slate-800/90 backdrop-blur-sm border border-slate-700/80 px-3 py-2 shadow-xl">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-500/20">
-                <Trophy className="h-4 w-4 text-amber-400" />
+            <div className="flex items-center gap-2 rounded-2xl bg-white border border-slate-200 px-3 py-2 shadow-md">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-100">
+                <Trophy className="h-4 w-4 text-amber-500" />
               </div>
               <div>
-                <p className="text-[11px] font-bold text-white leading-tight">Rank #3</p>
+                <p className="text-[11px] font-bold text-slate-800 leading-tight">Rank #3</p>
                 <p className="text-[10px] text-slate-400 font-medium">Leaderboard</p>
               </div>
             </div>
@@ -267,12 +253,12 @@ export default function HeroSection() {
 
           {/* Badge: bottom-right — Deadline */}
           <motion.div {...float(0.6)} className="absolute bottom-4 right-0 md:right-2 z-20">
-            <div className="flex items-center gap-2 rounded-2xl bg-slate-800/90 backdrop-blur-sm border border-slate-700/80 px-3 py-2 shadow-xl">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-rose-500/20">
-                <Clock className="h-4 w-4 text-rose-400" />
+            <div className="flex items-center gap-2 rounded-2xl bg-white border border-slate-200 px-3 py-2 shadow-md">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-rose-100">
+                <Clock className="h-4 w-4 text-rose-500" />
               </div>
               <div>
-                <p className="text-[11px] font-bold text-white leading-tight">Due in 2 days</p>
+                <p className="text-[11px] font-bold text-slate-800 leading-tight">Due in 2 days</p>
                 <p className="text-[10px] text-slate-400 font-medium">Database Exam</p>
               </div>
             </div>
@@ -280,14 +266,11 @@ export default function HeroSection() {
 
           {/* Badge: bottom-left — Progress */}
           <motion.div {...float(1.8)} className="absolute bottom-4 left-0 md:left-2 z-20">
-            <div
-              className="flex items-center gap-2 rounded-2xl px-3 py-2 shadow-xl"
-              style={{ background: "linear-gradient(135deg, #1d4ed8, #1e40af)" }}
-            >
-              <TrendingUp className="h-4 w-4 text-blue-200" />
+            <div className="flex items-center gap-2 rounded-2xl bg-blue-600 px-3 py-2 shadow-md">
+              <TrendingUp className="h-4 w-4 text-white" />
               <div>
                 <p className="text-[11px] font-bold text-white leading-tight">72% Overall</p>
-                <p className="text-[10px] text-blue-300 font-medium">Progress</p>
+                <p className="text-[10px] text-blue-200 font-medium">Progress</p>
               </div>
             </div>
           </motion.div>
