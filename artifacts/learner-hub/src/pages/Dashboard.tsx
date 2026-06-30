@@ -59,7 +59,7 @@ export default function Dashboard() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="w-full pt-6 pb-0 px-4 md:px-8 lg:px-12"
-        style={{ background: "#f0f5ff" }}
+        style={{ background: "#f3e8ff" }}
       >
         <div className="max-w-[1520px] mx-auto">
           <HeroSection />

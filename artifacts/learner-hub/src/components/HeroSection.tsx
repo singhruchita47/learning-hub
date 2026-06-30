@@ -145,7 +145,7 @@ export default function HeroSection() {
   return (
     <div
       className="relative overflow-hidden rounded-3xl"
-      style={{ background: "linear-gradient(135deg, #f0f5ff 0%, #e8f0fe 55%, #eef2ff 100%)" }}
+      style={{ background: "linear-gradient(135deg, #f3e8ff 0%, #ede9fe 45%, #ddd6fe 100%)" }}
     >
 
       <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 px-8 py-10 md:px-14 md:py-12">
