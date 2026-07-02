@@ -7,9 +7,13 @@ import NotFound from "@/pages/not-found";
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import Login from "@/pages/Login";
+import { SearchProvider } from "@/context/SearchContext";
 
 // Pages
 import Dashboard from "@/pages/Dashboard";
+import FacultyDashboard from "@/pages/FacultyDashboard";
+import AdminDashboard from "@/pages/AdminDashboard";
+import CourseViewer from "@/pages/CourseViewer";
 import Courses from "@/pages/Courses";
 import Resources from "@/pages/Resources";
 import Quizzes from "@/pages/Quizzes";
@@ -30,6 +34,12 @@ interface AuthUser {
   role: Role;
 }
 
+function HomeDashboard({ user }: { user: AuthUser }) {
+  if (user.role === "faculty") return <FacultyDashboard user={user} />;
+  if (user.role === "admin")   return <AdminDashboard user={user} />;
+  return <Dashboard />;
+}
+
 function Layout({ children, user, onLogout }: { children: React.ReactNode; user: AuthUser; onLogout: () => void }) {
   return (
     <div className="flex min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 selection:text-primary">
@@ -48,7 +58,8 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
   return (
     <Layout user={user} onLogout={onLogout}>
       <Switch>
-        <Route path="/" component={Dashboard} />
+        <Route path="/" component={() => <HomeDashboard user={user} />} />
+        <Route path="/courses/:id" component={CourseViewer} />
         <Route path="/courses" component={Courses} />
         <Route path="/resources" component={Resources} />
         <Route path="/quizzes" component={Quizzes} />
@@ -79,14 +90,16 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        {user ? (
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <Router user={user} onLogout={handleLogout} />
-          </WouterRouter>
-        ) : (
-          <Login onLogin={handleLogin} />
-        )}
-        <Toaster />
+        <SearchProvider>
+          {user ? (
+            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+              <Router user={user} onLogout={handleLogout} />
+            </WouterRouter>
+          ) : (
+            <Login onLogin={handleLogin} />
+          )}
+          <Toaster />
+        </SearchProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

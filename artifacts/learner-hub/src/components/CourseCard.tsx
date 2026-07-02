@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { PlayCircle, Clock } from "lucide-react";
+import { PlayCircle } from "lucide-react";
+import { useLocation } from "wouter";
 
 interface CourseCardProps {
   course: {
@@ -28,12 +29,14 @@ const progressColor = (color: string) => {
 export default function CourseCard({ course }: CourseCardProps) {
   const pc = progressColor(course.color);
   const isComplete = course.progress === 100;
+  const [, navigate] = useLocation();
 
   return (
     <motion.div
       whileHover={{ y: -6, boxShadow: `0 20px 48px ${pc}22` }}
       transition={{ type: "spring", stiffness: 280, damping: 22 }}
-      className="group relative flex w-[240px] shrink-0 flex-col overflow-hidden rounded-2xl bg-white shadow-lg border border-gray-100"
+      className="group relative flex w-[240px] shrink-0 flex-col overflow-hidden rounded-2xl bg-white shadow-lg border border-gray-100 cursor-pointer"
+      onClick={() => navigate(`/courses/${course.id}`)}
     >
       {/* Course image */}
       <div className="relative h-[120px] w-full overflow-hidden">
@@ -47,22 +50,18 @@ export default function CourseCard({ course }: CourseCardProps) {
         ) : (
           <div className={`h-full w-full ${course.color}`} />
         )}
-        {/* overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-        {/* Course code pill */}
         <div className="absolute top-3 left-3 rounded-full bg-white/20 backdrop-blur-sm px-2.5 py-1">
           <span className="text-[10px] font-bold text-white tracking-wider">{course.code}</span>
         </div>
 
-        {/* Completion badge */}
         {isComplete && (
           <div className="absolute top-3 right-3 rounded-full bg-emerald-500 px-2 py-0.5 flex items-center gap-1">
             <span className="text-[10px] font-bold text-white">✓ Done</span>
           </div>
         )}
 
-        {/* Progress indicator on image */}
         <div className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-md">
           <svg viewBox="0 0 36 36" className="h-full w-full -rotate-90">
             <circle cx="18" cy="18" r="14" fill="none" stroke="#E2E8F0" strokeWidth="3" />
@@ -89,7 +88,6 @@ export default function CourseCard({ course }: CourseCardProps) {
           <p className="text-xs text-muted-foreground font-medium line-clamp-1">{course.teacher}</p>
         </div>
 
-        {/* Progress bar */}
         <div className="space-y-1">
           <div className="flex justify-between text-[11px] font-semibold">
             <span className="text-muted-foreground">Progress</span>
@@ -107,10 +105,10 @@ export default function CourseCard({ course }: CourseCardProps) {
           </div>
         </div>
 
-        {/* Footer */}
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
+          onClick={(e) => { e.stopPropagation(); navigate(`/courses/${course.id}`); }}
           className="flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-white transition-all"
           style={{ background: `linear-gradient(135deg, ${pc}dd, ${pc})`, boxShadow: `0 4px 14px ${pc}33` }}
         >

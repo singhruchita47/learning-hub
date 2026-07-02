@@ -1,0 +1,42 @@
+I already have a fully built login screen and student dashboard for an educational platform named "Learner Hub" (refer to "Screen Recording 2026-06-30 164037.mp4" for the exact UI design and theme). The student panel and basic login components are completely done.
+
+Objective:
+I want to expand my existing frontend code. Please do not rewrite the student dashboard; instead, provide the updated/additional HTML, Tailwind CSS, and JavaScript components to integrate the following new features into my current project:
+
+1. Admin & Faculty Views Integration
+Login Switch: Update the current login tab actions so that clicking on "Faculty" or "Admin" dynamically switches the UI view to their respective dashboards upon clicking "Sign In".
+
+Faculty Dashboard: Create a frontend dashboard matching the core design theme with:
+
+Quick stats (Active Students, Assigned Courses, Pending Assignments).
+
+An "Attendance Tracker" section where faculty can see a list of students and mark them present/absent via mock toggle buttons.
+
+An "Assignment & Grading Portal" to view submitted tasks and type mock grades.
+
+Admin Dashboard: Create a high-level management command center containing:
+
+Analytics cards (Total Registrations, Faculty Count, System Alerts).
+
+A "User Management Table" displaying lists of mock students/faculty with action buttons like "Edit", "Ban", or "Add User".
+
+A "Course Approval Queue" component.
+
+2. Course Page Enhancement (Video & Playlist Feature)
+Modify the layout when a user clicks "Continue" on any course card to open a full-page Course Viewer:
+
+Main Video Player Panel (Left Side): A sleek placeholder card acting as a video player with control overlays.
+
+Interactive Playlist Sidebar (Right Side): An accordion-style list structured by chapters/modules (e.g., Module 1: Introduction, Module 2: Deep Dive).
+
+Click functionality: Write a clean JavaScript click event handler so that when a user clicks a video title from the playlist sidebar, it dynamically updates the main video title and simulates changing the video stream/source.
+
+3. Bonus Smart Frontend Features
+Global Search Bar Logic: A dynamic JavaScript filter in the top navbar that searches and hides/shows course cards based on user input.
+
+Notification Dropdown Panel: A stylized clickable bell icon in the header that toggles a dropdown showing dummy alerts (e.g., "Midterm Schedule Released").
+
+UI & UX Instructions:
+Keep the exact same color palette, fonts, shadows, and smooth Tailwind transitions (transition-all duration-300) as seen in my current project.
+
+Make sure all new sections are fully responsive and structured modularly so I can easily drop them into my existing layout files.
