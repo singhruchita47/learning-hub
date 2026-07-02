@@ -243,35 +243,42 @@ export default function CourseViewer() {
           </div>
         </div>
 
-        {/* ── RIGHT: Playlist Sidebar ── */}
-        <div className="w-full lg:w-[340px] shrink-0 flex flex-col bg-slate-900 border-t lg:border-t-0 lg:border-l border-slate-800 overflow-y-auto">
-          <div className="px-4 py-4 border-b border-slate-800 sticky top-0 bg-slate-900 z-10">
-            <h3 className="text-white font-extrabold text-sm">Course Playlist</h3>
-            <p className="text-slate-500 text-xs mt-0.5">{totalVideos} videos · {totalWatched} completed</p>
+        {/* ── RIGHT: Playlist Sidebar (light) ── */}
+        <div className="w-full lg:w-[340px] shrink-0 flex flex-col bg-white border-t lg:border-t-0 lg:border-l border-gray-200 overflow-y-auto">
+          <div className="px-4 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
+            <h3 className="text-slate-900 font-extrabold text-sm">Course Playlist</h3>
+            <p className="text-slate-400 text-xs mt-0.5">{totalVideos} videos · {totalWatched} completed</p>
+            {/* Progress bar */}
+            <div className="mt-2.5 h-1.5 w-full rounded-full bg-gray-100 overflow-hidden">
+              <div className="h-full rounded-full transition-all" style={{ width: `${Math.round((totalWatched / totalVideos) * 100)}%`, backgroundColor: pc }} />
+            </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto divide-y divide-slate-800/60">
+          <div className="flex-1 overflow-y-auto divide-y divide-gray-100">
             {playlist.map((module) => {
               const isOpen = openModules.has(module.id);
               const moduleWatched = module.videos.filter((v) => watched.has(v.id)).length;
+              const allDone = moduleWatched === module.videos.length;
               return (
                 <div key={module.id}>
                   {/* Module header */}
                   <button
                     onClick={() => toggleModule(module.id)}
-                    className="w-full flex items-center justify-between px-4 py-3.5 hover:bg-slate-800/50 transition-colors"
+                    className="w-full flex items-center justify-between px-4 py-3.5 hover:bg-slate-50 transition-colors"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-xs font-bold"
-                        style={{ background: `${pc}25`, color: pc }}>
+                      <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md text-xs font-extrabold"
+                        style={{ background: `${pc}18`, color: pc }}>
                         {playlist.indexOf(module) + 1}
                       </div>
                       <div className="text-left min-w-0">
-                        <p className="text-xs font-extrabold text-slate-200 truncate">{module.title}</p>
-                        <p className="text-[10px] text-slate-500 font-medium">{moduleWatched}/{module.videos.length} done</p>
+                        <p className="text-xs font-extrabold text-slate-700 truncate">{module.title}</p>
+                        <p className={`text-[10px] font-semibold mt-0.5 ${allDone ? "text-emerald-500" : "text-slate-400"}`}>
+                          {allDone ? "✓ Complete" : `${moduleWatched}/${module.videos.length} done`}
+                        </p>
                       </div>
                     </div>
-                    {isOpen ? <ChevronDown className="h-4 w-4 text-slate-500 shrink-0" /> : <ChevronRight className="h-4 w-4 text-slate-500 shrink-0" />}
+                    {isOpen ? <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" /> : <ChevronRight className="h-4 w-4 text-slate-400 shrink-0" />}
                   </button>
 
                   {/* Video list */}
@@ -281,8 +288,8 @@ export default function CourseViewer() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="overflow-hidden"
+                        transition={{ duration: 0.22 }}
+                        className="overflow-hidden bg-slate-50/60"
                       >
                         {module.videos.map((video) => {
                           const isCurrent = video.id === currentVideoId;
@@ -291,41 +298,43 @@ export default function CourseViewer() {
                             <motion.button
                               key={video.id}
                               onClick={() => selectVideo(video.id)}
-                              whileHover={{ backgroundColor: "rgba(255,255,255,0.05)" }}
-                              className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
-                                isCurrent ? "bg-slate-800" : ""
+                              whileHover={{ backgroundColor: "rgba(0,0,0,0.03)" }}
+                              className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors border-l-2 ${
+                                isCurrent ? "border-l-2 bg-primary/5" : "border-transparent"
                               }`}
+                              style={isCurrent ? { borderLeftColor: pc } : {}}
                             >
                               {/* Status icon */}
                               <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
-                                style={isCurrent ? { outline: `2px solid ${pc}`, outlineOffset: "1px" } : {}}>
+                                style={isCurrent ? { outline: `2px solid ${pc}40`, outlineOffset: "1px" } : {}}>
                                 {isDone ? (
                                   <CheckCircle2 className="h-5 w-5 text-emerald-500" />
                                 ) : isCurrent ? (
-                                  <div className="flex h-5 w-5 items-center justify-center rounded-full" style={{ background: pc }}>
+                                  <div className="flex h-5 w-5 items-center justify-center rounded-full shadow-sm" style={{ background: pc }}>
                                     <Play className="h-3 w-3 text-white ml-0.5" />
                                   </div>
                                 ) : (
-                                  <PlayCircle className="h-5 w-5 text-slate-600" />
+                                  <PlayCircle className="h-5 w-5 text-slate-300" />
                                 )}
                               </div>
 
                               <div className="flex-1 min-w-0">
-                                <p className={`text-xs font-semibold truncate ${isCurrent ? "text-white" : isDone ? "text-slate-400" : "text-slate-300"}`}>
+                                <p className={`text-xs font-semibold truncate ${isCurrent ? "font-extrabold" : isDone ? "text-slate-400 line-through decoration-slate-300" : "text-slate-700"}`}
+                                  style={isCurrent ? { color: pc } : {}}>
                                   {video.title}
                                 </p>
-                                <p className="text-[10px] text-slate-600 font-medium">{video.duration}</p>
+                                <p className="text-[10px] text-slate-400 font-medium">{video.duration}</p>
                               </div>
 
                               {isCurrent && isPlaying && (
-                                <div className="flex gap-0.5 shrink-0">
+                                <div className="flex items-end gap-0.5 shrink-0 h-4">
                                   {[0, 1, 2].map((i) => (
                                     <motion.div
                                       key={i}
                                       className="w-0.5 rounded-full"
                                       style={{ backgroundColor: pc }}
-                                      animate={{ height: ["4px", "12px", "4px"] }}
-                                      transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.2 }}
+                                      animate={{ height: ["4px", "14px", "4px"] }}
+                                      transition={{ duration: 0.7, repeat: Infinity, delay: i * 0.18 }}
                                     />
                                   ))}
                                 </div>

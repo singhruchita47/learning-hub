@@ -11,20 +11,22 @@ import {
   Award, 
   User, 
   Settings, 
-  LogOut 
+  LogOut,
+  MessageSquarePlus
 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const navItems = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/" },
-  { icon: BookOpen, label: "Courses", href: "/courses" },
-  { icon: Library, label: "Resources", href: "/resources" },
-  { icon: ClipboardList, label: "Assignments", href: "/assignments" },
-  { icon: HelpCircle, label: "Quizzes", href: "/quizzes" },
-  { icon: CalendarDays, label: "Calendar", href: "/calendar" },
-  { icon: Trophy, label: "Leaderboard", href: "/leaderboard" },
-  { icon: Users, label: "Community", href: "/community" },
-  { icon: Award, label: "Certificates", href: "/certificates" },
+  { icon: LayoutDashboard, label: "Dashboard",   href: "/" },
+  { icon: BookOpen,        label: "Courses",      href: "/courses" },
+  { icon: Library,         label: "Resources",    href: "/resources" },
+  { icon: ClipboardList,   label: "Assignments",  href: "/assignments" },
+  { icon: HelpCircle,      label: "Quizzes",      href: "/quizzes" },
+  { icon: CalendarDays,    label: "Calendar",     href: "/calendar" },
+  { icon: Trophy,          label: "Leaderboard",  href: "/leaderboard" },
+  { icon: Users,           label: "Community",    href: "/community" },
+  { icon: Award,           label: "Certificates", href: "/certificates" },
+  { icon: MessageSquarePlus, label: "Feedback",   href: "/feedback" },
 ];
 
 const bottomNavItems = [

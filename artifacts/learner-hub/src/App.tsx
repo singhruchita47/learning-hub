@@ -24,6 +24,7 @@ import Calendar from "@/pages/Calendar";
 import Certificates from "@/pages/Certificates";
 import Profile from "@/pages/Profile";
 import Settings from "@/pages/Settings";
+import Feedback from "@/pages/Feedback";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +71,7 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
         <Route path="/certificates" component={Certificates} />
         <Route path="/profile" component={Profile} />
         <Route path="/settings" component={Settings} />
+        <Route path="/feedback" component={Feedback} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
