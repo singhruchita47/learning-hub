@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CalendarDays, Clock, CheckCircle2, AlertTriangle, Upload, X, FileText, Star } from "lucide-react";
+import { CalendarDays, Clock, CheckCircle2, AlertTriangle, Upload, X, FileText, Star, Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import FacultyAssignmentManager from "@/components/FacultyAssignmentManager";
+import StudentAssignmentsPanel from "@/components/StudentAssignmentsPanel";
+
+const CLOUDINARY_CONFIG = {
+  cloudName: "iuml8lxh",
+  apiKey: "779785661497217",
+};
 
 const assignments = [
   { id: "1", title: "Binary Tree Implementation",       course: "CS301", due: "Jul 5, 2026",   status: "pending",   grade: null,  points: 20, desc: "Implement a binary tree with insert, delete, and traversal methods in Python." },
@@ -18,22 +25,86 @@ const statusConfig: Record<string, { label: string; color: string; bg: string; i
   graded:    { label: "Graded",    color: "#10B981", bg: "#ECFDF5", icon: CheckCircle2 },
 };
 
-export default function Assignments() {
+export default function Assignments({ role = "student" }: { role?: "student" | "faculty" | "admin" }) {
   const [submitId, setSubmitId] = useState<string | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+  const [preview, setPreview] = useState<string | null>(null);
   const [statuses, setStatuses] = useState<Record<string, string>>(
     Object.fromEntries(assignments.map((a) => [a.id, a.status]))
   );
   const [activeTab, setActiveTab] = useState<"all" | "pending" | "submitted" | "graded">("all");
 
+  const uploadToCloudinary = async (file: File): Promise<string | null> => {
+    try {
+      setUploading(true);
+      setUploadError("");
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "learning_hub_assignments");
+      formData.append("api_key", CLOUDINARY_CONFIG.apiKey);
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CONFIG.cloudName}/auto/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Upload failed");
+      }
+
+      const data = await response.json();
+      return data.secure_url;
+    } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : "Upload failed";
+      setUploadError(errorMsg);
+      return null;
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      setFileName(file.name);
+      setUploadError("");
+
+      // Generate preview for images
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPreview(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        setPreview(null);
+      }
+    }
+  };
+
+  const handleSubmit = async (id: string) => {
+    if (!selectedFile) return;
+
+    const fileUrl = await uploadToCloudinary(selectedFile);
+    if (fileUrl) {
+      setStatuses((prev) => ({ ...prev, [id]: "submitted" }));
+      setSubmitId(null);
+      setSelectedFile(null);
+      setFileName("");
+      setPreview(null);
+    }
+  };
+
   const filtered = assignments.filter((a) => activeTab === "all" || statuses[a.id] === activeTab);
   const pendingCount = assignments.filter((a) => statuses[a.id] === "pending").length;
-
-  const handleSubmit = (id: string) => {
-    setStatuses((prev) => ({ ...prev, [id]: "submitted" }));
-    setSubmitId(null);
-    setFileName("");
-  };
 
   return (
     <div className="p-4 md:p-6 lg:p-8 max-w-[1200px] mx-auto animate-in fade-in duration-500">
@@ -49,6 +120,16 @@ export default function Assignments() {
           </div>
         )}
       </div>
+
+      {role === "faculty" ? (
+        <div className="mb-7">
+          <FacultyAssignmentManager />
+        </div>
+      ) : (
+        <div className="mb-7">
+          <StudentAssignmentsPanel />
+        </div>
+      )}
 
       {/* Stats row */}
       <div className="grid grid-cols-3 gap-4 mb-7">
@@ -119,15 +200,41 @@ export default function Assignments() {
                 {isSubmitOpen && (
                   <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
                     className="overflow-hidden border-t border-gray-100 bg-slate-50 px-5 py-4">
-                    <div className="flex items-center gap-3">
-                      <Input placeholder="Enter file name or link..." value={fileName} onChange={(e) => setFileName(e.target.value)}
-                        className="flex-1 h-9 text-sm rounded-lg" />
-                      <Button size="sm" onClick={() => handleSubmit(a.id)} disabled={!fileName}
-                        className="h-9 rounded-lg font-bold bg-emerald-500 hover:bg-emerald-600 text-white">Confirm Submit</Button>
-                      <button onClick={() => setSubmitId(null)}
-                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-slate-400 hover:text-slate-600">
-                        <X className="h-4 w-4" />
-                      </button>
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <label className="flex-1 flex items-center gap-2 h-9 rounded-lg border border-gray-300 bg-white px-3 cursor-pointer hover:border-gray-400 transition">
+                          <Upload className="h-4 w-4 text-slate-500" />
+                          <span className="text-sm text-slate-600 truncate">{fileName || "Choose file..."}</span>
+                          <input type="file" onChange={handleFileChange} className="hidden" accept="image/*,.pdf,.doc,.docx,.zip,.txt,.py,.java,.cpp,.js" />
+                        </label>
+                      </div>
+
+                      {preview && (
+                        <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
+                          <img src={preview} alt="Preview" className="max-h-48 max-w-full rounded-md object-contain mx-auto" />
+                        </div>
+                      )}
+
+                      {uploadError && (
+                        <p className="text-xs text-red-600 font-semibold">{uploadError}</p>
+                      )}
+                      <div className="flex items-center gap-3">
+                        <Button size="sm" onClick={() => handleSubmit(a.id)} disabled={!selectedFile || uploading}
+                          className="h-9 rounded-lg font-bold bg-emerald-500 hover:bg-emerald-600 text-white gap-2">
+                          {uploading ? (
+                            <>
+                              <Loader className="h-3.5 w-3.5 animate-spin" />
+                              Uploading...
+                            </>
+                          ) : (
+                            "Confirm Submit"
+                          )}
+                        </Button>
+                        <button onClick={() => { setSubmitId(null); setSelectedFile(null); setFileName(""); setUploadError(""); setPreview(null); }}
+                          className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-slate-400 hover:text-slate-600">
+                          <X className="h-4 w-4" />
+                        </button>
+                      </div>
                     </div>
                   </motion.div>
                 )}

@@ -1,222 +1,262 @@
-import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Search, Bell, MessageSquare, Menu, LogOut, ChevronDown, CheckCircle2, BookOpen, Trophy, Calendar, Megaphone } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useEffect, useState } from "react";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Award,
+  Bell,
+  BookOpen,
+  CalendarDays,
+  ClipboardList,
+  Code2,
+  FileText,
+  HelpCircle,
+  LayoutDashboard,
+  Library,
+  LogOut,
+  Radio,
+  Search,
+  Trophy,
+  Users,
+} from "lucide-react";
 import { useSearch } from "@/context/SearchContext";
+import { ACADEMIC_API_BASE } from "@/lib/api";
 
-interface AuthUser {
-  name: string;
-  role: "student" | "faculty" | "admin";
-}
+const API_BASE = ACADEMIC_API_BASE;
 
-const roleColors: Record<string, string> = {
-  student: "bg-primary/10 text-primary",
-  faculty: "bg-emerald-100 text-emerald-700",
-  admin:   "bg-violet-100 text-violet-700",
+type ApiNotification = {
+  _id: string;
+  title: string;
+  message: string;
+  type?: string;
+  createdAt?: string;
+  readBy?: string[];
 };
 
-const notifications = [
-  { id: 1, icon: Calendar,     text: "Midterm Schedule Released",         sub: "Check your exam timetable",   time: "2 min ago",  read: false, color: "text-blue-500",   bg: "bg-blue-50" },
-  { id: 2, icon: CheckCircle2, text: "Assignment 3 graded — CS302",        sub: "You scored 88/100",           time: "1 hr ago",   read: false, color: "text-emerald-500", bg: "bg-emerald-50" },
-  { id: 3, icon: Trophy,       text: "You moved to Rank #3!",              sub: "Leaderboard updated",         time: "3 hrs ago",  read: false, color: "text-amber-500",  bg: "bg-amber-50" },
-  { id: 4, icon: Megaphone,    text: "New announcement from Dr. Chen",     sub: "Assignment deadline extended", time: "Yesterday",  read: true,  color: "text-violet-500", bg: "bg-violet-50" },
-  { id: 5, icon: BookOpen,     text: "Python Course: Module 4 unlocked",   sub: "Continue your learning",      time: "2 days ago", read: true,  color: "text-indigo-500", bg: "bg-indigo-50" },
+const navItems = [
+  { icon: LayoutDashboard, label: "Dashboard", href: "/" },
+  { icon: BookOpen, label: "Courses", href: "/courses" },
+  { icon: Library, label: "Resources", href: "/resources" },
+  { icon: Radio, label: "Classes", href: "/classes" },
+  { icon: ClipboardList, label: "Assignments", href: "/assignments" },
+  { icon: HelpCircle, label: "Quizzes", href: "/quizzes" },
+  { icon: Code2, label: "Coding Practice", href: "/coding-practice" },
+  { icon: CalendarDays, label: "Calendar", href: "/calendar" },
+  { icon: Trophy, label: "Leaderboard", href: "/leaderboard" },
+  { icon: Users, label: "Community", href: "/community" },
+  { icon: Award, label: "Certificates", href: "/certificates" },
+  { icon: FileText, label: "AI Resume", href: "/resume-generator" },
 ];
 
+type NavbarUser = {
+  name: string;
+  email?: string;
+};
+
 function getInitials(name: string) {
-  return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((item) => item[0])
+    .join("")
+    .toUpperCase() || "RS";
 }
 
-export default function Navbar({ user, onLogout }: { user?: AuthUser; onLogout?: () => void }) {
-  const [location] = useLocation();
+export default function Navbar({ user, onLogout }: { user?: NavbarUser; onLogout?: () => void }) {
   const { query, setQuery } = useSearch();
-  const [notifOpen, setNotifOpen] = useState(false);
-  const [readIds, setReadIds] = useState<Set<number>>(
-    new Set(notifications.filter((n) => n.read).map((n) => n.id))
-  );
+  const [location] = useLocation();
+  const [notifications, setNotifications] = useState<ApiNotification[]>([]);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const unreadCount = notifications.filter((item) => !(item.readBy ?? []).includes("student-demo-rs")).length;
+  const displayName = user?.name ?? "Ruchita Singh";
+  const initials = getInitials(displayName);
 
-  const unreadCount = notifications.filter((n) => !readIds.has(n.id)).length;
+  useEffect(() => {
+    let mounted = true;
 
-  const markAllRead = () => setReadIds(new Set(notifications.map((n) => n.id)));
-  const markRead = (id: number) => setReadIds((prev) => new Set([...prev, id]));
+    async function loadNotifications() {
+      try {
+        const response = await fetch(`${API_BASE}/notifications?audience=student`);
+        if (!response.ok) return;
+        const data = await response.json() as { notifications?: ApiNotification[] };
+        if (mounted) setNotifications(data.notifications ?? []);
+      } catch {
+        // Keep the navbar quiet if the API is offline.
+      }
+    }
 
-  const navLinks = [
-    { label: "Dashboard",   href: "/" },
-    { label: "Courses",     href: "/courses" },
-    { label: "Resources",   href: "/resources" },
-    { label: "Quizzes",     href: "/quizzes" },
-    { label: "Assignments", href: "/assignments" },
-    { label: "Community",   href: "/community" },
-  ];
+    void loadNotifications();
+    const timer = window.setInterval(loadNotifications, 12000);
+    return () => {
+      mounted = false;
+      window.clearInterval(timer);
+    };
+  }, []);
 
-  const initials  = user ? getInitials(user.name) : "AS";
-  const avatarClass = user ? (roleColors[user.role] ?? roleColors.student) : roleColors.student;
+  async function markNotificationsRead() {
+    setShowNotifications((current) => !current);
+
+    await Promise.allSettled(
+      notifications
+        .filter((item) => !(item.readBy ?? []).includes("student-demo-rs"))
+        .map((item) =>
+          fetch(`${API_BASE}/notifications/${item._id}/read`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId: "student-demo-rs" }),
+          }),
+        ),
+    );
+
+    setNotifications((current) =>
+      current.map((item) => ({
+        ...item,
+        readBy: Array.from(new Set([...(item.readBy ?? []), "student-demo-rs"])),
+      })),
+    );
+  }
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b bg-white/80 px-4 md:px-6 backdrop-blur-md">
-      <div className="flex items-center gap-4">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Menu className="h-5 w-5" />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-[240px] sm:w-[300px]">
-            <nav className="flex flex-col gap-4 mt-8">
-              {navLinks.map((link) => (
-                <Link key={link.href} href={link.href}
-                  className={`text-lg font-medium transition-colors hover:text-primary ${location === link.href ? "text-primary" : "text-muted-foreground"}`}>
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </SheetContent>
-        </Sheet>
-
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white md:hidden">
-            <span className="font-bold text-xs">LH</span>
+    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur-xl">
+      <div className="border-b border-[#34428c]/10 bg-[#34428c] px-4 py-2 text-white md:px-8">
+        <div className="mx-auto flex max-w-[1540px] items-center justify-between gap-4">
+          <div className="flex items-center gap-3 text-xs font-black">
+            <span className="rounded-md bg-[#ff7a21] px-2 py-1">SGSU</span>
+            <span className="hidden sm:inline">Scope Global Skills University LMS</span>
           </div>
-          <span className="text-xl font-extrabold tracking-tight text-foreground hidden sm:inline-block">Learner Hub</span>
-        </Link>
+          <div className="hidden items-center gap-6 text-xs font-black md:flex">
+            <span>Exam</span>
+            <span>Result</span>
+            <span>Notices</span>
+            <span>Student Grievance</span>
+          </div>
+        </div>
       </div>
 
-      <nav className="hidden items-center gap-6 md:flex">
-        {navLinks.map((link) => (
-          <Link key={link.href} href={link.href}
-            className={`text-sm font-semibold transition-colors hover:text-primary relative ${location === link.href ? "text-primary" : "text-muted-foreground"}`}>
-            {link.label}
-            {location === link.href && (
-              <span className="absolute -bottom-[21px] left-0 right-0 h-0.5 bg-primary rounded-full" />
-            )}
-          </Link>
-        ))}
-      </nav>
-
-      <div className="flex items-center gap-2 sm:gap-3">
-        {/* Global search */}
-        <div className="relative hidden sm:block w-44 lg:w-56">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search courses..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-full rounded-full bg-muted/50 pl-8 focus-visible:bg-white text-sm"
-          />
-        </div>
-
-        {/* Notification dropdown */}
-        <DropdownMenu open={notifOpen} onOpenChange={setNotifOpen}>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="relative rounded-full">
-              <Bell className="h-5 w-5 text-muted-foreground" />
-              {unreadCount > 0 && (
-                <span className="absolute right-1.5 top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-destructive text-[9px] font-extrabold text-white border-2 border-white">
-                  {unreadCount}
-                </span>
-              )}
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-80 rounded-2xl shadow-2xl border border-border/50 p-0 overflow-hidden">
-            {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-border/50 bg-muted/20">
-              <div>
-                <p className="text-sm font-extrabold text-foreground">Notifications</p>
-                <p className="text-xs text-muted-foreground font-medium">{unreadCount} unread</p>
+      <div className="px-4 py-3 md:px-8">
+        <div className="mx-auto flex max-w-[1540px] flex-col gap-3">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" className="flex shrink-0 items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff7a21] to-[#7b35ad] text-sm font-black text-white shadow-lg shadow-[#7b35ad]/20">
+                SG
               </div>
-              {unreadCount > 0 && (
-                <button onClick={markAllRead} className="text-xs font-bold text-primary hover:underline">
-                  Mark all read
+              <div className="hidden leading-tight sm:block">
+                <p className="text-base font-black text-[#34428c]">SGSU Learning Hub</p>
+                <p className="text-[11px] font-bold text-slate-500">Digital campus workspace</p>
+              </div>
+            </Link>
+
+            <div className="relative hidden w-full max-w-xl md:block">
+              <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+              <input
+                type="search"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search courses, resources, quizzes..."
+                className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-sm font-bold text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-[#7b35ad]/40 focus:bg-white focus:ring-4 focus:ring-[#7b35ad]/10"
+              />
+            </div>
+
+            <div className="flex shrink-0 items-center gap-3">
+              <div className="relative">
+                <button
+                  type="button"
+                  aria-label="Notifications"
+                  onClick={markNotificationsRead}
+                  className="relative flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-[#34428c] shadow-sm transition hover:border-[#7b35ad]/30 hover:text-[#7b35ad]"
+                >
+                  <Bell className="h-5 w-5" />
+                  {unreadCount > 0 && (
+                    <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-white bg-red-500 px-1 text-[10px] font-black text-white">
+                      {unreadCount}
+                    </span>
+                  )}
                 </button>
-              )}
-            </div>
 
-            {/* List */}
-            <div className="max-h-[340px] overflow-y-auto divide-y divide-border/30">
-              {notifications.map((notif) => {
-                const isRead = readIds.has(notif.id);
-                return (
-                  <button
-                    key={notif.id}
-                    onClick={() => markRead(notif.id)}
-                    className={`w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-muted/40 transition-colors ${!isRead ? "bg-primary/[0.03]" : ""}`}
-                  >
-                    <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl mt-0.5 ${notif.bg}`}>
-                      <notif.icon className={`h-4 w-4 ${notif.color}`} />
+                {showNotifications && (
+                  <div className="absolute right-0 top-13 z-50 w-80 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-slate-300/60">
+                    <div className="border-b border-slate-100 px-4 py-3">
+                      <p className="text-sm font-black text-slate-950">Notifications</p>
+                      <p className="text-xs font-bold text-slate-500">Assignments, notices, feedback, and classes</p>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className={`text-xs leading-tight ${isRead ? "font-medium text-foreground/70" : "font-bold text-foreground"}`}>
-                        {notif.text}
-                      </p>
-                      <p className="text-[10px] text-muted-foreground font-medium mt-0.5">{notif.sub}</p>
-                      <p className="text-[10px] text-muted-foreground/70 mt-1">{notif.time}</p>
+                    <div className="max-h-80 overflow-y-auto p-2">
+                      {notifications.length > 0 ? notifications.slice(0, 8).map((item) => (
+                        <article key={item._id} className="rounded-2xl p-3 transition hover:bg-violet-50">
+                          <div className="flex items-start gap-3">
+                            <div className="mt-0.5 h-2.5 w-2.5 rounded-full bg-violet-500" />
+                            <div>
+                              <p className="text-sm font-black text-slate-900">{item.title}</p>
+                              <p className="mt-1 text-xs font-semibold leading-5 text-slate-600">{item.message}</p>
+                              {item.createdAt && (
+                                <p className="mt-1 text-[10px] font-black uppercase tracking-[0.12em] text-slate-400">
+                                  {new Date(item.createdAt).toLocaleString("en-IN")}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </article>
+                      )) : (
+                        <div className="p-6 text-center">
+                          <p className="text-sm font-black text-slate-700">No notifications yet</p>
+                          <p className="mt-1 text-xs font-bold text-slate-400">New assignments and feedback will appear here.</p>
+                        </div>
+                      )}
                     </div>
-                    {!isRead && <div className="h-2 w-2 rounded-full bg-primary shrink-0 mt-1.5" />}
-                  </button>
-                );
-              })}
-            </div>
+                  </div>
+                )}
+              </div>
 
-            {/* Footer */}
-            <div className="px-4 py-2.5 border-t border-border/50 text-center">
-              <button className="text-xs font-bold text-primary hover:underline">View all notifications</button>
-            </div>
-          </DropdownMenuContent>
-        </DropdownMenu>
-
-        <Button variant="ghost" size="icon" className="rounded-full hidden sm:flex">
-          <MessageSquare className="h-5 w-5 text-muted-foreground" />
-        </Button>
-
-        {/* Profile dropdown */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="flex items-center gap-2 rounded-full pl-1 pr-2 py-1 hover:bg-muted/60 transition-colors outline-none">
-              <Avatar className="h-8 w-8 border-2 border-white shadow-sm ring-2 ring-primary/15">
-                <AvatarFallback className={`text-xs font-extrabold ${avatarClass}`}>{initials}</AvatarFallback>
-              </Avatar>
-              {user && (
-                <span className="hidden md:block text-sm font-bold text-foreground max-w-[90px] truncate">
-                  {user.name.split(" ")[0]}
-                </span>
-              )}
-              <ChevronDown className="h-3.5 w-3.5 text-muted-foreground hidden md:block" />
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-52 rounded-xl shadow-xl border border-border/50">
-            {user && (
-              <>
-                <div className="px-3 py-2.5">
-                  <p className="text-sm font-extrabold text-foreground">{user.name}</p>
-                  <p className="text-xs text-muted-foreground capitalize font-medium">{user.role}</p>
+              <div className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white py-1.5 pl-1.5 pr-3 shadow-sm">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#7b35ad] text-xs font-black text-white">
+                  {initials}
                 </div>
-                <DropdownMenuSeparator />
-              </>
-            )}
-            <DropdownMenuItem asChild>
-              <Link href="/profile" className="cursor-pointer font-medium">Profile</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/settings" className="cursor-pointer font-medium">Settings</Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={onLogout} className="text-destructive focus:text-destructive cursor-pointer font-semibold">
-              <LogOut className="h-4 w-4 mr-2" />
-              Sign Out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+                <div className="hidden leading-tight lg:block">
+                  <p className="text-sm font-black text-slate-900">{displayName}</p>
+                  <p className="text-[11px] font-bold text-slate-500">Student</p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={onLogout}
+                className="flex h-11 items-center justify-center gap-2 rounded-2xl bg-[#34428c] px-4 text-xs font-black text-white shadow-lg shadow-[#34428c]/20 transition hover:bg-[#7b35ad]"
+              >
+                <LogOut className="h-4 w-4" />
+                <span className="hidden sm:inline">Logout</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="relative md:hidden">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search..."
+              className="h-10 w-full rounded-2xl border border-slate-200 bg-slate-50 pl-10 pr-4 text-sm font-bold text-slate-800 outline-none"
+            />
+          </div>
+
+          <nav className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none]">
+            {navItems.map((item) => {
+              const isActive = location === item.href || (item.href !== "/" && location.startsWith(item.href));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex h-11 shrink-0 items-center gap-2 rounded-2xl px-4 text-xs font-black transition-all ${
+                    isActive
+                      ? "bg-[#7b35ad] text-white shadow-lg shadow-[#7b35ad]/20"
+                      : "border border-slate-200 bg-white text-slate-600 hover:border-[#7b35ad]/25 hover:bg-[#7b35ad]/5 hover:text-[#7b35ad]"
+                  }`}
+                >
+                  <item.icon className="h-4 w-4" />
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
       </div>
     </header>
   );

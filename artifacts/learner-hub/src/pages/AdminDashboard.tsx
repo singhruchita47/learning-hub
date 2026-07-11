@@ -8,6 +8,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
+import DashboardTopBar from "@/components/DashboardTopBar";
+import BookHeroArt from "@/components/BookHeroArt";
 
 const tabs = [
   { id: "overview",      label: "Overview",        icon: BarChart2 },
@@ -73,7 +75,7 @@ const logConfig: Record<string, { bg: string; color: string; icon: typeof CheckC
   info:    { bg: "bg-blue-50 border-blue-200",   color: "text-blue-600",  icon: CheckCircle2 },
 };
 
-export default function AdminDashboard({ user }: { user: { name: string } }) {
+export default function AdminDashboard({ user, onLogout }: { user: { name: string }; onLogout?: () => void }) {
   const [activeTab, setActiveTab] = useState("overview");
   const [userStatuses, setUserStatuses] = useState<Record<number, string>>(Object.fromEntries(mockUsers.map(u => [u.id, u.status])));
   const [courseStatuses, setCourseStatuses] = useState<Record<number, string>>(Object.fromEntries(approvalQueue.map(c => [c.id, "pending"])));
@@ -96,6 +98,8 @@ export default function AdminDashboard({ user }: { user: { name: string } }) {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <DashboardTopBar name={user.name} role="Admin" accent="violet" onLogout={onLogout} />
+
       {/* Hero */}
       <div className="w-full px-4 md:px-8 lg:px-12 py-7"
         style={{ background: "linear-gradient(135deg, #f5f3ff 0%, #ede9fe 60%, #ddd6fe 100%)" }}>
@@ -108,9 +112,14 @@ export default function AdminDashboard({ user }: { user: { name: string } }) {
             <p className="text-slate-500 mt-1 text-sm font-medium">Manage users, courses, and monitor platform activity.</p>
           </div>
           <div className="flex items-center gap-5 shrink-0">
-            <div className="text-center"><div className="text-2xl font-extrabold text-slate-900">{mockUsers.filter(u => userStatuses[u.id] === "active").length}</div><div className="text-xs text-slate-500 font-medium">Active Users</div></div>
-            <div className="h-10 w-px bg-violet-200" />
-            <div className="text-center"><div className="text-2xl font-extrabold text-amber-600">{approvalQueue.filter(c => courseStatuses[c.id] === "pending").length}</div><div className="text-xs text-slate-500 font-medium">Pending Approvals</div></div>
+            <BookHeroArt accent="violet" />
+            <div className="rounded-2xl border border-violet-200 bg-white/70 p-4 shadow-sm backdrop-blur">
+              <div className="flex items-center gap-5">
+                <div className="text-center"><div className="text-2xl font-extrabold text-slate-900">{mockUsers.filter(u => userStatuses[u.id] === "active").length}</div><div className="text-xs text-slate-500 font-medium">Active Users</div></div>
+                <div className="h-10 w-px bg-violet-200" />
+                <div className="text-center"><div className="text-2xl font-extrabold text-amber-600">{approvalQueue.filter(c => courseStatuses[c.id] === "pending").length}</div><div className="text-xs text-slate-500 font-medium">Pending Approvals</div></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

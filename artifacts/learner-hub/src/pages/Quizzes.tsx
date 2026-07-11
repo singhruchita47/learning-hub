@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Clock, HelpCircle, Zap, CheckCircle2, XCircle, ChevronRight, RotateCcw, Trophy } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { Clock, HelpCircle, Zap, ChevronRight } from "lucide-react";
+import { useLocation, useParams } from "wouter";
+import Quiz from "@/components/Quiz";
+import StudentLiveTestsPanel from "@/components/StudentLiveTestsPanel";
 
 interface Question { q: string; opts: string[]; ans: number; }
 
@@ -69,116 +71,33 @@ const diffColor: Record<string, string> = {
   Hard:   "bg-red-100 text-red-600",
 };
 
-type Phase = "list" | "quiz" | "result";
+type Phase = "list" | "quiz";
 
 export default function Quizzes() {
+  const { quizId } = useParams<{ quizId?: string }>();
+  const [, navigate] = useLocation();
   const [phase, setPhase] = useState<Phase>("list");
   const [activeQuiz, setActiveQuiz] = useState<typeof quizData[0] | null>(null);
-  const [currentQ, setCurrentQ] = useState(0);
-  const [selected, setSelected] = useState<number | null>(null);
-  const [answers, setAnswers] = useState<(number | null)[]>([]);
-  const [score, setScore] = useState(0);
+  const routedQuiz = useMemo(() => quizData.find((quiz) => quiz.id === quizId) ?? null, [quizId]);
 
   const startQuiz = (quiz: typeof quizData[0]) => {
     setActiveQuiz(quiz);
-    setCurrentQ(0);
-    setSelected(null);
-    setAnswers(Array(quiz.qBank.length).fill(null));
-    setScore(0);
     setPhase("quiz");
+    navigate(`/quizzes/${quiz.id}`);
   };
 
-  const handleSelect = (idx: number) => { if (selected === null) setSelected(idx); };
-
-  const handleNext = () => {
-    if (selected === null || !activeQuiz) return;
-    const newAnswers = [...answers];
-    newAnswers[currentQ] = selected;
-    setAnswers(newAnswers);
-    if (currentQ < activeQuiz.qBank.length - 1) {
-      setCurrentQ(currentQ + 1);
-      setSelected(null);
-    } else {
-      const finalScore = newAnswers.filter((a, i) => a === activeQuiz.qBank[i].ans).length;
-      setScore(finalScore);
-      setPhase("result");
-    }
-  };
-
-  if (phase === "quiz" && activeQuiz) {
-    const q = activeQuiz.qBank[currentQ];
-    const prog = ((currentQ) / activeQuiz.qBank.length) * 100;
+  if ((phase === "quiz" && activeQuiz) || routedQuiz) {
+    const quiz = routedQuiz ?? activeQuiz!;
     return (
-      <div className="p-4 md:p-8 max-w-2xl mx-auto animate-in fade-in duration-300">
-        <div className="flex items-center justify-between mb-6">
-          <button onClick={() => setPhase("list")} className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors">← Back</button>
-          <span className="text-sm font-bold text-muted-foreground">{currentQ + 1} / {activeQuiz.qBank.length}</span>
-        </div>
-        <div className="h-2 w-full rounded-full bg-gray-100 mb-8 overflow-hidden">
-          <motion.div className="h-full rounded-full" style={{ backgroundColor: activeQuiz.color }} animate={{ width: `${prog}%` }} />
-        </div>
-        <AnimatePresence mode="wait">
-          <motion.div key={currentQ} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
-            <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm mb-5">
-              <p className="text-lg font-bold text-slate-800 leading-relaxed">{q.q}</p>
-            </div>
-            <div className="flex flex-col gap-3">
-              {q.opts.map((opt, i) => {
-                const isSelected = selected === i;
-                const isCorrect = selected !== null && i === q.ans;
-                const isWrong = selected !== null && isSelected && i !== q.ans;
-                return (
-                  <motion.button key={i} whileHover={selected === null ? { scale: 1.01 } : {}} onClick={() => handleSelect(i)}
-                    className={`w-full rounded-xl border-2 px-4 py-3.5 text-left text-sm font-semibold transition-all ${
-                      isCorrect ? "border-emerald-400 bg-emerald-50 text-emerald-800" :
-                      isWrong   ? "border-red-400 bg-red-50 text-red-800" :
-                      isSelected ? "border-primary bg-primary/5 text-primary" :
-                      "border-gray-200 bg-white text-slate-700 hover:border-gray-300"
-                    }`}>
-                    <div className="flex items-center gap-3">
-                      <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-extrabold ${
-                        isCorrect ? "bg-emerald-500 text-white" : isWrong ? "bg-red-500 text-white" : isSelected ? "bg-primary text-white" : "bg-gray-100 text-gray-500"
-                      }`}>{String.fromCharCode(65 + i)}</div>
-                      {opt}
-                      {isCorrect && <CheckCircle2 className="h-4 w-4 text-emerald-500 ml-auto" />}
-                      {isWrong   && <XCircle className="h-4 w-4 text-red-500 ml-auto" />}
-                    </div>
-                  </motion.button>
-                );
-              })}
-            </div>
-            <Button onClick={handleNext} disabled={selected === null} className="w-full mt-6 h-12 rounded-xl text-base font-bold"
-              style={{ background: activeQuiz.color }}>
-              {currentQ < activeQuiz.qBank.length - 1 ? "Next Question →" : "Submit Quiz"}
-            </Button>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    );
-  }
-
-  if (phase === "result" && activeQuiz) {
-    const pct = Math.round((score / activeQuiz.qBank.length) * 100);
-    const grade = pct >= 80 ? "Excellent!" : pct >= 60 ? "Good Job!" : "Keep Practicing!";
-    return (
-      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-        className="p-4 md:p-8 max-w-lg mx-auto text-center mt-10">
-        <div className="flex h-24 w-24 items-center justify-center rounded-full mx-auto mb-5"
-          style={{ background: `${activeQuiz.color}20` }}>
-          <Trophy className="h-12 w-12" style={{ color: activeQuiz.color }} />
-        </div>
-        <h2 className="text-3xl font-extrabold text-slate-900 mb-1">{grade}</h2>
-        <p className="text-muted-foreground mb-6">{activeQuiz.title}</p>
-        <div className="flex items-center justify-center gap-6 mb-8">
-          <div><div className="text-4xl font-extrabold" style={{ color: activeQuiz.color }}>{score}/{activeQuiz.qBank.length}</div><div className="text-xs text-slate-500 font-medium">Correct</div></div>
-          <div className="h-12 w-px bg-gray-200" />
-          <div><div className="text-4xl font-extrabold text-slate-800">{pct}%</div><div className="text-xs text-slate-500 font-medium">Score</div></div>
-        </div>
-        <div className="flex gap-3">
-          <Button variant="outline" onClick={() => startQuiz(activeQuiz)} className="flex-1 gap-2 rounded-xl font-bold"><RotateCcw className="h-4 w-4" />Retry</Button>
-          <Button onClick={() => setPhase("list")} className="flex-1 rounded-xl font-bold">Back to Quizzes</Button>
-        </div>
-      </motion.div>
+      <Quiz
+        title={quiz.title}
+        color={quiz.color}
+        qBank={quiz.qBank}
+        onBack={() => {
+          setPhase("list");
+          navigate("/quizzes");
+        }}
+      />
     );
   }
 
@@ -188,6 +107,11 @@ export default function Quizzes() {
         <h1 className="text-3xl font-bold text-foreground">Quizzes</h1>
         <p className="text-muted-foreground mt-1">Test your knowledge and earn XP points.</p>
       </div>
+
+      <div className="mb-8">
+        <StudentLiveTestsPanel />
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {quizData.map((quiz, i) => (
           <motion.div key={quiz.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}

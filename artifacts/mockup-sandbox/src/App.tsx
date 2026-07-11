@@ -117,7 +117,7 @@ function Gallery() {
   );
 }
 
-function getPreviewPath(): string | null {
+function getPreviewPath(): string {
   const basePath = getBasePath();
   const { pathname } = window.location;
   const local =
@@ -125,22 +125,18 @@ function getPreviewPath(): string | null {
       ? pathname.slice(basePath.length) || "/"
       : pathname;
   const match = local.match(/^\/preview\/(.+)$/);
-  return match ? match[1] : null;
+  return match ? match[1] : "LoginForm";
 }
 
 function App() {
   const previewPath = getPreviewPath();
 
-  if (previewPath) {
-    return (
-      <PreviewRenderer
-        componentPath={previewPath}
-        modules={discoveredModules}
-      />
-    );
-  }
-
-  return <Gallery />;
+  return (
+    <PreviewRenderer
+      componentPath={previewPath}
+      modules={discoveredModules}
+    />
+  );
 }
 
 export default App;
