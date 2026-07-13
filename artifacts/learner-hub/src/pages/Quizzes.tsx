@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import { Clock, HelpCircle, Zap, ChevronRight } from "lucide-react";
+import { Clock, HelpCircle, Zap, ChevronRight, CheckCircle2 } from "lucide-react";
 import { useLocation, useParams } from "wouter";
 import Quiz from "@/components/Quiz";
 import StudentLiveTestsPanel from "@/components/StudentLiveTestsPanel";
@@ -43,7 +43,7 @@ const quizData = [
   },
   {
     id: "4", title: "Networking Quiz", course: "CS304", questions: 5, difficulty: "Medium", time: "8 mins",
-    color: "#F59E0B", icon: "🌐", completed: false,
+    color: "#6366F1", icon: "🌐", completed: false,
     qBank: [
       { q: "What does IP stand for?", opts: ["Internal Protocol", "Internet Protocol", "Interface Point", "Integrated Path"], ans: 1 },
       { q: "Which layer handles routing in the OSI model?", opts: ["Physical", "Data Link", "Network", "Transport"], ans: 2 },
@@ -67,8 +67,8 @@ const quizData = [
 
 const diffColor: Record<string, string> = {
   Easy:   "bg-emerald-100 text-emerald-700",
-  Medium: "bg-amber-100 text-amber-700",
-  Hard:   "bg-red-100 text-red-600",
+  Medium: "bg-violet-100 text-violet-700",
+  Hard:   "bg-rose-100 text-rose-600",
 };
 
 type Phase = "list" | "quiz";
@@ -101,44 +101,104 @@ export default function Quizzes() {
     );
   }
 
+  const totalDone = quizData.filter(q => q.completed).length;
+
   return (
-    <div className="p-4 md:p-6 lg:p-8 max-w-[1400px] mx-auto animate-in fade-in duration-500">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground">Quizzes</h1>
-        <p className="text-muted-foreground mt-1">Test your knowledge and earn XP points.</p>
-      </div>
+    <div className="min-h-screen bg-[#eef2fb] px-4 py-6 md:px-8 animate-in fade-in duration-500">
+      <div className="mx-auto max-w-[1400px] space-y-5">
 
-      <div className="mb-8">
-        <StudentLiveTestsPanel />
-      </div>
+        {/* ── Page Header ── */}
+        <section className="relative overflow-hidden rounded-2xl bg-white px-8 py-6 shadow-sm ring-1 ring-slate-100">
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-violet-50 to-transparent" />
+          <div className="pointer-events-none absolute -right-4 -top-4 h-32 w-32 rounded-full bg-indigo-100/50 blur-2xl" />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {quizData.map((quiz, i) => (
-          <motion.div key={quiz.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.07 }}
-            whileHover={{ y: -5 }} className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm flex flex-col gap-4">
-            <div className="flex items-start justify-between">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl text-2xl" style={{ background: `${quiz.color}15` }}>{quiz.icon}</div>
-              <div className="flex items-center gap-2">
-                {quiz.completed && <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">✓ Done</span>}
-                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${diffColor[quiz.difficulty]}`}>{quiz.difficulty}</span>
+          <div className="relative flex items-center justify-between">
+            <div className="flex-1">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-500">Student Module</p>
+              <h1 className="mt-1 text-3xl font-black text-slate-900">My <span className="text-violet-600">Quizzes</span></h1>
+              <p className="mt-1.5 text-xs font-semibold text-slate-400">Test your knowledge, earn XP and track your progress across all subjects.</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {[
+                  { val: quizData.length,              label: "Total Quizzes", color: "bg-violet-100 text-violet-700 ring-violet-200"    },
+                  { val: totalDone,                    label: "Completed",     color: "bg-emerald-100 text-emerald-700 ring-emerald-200"  },
+                  { val: quizData.length - totalDone,  label: "Remaining",     color: "bg-rose-100 text-rose-600 ring-rose-200"           },
+                  { val: `+${quizData.length * 50} XP`,label: "Available XP",  color: "bg-indigo-100 text-indigo-700 ring-indigo-200"     },
+                ].map(({ val, label, color }) => (
+                  <span key={label} className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-black ring-1 ${color}`}>
+                    <span className="text-sm font-black">{val}</span> {label}
+                  </span>
+                ))}
               </div>
             </div>
-            <div>
-              <h3 className="text-base font-extrabold text-slate-800">{quiz.title}</h3>
-              <p className="text-xs font-mono font-bold text-indigo-600 mt-0.5">{quiz.course}</p>
+
+            {/* Illustration */}
+            <div className="relative ml-6 hidden shrink-0 lg:block">
+              <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-violet-100 to-indigo-100 shadow-inner">
+                <span className="text-5xl select-none">🧠</span>
+              </div>
+              <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-violet-500 text-sm shadow-md">⚡</div>
             </div>
-            <div className="flex items-center gap-4 text-xs text-slate-500">
-              <div className="flex items-center gap-1"><HelpCircle className="h-3.5 w-3.5" />{quiz.questions} questions</div>
-              <div className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{quiz.time}</div>
-              <div className="flex items-center gap-1 text-amber-600 font-semibold"><Zap className="h-3.5 w-3.5" />+50 XP</div>
-            </div>
-            <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }} onClick={() => startQuiz(quiz)}
-              className="flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-white transition-all"
-              style={{ background: `linear-gradient(135deg, ${quiz.color}cc, ${quiz.color})` }}>
-              {quiz.completed ? "Retake Quiz" : "Start Quiz"} <ChevronRight className="h-4 w-4" />
-            </motion.button>
-          </motion.div>
-        ))}
+          </div>
+        </section>
+
+        {/* ── Live Tests ── */}
+        <StudentLiveTestsPanel />
+
+        {/* ── Quiz Cards ── */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {quizData.map((quiz, i) => (
+            <motion.div
+              key={quiz.id}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.07 }}
+              whileHover={{ y: -4 }}
+              className="relative overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-100 flex flex-col transition hover:shadow-md"
+            >
+              {/* colored top bar */}
+              <div className="h-1.5 w-full" style={{ background: quiz.color }} />
+
+              <div className="flex flex-col gap-4 p-5 flex-1">
+                <div className="flex items-start justify-between">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl text-2xl" style={{ background: `${quiz.color}18` }}>
+                    {quiz.icon}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {quiz.completed && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                        <CheckCircle2 className="h-3 w-3" /> Done
+                      </span>
+                    )}
+                    <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-black ${diffColor[quiz.difficulty]}`}>
+                      {quiz.difficulty}
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-extrabold text-slate-800">{quiz.title}</h3>
+                  <p className="mt-0.5 text-xs font-bold text-indigo-500">{quiz.course}</p>
+                </div>
+
+                <div className="flex items-center gap-4 text-xs text-slate-400 font-semibold">
+                  <span className="flex items-center gap-1"><HelpCircle className="h-3.5 w-3.5" />{quiz.questions} questions</span>
+                  <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{quiz.time}</span>
+                  <span className="flex items-center gap-1 text-violet-600 font-bold"><Zap className="h-3.5 w-3.5" />+50 XP</span>
+                </div>
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => startQuiz(quiz)}
+                  className="mt-auto flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-white transition-all"
+                  style={{ background: `linear-gradient(135deg, ${quiz.color}cc, ${quiz.color})` }}
+                >
+                  {quiz.completed ? "Retake Quiz" : "Start Quiz"} <ChevronRight className="h-4 w-4" />
+                </motion.button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

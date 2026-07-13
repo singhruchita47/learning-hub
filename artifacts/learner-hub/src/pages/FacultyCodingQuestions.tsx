@@ -235,10 +235,20 @@ export default function FacultyCodingQuestions() {
     expectedOutput: string;
     starterCode: string;
   }) {
+    const user = (() => {
+      try {
+        const saved = localStorage.getItem("learningHubUser");
+        return saved ? JSON.parse(saved) : null;
+      } catch {
+        return null;
+      }
+    })();
+    const facultyId = user?.email ?? user?.id ?? "faculty-demo";
+
     const response = await fetch(`${API_BASE}/coding-questions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...payload, facultyId: "faculty-demo" }),
+      body: JSON.stringify({ ...payload, facultyId }),
       });
     if (!response.ok) throw new Error("Unable to save");
     return response.json() as Promise<{ codingQuestion: CodingQuestion }>;

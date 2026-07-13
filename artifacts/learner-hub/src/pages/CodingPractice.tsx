@@ -4,13 +4,13 @@ import {
   Clock,
   Code2,
   Flame,
-  ListChecks,
   Play,
   RotateCcw,
   Search,
   Send,
   Trophy,
   XCircle,
+  Loader,
 } from "lucide-react";
 import { useLocation } from "wouter";
 import { codingPracticeProblems, type PracticeProblem } from "@/data/codingPracticeProblems";
@@ -109,6 +109,8 @@ export default function CodingPractice() {
   const [solutions, setSolutions] = useState<Record<string, string>>({});
   const [runStates, setRunStates] = useState<Record<string, RunState>>({});
   const [solvedIds, setSolvedIds] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState<"test" | "practice">("practice");
+
   const activeId = location.startsWith("/coding-practice/")
     ? decodeURIComponent(location.split("/").filter(Boolean).at(-1) ?? "")
     : null;
@@ -117,7 +119,9 @@ export default function CodingPractice() {
     () => [...facultyProblems, ...codingPracticeProblems].find((problem) => problem.id === activeId) ?? null,
     [activeId, facultyProblems],
   );
+
   const practiceProblems = useMemo(() => [...facultyProblems, ...codingPracticeProblems], [facultyProblems]);
+  
   const language = languages.find((item) => item.key === selectedLanguage);
   const solutionKey = activeProblem ? `${activeProblem.id}-${selectedLanguage}` : "";
   const currentCode =
@@ -140,26 +144,31 @@ export default function CodingPractice() {
         description: string;
         inputTestCase: string;
         expectedOutput: string;
+        isTest?: boolean;
       }> }) => {
         if (!mounted) return;
-        const mapped = (data.codingQuestions ?? []).map((question) => ({
-          id: `faculty-${question._id}`,
-          title: question.title,
-          difficulty: "Easy" as const,
-          tags: ["Faculty Assigned", "Practice"],
-          acceptance: "New",
-          description: question.description,
-          examples: [
-            {
-              input: question.inputTestCase,
-              output: question.expectedOutput,
-              explanation: "This sample is provided by faculty.",
-            },
-          ],
-          constraints: ["Follow the input/output format exactly."],
-          stdin: question.inputTestCase,
-          expectedOutput: question.expectedOutput,
-        }));
+        const mapped = (data.codingQuestions ?? []).map((question) => {
+          const isTest = question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
+          return {
+            id: `faculty-${question._id}`,
+            title: question.title,
+            difficulty: "Easy" as const,
+            tags: [isTest ? "Coding Test" : "Practice Question", "Faculty Assigned"],
+            acceptance: "New",
+            description: question.description,
+            examples: [
+              {
+                input: question.inputTestCase,
+                output: question.expectedOutput,
+                explanation: "This sample is provided by faculty.",
+              },
+            ],
+            constraints: ["Follow the input/output format exactly."],
+            stdin: question.inputTestCase,
+            expectedOutput: question.expectedOutput,
+            isTest
+          };
+        });
         setFacultyProblems(mapped);
       })
       .catch(() => {
@@ -170,6 +179,42 @@ export default function CodingPractice() {
       mounted = false;
     };
   }, []);
+
+  // UI Text Parsing to hide raw code or JSON schema from the student
+  const parsedDescription = useMemo(() => {
+    if (!activeProblem) return { topic: "", description: "" };
+    try {
+      const desc = activeProblem.description.trim();
+      if (desc.startsWith("{")) {
+        const parsed = JSON.parse(desc);
+        return {
+          topic: parsed.topic || "Coding Challenge",
+          description: parsed.description || desc,
+        };
+      }
+    } catch {
+      // ignore JSON parse error
+    }
+    return {
+      topic: activeProblem.tags?.[0] || "Coding Practice",
+      description: activeProblem.description,
+    };
+  }, [activeProblem]);
+
+  // Separate problems into Coding Tests vs Daily Practice
+  const dynamicTestsList = useMemo(() => {
+    return practiceProblems.filter((p) => {
+      const isTest = (p as any).isTest || p.tags.includes("Coding Test") || p.title.toLowerCase().includes("test") || p.title.toLowerCase().includes("exam");
+      return isTest;
+    });
+  }, [practiceProblems]);
+
+  const dynamicPracticeList = useMemo(() => {
+    return practiceProblems.filter((p) => {
+      const isTest = (p as any).isTest || p.tags.includes("Coding Test") || p.title.toLowerCase().includes("test") || p.title.toLowerCase().includes("exam");
+      return !isTest;
+    });
+  }, [practiceProblems]);
 
   async function handleRun(submit = false) {
     if (!selectedLanguage || !language || !activeProblem) return;
@@ -217,33 +262,54 @@ export default function CodingPractice() {
     }
   }
 
+  const langColors: Record<string, { bg: string; icon: string; glow: string }> = {
+    javascript: { bg: "from-yellow-400 to-amber-500",   icon: "☕", glow: "shadow-amber-300/40" },
+    python:     { bg: "from-blue-500 to-indigo-600",    icon: "🐍", glow: "shadow-blue-300/40"  },
+    java:       { bg: "from-red-500 to-rose-600",       icon: "☕", glow: "shadow-red-300/40"   },
+    cpp:        { bg: "from-[#6c5ce7] to-purple-700",   icon: "⚡", glow: "shadow-purple-300/40"},
+  };
+
   if (!selectedLanguage) {
     return (
-      <div className="min-h-[calc(100vh-130px)] bg-gradient-to-br from-white via-indigo-50 to-violet-50 px-4 py-10">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-8 text-center">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-500 text-white shadow-lg shadow-indigo-500/20">
-              <Code2 className="h-7 w-7" />
+      <div className="min-h-screen bg-[#eef2fb] px-4 py-6 animate-in fade-in duration-500">
+        <div className="mx-auto max-w-5xl space-y-5">
+
+          {/* Compact Header */}
+          <section className="rounded-2xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[11px] font-black uppercase tracking-widest text-violet-600">Practice Platform</p>
+                <h1 className="mt-0.5 text-2xl font-black text-slate-900">Coding <span className="text-violet-600">Arena</span></h1>
+                <p className="mt-1 text-xs font-semibold text-slate-400">Choose your language to start solving, run code and climb the leaderboard.</p>
+              </div>
+              <div className="flex gap-2">
+                {["🏆 Competitive", "⚡ Instant run", "📊 Leaderboard"].map(f => (
+                  <span key={f} className="hidden sm:inline-flex rounded-xl bg-violet-50 px-3 py-1.5 text-xs font-bold text-violet-700">{f}</span>
+                ))}
+              </div>
             </div>
-            <h1 className="text-3xl font-extrabold text-slate-950">Coding Practice</h1>
-            <p className="mt-2 text-sm font-semibold text-slate-600">Choose your language first, then select an easy question.</p>
-          </div>
+          </section>
+
+          {/* Language Cards */}
           <div className="grid gap-4 md:grid-cols-4">
-            {languages.map((item) => (
-              <button
-                key={item.key}
-                type="button"
-                onClick={() => {
-                  setSelectedLanguage(item.key);
-                  setLocation("/coding-practice");
-                }}
-                className="rounded-3xl border border-indigo-100 bg-white p-5 text-left shadow-sm transition-all hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg"
-              >
-                <Code2 className="mb-5 h-7 w-7 text-indigo-500" />
-                <h2 className="text-lg font-extrabold text-slate-950">{item.label}</h2>
-                <p className="mt-2 text-xs font-semibold text-slate-500">Problem list, editor, tests, submit, leaderboard.</p>
-              </button>
-            ))}
+            {languages.map((item) => {
+              const lc = langColors[item.key];
+              return (
+                <button
+                  key={item.key}
+                  type="button"
+                  onClick={() => { setSelectedLanguage(item.key); setLocation("/coding-practice"); }}
+                  className="group relative overflow-hidden rounded-2xl bg-white p-5 text-left shadow-sm ring-1 ring-slate-100 transition-all hover:-translate-y-1 hover:shadow-md hover:ring-violet-200"
+                >
+                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${lc.bg} text-xl shadow-md`}>
+                    {lc.icon}
+                  </div>
+                  <h2 className="text-base font-black text-slate-900">{item.label}</h2>
+                  <p className="mt-1 text-xs font-semibold text-slate-400">Practice & climb the leaderboard.</p>
+                  <div className={`mt-3 h-0.5 w-full rounded-full bg-gradient-to-r ${lc.bg} opacity-30 group-hover:opacity-100 transition-opacity`} />
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -251,21 +317,23 @@ export default function CodingPractice() {
   }
 
   if (!activeProblem) {
+    const listToRender = activeTab === "test" ? dynamicTestsList : dynamicPracticeList;
+
     return (
-      <div className="min-h-[calc(100vh-130px)] bg-[#f6f8fb]">
-        <div className="border-b border-slate-200 bg-white px-4 py-4">
+      <div className="min-h-screen bg-[#eef2fb] animate-in fade-in duration-500">
+        <div className="border-b border-slate-100 bg-white px-4 py-3 shadow-sm">
           <div className="mx-auto flex max-w-[1500px] flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="text-3xl font-black text-indigo-600">LH</div>
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#6c5ce7] text-xs font-black text-white shadow-md">⌨️</div>
               <div>
-                <h1 className="text-xl font-extrabold text-slate-950">Coding Practice</h1>
-                <p className="text-xs font-bold text-slate-500">Language: {language?.label}</p>
+                <h1 className="text-base font-black text-slate-900">Coding Practice</h1>
+                <p className="text-[11px] font-bold text-slate-400">Language: {language?.label}</p>
               </div>
             </div>
             <button
               type="button"
               onClick={() => setSelectedLanguage("")}
-              className="rounded-xl border border-indigo-200 bg-white px-4 py-2 text-sm font-extrabold text-indigo-700 hover:bg-indigo-50"
+              className="rounded-xl border border-[#6c5ce7]/20 bg-[#6c5ce7]/5 px-4 py-2 text-xs font-black text-[#6c5ce7] hover:bg-[#6c5ce7]/10 transition"
             >
               Change Language
             </button>
@@ -273,32 +341,38 @@ export default function CodingPractice() {
         </div>
 
         <div className="mx-auto grid max-w-[1500px] gap-5 p-5 lg:grid-cols-[1fr_330px]">
-          <main className="rounded-2xl bg-white p-5 shadow-sm">
-            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+          
+          <main className="rounded-2xl bg-white p-5 shadow-sm space-y-6">
+            
+            {/* Control Panel Toggle Mode */}
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-slate-150 pb-4">
               <div>
-                <h2 className="text-3xl font-extrabold text-slate-950">Popular Problems</h2>
-                <p className="mt-1 text-sm font-semibold text-slate-500">
-                  {solvedIds.length} of {practiceProblems.length} Problems Solved
-                  {facultyProblems.length > 0 && (
-                    <span className="ml-2 rounded-full bg-violet-100 px-2 py-0.5 text-xs font-black text-violet-700">
-                      {facultyProblems.length} faculty assigned
-                    </span>
-                  )}
-                </p>
+                <h2 className="text-2xl font-extrabold text-slate-950">Problems Catalog</h2>
+                <p className="text-xs text-slate-500 font-bold mt-0.5">Solve coding challenges, track accuracy and metrics.</p>
               </div>
-              <div className="flex gap-2">
-                <div className="flex h-11 items-center gap-2 rounded-xl border border-slate-200 px-3 text-sm font-bold text-slate-500">
-                  <Search className="h-4 w-4" />
-                  Search
-                </div>
-                <div className="h-11 rounded-xl border border-slate-200 px-3 py-2 text-sm font-bold text-slate-600">
-                  Sort: Submissions
-                </div>
+              <div className="flex rounded-xl bg-slate-100 p-1">
+                <button
+                  onClick={() => setActiveTab("practice")}
+                  className={`rounded-lg px-4 py-1.5 text-xs font-black transition-all ${
+                    activeTab === "practice" ? "bg-white text-indigo-700 shadow-sm" : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Daily Practice ({dynamicPracticeList.length})
+                </button>
+                <button
+                  onClick={() => setActiveTab("test")}
+                  className={`rounded-lg px-4 py-1.5 text-xs font-black transition-all ${
+                    activeTab === "test" ? "bg-white text-indigo-700 shadow-sm" : "text-slate-500 hover:text-slate-900"
+                  }`}
+                >
+                  Coding Tests ({dynamicTestsList.length})
+                </button>
               </div>
             </div>
 
+            {/* List area */}
             <div className="divide-y divide-slate-100">
-              {practiceProblems.map((problem) => {
+              {listToRender.map((problem) => {
                 const solved = solvedIds.includes(problem.id);
                 return (
                   <div key={problem.id} className="flex flex-col gap-4 py-5 md:flex-row md:items-center md:justify-between">
@@ -306,15 +380,15 @@ export default function CodingPractice() {
                       <button className="mt-1 text-slate-400">♡</button>
                       <div>
                         <h3 className="text-lg font-extrabold text-slate-800">{problem.title}</h3>
-                        <div className="mt-2 flex flex-wrap gap-2 text-sm font-semibold text-slate-500">
+                        <div className="mt-2 flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
                           <span className="text-indigo-600">{problem.difficulty}</span>
                           <span>•</span>
                           <span>{problem.acceptance}</span>
                           <span>•</span>
                           <span>{problem.tags.join(", ")}</span>
-                          {solved && <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-extrabold text-indigo-700">Solved</span>}
+                          {solved && <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-black text-emerald-800">Solved</span>}
                         </div>
-                        <p className="mt-3 max-w-3xl text-sm font-medium leading-6 text-slate-500">{problem.description}</p>
+                        <p className="mt-3 max-w-3xl text-sm font-medium leading-6 text-slate-550">{problem.description}</p>
                       </div>
                     </div>
                     <button
@@ -327,6 +401,12 @@ export default function CodingPractice() {
                   </div>
                 );
               })}
+
+              {listToRender.length === 0 && (
+                <div className="text-center py-10 text-slate-400">
+                  <p className="text-sm font-extrabold">No questions available under this category.</p>
+                </div>
+              )}
             </div>
           </main>
 
@@ -366,7 +446,7 @@ export default function CodingPractice() {
   }
 
   return (
-    <div className="flex h-full min-h-[720px] flex-col overflow-hidden bg-[#eef2f6]">
+    <div className="flex h-full min-h-[720px] flex-col overflow-hidden bg-[#eef2f6] animate-in fade-in duration-300">
       <div className="shrink-0 border-b border-slate-200 bg-white px-4 py-2">
         <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -389,22 +469,28 @@ export default function CodingPractice() {
       </div>
 
       <div className="mx-auto grid min-h-0 w-full max-w-[1600px] flex-1 grid-cols-[40fr_60fr] items-stretch gap-1 px-3 pb-2 pt-2">
-        <section className="h-full overflow-y-auto rounded-l-2xl border border-slate-200 bg-white p-6">
-          <h1 className="text-2xl font-extrabold text-slate-950">{activeProblem.title}</h1>
-          <div className="mt-4 flex flex-wrap items-center gap-5 text-sm font-semibold text-slate-600">
-            <span>Difficulty: <b className="text-indigo-600">{activeProblem.difficulty}</b></span>
-            <span>Accuracy: <b>{activeProblem.acceptance}</b></span>
-            <span>Points: <b>2</b></span>
-            <span>Average Time: <b>5m</b></span>
+        
+        {/* Left Side details */}
+        <section className="h-full overflow-y-auto rounded-l-2xl border border-slate-200 bg-white p-6 space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h1 className="text-2xl font-extrabold text-slate-950">{activeProblem.title}</h1>
+            <span className="rounded-lg bg-indigo-50 px-2 py-1 text-[10px] font-black uppercase text-indigo-700 tracking-wider">
+              {parsedDescription.topic}
+            </span>
+          </div>
+          <div className="mt-4 flex flex-wrap items-center gap-5 text-xs font-black text-slate-400">
+            <span>DIFFICULTY: <b className="text-indigo-600 uppercase">{activeProblem.difficulty}</b></span>
+            <span>ACCURACY: <b className="text-slate-600">{activeProblem.acceptance}</b></span>
+            <span>POINTS: <b className="text-slate-600">2</b></span>
           </div>
           <div className="my-5 h-px bg-slate-200" />
-          <p className="text-lg font-medium leading-8 text-slate-700">{activeProblem.description}</p>
+          <p className="text-sm font-semibold leading-relaxed text-slate-700">{parsedDescription.description}</p>
 
           <div className="mt-7 space-y-5">
             {activeProblem.examples.map((example, index) => (
               <div key={index}>
-                <h3 className="mb-2 text-base font-extrabold text-slate-900">Example {index + 1}:</h3>
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-base leading-7 text-slate-700">
+                <h3 className="mb-2 text-sm font-extrabold text-slate-900">Example {index + 1}:</h3>
+                <div className="rounded-xl border border-slate-200 bg-slate-55/40 p-4 text-xs leading-normal text-slate-700 font-semibold space-y-1">
                   <p><b>Input:</b> {example.input}</p>
                   <p><b>Output:</b> {example.output}</p>
                   <p><b>Explanation:</b> {example.explanation}</p>
@@ -413,21 +499,22 @@ export default function CodingPractice() {
             ))}
           </div>
 
-          <div className="mt-8">
-            <h3 className="mb-3 text-base font-extrabold text-slate-900">Constraints:</h3>
+          <div className="mt-8 pt-4 border-t border-slate-100">
+            <h3 className="mb-3 text-sm font-extrabold text-slate-900">Constraints:</h3>
             <div className="space-y-2">
               {activeProblem.constraints.map((item) => (
-                <p key={item} className="font-mono text-sm text-slate-700">{item}</p>
+                <p key={item} className="font-mono text-xs text-slate-650">{item}</p>
               ))}
             </div>
           </div>
         </section>
 
+        {/* Right Side Editor */}
         <section className="flex h-full min-h-0 flex-col rounded-r-2xl border border-slate-200 bg-white">
           <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3">
             <div className="flex items-center gap-2 text-sm font-extrabold text-slate-800">
               <Code2 className="h-4 w-4 text-indigo-600" />
-              Code
+              Code Editor
             </div>
             <select
               value={selectedLanguage}
@@ -471,8 +558,8 @@ export default function CodingPractice() {
               </div>
             </div>
             <div className="grid gap-3 md:grid-cols-2">
-              <pre className="rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700">Input: {activeProblem.stdin}</pre>
-              <pre className="rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700">Expected: {activeProblem.expectedOutput}</pre>
+              <pre className="rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-700 font-mono">Input: {activeProblem.stdin}</pre>
+              <pre className="rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-700 font-mono">Expected: {activeProblem.expectedOutput}</pre>
             </div>
             {currentRun && (
               <div className={`mt-3 rounded-xl border p-3 text-sm ${
@@ -486,7 +573,7 @@ export default function CodingPractice() {
                   {currentRun.status === "accepted" ? <CheckCircle2 className="h-4 w-4" /> : <XCircle className="h-4 w-4" />}
                   {currentRun.message}
                 </div>
-                <pre className="whitespace-pre-wrap rounded-lg bg-white/70 p-2">Your Output: {currentRun.output}</pre>
+                <pre className="whitespace-pre-wrap rounded-lg bg-white/70 p-2 font-mono text-xs">Your Output: {currentRun.output}</pre>
               </div>
             )}
           </div>

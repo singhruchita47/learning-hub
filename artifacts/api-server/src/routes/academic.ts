@@ -6,6 +6,12 @@ import ClassSession from "../models/classSession";
 import CodingQuestion from "../models/codingQuestion";
 import Notification from "../models/notification";
 import QuizAttempt from "../models/quizAttempt";
+import Attendance from "../models/attendance";
+import Feedback from "../models/feedback";
+import LiveClass from "../models/liveClass";
+import Resource from "../models/resource";
+import Course from "../models/course";
+import { isCloudinaryConfigured, uploadBufferToCloudinary } from "../lib/cloudinary";
 
 const router = Router();
 
@@ -16,6 +22,11 @@ const memoryStore = {
   notifications: [] as any[],
   codingQuestions: [] as any[],
   classes: [] as any[],
+  attendance: [] as any[],
+  feedback: [] as any[],
+  liveClasses: [] as any[],
+  resources: [] as any[],
+  courses: [] as any[],
 };
 
 function mongoReady() {
@@ -27,7 +38,7 @@ function memoryId(prefix: string) {
 }
 
 router.post("/assignments", async (req: Request, res: Response) => {
-  const { title, description, dueDate, courseCode, facultyId } = req.body;
+  const { title, description, dueDate, courseCode, facultyId, imageUrl, maxMarks } = req.body;
 
   if (!title || !description || !dueDate || !courseCode || !facultyId) {
     return res.status(400).json({ message: "title, description, dueDate, courseCode, and facultyId are required." });
@@ -41,6 +52,8 @@ router.post("/assignments", async (req: Request, res: Response) => {
       dueDate: new Date(dueDate).toISOString(),
       courseCode,
       facultyId,
+      imageUrl,
+      maxMarks: maxMarks ? Number(maxMarks) : 100,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -62,6 +75,8 @@ router.post("/assignments", async (req: Request, res: Response) => {
     dueDate: new Date(dueDate),
     courseCode,
     facultyId,
+    imageUrl,
+    maxMarks: maxMarks ? Number(maxMarks) : 100,
   });
 
   await Notification.create({
@@ -85,7 +100,7 @@ router.get("/assignments", async (_req: Request, res: Response) => {
 
 router.post("/assignments/:assignmentId/submissions", async (req: Request, res: Response) => {
   const { assignmentId } = req.params;
-  const { studentId, fileName, note } = req.body;
+  const { studentId, fileName, fileUrl, note } = req.body;
 
   if (!studentId || !fileName) {
     return res.status(400).json({ message: "studentId and fileName are required." });
@@ -98,6 +113,7 @@ router.post("/assignments/:assignmentId/submissions", async (req: Request, res: 
       assignment: assignment ?? assignmentId,
       studentId,
       fileName,
+      fileUrl,
       note,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -118,6 +134,7 @@ router.post("/assignments/:assignmentId/submissions", async (req: Request, res: 
     assignment: assignmentId,
     studentId,
     fileName,
+    fileUrl,
     note,
   });
 
@@ -157,7 +174,7 @@ router.patch("/assignment-submissions/:submissionId/feedback", async (req: Reque
     memoryStore.notifications.unshift({
       _id: memoryId("notification"),
       title: "Assignment feedback received",
-      message: `Faculty added feedback for ${submission.assignment?.title ?? "your assignment"}.`,
+      message: `Faculty added feedback for ${submission.assignment?.title ?? "your assignment"}. Marks: ${marks ?? "N/A"}.`,
       audience: "student",
       type: "assignment",
       createdAt: new Date().toISOString(),
@@ -178,7 +195,7 @@ router.patch("/assignment-submissions/:submissionId/feedback", async (req: Reque
 
   await Notification.create({
     title: "Assignment feedback received",
-    message: "Faculty added feedback for your assignment submission.",
+    message: `Faculty added feedback for ${(submission.assignment as any)?.title ?? "your assignment submission"}. Marks: ${marks ?? "N/A"}.`,
     audience: "student",
     type: "assignment",
   });
@@ -450,6 +467,367 @@ router.get("/coding-questions", async (_req: Request, res: Response) => {
 
   const codingQuestions = await CodingQuestion.find().sort({ createdAt: -1 }).lean();
   return res.json({ codingQuestions });
+});
+
+// Attendance routes
+router.post("/attendance/mark", async (req: Request, res: Response) => {
+  const { studentId } = req.body;
+  const dateStr = new Date().toISOString().slice(0, 10); // YYYY-MM-DD format
+
+  if (!studentId) {
+    return res.status(400).json({ message: "studentId is required" });
+  }
+
+  if (!mongoReady()) {
+    const existing = memoryStore.attendance.find((item) => item.studentId === studentId && item.date === dateStr);
+    if (existing) {
+      return res.status(200).json({ attendance: existing, message: "Attendance already marked for today.", storage: "memory" });
+    }
+    const log = { _id: memoryId("attendance"), studentId, date: dateStr, marked: true, createdAt: new Date().toISOString() };
+    memoryStore.attendance.push(log);
+    return res.status(201).json({ attendance: log, storage: "memory" });
+  }
+
+  const existing = await Attendance.findOne({ studentId, date: dateStr });
+  if (existing) {
+    return res.status(200).json({ attendance: existing, message: "Attendance already marked for today." });
+  }
+
+  const log = await Attendance.create({ studentId, date: dateStr, marked: true });
+  return res.status(201).json({ attendance: log });
+});
+
+router.get("/attendance/list", async (_req: Request, res: Response) => {
+  if (!mongoReady()) {
+    return res.json({ attendance: memoryStore.attendance, storage: "memory" });
+  }
+  const attendance = await Attendance.find().sort({ createdAt: -1 }).lean();
+  return res.json({ attendance });
+});
+
+// Feedback routes
+router.post("/feedback", async (req: Request, res: Response) => {
+  const { studentId, courseCode, rating, comments } = req.body;
+
+  if (!studentId || !courseCode || !rating || !comments) {
+    return res.status(400).json({ message: "studentId, courseCode, rating, and comments are required." });
+  }
+
+  if (!mongoReady()) {
+    const log = {
+      _id: memoryId("feedback"),
+      studentId,
+      courseCode,
+      rating: Number(rating),
+      comments,
+      createdAt: new Date().toISOString(),
+    };
+    memoryStore.feedback.push(log);
+    return res.status(201).json({ feedback: log, storage: "memory" });
+  }
+
+  const log = await Feedback.create({ studentId, courseCode, rating: Number(rating), comments });
+  return res.status(201).json({ feedback: log });
+});
+
+router.get("/feedback", async (_req: Request, res: Response) => {
+  if (!mongoReady()) {
+    return res.json({ feedback: memoryStore.feedback, storage: "memory" });
+  }
+  const feedback = await Feedback.find().sort({ createdAt: -1 }).lean();
+  return res.json({ feedback });
+});
+
+// Live Class routes
+router.post("/live-classes", async (req: Request, res: Response) => {
+  const { title, courseCode, facultyId, startsAt, meetingUrl } = req.body;
+
+  if (!title || !courseCode || !facultyId || !startsAt) {
+    return res.status(400).json({ message: "title, courseCode, facultyId, and startsAt are required." });
+  }
+
+  if (!mongoReady()) {
+    const liveClass = {
+      _id: memoryId("liveclass"),
+      title,
+      courseCode,
+      facultyId,
+      startsAt: new Date(startsAt).toISOString(),
+      meetingUrl,
+      status: "scheduled",
+      createdAt: new Date().toISOString(),
+    };
+    memoryStore.liveClasses.unshift(liveClass);
+    
+    // Trigger notification
+    memoryStore.notifications.unshift({
+      _id: memoryId("notification"),
+      title: "Live class scheduled",
+      message: `${title} starts at ${new Date(startsAt).toLocaleString("en-IN")}.`,
+      audience: "student",
+      type: "class",
+      createdAt: new Date().toISOString(),
+    });
+    
+    return res.status(201).json({ liveClass, storage: "memory" });
+  }
+
+  const liveClass = await LiveClass.create({
+    title,
+    courseCode,
+    facultyId,
+    startsAt: new Date(startsAt),
+    meetingUrl,
+  });
+
+  await Notification.create({
+    title: "Live class scheduled",
+    message: `${title} starts at ${new Date(startsAt).toLocaleString("en-IN")}.`,
+    audience: "student",
+    type: "class",
+  });
+
+  return res.status(201).json({ liveClass });
+});
+
+router.get("/live-classes", async (_req: Request, res: Response) => {
+  if (!mongoReady()) {
+    return res.json({ liveClasses: memoryStore.liveClasses, storage: "memory" });
+  }
+  const liveClasses = await LiveClass.find().sort({ startsAt: 1 }).lean();
+  return res.json({ liveClasses });
+});
+
+router.patch("/live-classes/:classId/status", async (req: Request, res: Response) => {
+  const { classId } = req.params;
+  const { status } = req.body;
+
+  if (!mongoReady()) {
+    const liveClass = memoryStore.liveClasses.find((item) => item._id === classId);
+    if (!liveClass) return res.status(404).json({ message: "Live class not found." });
+    liveClass.status = status;
+    return res.json({ liveClass, storage: "memory" });
+  }
+
+  const liveClass = await LiveClass.findByIdAndUpdate(classId, { status }, { new: true });
+  if (!liveClass) return res.status(404).json({ message: "Live class not found." });
+  return res.json({ liveClass });
+});
+
+// Batch Coding Question route (with aggregated alerts)
+router.post("/coding-questions/batch", async (req: Request, res: Response) => {
+  const { questions } = req.body;
+
+  if (!Array.isArray(questions) || questions.length === 0) {
+    return res.status(400).json({ message: "questions must be a non-empty array." });
+  }
+
+  const createdQuestions = [];
+
+  if (!mongoReady()) {
+    for (const q of questions) {
+      const codingQuestion = {
+        _id: memoryId("coding-question"),
+        title: q.title,
+        difficulty: q.difficulty || "Easy",
+        description: q.description,
+        inputTestCase: q.inputTestCase,
+        expectedOutput: q.expectedOutput,
+        starterCode: q.starterCode || "",
+        facultyId: q.facultyId,
+        createdAt: new Date().toISOString(),
+      };
+      memoryStore.codingQuestions.unshift(codingQuestion);
+      createdQuestions.push(codingQuestion);
+    }
+
+    memoryStore.notifications.unshift({
+      _id: memoryId("notification"),
+      title: "New coding practice available",
+      message: `Faculty has added ${questions.length} new practice coding questions.`,
+      audience: "student",
+      type: "general",
+      createdAt: new Date().toISOString(),
+    });
+
+    return res.status(201).json({ codingQuestions: createdQuestions, storage: "memory" });
+  }
+
+  for (const q of questions) {
+    const codingQuestion = await CodingQuestion.create({
+      title: q.title,
+      difficulty: q.difficulty || "Easy",
+      description: q.description,
+      inputTestCase: q.inputTestCase,
+      expectedOutput: q.expectedOutput,
+      starterCode: q.starterCode || "",
+      facultyId: q.facultyId,
+    });
+    createdQuestions.push(codingQuestion);
+  }
+
+  await Notification.create({
+    title: "New coding practice available",
+    message: `Faculty has added ${questions.length} new practice coding questions.`,
+    audience: "student",
+    type: "general",
+  });
+
+  return res.status(201).json({ codingQuestions: createdQuestions });
+});
+
+// Resources endpoints
+router.post("/resources", async (req: Request, res: Response) => {
+  const { title, category, courseCode, fileUrl, format, size, pages } = req.body;
+
+  if (!title || !category || !courseCode || !fileUrl || !format) {
+    return res.status(400).json({ message: "title, category, courseCode, fileUrl, and format are required." });
+  }
+
+  if (!mongoReady()) {
+    const resource = {
+      _id: memoryId("resource"),
+      title,
+      category,
+      courseCode,
+      fileUrl,
+      format,
+      size: size || "1.5 MB",
+      pages: pages ? Number(pages) : 0,
+      createdAt: new Date().toISOString(),
+    };
+    memoryStore.resources.unshift(resource);
+
+    // Trigger notification
+    memoryStore.notifications.unshift({
+      _id: memoryId("notification"),
+      title: `New resource uploaded in ${category}`,
+      message: `Faculty uploaded: ${title} (${courseCode}).`,
+      audience: "student",
+      type: "general",
+      createdAt: new Date().toISOString(),
+    });
+
+    return res.status(201).json({ resource, storage: "memory" });
+  }
+
+  const resource = await Resource.create({
+    title,
+    category,
+    courseCode,
+    fileUrl,
+    format,
+    size: size || "1.5 MB",
+    pages: pages ? Number(pages) : 0,
+  });
+
+  await Notification.create({
+    title: `New resource uploaded in ${category}`,
+    message: `Faculty uploaded: ${title} (${courseCode}).`,
+    audience: "student",
+    type: "general",
+  });
+
+  return res.status(201).json({ resource });
+});
+
+router.get("/resources", async (_req: Request, res: Response) => {
+  if (!mongoReady()) {
+    return res.json({ resources: memoryStore.resources, storage: "memory" });
+  }
+  const resources = await Resource.find().sort({ createdAt: -1 }).lean();
+  return res.json({ resources });
+});
+
+// Courses endpoints
+router.post("/courses", async (req: Request, res: Response) => {
+  const { code, title, color, teacher } = req.body;
+
+  if (!code || !title) {
+    return res.status(400).json({ message: "code and title are required." });
+  }
+
+  if (!mongoReady()) {
+    const course = {
+      _id: memoryId("course"),
+      code,
+      title,
+      color: color || "#7130a1",
+      teacher: teacher || "Dr. Faculty",
+      students: 48,
+      progress: 68,
+      createdAt: new Date().toISOString(),
+    };
+    memoryStore.courses.push(course);
+    return res.status(201).json({ course, storage: "memory" });
+  }
+
+  try {
+    const course = await Course.create({
+      code,
+      title,
+      color: color || "#7130a1",
+      teacher: teacher || "Dr. Faculty",
+      students: Math.floor(Math.random() * 30) + 20,
+      progress: Math.floor(Math.random() * 40) + 40,
+    });
+    return res.status(201).json({ course });
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/courses", async (_req: Request, res: Response) => {
+  if (!mongoReady()) {
+    return res.json({ courses: memoryStore.courses, storage: "memory" });
+  }
+  const courses = await Course.find().sort({ createdAt: 1 }).lean();
+  return res.json({ courses });
+});
+
+// Upload file base64 endpoint
+router.post("/upload-base64", async (req: Request, res: Response) => {
+  const { fileName, base64Data } = req.body;
+  if (!fileName || !base64Data) {
+    return res.status(400).json({ message: "fileName and base64Data are required." });
+  }
+
+  if (!isCloudinaryConfigured()) {
+    return res.status(503).json({ message: "Cloudinary is not configured on the server." });
+  }
+
+  try {
+    const buffer = Buffer.from(base64Data, "base64");
+    const fileUrl = await uploadBufferToCloudinary(buffer, fileName);
+    return res.status(200).json({ fileUrl });
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message ?? "Cloudinary upload failed." });
+  }
+});
+
+// Reset database endpoint
+router.post("/reset-db", async (_req: Request, res: Response) => {
+  memoryStore.assignments = [];
+  memoryStore.assignmentSubmissions = [];
+  memoryStore.quizAttempts = [];
+  memoryStore.notifications = [];
+  memoryStore.codingQuestions = [];
+  memoryStore.classes = [];
+  memoryStore.attendance = [];
+  memoryStore.feedback = [];
+  memoryStore.liveClasses = [];
+  memoryStore.resources = [];
+  memoryStore.courses = [];
+  
+  if (mongoReady()) {
+    try {
+      await mongoose.connection.db.dropDatabase();
+    } catch {
+      // Ignore if cannot drop
+    }
+  }
+
+  return res.json({ message: "Database reset successful" });
 });
 
 export default router;

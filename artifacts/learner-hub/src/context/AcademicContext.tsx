@@ -14,10 +14,12 @@ export interface SharedAssignment {
   createdAt: string;
   courseCode?: string;
   submittedFileName?: string;
+  submittedFileUrl?: string;
   submittedAt?: string;
   studentNote?: string;
   feedback?: string;
   marks?: number;
+  imageUrl?: string;
 }
 
 export interface Question {
@@ -51,10 +53,11 @@ interface AcademicContextValue {
   reloadQuestions: () => Promise<void>;
   reloadAssignments: () => Promise<void>;
   addAssignment: (assignment: Omit<SharedAssignment, "id" | "createdAt">) => void;
-  submitAssignment: (assignmentId: string, fileName: string, note?: string) => void;
+  submitAssignment: (assignmentId: string, fileName: string, fileUrl?: string, note?: string) => void;
   addAssignmentFeedback: (assignmentId: string, feedback: string) => void;
   publishTest: (test: Omit<PublishedTest, "id" | "createdAt">) => void;
   publishCodingQuestions: (questions: CodingQuestion[]) => void;
+  addQuestionsToBank: (questions: Question[]) => void;
 }
 
 export const fallbackQuestionBank: Question[] = [
@@ -82,15 +85,7 @@ export const fallbackQuestionBank: Question[] = [
 
 const AcademicContext = createContext<AcademicContextValue | null>(null);
 
-const starterAssignments: SharedAssignment[] = [
-  {
-    id: "seed-assignment-1",
-    title: "Binary Tree Implementation",
-    description: "Implement insert, search, delete, and traversal operations for a binary search tree.",
-    dueDate: "2026-07-10",
-    createdAt: new Date().toISOString(),
-  },
-];
+const starterAssignments: SharedAssignment[] = [];
 
 type ApiAssignment = {
   _id: string;
@@ -99,12 +94,14 @@ type ApiAssignment = {
   dueDate: string;
   courseCode?: string;
   createdAt?: string;
+  imageUrl?: string;
 };
 
 type ApiSubmission = {
   _id: string;
   studentId: string;
   fileName: string;
+  fileUrl?: string;
   note?: string;
   feedback?: string;
   marks?: number;
@@ -120,10 +117,19 @@ function mapApiAssignment(assignment: ApiAssignment): SharedAssignment {
     dueDate: assignment.dueDate?.slice(0, 10) ?? "",
     courseCode: assignment.courseCode,
     createdAt: assignment.createdAt ?? new Date().toISOString(),
+    imageUrl: assignment.imageUrl,
   };
 }
 
-export function AcademicProvider({ children }: { children: React.ReactNode }) {
+interface AuthUser {
+  id: string;
+  name: string;
+  email: string;
+  role: "student" | "faculty" | "admin";
+  token: string;
+}
+
+export function AcademicProvider({ children, user }: { children: React.ReactNode; user: AuthUser | null }) {
   const [assignments, setAssignments] = useState<SharedAssignment[]>(starterAssignments);
   const [publishedTests, setPublishedTests] = useState<PublishedTest[]>([]);
   const [publishedCodingQuestions, setPublishedCodingQuestions] = useState<CodingQuestion[]>([]);
@@ -164,6 +170,7 @@ export function AcademicProvider({ children }: { children: React.ReactNode }) {
         : { submissions: [] };
       const submissions = submissionData.submissions ?? [];
       const apiAssignments = (data.assignments ?? []).map(mapApiAssignment);
+
       const assignmentsWithSubmissions = apiAssignments.map((assignment) => {
         const submission = submissions.find((item) => {
           const assignmentRef = item.assignment;
@@ -173,6 +180,7 @@ export function AcademicProvider({ children }: { children: React.ReactNode }) {
           ? {
               ...assignment,
               submittedFileName: submission.fileName,
+              submittedFileUrl: submission.fileUrl,
               submittedAt: submission.createdAt,
               studentNote: submission.note,
               feedback: submission.feedback,
@@ -180,10 +188,14 @@ export function AcademicProvider({ children }: { children: React.ReactNode }) {
             }
           : assignment;
       });
-      setAssignments(assignmentsWithSubmissions.length > 0 ? assignmentsWithSubmissions : starterAssignments);
+      setAssignments(assignmentsWithSubmissions);
     } catch {
-      // Keep local starter assignments when the backend is not available.
+      setAssignments([]);
     }
+  }, []);
+
+  useEffect(() => {
+    localStorage.removeItem("local_assignments");
   }, []);
 
   useEffect(() => {
@@ -209,7 +221,7 @@ export function AcademicProvider({ children }: { children: React.ReactNode }) {
             description: assignment.description,
             dueDate: assignment.dueDate,
             courseCode: assignment.courseCode ?? "CS301",
-            facultyId: "faculty-demo",
+            facultyId: user?.email ?? "faculty-demo",
           }),
         })
           .then((response) => (response.ok ? response.json() : null))
@@ -220,13 +232,14 @@ export function AcademicProvider({ children }: { children: React.ReactNode }) {
           })
           .catch(() => {});
       },
-      submitAssignment: (assignmentId, fileName, note = "") => {
+      submitAssignment: (assignmentId, fileName, fileUrl = "", note = "") => {
         void fetch(`${API_BASE}/assignments/${assignmentId}/submissions`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            studentId: "student-demo-rs",
+            studentId: user?.email ?? "student-demo-rs",
             fileName,
+            fileUrl,
             note,
           }),
         })
@@ -239,6 +252,7 @@ export function AcademicProvider({ children }: { children: React.ReactNode }) {
               ? {
                   ...assignment,
                   submittedFileName: fileName,
+                  submittedFileUrl: fileUrl,
                   submittedAt: new Date().toISOString(),
                   studentNote: note,
                 }
@@ -270,6 +284,9 @@ export function AcademicProvider({ children }: { children: React.ReactNode }) {
       },
       publishCodingQuestions: (questions) => {
         setPublishedCodingQuestions(questions);
+      },
+      addQuestionsToBank: (questions) => {
+        setQuestionBank((current) => [...questions, ...current]);
       },
     }),
     [assignments, publishedTests, publishedCodingQuestions, questionBank, questionsLoading, questionsError, reloadAssignments],

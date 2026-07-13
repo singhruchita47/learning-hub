@@ -49,7 +49,15 @@ export default function Quiz({ title, color, qBank, onBack }: QuizProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           quizTitle: title,
-          studentId: "student-demo-rs",
+          studentId: (() => {
+            try {
+              const saved = localStorage.getItem("learningHubUser");
+              const user = saved ? JSON.parse(saved) : null;
+              return user?.email ?? user?.id ?? "student-demo-rs";
+            } catch {
+              return "student-demo-rs";
+            }
+          })(),
           score: finalScore,
           total: qBank.length,
           answers: qBank.map((question, questionIndex) => {

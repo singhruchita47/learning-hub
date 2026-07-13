@@ -1,8 +1,8 @@
 export const courses = [
   {
-    id: '1',
-    title: 'Data Structures',
-    teacher: 'Dr. Sarah Chen',
+    id: 'web-dev',
+    title: 'Web Development',
+    teacher: 'CodeWithHarry',
     code: 'CS301',
     progress: 85,
     color: 'bg-indigo-500',

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import axios from "axios";
 import mongoose from "mongoose";
-import Question from "../models/question";
+import CodingQuestion from "../models/codingQuestion";
 
 const router = Router();
 
@@ -31,7 +31,7 @@ router.post("/run-code", async (req, res) => {
       });
     }
 
-    const question = await Question.findById(questionId).lean();
+    const question = await CodingQuestion.findById(questionId).lean();
 
     if (!question) {
       return res.status(404).json({ error: "Question not found" });

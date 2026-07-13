@@ -8,6 +8,7 @@ type Submission = {
   _id: string;
   studentId: string;
   fileName: string;
+  fileUrl?: string;
   note?: string;
   feedback?: string;
   marks?: number;
@@ -114,10 +115,25 @@ export default function FacultySubmissions() {
                     }`}>
                       {item.feedback ? "Feedback sent" : "Need feedback"}
                     </span>
-                    <button className="flex h-10 items-center gap-2 rounded-xl bg-slate-950 px-4 text-xs font-black text-white">
-                      <Download className="h-4 w-4" />
-                      View File
-                    </button>
+                    {item.fileUrl ? (
+                      <a
+                        href={item.fileUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex h-10 items-center gap-2 rounded-xl bg-slate-950 px-4 text-xs font-black text-white hover:bg-slate-800"
+                      >
+                        <Download className="h-4 w-4" />
+                        View File
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => window.open(item.fileName, "_blank")}
+                        className="flex h-10 items-center gap-2 rounded-xl bg-slate-950 px-4 text-xs font-black text-white hover:bg-slate-800"
+                      >
+                        <Download className="h-4 w-4" />
+                        View File
+                      </button>
+                    )}
                   </div>
                 </div>
                 <div className="mt-4 grid gap-3 rounded-2xl border border-violet-100 bg-white p-4 md:grid-cols-[140px_1fr_auto] md:items-end">

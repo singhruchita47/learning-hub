@@ -34,6 +34,9 @@ import Profile from "@/pages/Profile";
 import Settings from "@/pages/Settings";
 import Feedback from "@/pages/Feedback";
 import ResumeGenerator from "@/pages/ResumeGenerator";
+import WebDevPlayer from "@/pages/WebDevPlayer";
+import StudentAttendance from "@/pages/StudentAttendance";
+import FacultyAttendance from "@/pages/FacultyAttendance";
 
 const queryClient = new QueryClient();
 
@@ -99,6 +102,7 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
           <Route path="/faculty/quiz-marks" component={FacultyQuizMarks} />
           <Route path="/faculty/coding-questions" component={FacultyCodingQuestions} />
           <Route path="/faculty/analytics" component={() => <FacultyDashboard user={user} onLogout={onLogout} />} />
+          <Route path="/faculty/attendance" component={FacultyAttendance} />
           <Route component={NotFound} />
         </Switch>
       </FacultyLayout>
@@ -117,6 +121,7 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
     <Layout user={user} onLogout={onLogout}>
       <Switch>
         <Route path="/" component={() => <HomeDashboard user={user} onLogout={onLogout} />} />
+        <Route path="/courses/web-dev" component={WebDevPlayer} />
         <Route path="/courses/:id" component={CourseViewer} />
         <Route path="/courses" component={Courses} />
         <Route path="/resources" component={Resources} />
@@ -129,6 +134,7 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
         <Route path="/community" component={Community} />
         <Route path="/leaderboard" component={Leaderboard} />
         <Route path="/calendar" component={Calendar} />
+        <Route path="/attendance" component={StudentAttendance} />
         <Route path="/certificates" component={Certificates} />
         <Route path="/profile" component={Profile} />
         <Route path="/settings" component={Settings} />
@@ -167,7 +173,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <SearchProvider>
-          <AcademicProvider>
+          <AcademicProvider user={user}>
             {user ? (
               <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
                 <Router user={user} onLogout={handleLogout} />

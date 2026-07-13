@@ -5,6 +5,8 @@ import quizRouter from "./quiz";
 import runCodeRouter from "./runCode";
 import academicRouter from "./academic";
 import authRouter from "./auth";
+import aiRouter from "./ai";
+import attendanceRouter from "./attendance";
 
 const router: IRouter = Router();
 
@@ -13,6 +15,8 @@ router.use("/questions", questionsRouter);
 router.use("/quiz", quizRouter);
 router.use("/academic", academicRouter);
 router.use("/auth", authRouter);
+router.use("/ai", aiRouter);
+router.use("/attendance", attendanceRouter);
 router.use(runCodeRouter);
 
 export default router;

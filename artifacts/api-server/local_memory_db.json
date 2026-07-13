@@ -1,0 +1,13 @@
+{
+  "attendance": [
+    {
+      "_id": "att-1783917538071",
+      "studentId": "singhruchita47@gmail.com",
+      "studentName": "ruchita",
+      "courseCode": "WEBDEV001",
+      "date": "2026-07-13",
+      "status": "present",
+      "markedAt": "2026-07-13T04:38:58.071Z"
+    }
+  ]
+}

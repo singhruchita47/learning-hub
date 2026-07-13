@@ -5,7 +5,7 @@ import { BookOpen, Trophy, Clock, TrendingUp } from "lucide-react";
 
 const float = (delay = 0) => ({
   animate: { y: [0, -8, 0] },
-  transition: { duration: 3.6, repeat: Infinity, ease: "easeInOut", delay },
+  transition: { duration: 3.6, repeat: Infinity, ease: "easeInOut" as const, delay },
 });
 
 function CartoonBoy() {
