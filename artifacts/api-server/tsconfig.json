@@ -6,6 +6,8 @@
     "outDir": "dist",
     "rootDir": "src",
     "types": ["node"],
+    "module": "commonjs",
+    "moduleResolution": "node",
     "strict": false,
     "noImplicitAny": false,
     "skipLibCheck": true
