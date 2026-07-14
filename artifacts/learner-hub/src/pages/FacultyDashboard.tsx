@@ -189,12 +189,12 @@ export default function FacultyDashboard({
   }
 
   async function handleScheduleClass() {
-    if (!classTopic.trim() || !classDate || !classTime) {
-      alert("Please fill in topic, date, and time");
+    if (!classTopic.trim() || !classDate || !classTime || !classCustomLink.trim()) {
+      alert("Please fill in topic, date, time, and meeting link");
       return;
     }
     const startsAt = new Date(`${classDate}T${classTime}`).toISOString();
-    const meetingUrl = classCustomLink.trim() || `https://meet.jit.si/sgsu-${classTopic.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
+    const meetingUrl = classCustomLink.trim();
     const payload = {
       title: classTopic.trim(),
       courseCode: classCourse,
@@ -655,7 +655,7 @@ export default function FacultyDashboard({
                     value={classCustomLink}
                     onChange={(e) => setClassCustomLink(e.target.value)}
                     className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none focus:border-violet-300 focus:bg-white focus:ring-4 focus:ring-violet-100 transition"
-                    placeholder="Custom Meeting Link (Optional - e.g. Zoom, GMeet)"
+                    placeholder="Meeting Link (e.g. Zoom, Google Meet)"
                   />
                   <button
                     onClick={handleScheduleClass}

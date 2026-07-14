@@ -40,7 +40,7 @@ export default function Classes() {
             courseCode: "B.Tech CSE - Sem 4",
             facultyId: "Dr. Meera Rao",
             startsAt: dateNow.toISOString(),
-            meetingUrl: "https://meet.jit.si/sgsu-ds-lab",
+            meetingUrl: "https://meet.google.com/abc-defg-hij",
             status: "live",
           },
           {
@@ -49,7 +49,7 @@ export default function Classes() {
             courseCode: "Database Systems",
             facultyId: "Prof. Iyer",
             startsAt: new Date(Date.now() + 3600000).toISOString(),
-            meetingUrl: "https://meet.jit.si/sgsu-db-normalization",
+            meetingUrl: "https://zoom.us/j/123456789",
             status: "scheduled",
           },
           {
@@ -58,7 +58,7 @@ export default function Classes() {
             courseCode: "Operating Systems",
             facultyId: "Dr. Kapoor",
             startsAt: new Date(Date.now() + 7200000).toISOString(),
-            meetingUrl: "https://meet.jit.si/sgsu-os-revision",
+            meetingUrl: "https://meet.google.com/xyz-uvwx-yz",
             status: "scheduled",
           }
         ]);
@@ -75,8 +75,12 @@ export default function Classes() {
   const completedCount = liveClasses.filter(c => c.status === "completed").length;
 
   function handleJoinClass(meetingUrl?: string) {
-    const url = meetingUrl || "https://meet.jit.si/sgsu-virtual-classroom";
-    window.open(url, "_blank");
+    const url = meetingUrl || "#";
+    if (url !== "#") {
+      window.open(url, "_blank");
+    } else {
+      alert("No meeting link provided for this class.");
+    }
   }
 
   return (
