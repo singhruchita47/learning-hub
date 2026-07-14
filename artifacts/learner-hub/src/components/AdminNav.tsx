@@ -3,7 +3,7 @@ import {
   BarChart2, BookOpen, Users, LogOut, 
   Settings, LayoutDashboard, Calendar,
   Trophy, BookMarked, UserCheck, CheckCircle2,
-  TrendingUp, Megaphone, Link2, Award, Search, Code2
+  TrendingUp, Megaphone, Link2, Award, Search, Code2, ClipboardList
 } from "lucide-react";
 
 export default function AdminNav({ name, onLogout, children }: { name: string, onLogout: () => void, children: React.ReactNode }) {
@@ -15,6 +15,7 @@ export default function AdminNav({ name, onLogout, children }: { name: string, o
     { href: "/admin/announcements", label: "Announcements", icon: Megaphone },
     { href: "/admin/courses", label: "Courses", icon: BookOpen },
     { href: "/admin/quiz-coding", label: "Quiz & Coding", icon: Code2 },
+    { href: "/admin/assignments", label: "Assignments", icon: ClipboardList },
     { href: "/admin/allocations", label: "Allocations", icon: Link2 },
     { href: "/admin/placements", label: "Students", icon: Users },
     { href: "/admin/curriculum", label: "Curriculum", icon: BookMarked },
