@@ -18,7 +18,7 @@ export default function AdminDashboard({ user }: { user: { name: string }; onLog
 
   // Add User State
   const [showAddUser, setShowAddUser] = useState(false);
-  const [newUserForm, setNewUserForm] = useState({ name: "", email: "", password: "", role: "student" });
+  const [newUserForm, setNewUserForm] = useState({ name: "", email: "", password: "", role: "student", branch: "", course: "", enrollmentYear: "" });
   const [addSaving, setAddSaving] = useState(false);
   const [addedCredentials, setAddedCredentials] = useState<{email: string, password: string, role: string} | null>(null);
 
@@ -77,7 +77,7 @@ export default function AdminDashboard({ user }: { user: { name: string }; onLog
         role: newUserForm.role,
       });
       setUsersList([data.user, ...usersList]);
-      setNewUserForm({ name: "", email: "", password: "", role: "student" });
+      setNewUserForm({ name: "", email: "", password: "", role: "student", branch: "", course: "", enrollmentYear: "" });
       setShowAddUser(false);
     } catch (err: any) {
       alert(err.message);
@@ -273,6 +273,41 @@ export default function AdminDashboard({ user }: { user: { name: string }; onLog
                   <option value="admin">Admin</option>
                 </select>
               </div>
+
+              {newUserForm.role === "student" && (
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <label className="mb-1.5 block text-xs font-bold text-slate-700">Branch</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. CSE"
+                      value={newUserForm.branch}
+                      onChange={(e) => setNewUserForm({ ...newUserForm, branch: e.target.value })}
+                      className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm font-bold text-slate-900 outline-none transition focus:border-violet-400 focus:bg-white focus:ring-4 focus:ring-violet-100"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1.5 block text-xs font-bold text-slate-700">Course</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. B.Tech"
+                      value={newUserForm.course}
+                      onChange={(e) => setNewUserForm({ ...newUserForm, course: e.target.value })}
+                      className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm font-bold text-slate-900 outline-none transition focus:border-violet-400 focus:bg-white focus:ring-4 focus:ring-violet-100"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1.5 block text-xs font-bold text-slate-700">Year</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. 2024"
+                      value={newUserForm.enrollmentYear}
+                      onChange={(e) => setNewUserForm({ ...newUserForm, enrollmentYear: e.target.value })}
+                      className="h-10 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm font-bold text-slate-900 outline-none transition focus:border-violet-400 focus:bg-white focus:ring-4 focus:ring-violet-100"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="mt-8 flex gap-3">
