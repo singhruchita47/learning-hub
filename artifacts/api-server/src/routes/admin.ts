@@ -9,6 +9,10 @@ import { memoryUsers } from "./auth";
 import { memoryStore } from "./academic";
 import { getDB, updateDB } from "../lib/memoryDb";
 
+function saveMemoryUsers() {
+  updateDB("users", memoryUsers);
+}
+
 const router = Router();
 
 function mongoReady() {
@@ -66,6 +70,7 @@ router.post("/users", async (req, res) => {
         role
       };
       memoryUsers.push(newUser);
+      saveMemoryUsers(); // Persist to disk so users survive cold starts
       
       const userObj = { _id: newUser.id, name, email, role, status: "active" };
       return res.status(201).json({ user: userObj, storage: "memory" });
@@ -178,8 +183,22 @@ router.get("/courses", async (req, res) => {
 
 // Approve/Reject/Update Course
 router.patch("/courses/:id", async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoReady()) {
+    const course = memoryStore.courses.find((c: any) => c._id === id || c.code === id);
+    if (!course) return res.status(404).json({ error: "Course not found" });
+    Object.assign(course, req.body);
+    updateDB("courses", memoryStore.courses);
+    return res.json({ course });
+  }
+
   try {
-    const course = await Course.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const course = await Course.findOneAndUpdate(
+      { $or: [{ _id: id }, { code: id }] },
+      req.body,
+      { new: true }
+    );
     if (!course) return res.status(404).json({ error: "Course not found" });
     res.json({ course });
   } catch (error: any) {

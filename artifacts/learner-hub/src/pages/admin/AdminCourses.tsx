@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Plus, Users, BookOpen, BarChart2 } from "lucide-react";
+import { Plus, Users, BookOpen, BarChart2, Check, Trash2 } from "lucide-react";
 import { ACADEMIC_API_BASE, API_ROOT } from "@/lib/api";
 
 const ADMIN_API_BASE = `${API_ROOT}/admin`;
@@ -59,11 +59,20 @@ export default function AdminCourses({ adminName }: { adminName: string }) {
   async function addCourse() {
     if (!newForm.code.trim() || !newForm.title.trim()) return;
     setAddSaving(true);
+    const color = newForm.themeColor.match(/#\w+/)?.[0] || "#7130a1";
     try {
       await fetch(`${ACADEMIC_API_BASE}/courses`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...newForm, teacher: newForm.teacher || adminName, students: 0, progress: 0 }),
+        body: JSON.stringify({
+          code: newForm.code,
+          title: newForm.title,
+          color,
+          teacher: newForm.teacher || adminName,
+          status: "approved",
+          students: 0,
+          progress: 0
+        }),
       });
       setShowAddForm(false);
       setNewForm({ code: "", title: "", themeColor: "Purple (#7130a1)", teacher: faculties.length > 0 ? faculties[0].name : "" });
@@ -72,6 +81,39 @@ export default function AdminCourses({ adminName }: { adminName: string }) {
       alert("Failed to create course.");
     } finally {
       setAddSaving(false);
+    }
+  }
+
+  async function deleteCourse(code: string) {
+    if (!window.confirm("Are you sure you want to delete this course?")) return;
+    try {
+      const res = await fetch(`${ACADEMIC_API_BASE}/courses/${code}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        void loadCourses();
+      } else {
+        alert("Failed to delete course.");
+      }
+    } catch {
+      alert("Error deleting course.");
+    }
+  }
+
+  async function approveCourse(idOrCode: string) {
+    try {
+      const res = await fetch(`${ADMIN_API_BASE}/courses/${idOrCode}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "approved" }),
+      });
+      if (res.ok) {
+        void loadCourses();
+      } else {
+        alert("Failed to approve course.");
+      }
+    } catch {
+      alert("Error approving course.");
     }
   }
 
@@ -147,6 +189,7 @@ export default function AdminCourses({ adminName }: { adminName: string }) {
                 <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wider text-slate-400">Status</th>
                 <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wider text-slate-400">Enrolled Students</th>
                 <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wider text-slate-400">Overall Progress</th>
+                <th className="px-5 py-3 text-left text-[10px] font-black uppercase tracking-wider text-slate-400">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -180,6 +223,26 @@ export default function AdminCourses({ adminName }: { adminName: string }) {
                         <div className="h-full bg-violet-500 rounded-full" style={{ width: `${course.progress || 0}%` }} />
                       </div>
                       <span className="text-xs font-bold text-slate-500">{course.progress || 0}%</span>
+                    </div>
+                  </td>
+                  <td className="px-5 py-4">
+                    <div className="flex items-center gap-2">
+                      {(course.status !== 'approved') && (
+                        <button
+                          onClick={() => approveCourse(course._id || course.code)}
+                          title="Approve"
+                          className="flex items-center gap-1 rounded-lg bg-emerald-100 px-2 py-1 text-[10px] font-black text-emerald-700 hover:bg-emerald-200 transition"
+                        >
+                          <Check className="h-3 w-3" /> Approve
+                        </button>
+                      )}
+                      <button
+                        onClick={() => deleteCourse(course._id || course.code)}
+                        title="Delete"
+                        className="flex items-center gap-1 rounded-lg bg-red-100 px-2 py-1 text-[10px] font-black text-red-600 hover:bg-red-200 transition"
+                      >
+                        <Trash2 className="h-3 w-3" /> Delete
+                      </button>
                     </div>
                   </td>
                 </tr>
