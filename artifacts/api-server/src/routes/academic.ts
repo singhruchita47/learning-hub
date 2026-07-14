@@ -779,7 +779,7 @@ router.get("/resources", async (_req: Request, res: Response) => {
 
 // Courses endpoints
 router.post("/courses", async (req: Request, res: Response) => {
-  const { code, title, color, teacher, status } = req.body;
+  const { code, title, color, teacher, status, branch } = req.body;
 
   if (!code || !title) {
     return res.status(400).json({ message: "code and title are required." });
@@ -792,6 +792,7 @@ router.post("/courses", async (req: Request, res: Response) => {
       title,
       color: color || "#7130a1",
       teacher: teacher || "Dr. Faculty",
+      branch: branch || "All Branches",
       status: status || "approved",
       students: 0,
       progress: 0,
@@ -808,6 +809,7 @@ router.post("/courses", async (req: Request, res: Response) => {
       title,
       color: color || "#7130a1",
       teacher: teacher || "Dr. Faculty",
+      branch: branch || "All Branches",
       status: status || "pending",
       students: Math.floor(Math.random() * 30) + 20,
       progress: Math.floor(Math.random() * 40) + 40,

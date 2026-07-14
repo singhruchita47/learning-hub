@@ -7,6 +7,7 @@ export interface ICourse extends Document {
   progress: number;
   color: string;
   teacher: string;
+  branch?: string;
   facultyId?: mongoose.Types.ObjectId;
   status: "pending" | "approved" | "rejected";
   createdAt: Date;
@@ -21,6 +22,7 @@ const CourseSchema = new Schema<ICourse>(
     progress: { type: Number, default: 0 },
     color: { type: String, default: "#7130a1" },
     teacher: { type: String, default: "Dr. Faculty" },
+    branch: { type: String, default: "All Branches" },
     facultyId: { type: Schema.Types.ObjectId, ref: "User" },
     status: {
       type: String,

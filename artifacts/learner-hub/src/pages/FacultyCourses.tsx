@@ -27,7 +27,7 @@ export default function FacultyCourses() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [newForm, setNewForm] = useState({ code: "", title: "", themeColor: "Purple (#7130a1)" });
+  const [newForm, setNewForm] = useState({ code: "", title: "", themeColor: "Purple (#7130a1)", branch: "B.Tech CSE" });
   const [addSaving, setAddSaving] = useState(false);
 
   /* ─── Upload modal state ─── */
@@ -64,10 +64,10 @@ export default function FacultyCourses() {
       await fetch(`${API_BASE}/courses`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...newForm, teacher: facultyName, students: 0, progress: 0 }),
+        body: JSON.stringify({ ...newForm, teacher: facultyName, students: 0, progress: 0, branch: newForm.branch }),
       });
       setShowAddForm(false);
-      setNewForm({ code: "", title: "", themeColor: "Purple (#7130a1)" });
+      setNewForm({ code: "", title: "", themeColor: "Purple (#7130a1)", branch: "B.Tech CSE" });
       void loadCourses();
     } catch { /* ignore */ }
     finally { setAddSaving(false); }
@@ -194,6 +194,11 @@ export default function FacultyCourses() {
                 <div className="mt-4">
                   <h2 className="text-xl font-black text-slate-900 leading-snug">{course.title}</h2>
                   <p className="mt-0.5 text-sm font-black text-violet-600">{course.code}</p>
+                  {(course as any).branch && (
+                    <span className="mt-1.5 inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-black text-indigo-600">
+                      {(course as any).branch}
+                    </span>
+                  )}
                 </div>
 
                 {/* Progress */}
@@ -269,6 +274,25 @@ export default function FacultyCourses() {
                   placeholder="e.g. Data Structures & Algorithms"
                   className="h-11 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-800 outline-none focus:border-violet-400 focus:bg-white focus:ring-4 focus:ring-violet-100 transition"
                 />
+              </label>
+
+              <label className="grid gap-1.5">
+                <span className="text-xs font-black text-slate-500">Branch / Department:</span>
+                <select
+                  value={newForm.branch}
+                  onChange={e => setNewForm(prev => ({ ...prev, branch: e.target.value }))}
+                  className="h-11 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-700 outline-none focus:border-violet-400 cursor-pointer"
+                >
+                  <option>B.Tech CSE</option>
+                  <option>B.Tech IT</option>
+                  <option>B.Tech ECE</option>
+                  <option>B.Tech ME</option>
+                  <option>B.Tech CE</option>
+                  <option>B.Tech EE</option>
+                  <option>MCA</option>
+                  <option>MBA</option>
+                  <option>All Branches</option>
+                </select>
               </label>
 
               <label className="grid gap-1.5">

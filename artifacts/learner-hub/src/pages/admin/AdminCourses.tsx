@@ -30,7 +30,7 @@ export default function AdminCourses({ adminName }: { adminName: string }) {
   
   // Add course state
   const [showAddForm, setShowAddForm] = useState(false);
-  const [newForm, setNewForm] = useState({ code: "", title: "", themeColor: "Purple (#7130a1)", teacher: "" });
+  const [newForm, setNewForm] = useState({ code: "", title: "", themeColor: "Purple (#7130a1)", teacher: "", branch: "B.Tech CSE" });
   const [addSaving, setAddSaving] = useState(false);
 
   // Upload modal state (same as FacultyCourses)
@@ -90,13 +90,14 @@ export default function AdminCourses({ adminName }: { adminName: string }) {
           title: newForm.title,
           color,
           teacher: newForm.teacher || adminName,
+          branch: newForm.branch,
           status: "approved",
           students: 0,
           progress: 0
         }),
       });
       setShowAddForm(false);
-      setNewForm({ code: "", title: "", themeColor: "Purple (#7130a1)", teacher: faculties.length > 0 ? faculties[0].name : "" });
+      setNewForm({ code: "", title: "", themeColor: "Purple (#7130a1)", teacher: faculties.length > 0 ? faculties[0].name : "", branch: "B.Tech CSE" });
       void loadCourses();
     } catch {
       alert("Failed to create course.");
@@ -266,6 +267,11 @@ export default function AdminCourses({ adminName }: { adminName: string }) {
                 <h2 className="text-xl font-black text-slate-900 leading-snug">{course.title}</h2>
                 <p className="mt-0.5 text-sm font-black text-violet-600">{course.code}</p>
                 <p className="mt-1 text-xs font-semibold text-slate-400">by {course.teacher}</p>
+                {(course as any).branch && (
+                  <span className="mt-1.5 inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-0.5 text-[10px] font-black text-indigo-600">
+                    {(course as any).branch}
+                  </span>
+                )}
               </div>
 
               {/* Progress */}
@@ -359,6 +365,25 @@ export default function AdminCourses({ adminName }: { adminName: string }) {
                   placeholder="e.g. Data Structures & Algorithms"
                   className="h-11 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-800 outline-none focus:border-violet-400 focus:bg-white focus:ring-4 focus:ring-violet-100 transition"
                 />
+              </label>
+
+              <label className="grid gap-1.5">
+                <span className="text-xs font-black text-slate-500">Branch / Department:</span>
+                <select
+                  value={newForm.branch}
+                  onChange={e => setNewForm(prev => ({ ...prev, branch: e.target.value }))}
+                  className="h-11 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-700 outline-none focus:border-violet-400 cursor-pointer"
+                >
+                  <option>B.Tech CSE</option>
+                  <option>B.Tech IT</option>
+                  <option>B.Tech ECE</option>
+                  <option>B.Tech ME</option>
+                  <option>B.Tech CE</option>
+                  <option>B.Tech EE</option>
+                  <option>MCA</option>
+                  <option>MBA</option>
+                  <option>All Branches</option>
+                </select>
               </label>
 
               <label className="grid gap-1.5">
