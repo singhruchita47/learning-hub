@@ -113,6 +113,7 @@ export default function FacultyDashboard({
   const [newCourseCode, setNewCourseCode] = useState("");
   const [newCourseTitle, setNewCourseTitle] = useState("");
   const [newCourseColor, setNewCourseColor] = useState("#7130a1");
+  const [newCourseBranch, setNewCourseBranch] = useState("All Branches");
   const [apiSubmissions, setApiSubmissions] = useState<ApiSubmission[]>([]);
   const [quizAttempts, setQuizAttempts] = useState<ApiQuizAttempt[]>([]);
   const [notifications, setNotifications] = useState<ApiNotification[]>([]);
@@ -315,6 +316,7 @@ export default function FacultyDashboard({
       code: newCourseCode.trim().toUpperCase(),
       title: newCourseTitle.trim(),
       color: newCourseColor,
+      branch: newCourseBranch,
       teacher: user.name || "Dr. Faculty",
     };
 
@@ -907,6 +909,22 @@ export default function FacultyDashboard({
                   <option value="#10b981">Green (#10b981)</option>
                   <option value="#ef4444">Red (#ef4444)</option>
                   <option value="#f59e0b">Orange (#f59e0b)</option>
+                </select>
+              </label>
+
+              <label className="grid gap-1.5 text-xs font-bold text-slate-700">
+                Target Branch:
+                <select
+                  value={newCourseBranch}
+                  onChange={(e) => setNewCourseBranch(e.target.value)}
+                  className="h-10 rounded-xl border border-slate-200 bg-slate-50 px-2 text-xs font-bold"
+                >
+                  <option value="All Branches">All Branches</option>
+                  <option value="CSE">CSE</option>
+                  <option value="IT">IT</option>
+                  <option value="ECE">ECE</option>
+                  <option value="ME">ME</option>
+                  <option value="CE">CE</option>
                 </select>
               </label>
 
