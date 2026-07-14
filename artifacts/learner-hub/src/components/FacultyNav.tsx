@@ -87,87 +87,29 @@ export default function FacultyNav({
   }
 
   return (
-    <div className="flex min-h-screen bg-[#eef2fb]">
-
-      {/* ── Sidebar ── */}
-      <aside className={`fixed left-0 top-0 z-30 h-screen bg-white shadow-lg shadow-slate-200/60 border-r border-slate-100 flex flex-col transition-all duration-300 ${
-        sidebarOpen ? "w-64" : "w-0 overflow-hidden"
-      } hidden lg:flex`}>
-        
-        {/* Logo */}
-        <div className="flex items-center gap-3 px-5 py-5 border-b border-slate-100 shrink-0">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 text-sm font-black text-white shadow-md shadow-violet-600/30">
-            SG
-          </div>
-          <div>
-            <p className="text-sm font-black text-slate-900">Faculty Panel</p>
-            <p className="text-[10px] font-bold text-slate-400">SGSU Workspace</p>
-          </div>
-        </div>
-
-        {/* Nav Links */}
-        <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-0.5">
-          {facultyLinks.map(({ href, label, icon: Icon, color, bg }) => {
-            const isActive = path === href || (href !== "/" && path.startsWith(href));
-            return (
-              <Link key={href} href={href}>
-                <div className={`group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all cursor-pointer ${
-                  isActive
-                    ? "bg-violet-600 text-white shadow-md shadow-violet-300/40"
-                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                }`}>
-                  <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${
-                    isActive ? "bg-white/20" : bg
-                  }`}>
-                    <Icon className={`h-4 w-4 ${isActive ? "text-white" : color}`} />
-                  </div>
-                  <span className="text-xs font-black">{label}</span>
-                  {isActive && <ChevronRight className="ml-auto h-3.5 w-3.5 opacity-60" />}
+    <div className="flex min-h-screen flex-col bg-[#eef2fb]">
+      
+      {/* ── Top Header ── */}
+      <header className="sticky top-0 z-40 border-b border-slate-150 bg-white/95 shadow-sm backdrop-blur-xl">
+        <div className="px-4 py-3 md:px-8">
+          <div className="mx-auto flex max-w-[1540px] items-center justify-between gap-4">
+            
+            {/* Logo area */}
+            <Link href="/" className="flex shrink-0 items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 text-sm font-black text-white shadow-lg shadow-violet-500/30">
+                SG
+              </div>
+              <div className="hidden leading-tight sm:block text-left">
+                <div className="flex items-center gap-1.5">
+                  <p className="text-base font-black text-slate-900">Faculty Panel</p>
+                  <span className="rounded-full bg-violet-100 px-1.5 py-0.5 text-[9px] font-black text-violet-600">WORKSPACE</span>
                 </div>
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Profile + Logout at bottom */}
-        <div className="border-t border-slate-100 p-4 space-y-2 shrink-0">
-          <div className="flex items-center gap-3 rounded-xl bg-slate-50 px-3 py-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-600 text-xs font-black text-white shadow">
-              {initials || "FC"}
-            </div>
-            <div className="min-w-0">
-              <p className="truncate text-xs font-black text-slate-900">{name}</p>
-              <p className="text-[10px] font-bold text-slate-400">Faculty Member</p>
-            </div>
-          </div>
-          <button
-            onClick={onLogout}
-            className="flex w-full items-center gap-2 rounded-xl border border-red-100 bg-red-50 px-3 py-2 text-xs font-black text-red-600 hover:bg-red-100 transition"
-          >
-            <LogOut className="h-4 w-4" /> Sign Out
-          </button>
-        </div>
-      </aside>
-
-      {/* ── Main content area ── */}
-      <div className={`flex min-w-0 flex-1 flex-col transition-all duration-300 ${
-        sidebarOpen ? "lg:pl-64" : "lg:pl-0"
-      }`}>
-
-        {/* Top Navbar */}
-        <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/95 px-4 py-3 shadow-sm backdrop-blur-xl md:px-6">
-          <div className="flex items-center justify-between gap-4">
-
-            {/* Sidebar toggle */}
-            <button
-              onClick={() => setSidebarOpen((o) => !o)}
-              className="hidden lg:flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-500 hover:bg-violet-50 hover:text-violet-600 transition"
-            >
-              {sidebarOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-            </button>
+                <p className="text-[10px] font-bold text-slate-400">SGSU Digital Campus</p>
+              </div>
+            </Link>
 
             {/* Search */}
-            <div className="relative flex-1 max-w-xl">
+            <div className="relative flex-1 max-w-md hidden md:block">
               <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
               <input
                 type="search"
@@ -179,14 +121,15 @@ export default function FacultyNav({
             </div>
 
             {/* Right actions */}
-            <div className="flex shrink-0 items-center gap-2">
+            <div className="flex shrink-0 items-center gap-3">
+              
               {/* Notifications */}
               <div className="relative">
                 <button
                   onClick={openNotifications}
-                  className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 shadow-sm hover:bg-violet-50 hover:text-violet-600 transition"
+                  className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 shadow-sm hover:bg-violet-50 hover:text-violet-600 transition cursor-pointer"
                 >
-                  <Bell className="h-5 w-5" />
+                  <Bell className="h-4.5 w-4.5" />
                   {unreadCount > 0 && (
                     <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-white bg-red-500 px-1 text-[10px] font-black text-white">
                       {unreadCount}
@@ -195,11 +138,11 @@ export default function FacultyNav({
                 </button>
                 {showNotifications && (
                   <div className="absolute right-0 top-12 z-50 w-80 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-300/60">
-                    <div className="border-b border-slate-100 px-4 py-3">
+                    <div className="border-b border-slate-100 px-4 py-3 text-left">
                       <p className="text-sm font-black text-slate-900">Notifications</p>
                       <p className="text-xs font-bold text-slate-400">Submissions and quiz updates</p>
                     </div>
-                    <div className="max-h-80 overflow-y-auto p-2">
+                    <div className="max-h-80 overflow-y-auto p-2 text-left">
                       {notifications.length > 0 ? notifications.slice(0, 8).map((item) => (
                         <article key={item._id} className="rounded-xl p-3 hover:bg-violet-50 transition">
                           <p className="text-sm font-black text-slate-900">{item.title}</p>
@@ -221,33 +164,60 @@ export default function FacultyNav({
                 )}
               </div>
 
-              {/* Avatar */}
+              {/* Profile details */}
               <div className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white py-1.5 pl-1.5 pr-3 shadow-sm">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-600 text-xs font-black text-white">
                   {initials || "FC"}
                 </div>
-                <div className="hidden leading-tight sm:block">
+                <div className="hidden leading-tight sm:block text-left">
                   <p className="text-xs font-black text-slate-900">{name}</p>
-                  <p className="text-[10px] font-bold text-slate-400">Faculty</p>
+                  <p className="text-[10px] font-bold text-slate-400">Faculty Member</p>
                 </div>
               </div>
 
-              {/* Logout mobile */}
+              {/* Logout button */}
               <button
                 onClick={onLogout}
-                className="flex h-10 items-center gap-1.5 rounded-xl border border-red-100 bg-red-50 px-3 text-xs font-black text-red-600 hover:bg-red-100 transition lg:hidden"
+                className="flex h-10 items-center gap-1.5 rounded-xl border border-red-50 bg-red-50 px-3 text-xs font-black text-red-600 hover:bg-red-100 transition cursor-pointer"
               >
-                <LogOut className="h-4 w-4" /> Logout
+                <LogOut className="h-4 w-4" />
+                <span className="hidden sm:inline">Logout</span>
               </button>
-            </div>
-          </div>
-        </header>
 
-        {/* Page content */}
-        <main className="min-w-0 flex-1">
-          {children}
-        </main>
-      </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ── Secondary Nav row with Horizontal links ── */}
+        <div className="border-t border-slate-100 bg-white px-4 md:px-8 py-2 overflow-x-auto no-scrollbar">
+          <div className="mx-auto max-w-[1540px]">
+            <nav className="flex items-center gap-1.5 py-0.5">
+              {facultyLinks.map(({ href, label, icon: Icon, color, bg }) => {
+                const isActive = path === href || (href !== "/" && path.startsWith(href));
+                return (
+                  <Link key={href} href={href}>
+                    <div className={`group flex items-center gap-2 rounded-xl px-3.5 py-2 transition-all cursor-pointer shrink-0 ${
+                      isActive
+                        ? "bg-violet-600 text-white shadow-md shadow-violet-300/40"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                    }`}>
+                      <Icon className={`h-4 w-4 ${isActive ? "text-white" : color}`} />
+                      <span className="text-[10px] font-black">{label}</span>
+                    </div>
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* ── Main content area ── */}
+      <main className="min-w-0 flex-1">
+        {children}
+      </main>
+
     </div>
   );
 }

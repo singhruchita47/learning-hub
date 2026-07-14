@@ -92,131 +92,194 @@ export default function FacultyCreateAssignment() {
   }
 
   return (
-    <main className="min-h-screen bg-[#eef2fb] px-4 py-6 md:px-8">
-      <div className="mx-auto max-w-[1100px]">
+    <main className="min-h-screen bg-[#eef2fb] px-4 py-6 md:px-8 animate-in fade-in duration-500">
+      <div className="mx-auto max-w-[1400px] space-y-6">
         
-        <section className="mb-6 rounded-[2rem] border border-[#d8c8ff] bg-gradient-to-br from-[#f7f2ff]/95 via-[#eee7ff]/90 to-white p-7 shadow-xl shadow-violet-200/40">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-violet-650">Faculty assignment module</p>
-          <h1 className="mt-2 text-4xl font-black text-slate-950">Create Assignment</h1>
-          <p className="mt-2 text-sm font-bold text-slate-600">
+        {/* Header */}
+        <section className="mb-6 rounded-[2rem] border border-[#d8c8ff] bg-gradient-to-br from-[#f7f2ff]/95 via-[#eee7ff]/90 to-white p-6 shadow-xl shadow-violet-200/40">
+          <p className="text-[10px] font-black uppercase tracking-[0.22em] text-violet-600">Faculty assignment module</p>
+          <h1 className="mt-1 text-2xl font-black text-slate-955">Create Assignment</h1>
+          <p className="mt-1 text-xs font-semibold text-slate-500">
             Create student tasks and publish them directly into the student Assignment page.
           </p>
         </section>
 
-        <section className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60">
-          <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-violet-600">
-              <ClipboardList className="h-6 w-6" />
-            </div>
+        {/* 2-Column Workspace */}
+        <div className="grid gap-6 lg:grid-cols-[1fr_450px]">
+          
+          {/* ── Left Column: Form Box (Smaller/Compact) ── */}
+          <section className="rounded-[2rem] border border-slate-150 bg-white p-6 shadow-sm flex flex-col justify-between">
             <div>
-              <h2 className="text-2xl font-black text-slate-950">Assignment Details</h2>
-              <p className="text-sm font-bold text-slate-500">Title, instructions, course, and due date.</p>
-            </div>
-          </div>
-
-          <div className="grid gap-4">
-            <input
-              value={form.title}
-              onChange={(event) => setForm((current) => ({ ...current, title: event.target.value }))}
-              placeholder="Assignment title"
-              className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-100"
-            />
-            
-            <textarea
-              value={form.description}
-              onChange={(event) => setForm((current) => ({ ...current, description: event.target.value }))}
-              placeholder="Instructions / description"
-              rows={5}
-              className="resize-none rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-bold outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-100"
-            />
-            
-            <div className="grid gap-4 md:grid-cols-2">
-              <label className="grid gap-1 text-xs font-black text-slate-500">
-                Course:
-                <select
-                  value={form.courseCode}
-                  onChange={(event) => setForm((current) => ({ ...current, courseCode: event.target.value }))}
-                  className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-800 outline-none focus:border-violet-300"
-                >
-                  {coursesList.length > 0 ? (
-                    coursesList.map((course) => (
-                      <option key={course.code} value={course.code}>
-                        {course.code} - {course.title}
-                      </option>
-                    ))
-                  ) : (
-                    <option value="">No courses created yet</option>
-                  )}
-                </select>
-              </label>
-
-              <label className="grid gap-1 text-xs font-black text-slate-500">
-                Due Date:
-                <div className="relative">
-                  <CalendarDays className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-                  <input
-                    type="date"
-                    value={form.dueDate}
-                    onChange={(event) => setForm((current) => ({ ...current, dueDate: event.target.value }))}
-                    className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-sm font-bold outline-none focus:border-violet-300"
-                  />
+              <div className="mb-5 flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-55 bg-[#f5f3ff] text-violet-600">
+                  <ClipboardList className="h-5 w-5" />
                 </div>
-              </label>
-            </div>
-
-            {/* Image attachment block */}
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-3">
-              <p className="text-xs font-black uppercase tracking-wider text-slate-500">Attach Reference Photo / Image</p>
-              
-              <div className="flex items-center gap-3">
-                <input
-                  type="file"
-                  id="assignment-img-picker"
-                  className="hidden"
-                  onChange={handleImageUpload}
-                  accept="image/*"
-                />
-                <label
-                  htmlFor="assignment-img-picker"
-                  className="flex h-11 px-4 items-center justify-center rounded-xl border border-slate-300 bg-white hover:bg-slate-50 cursor-pointer text-xs font-black text-slate-650 gap-2 shadow-sm transition-all"
-                >
-                  {uploadingImage ? (
-                    <Loader className="h-4 w-4 animate-spin text-violet-650" />
-                  ) : (
-                    <Image className="h-4 w-4 text-violet-650" />
-                  )}
-                  {uploadingImage ? "Uploading photo..." : "Choose Image File"}
-                </label>
-
-                {imageUrl && (
-                  <button
-                    onClick={() => setImageUrl("")}
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-red-50 text-red-500 hover:bg-red-100"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-                )}
+                <div>
+                  <h2 className="text-lg font-black text-slate-805 text-slate-800">Assignment Details</h2>
+                  <p className="text-xs font-bold text-slate-400">Fill in the workspace task fields.</p>
+                </div>
               </div>
 
-              {imageUrl && (
-                <div className="rounded-xl overflow-hidden border border-slate-200 max-w-[280px] bg-white shadow-sm p-1.5">
-                  <img src={imageUrl} alt="Attached preview" className="w-full h-auto rounded-lg object-contain" />
-                </div>
-              )}
-            </div>
+              <div className="grid gap-4">
+                <input
+                  value={form.title}
+                  onChange={(event) => setForm((current) => ({ ...current, title: event.target.value }))}
+                  placeholder="Assignment title"
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
+                />
+                
+                <textarea
+                  value={form.description}
+                  onChange={(event) => setForm((current) => ({ ...current, description: event.target.value }))}
+                  placeholder="Instructions / description"
+                  rows={4}
+                  className="resize-none w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
+                />
+                
+                <div className="grid gap-4 md:grid-cols-2">
+                  <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                    Course:
+                    <select
+                      value={form.courseCode}
+                      onChange={(event) => setForm((current) => ({ ...current, courseCode: event.target.value }))}
+                      className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-bold text-slate-700 outline-none focus:border-violet-300 focus:bg-white transition cursor-pointer"
+                    >
+                      {coursesList.length > 0 ? (
+                        coursesList.map((course) => (
+                          <option key={course.code} value={course.code}>
+                            {course.code} - {course.title}
+                          </option>
+                        ))
+                      ) : (
+                        <option value="">No courses created yet</option>
+                      )}
+                    </select>
+                  </label>
 
-            {status && <p className="rounded-2xl bg-violet-50 px-4 py-3 text-sm font-bold text-violet-700">{status}</p>}
+                  <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                    Due Date:
+                    <div className="relative">
+                      <CalendarDays className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                      <input
+                        type="date"
+                        value={form.dueDate}
+                        onChange={(event) => setForm((current) => ({ ...current, dueDate: event.target.value }))}
+                        className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-3 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition cursor-pointer"
+                      />
+                    </div>
+                  </label>
+                </div>
+
+                {/* Image attachment block */}
+                <div className="rounded-xl border border-slate-150 bg-slate-50/50 p-4 space-y-3">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Attach Reference Photo / Image</p>
+                  
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="file"
+                      id="assignment-img-picker"
+                      className="hidden"
+                      onChange={handleImageUpload}
+                      accept="image/*"
+                    />
+                    <label
+                      htmlFor="assignment-img-picker"
+                      className="flex h-10 px-4 items-center justify-center rounded-xl border border-slate-200 bg-white hover:bg-slate-50 cursor-pointer text-xs font-black text-slate-600 gap-2 shadow-sm transition-all"
+                    >
+                      {uploadingImage ? (
+                        <Loader className="h-4 w-4 animate-spin text-violet-600" />
+                      ) : (
+                        <Image className="h-4 w-4 text-violet-600" />
+                      )}
+                      {uploadingImage ? "Uploading..." : "Choose Image File"}
+                    </label>
+
+                    {imageUrl && (
+                      <button
+                        onClick={() => setImageUrl("")}
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-red-50 text-red-500 hover:bg-red-100 transition cursor-pointer"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {status && <p className="rounded-xl bg-violet-50 border border-violet-100 px-4 py-3 text-xs font-bold text-violet-750">{status}</p>}
+              </div>
+            </div>
             
             <button
               type="button"
               onClick={createAssignment}
-              className="flex h-12 items-center justify-center gap-2 rounded-2xl bg-violet-600 text-sm font-black text-white shadow-lg shadow-violet-600/20"
+              className="mt-6 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-violet-600 text-xs font-black text-white hover:bg-violet-700 shadow-md transition cursor-pointer"
             >
               <Send className="h-4 w-4" />
               Publish Assignment
             </button>
-          </div>
-        </section>
+          </section>
+
+          {/* ── Right Column: Live Preview Panel ── */}
+          <section className="rounded-[2rem] border border-slate-150 bg-white p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="mb-5 flex items-center justify-between border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-2.5 w-2.5 rounded-full bg-[#6c5ce7] animate-pulse" />
+                  <h2 className="text-xs font-black uppercase tracking-wider text-slate-405 text-slate-450">Live Student Preview</h2>
+                </div>
+                <span className="rounded-full bg-violet-50 px-2.5 py-0.5 text-[9px] font-black text-[#6c5ce7] border border-violet-100">
+                  DRAFT MODE
+                </span>
+              </div>
+
+              {/* Simulated Assignment Card Container */}
+              <div className="rounded-2xl border border-slate-150 bg-white p-5 shadow-sm space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="rounded-full bg-violet-50 px-2.5 py-1 text-[9px] font-black text-violet-700 uppercase tracking-wider border border-violet-100">
+                    {form.courseCode || "CS301"}
+                  </span>
+                  <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1">
+                    ⏰ Due: {form.dueDate ? new Date(form.dueDate).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "Not Set"}
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-black text-slate-800 leading-snug truncate">
+                    {form.title || "Untitled Assignment"}
+                  </h3>
+                  <p className="mt-2 text-xs font-semibold text-slate-500 leading-relaxed whitespace-pre-wrap min-h-[60px] max-h-[140px] overflow-y-auto">
+                    {form.description || "Instructions and details will appear here as you type..."}
+                  </p>
+                </div>
+
+                {/* Attached Image inside the card preview */}
+                {imageUrl ? (
+                  <div className="rounded-xl overflow-hidden border border-slate-150 max-h-[180px] bg-slate-50 relative flex items-center justify-center">
+                    <img src={imageUrl} alt="Reference Attachment" className="max-w-full max-h-[180px] object-cover" />
+                  </div>
+                ) : (
+                  <div className="rounded-xl border border-dashed border-slate-200 bg-slate-50/50 p-6 text-center text-xs text-slate-400 font-semibold flex flex-col items-center justify-center gap-1.5">
+                    <span>🖼️</span>
+                    <span>No reference photo attached</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Student Upload Simulation Area */}
+              <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 p-4 space-y-3 text-center">
+                <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Student Upload Area (Simulated)</p>
+                <div className="flex h-10 w-full items-center justify-center rounded-xl bg-white border border-slate-200 border-dashed text-xs text-slate-400 font-bold">
+                  📂 Drop submission files here
+                </div>
+              </div>
+            </div>
+
+            <div className="text-[10px] font-semibold text-slate-400 text-center mt-6">
+              This preview matches the student-facing dashboard layout exactly.
+            </div>
+          </section>
+
+        </div>
       </div>
     </main>
   );

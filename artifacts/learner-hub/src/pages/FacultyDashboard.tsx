@@ -347,60 +347,53 @@ export default function FacultyDashboard({
     <div className="min-h-screen bg-[#eef2fb]">
       <main className="mx-auto max-w-[1540px] px-4 py-6 md:px-8">
 
-        {/* ── Hero Banner ── */}
-        <section className="relative mb-6 overflow-hidden rounded-2xl bg-white px-8 py-6 shadow-sm ring-1 ring-slate-100">
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-2/5 bg-gradient-to-l from-violet-50 via-indigo-50 to-transparent" />
-          <div className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-violet-200/30 blur-3xl" />
-
-          <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex-1">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-500">Faculty Dashboard</p>
-              <h1 className="mt-1 text-3xl font-black text-slate-900">
-                Welcome back, <span className="text-violet-600">{user.name.split(" ")[0]}!</span>
-              </h1>
-              <p className="mt-1.5 max-w-lg text-xs font-semibold text-slate-400">
-                Manage students, publish tests, review submissions, schedule live classes and track academic activity.
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {["B.Tech CSE", "Semester 4", "SGSU Faculty"].map((item) => (
-                  <span key={item} className="inline-flex items-center rounded-lg bg-violet-100 px-3 py-1 text-xs font-black text-violet-700 ring-1 ring-violet-200">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Today's class quick card */}
-            <div className="shrink-0 rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 p-5 text-white shadow-lg shadow-violet-300/30 w-full lg:w-64">
-              <p className="text-[10px] font-black uppercase tracking-widest text-violet-200">Today's Live Class</p>
-              <h2 className="mt-2 text-lg font-black">Data Structures Lab</h2>
-              <p className="mt-1 text-xs font-semibold text-violet-200">09:30 AM – 10:30 AM</p>
-              <button className="mt-4 flex h-10 w-full items-center justify-center gap-2 rounded-xl bg-white/20 text-xs font-black text-white hover:bg-white/30 transition backdrop-blur">
-                <Radio className="h-4 w-4" /> Start Live Now
-              </button>
-            </div>
-          </div>
-        </section>
-
         {activeTab === "overview" && (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
 
-            {/* ── Stat Cards ── */}
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {/* ── Hero Banner ── */}
+            <section className="relative mb-6 overflow-hidden rounded-[2rem] bg-white p-8 shadow-sm ring-1 ring-slate-100/80">
+              <div className="pointer-events-none absolute right-0 top-0 h-full w-2/5 bg-gradient-to-l from-violet-50 via-indigo-50 to-transparent" />
+              <div className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-violet-200/20 blur-3xl" />
+
+              <div className="relative">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-500">Faculty Dashboard</p>
+                <h1 className="mt-1 text-3xl font-black text-slate-900">
+                  Welcome back, <span className="text-violet-600">{user.name.split(" ")[0]}!</span>
+                </h1>
+                <p className="mt-1.5 max-w-xl text-xs font-semibold text-slate-400 leading-relaxed">
+                  Manage students, publish tests, review submissions, schedule live classes and track academic activity.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="inline-flex items-center rounded-lg bg-violet-100 px-3 py-1 text-xs font-black text-violet-700 ring-1 ring-violet-200">
+                    SGSU Faculty
+                  </span>
+                </div>
+              </div>
+            </section>
+
+            {/* ── Premium Square Stat Cards (Balanced Size) ── */}
+            <div className="flex flex-wrap items-center justify-between gap-5 w-full">
               {[
-                { label: "Today's Attendance", value: `${attendanceList.length || 42}`, sub: "Students checked in", icon: Users, from: "from-violet-500", to: "to-indigo-600", bg: "bg-violet-50", txt: "text-violet-700" },
-                { label: "Active Courses",      value: "4",                              sub: "Currently running",    icon: BookOpen, from: "from-blue-500",   to: "to-cyan-500",   bg: "bg-blue-50",   txt: "text-blue-700"   },
-                { label: "Pending Review",      value: String(reviewItems.length || 12), sub: "Submissions waiting",  icon: ClipboardList, from: "from-rose-500",  to: "to-pink-600",  bg: "bg-rose-50",   txt: "text-rose-700"  },
-                { label: "Avg Score",           value: markItems.length ? `${Math.round((markItems.reduce((sum, item) => sum + item.score / Math.max(item.total, 1), 0) / markItems.length) * 100)}%` : "78%", sub: "Class average", icon: Star, from: "from-emerald-500", to: "to-teal-500", bg: "bg-emerald-50", txt: "text-emerald-700" },
-              ].map(({ label, value, sub, icon: Icon, from, to, bg, txt }) => (
-                <div key={label} className="relative overflow-hidden rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-100 hover:shadow-md transition">
-                  <div className={`absolute right-0 top-0 h-1.5 w-full bg-gradient-to-r ${from} ${to} rounded-t-2xl`} />
-                  <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${bg} mt-1`}>
-                    <Icon className={`h-5 w-5 ${txt}`} />
+                { label: "Attendance",          value: `${attendanceList.length || 42}`, sub: "Checked in", icon: Users,         from: "from-violet-500",  to: "to-indigo-600", shadow: "shadow-violet-200/50", txt: "text-violet-600" },
+                { label: "Courses",             value: "4",                              sub: "Running",    icon: BookOpen,      from: "from-blue-500",    to: "to-cyan-500",   shadow: "shadow-blue-200/50",  txt: "text-blue-600"   },
+                { label: "Reviews",             value: String(reviewItems.length || 12), sub: "Waiting",    icon: ClipboardList, from: "from-rose-500",   to: "to-pink-500",   shadow: "shadow-rose-200/50",  txt: "text-rose-600"  },
+                { label: "Avg Score",           value: markItems.length ? `${Math.round((markItems.reduce((sum, item) => sum + item.score / Math.max(item.total, 1), 0) / markItems.length) * 100)}%` : "78%", sub: "Average",   icon: Star, from: "from-emerald-500", to: "to-teal-500", shadow: "shadow-emerald-200/50", txt: "text-emerald-600" },
+              ].map(({ label, value, sub, icon: Icon, from, to, shadow, txt }) => (
+                <div key={label} className="group relative overflow-hidden rounded-[2rem] bg-white w-48 h-48 sm:w-56 sm:h-56 xl:w-64 xl:h-64 flex flex-col items-center justify-center text-center p-4 shadow-xl shadow-slate-200/40 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-slate-100 flex-1 sm:flex-none">
+                  {/* Faint Background Watermark Icon */}
+                  <Icon className={`absolute -right-4 -bottom-4 h-28 w-28 xl:h-36 xl:w-36 opacity-[0.03] group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500 ${txt}`} />
+                  
+                  {/* Top Floating Gradient Icon */}
+                  <div className={`relative flex h-12 w-12 xl:h-14 xl:w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${from} ${to} shadow-lg ${shadow} mb-3 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300`}>
+                    <Icon className="h-5 w-5 xl:h-6 xl:w-6 text-white" />
                   </div>
-                  <p className="mt-3 text-3xl font-black text-slate-900">{value}</p>
-                  <p className="font-black text-slate-700 text-sm">{label}</p>
-                  <p className="mt-0.5 text-xs font-semibold text-slate-400">{sub}</p>
+                  
+                  {/* Main Value */}
+                  <p className="relative text-4xl xl:text-5xl font-black text-slate-900 tracking-tight mb-1 xl:mb-2 group-hover:scale-110 transition-transform duration-300 origin-bottom">{value}</p>
+                  
+                  {/* Labels */}
+                  <p className="relative font-black text-slate-700 text-xs xl:text-sm uppercase tracking-widest">{label}</p>
+                  <p className="relative mt-1 text-[10px] xl:text-xs font-bold text-slate-400">{sub}</p>
                 </div>
               ))}
             </div>
@@ -464,138 +457,235 @@ export default function FacultyDashboard({
         )}
 
         {activeTab === "courses" && (
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {coursesList.map((course) => (
-              <section key={course.code} className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60">
-                <div className="mb-5 flex items-start justify-between">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl text-lg font-black text-white" style={{ background: course.color }}>
-                    {course.code.slice(-2)}
-                  </div>
-                  <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-500">{course.students} students</span>
-                </div>
-                <h2 className="text-2xl font-black text-slate-950">{course.title}</h2>
-                <p className="mt-1 text-sm font-black" style={{ color: course.color }}>{course.code}</p>
-                <div className="mt-5">
-                  <div className="mb-2 flex justify-between text-xs font-black text-slate-500">
-                    <span>Syllabus progress</span>
-                    <span>{course.progress}%</span>
-                  </div>
-                  <div className="h-2.5 overflow-hidden rounded-full bg-slate-100">
-                    <div className="h-full rounded-full" style={{ width: `${course.progress}%`, background: course.color }} />
-                  </div>
-                </div>
-                <div className="mt-5 grid grid-cols-2 gap-3">
-                  <button
-                    onClick={() => {
-                      setUploadCourseCode(course.code);
-                      setResCategory("Video Lectures");
-                      setResFormat("Video");
-                      setResType("url");
-                      setUploadModalOpen(true);
-                    }}
-                    className="h-11 rounded-2xl border border-slate-205 text-xs font-black text-slate-600 hover:bg-slate-50 transition-all"
-                  >
-                    Upload Video
-                  </button>
-                  <button
-                    onClick={() => {
-                      setUploadCourseCode(course.code);
-                      setResCategory("Lecture Notes");
-                      setResFormat("PDF");
-                      setResType("file");
-                      setUploadModalOpen(true);
-                    }}
-                    className="h-11 rounded-2xl border border-slate-205 text-xs font-black text-slate-600 hover:bg-slate-50 transition-all"
-                  >
-                    Add Notes
-                  </button>
-                </div>
-              </section>
-            ))}
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+            
+            {/* ── Title and Config Row ── */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-black text-slate-900 tracking-tight">Courses Administration</h1>
+                <p className="text-xs font-semibold text-slate-400 mt-1">Manage active subjects, enroll students, and upload study assets.</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setAddCourseModalOpen(true)}
+                className="rounded-2xl bg-[#6c5ce7] px-5 py-2.5 text-xs font-black text-white hover:bg-[#584ac2] shadow-sm transition shrink-0 cursor-pointer"
+              >
+                + Create Course
+              </button>
+            </div>
 
-            {/* Add Course plus card */}
-            <button
-              onClick={() => setAddCourseModalOpen(true)}
-              className="rounded-[1.75rem] border-2 border-dashed border-slate-350 hover:border-violet-500 bg-white/50 hover:bg-white p-6 shadow-md transition-all flex flex-col items-center justify-center min-h-[220px] text-slate-500 hover:text-violet-600 gap-3"
-            >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 hover:bg-violet-50 text-2xl font-black">
-                +
-              </span>
-              <p className="text-sm font-black uppercase tracking-wider">Add New Course</p>
-            </button>
+            {/* ── Stats Row ── */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              {[
+                { label: "Total Courses", value: coursesList.length || "0", txt: "text-[#6c5ce7]" },
+                { label: "Avg Students",  value: `${coursesList.length ? Math.round(coursesList.reduce((sum, c) => sum + (c.students || 0), 0) / coursesList.length) : "0"}`, txt: "text-blue-650" },
+                { label: "Faculty Owner",  value: "SGSU Faculty", txt: "text-amber-500" },
+              ].map(({ label, value, txt }) => (
+                <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px]">
+                  <span className={`text-4xl font-black ${txt}`}>{value}</span>
+                  <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Courses Grid */}
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 pt-2">
+              {coursesList.map((course) => (
+                <section
+                  key={course.code}
+                  className="group relative overflow-hidden rounded-[1.75rem] border border-slate-150/70 bg-white p-5 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between min-h-[220px]"
+                >
+                  <div>
+                    {/* Top Row: Icon and Status Badge */}
+                    <div className="flex items-center justify-between mb-4.5">
+                      <div
+                        className="flex h-11 w-11 items-center justify-center rounded-xl text-lg font-black text-white shadow-sm transition-transform duration-300 group-hover:rotate-3"
+                        style={{
+                          background: `linear-gradient(135deg, ${course.color}dd, ${course.color})`,
+                        }}
+                      >
+                        {course.code.slice(-2)}
+                      </div>
+                      
+                      {/* Active Status Badge */}
+                      <span className="rounded-full bg-emerald-50 border border-emerald-100 px-2.5 py-0.5 text-[9px] font-black text-emerald-600 uppercase tracking-wider">
+                        Active
+                      </span>
+                    </div>
+
+                    {/* Title & Code */}
+                    <h2 className="text-base font-black text-slate-800 leading-snug group-hover:text-[#6c5ce7] transition-colors line-clamp-1">
+                      {course.title}
+                    </h2>
+                    <p className="text-[10px] font-black uppercase tracking-wider mt-0.5" style={{ color: course.color }}>
+                      {course.code}
+                    </p>
+
+                    {/* Stats & Progress Row */}
+                    <div className="mt-4 flex items-center justify-between text-[10px] font-bold text-slate-400 border-t border-slate-100/60 pt-3">
+                      <span>👥 {course.students || 0} Students</span>
+                      <span style={{ color: course.color }}>📊 {course.progress}% progress</span>
+                    </div>
+
+                    {/* Small progress line */}
+                    <div className="h-1.5 overflow-hidden rounded-full bg-slate-100 mt-2">
+                      <div
+                        className="h-full rounded-full transition-all duration-500"
+                        style={{
+                          width: `${course.progress}%`,
+                          background: course.color
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Actions buttons */}
+                  <div className="mt-5 grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => {
+                        setUploadCourseCode(course.code);
+                        setResCategory("Video Lectures");
+                        setResFormat("Video");
+                        setResType("url");
+                        setUploadModalOpen(true);
+                      }}
+                      className="h-9 rounded-xl border border-slate-150 text-[10px] font-black text-slate-600 hover:bg-slate-50 transition-all flex items-center justify-center gap-1 cursor-pointer hover:border-slate-300"
+                    >
+                      🎥 Video
+                    </button>
+                    <button
+                      onClick={() => {
+                        setUploadCourseCode(course.code);
+                        setResCategory("Lecture Notes");
+                        setResFormat("PDF");
+                        setResType("file");
+                        setUploadModalOpen(true);
+                      }}
+                      className="h-9 rounded-xl border border-slate-150 text-[10px] font-black text-slate-600 hover:bg-slate-50 transition-all flex items-center justify-center gap-1 cursor-pointer hover:border-slate-300"
+                    >
+                      📄 Notes
+                    </button>
+                  </div>
+                </section>
+              ))}
+
+              {/* Add Course plus card */}
+              <button
+                onClick={() => setAddCourseModalOpen(true)}
+                className="group relative overflow-hidden rounded-[1.75rem] border border-dashed border-slate-250 hover:border-[#6c5ce7] bg-white/40 hover:bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 flex flex-col justify-center items-center min-h-[220px] gap-2.5 cursor-pointer"
+              >
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-50 text-[#6c5ce7] transition-transform group-hover:scale-110 duration-300">
+                  <span className="text-xl font-black">+</span>
+                </div>
+                <div className="text-center">
+                  <p className="text-sm font-black text-slate-800 group-hover:text-[#6c5ce7] transition-colors">Create Subject</p>
+                  <p className="text-[10px] font-semibold text-slate-400 mt-1 max-w-[160px] mx-auto">Launch new classroom module.</p>
+                </div>
+              </button>
+            </div>
           </motion.div>
         )}
 
         {activeTab === "classes" && (
-          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
-            <section className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60">
-              <h2 className="mb-4 text-xl font-black text-slate-950">Schedule Live Class</h2>
-              <div className="grid gap-3">
-                <input
-                  value={classTopic}
-                  onChange={(e) => setClassTopic(e.target.value)}
-                  className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none shadow-sm focus:border-indigo-300"
-                  placeholder="Class topic (e.g. Binary Trees)"
-                />
-                <div className="grid gap-3 md:grid-cols-3">
-                  <select
-                    value={classCourse}
-                    onChange={(e) => setClassCourse(e.target.value)}
-                    className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-3 text-sm font-bold outline-none focus:border-indigo-300"
-                  >
-                    <option value="CS301">CS301 (Data Structures)</option>
-                    <option value="CS302">CS302 (Database Systems)</option>
-                    <option value="CS303">CS303 (Operating Systems)</option>
-                  </select>
-                  <input
-                    type="date"
-                    value={classDate}
-                    onChange={(e) => setClassDate(e.target.value)}
-                    className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none focus:border-indigo-300"
-                  />
-                  <input
-                    type="time"
-                    value={classTime}
-                    onChange={(e) => setClassTime(e.target.value)}
-                    className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none focus:border-indigo-300"
-                  />
-                </div>
-                <button
-                  onClick={handleScheduleClass}
-                  className="mt-2 flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#263676] text-sm font-black text-white hover:bg-[#1a2552] transition-all"
-                >
-                  <CalendarClock className="h-4 w-4" />
-                  Schedule Class
-                </button>
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+            
+            {/* ── Title and Config Row ── */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h1 className="text-3xl font-black text-slate-900 tracking-tight">Virtual Classrooms</h1>
+                <p className="text-xs font-semibold text-slate-400 mt-1">Schedule live virtual lectures, start Jitsi video meetings, and manage logs.</p>
               </div>
-            </section>
+              <div className="inline-flex items-center gap-1.5 rounded-2xl bg-emerald-50 border border-emerald-200 px-4 py-2.5 text-xs font-bold text-emerald-850 shadow-sm shrink-0">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Classroom Server Live</span>
+              </div>
+            </div>
 
-            <section className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60">
-              <h2 className="mb-4 text-xl font-black text-slate-950">Scheduled Live Classes</h2>
-              <div className="space-y-3 max-h-[350px] overflow-y-auto pr-1">
-                {scheduledList.length > 0 ? (
-                  scheduledList.map((item) => (
-                    <div key={item._id} className="rounded-2xl bg-slate-50 p-4 border border-slate-100 flex items-center justify-between gap-3">
-                      <div>
-                        <p className="text-sm font-black text-slate-900 leading-tight">{item.title}</p>
-                        <p className="text-[10px] font-black text-slate-450 uppercase mt-0.5">{item.courseCode} · {item.status}</p>
-                        <p className="text-xs font-bold text-slate-500 mt-2">Starts: {new Date(item.startsAt).toLocaleString("en-IN")}</p>
-                      </div>
-                      <button
-                        onClick={() => window.open(item.meetingUrl || "https://meet.jit.si/sgsu-virtual-classroom", "_blank")}
-                        className="rounded-xl bg-violet-100 text-violet-700 px-3 py-1.5 text-xs font-black hover:bg-violet-200 transition-all shrink-0"
-                      >
-                        Start Meeting
-                      </button>
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center py-8 text-slate-400 text-xs font-bold border border-dashed border-slate-200 rounded-2xl">
-                    No classes scheduled yet.
+            {/* ── Stats Row ── */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              {[
+                { label: "Scheduled Lectures", value: scheduledList.length || "0", txt: "text-blue-650" },
+                { label: "Meeting Provider",  value: "Jitsi Meet", txt: "text-[#6c5ce7]" },
+                { label: "Status Status",    value: "Online",     txt: "text-emerald-600" },
+              ].map(({ label, value, txt }) => (
+                <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px]">
+                  <span className={`text-4xl font-black ${txt}`}>{value}</span>
+                  <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Main panels */}
+            <div className="grid gap-6 lg:grid-cols-[1fr_420px] pt-2">
+              <section className="rounded-[2rem] border border-slate-150 bg-white p-6 shadow-sm">
+                <h2 className="mb-4 text-base font-black text-slate-800">Schedule Live Class</h2>
+                <div className="grid gap-4.5">
+                  <input
+                    value={classTopic}
+                    onChange={(e) => setClassTopic(e.target.value)}
+                    className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none focus:border-violet-300 focus:bg-white focus:ring-4 focus:ring-violet-100 transition"
+                    placeholder="Class topic (e.g. Binary Trees)"
+                  />
+                  <div className="grid gap-4 md:grid-cols-3">
+                    <select
+                      value={classCourse}
+                      onChange={(e) => setClassCourse(e.target.value)}
+                      className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-3 text-sm font-bold outline-none focus:border-violet-300 focus:bg-white transition cursor-pointer"
+                    >
+                      <option value="CS301">CS301 (Data Structures)</option>
+                      <option value="CS302">CS302 (Database Systems)</option>
+                      <option value="CS303">CS303 (Operating Systems)</option>
+                    </select>
+                    <input
+                      type="date"
+                      value={classDate}
+                      onChange={(e) => setClassDate(e.target.value)}
+                      className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none focus:border-violet-300 focus:bg-white transition cursor-pointer"
+                    />
+                    <input
+                      type="time"
+                      value={classTime}
+                      onChange={(e) => setClassTime(e.target.value)}
+                      className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none focus:border-violet-300 focus:bg-white transition cursor-pointer"
+                    />
                   </div>
-                )}
-              </div>
-            </section>
+                  <button
+                    onClick={handleScheduleClass}
+                    className="mt-2 flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#6c5ce7] text-sm font-black text-white hover:bg-[#584ac2] shadow-sm transition cursor-pointer"
+                  >
+                    <CalendarClock className="h-4.5 w-4.5" />
+                    Schedule Class
+                  </button>
+                </div>
+              </section>
+
+              <section className="rounded-[2rem] border border-slate-150 bg-white p-6 shadow-sm">
+                <h2 className="mb-4 text-base font-black text-slate-800">Scheduled Live Classes</h2>
+                <div className="space-y-3.5 max-h-[350px] overflow-y-auto pr-1">
+                  {scheduledList.length > 0 ? (
+                    scheduledList.map((item) => (
+                      <div key={item._id} className="rounded-2xl bg-slate-50 p-4 border border-slate-100 flex items-center justify-between gap-3">
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-black text-slate-900 leading-tight truncate">{item.title}</p>
+                          <p className="text-[10px] font-black text-slate-400 uppercase mt-1">{item.courseCode} · {item.status}</p>
+                          <p className="text-xs font-bold text-slate-500 mt-2">Starts: {new Date(item.startsAt).toLocaleString("en-IN")}</p>
+                        </div>
+                        <button
+                          onClick={() => window.open(item.meetingUrl || "https://meet.jit.si/sgsu-virtual-classroom", "_blank")}
+                          className="rounded-xl bg-violet-100 text-violet-750 px-3.5 py-2 text-xs font-black hover:bg-violet-200 transition shrink-0 cursor-pointer"
+                        >
+                          Start Meeting
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-8 text-slate-400 text-xs font-bold border border-dashed border-slate-200 rounded-2xl">
+                      No classes scheduled yet.
+                    </div>
+                  )}
+                </div>
+              </section>
+            </div>
           </motion.div>
         )}
 

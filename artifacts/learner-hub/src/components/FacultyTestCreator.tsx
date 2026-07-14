@@ -162,227 +162,281 @@ export default function FacultyTestCreator() {
   }
 
   return (
-    <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm space-y-6">
-      
-      {/* Header and Controls */}
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between border-b border-gray-100 pb-4">
-        <div>
-          <h3 className="text-lg font-extrabold text-slate-900">Custom Test Creator</h3>
-          <p className="mt-1 text-sm font-medium text-slate-500">
-            Choose a subject, select or generate questions, then set schedule to publish.
-          </p>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
+    <>
+      <div className="grid gap-6 lg:grid-cols-[1fr_450px]">
+        {/* ── Left Column: Test Creator Control Panel ── */}
+        <section className="rounded-[2rem] border border-slate-150 bg-white p-6 shadow-sm space-y-5">
+        
+        {/* Header and Controls */}
+        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div>
+            <h3 className="text-lg font-black text-slate-800">Custom Test Creator</h3>
+            <p className="text-xs font-bold text-slate-400">Select questions and set test details.</p>
+          </div>
           <button
             type="button"
             onClick={() => void reloadQuestions()}
             disabled={questionsLoading}
-            className="rounded-full border border-emerald-200 bg-white px-3 py-1 text-xs font-extrabold text-emerald-600 transition-all hover:bg-emerald-50 disabled:opacity-50"
+            className="rounded-xl border border-emerald-100 bg-emerald-50 px-3 py-1.5 text-[10px] font-black text-emerald-600 transition hover:bg-emerald-100 disabled:opacity-50 cursor-pointer"
           >
-            {questionsLoading ? "Loading..." : "Reload API Questions"}
+            {questionsLoading ? "Loading..." : "Reload Bank"}
           </button>
-          <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-extrabold text-emerald-600">
-            {selectedQuestions.length}/{categoryQuestions.length} selected
-          </span>
         </div>
-      </div>
 
-      {questionsError && (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-bold text-amber-700">
-          Dynamic API unavailable. Using local fallback questions. {questionsError}
-        </div>
-      )}
-
-      {/* AI Generate Section */}
-      <div className="rounded-2xl border border-violet-100 bg-gradient-to-br from-violet-50/50 to-fuchsia-50/30 p-4">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-600 text-white shadow-sm shadow-violet-200">
-              <Sparkles className="h-5 w-5" />
-            </div>
-            <div>
-              <h4 className="text-sm font-black text-slate-900">AI Question Assistant</h4>
-              <p className="text-xs text-slate-500 font-bold mt-0.5">Generate high-quality questions for {selectedCategory} instantly.</p>
-            </div>
+        {questionsError && (
+          <div className="rounded-xl border border-amber-250 bg-amber-50 px-4 py-3 text-xs font-bold text-amber-800">
+            Dynamic API offline: fallback questions enabled.
           </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <label className="flex items-center gap-2 text-xs font-black text-slate-700">
-              Count:
+        )}
+
+        {/* AI Generate Section */}
+        <div className="rounded-xl border border-violet-100 bg-gradient-to-br from-violet-50/50 to-fuchsia-50/30 p-4">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-600 text-white shadow-sm shadow-violet-200">
+                <Sparkles className="h-4.5 w-4.5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-black text-slate-900 leading-tight">AI Question Generator</h4>
+                <p className="text-[10px] text-slate-400 font-bold mt-0.5">Generate high-quality questions for {selectedCategory} instantly.</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between gap-3 pt-1">
               <select
                 value={aiCount}
                 onChange={(e) => setAiCount(e.target.value)}
-                className="rounded-lg border border-violet-200 bg-white px-2 py-1 text-xs font-bold"
+                className="h-9 rounded-xl border border-violet-200 bg-white px-3 text-xs font-bold text-slate-700 outline-none"
               >
                 <option value="3">3 Questions</option>
                 <option value="5">5 Questions</option>
                 <option value="10">10 Questions</option>
               </select>
-            </label>
-            <button
-              type="button"
-              onClick={handleAiGenerate}
-              disabled={aiGenerating}
-              className="flex h-9 items-center justify-center gap-2 rounded-xl bg-violet-600 px-4 text-xs font-black text-white hover:bg-violet-750 disabled:opacity-50"
-            >
-              {aiGenerating ? "Generating..." : "Generate with AI"}
-            </button>
+              <button
+                type="button"
+                onClick={handleAiGenerate}
+                disabled={aiGenerating}
+                className="flex h-9 items-center justify-center gap-2 rounded-xl bg-violet-600 px-4 text-xs font-black text-white hover:bg-violet-700 disabled:opacity-50 cursor-pointer"
+              >
+                {aiGenerating ? "Generating..." : "Generate AI"}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Subject Filter Section */}
-      <div className="grid gap-3 lg:grid-cols-[1fr_260px_auto]">
-        <div className="rounded-2xl border border-gray-100 bg-slate-50 p-2">
-          <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
-            {subjectOptions.map((category) => {
-              const count = questionBank.filter((question) => {
-                const fallbackCategory = question.id <= Math.ceil(questionBank.length / 2) ? "GK Question" : "Quantitative Aptitude";
-                return (question.category ?? fallbackCategory) === category;
-              }).length;
-              const isActive = selectedCategory === category;
+        {/* Subject dropdown & limit row */}
+        <div className="grid gap-4 md:grid-cols-2">
+          
+          {/* Dropdown for subject choice as requested */}
+          <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+            Select Subject:
+            <select
+              value={selectedCategory}
+              onChange={(e) => changeCategory(e.target.value as QuestionCategory)}
+              className="h-11 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-bold text-slate-700 outline-none focus:border-violet-300 focus:bg-white transition cursor-pointer"
+            >
+              {subjectOptions.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </label>
 
+          <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+            Quick selection limit:
+            <div className="flex gap-2">
+              <input
+                type="number"
+                min="1"
+                max={categoryQuestions.length}
+                value={questionLimit}
+                onChange={(event) => setQuestionLimit(event.target.value)}
+                className="h-11 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold outline-none focus:border-violet-350 focus:bg-white transition"
+              />
+              <button
+                type="button"
+                onClick={selectQuestionCount}
+                disabled={categoryQuestions.length === 0}
+                className="h-11 rounded-xl bg-slate-900 px-3 text-xs font-extrabold text-white hover:bg-slate-800 disabled:opacity-50 cursor-pointer"
+              >
+                Auto Select
+              </button>
+            </div>
+          </label>
+        </div>
+
+        {/* Date & Time Settings */}
+        <div className="grid gap-4 md:grid-cols-3 border-t border-slate-100 pt-4">
+          <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+            Test Date
+            <input
+              type="date"
+              value={testDate}
+              onChange={(event) => setTestDate(event.target.value)}
+              className="h-11 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold outline-none focus:border-violet-350 focus:bg-white transition cursor-pointer"
+            />
+          </label>
+          <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+            Start Time
+            <input
+              type="time"
+              value={startTime}
+              onChange={(event) => setStartTime(event.target.value)}
+              className="h-11 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold outline-none focus:border-violet-350 focus:bg-white transition cursor-pointer"
+            />
+          </label>
+          <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+            Duration (min)
+            <input
+              type="number"
+              min="1"
+              value={durationMinutes}
+              onChange={(event) => setDurationMinutes(event.target.value)}
+              className="h-11 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold outline-none focus:border-violet-350 focus:bg-white transition"
+            />
+          </label>
+        </div>
+
+        {/* Question Bank Checklist (Compact) */}
+        <div className="space-y-2">
+          <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Checklist ({categoryQuestions.length} available)</p>
+          <div className="max-h-[220px] space-y-2 overflow-y-auto rounded-2xl border border-slate-150 bg-slate-50/50 p-3 [scrollbar-width:thin]">
+            {categoryQuestions.map((question) => {
+              const isSelected = selectedIds.includes(question.id);
               return (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() => changeCategory(category)}
-                  className={`rounded-xl px-4 py-3 text-left transition-all ${
-                    isActive ? "bg-emerald-600 text-white shadow-sm" : "bg-white text-slate-600 hover:bg-emerald-50"
+                <div
+                  key={question.id}
+                  className={`flex items-start justify-between gap-3 rounded-xl border p-2.5 transition-all ${
+                    isSelected ? "border-emerald-250 bg-white shadow-sm" : "border-transparent bg-transparent hover:bg-white"
                   }`}
                 >
-                  <span className="block text-sm font-extrabold">{category}</span>
-                  <span className={`mt-1 block text-xs font-bold ${isActive ? "text-white/80" : "text-slate-400"}`}>
-                    {count} questions available
-                  </span>
-                </button>
+                  <label className="flex cursor-pointer gap-2.5 min-w-0 flex-1">
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => toggleQuestion(question.id)}
+                      className="mt-0.5 h-3.5 w-3.5 rounded border-gray-300 accent-emerald-600"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-bold text-slate-800 leading-snug line-clamp-2">
+                        {question.questionText}
+                      </p>
+                    </div>
+                  </label>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveDetailQuestion(question);
+                      setShowDetailModal(true);
+                    }}
+                    className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-100 hover:text-slate-900 transition-all shrink-0 cursor-pointer"
+                  >
+                    <Eye className="h-3.5 w-3.5" />
+                  </button>
+                </div>
               );
             })}
+
+            {categoryQuestions.length === 0 && (
+              <div className="py-6 text-center text-xs font-bold text-slate-400">
+                No questions available. Generate with AI or reload bank.
+              </div>
+            )}
           </div>
         </div>
-
-        <label className="grid gap-1.5 text-sm font-bold text-slate-700">
-          How many questions?
-          <input
-            type="number"
-            min="1"
-            max={categoryQuestions.length}
-            value={questionLimit}
-            onChange={(event) => setQuestionLimit(event.target.value)}
-            className="h-11 rounded-xl border border-gray-200 bg-slate-50 px-3 text-sm font-semibold outline-none focus:border-emerald-300"
-          />
-        </label>
 
         <button
           type="button"
-          onClick={selectQuestionCount}
-          disabled={categoryQuestions.length === 0}
-          className="flex h-11 items-center justify-center self-end rounded-xl bg-slate-950 px-5 text-sm font-extrabold text-white transition-all hover:bg-slate-800 disabled:opacity-50"
+          onClick={handlePublish}
+          disabled={!canPublish}
+          className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 text-xs font-black text-white hover:bg-emerald-700 shadow-md transition disabled:opacity-50 cursor-pointer"
         >
-          Select Questions
+          {published ? <CheckCircle2 className="h-4 w-4" /> : <Send className="h-4 w-4" />}
+          {published ? "Test Published successfully!" : "Publish Test Module"}
         </button>
-      </div>
 
-      {/* Date & Time Settings */}
-      <div className="grid gap-3 md:grid-cols-3 border-t border-gray-100 pt-5">
-        <label className="grid gap-1.5 text-sm font-bold text-slate-700">
-          Test Date
-          <input
-            type="date"
-            value={testDate}
-            onChange={(event) => setTestDate(event.target.value)}
-            className="h-10 rounded-xl border border-gray-200 bg-slate-50 px-3 text-sm font-semibold outline-none focus:border-emerald-300"
-          />
-        </label>
-        <label className="grid gap-1.5 text-sm font-bold text-slate-700">
-          Start Time
-          <input
-            type="time"
-            value={startTime}
-            onChange={(event) => setStartTime(event.target.value)}
-            className="h-10 rounded-xl border border-gray-200 bg-slate-50 px-3 text-sm font-semibold outline-none focus:border-emerald-300"
-          />
-        </label>
-        <label className="grid gap-1.5 text-sm font-bold text-slate-700">
-          Duration (minutes)
-          <input
-            type="number"
-            min="1"
-            value={durationMinutes}
-            onChange={(event) => setDurationMinutes(event.target.value)}
-            className="h-10 rounded-xl border border-gray-200 bg-slate-50 px-3 text-sm font-semibold outline-none focus:border-emerald-300"
-          />
-        </label>
-      </div>
+      </section>
 
-      {/* Question Bank Select List */}
-      <div className="max-h-[420px] space-y-2 overflow-y-auto rounded-2xl border border-gray-100 bg-slate-50 p-3">
-        {categoryQuestions.map((question) => {
-          const isSelected = selectedIds.includes(question.id);
-          return (
-            <div
-              key={question.id}
-              className={`flex items-start justify-between gap-3 rounded-xl border p-3 transition-all ${
-                isSelected ? "border-emerald-200 bg-white shadow-sm" : "border-transparent bg-transparent hover:bg-white"
-              }`}
-            >
-              <label className="flex cursor-pointer gap-3 min-w-0 flex-1">
-                <input
-                  type="checkbox"
-                  checked={isSelected}
-                  onChange={() => toggleQuestion(question.id)}
-                  className="mt-1 h-4 w-4 rounded border-gray-300 accent-emerald-600"
-                />
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-extrabold text-slate-900 leading-snug">
-                    {question.questionText}
+      {/* ── Right Column: Test Preview & Review Panel ── */}
+      <section className="rounded-[2rem] border border-slate-150 bg-white p-6 shadow-sm flex flex-col justify-between">
+        <div>
+          <div className="mb-5 flex items-center justify-between border-b border-slate-100 pb-3">
+            <div className="flex items-center gap-2">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <h2 className="text-xs font-black uppercase tracking-wider text-slate-450">Test Live Review Panel</h2>
+            </div>
+            <span className="rounded-full bg-emerald-50 px-2.5 py-0.5 text-[9px] font-black text-emerald-600 border border-emerald-100">
+              {selectedQuestions.length} QUESTIONS SELECTED
+            </span>
+          </div>
+
+          {/* Metadata preview card */}
+          <div className="rounded-2xl border border-slate-150 bg-slate-50/50 p-4 mb-4 grid grid-cols-2 gap-3.5 text-left">
+            <div>
+              <p className="text-[9px] font-black uppercase tracking-wider text-slate-400">Subject Category</p>
+              <p className="text-xs font-black text-slate-800 mt-0.5">{selectedCategory}</p>
+            </div>
+            <div>
+              <p className="text-[9px] font-black uppercase tracking-wider text-slate-400">Scheduled Date & Time</p>
+              <p className="text-xs font-semibold text-slate-600 mt-0.5">
+                {testDate ? `${new Date(testDate).toLocaleDateString("en-IN", { day: "numeric", month: "short" })} at ${startTime || "00:00"}` : "Not Scheduled"}
+              </p>
+            </div>
+            <div>
+              <p className="text-[9px] font-black uppercase tracking-wider text-slate-400">Duration Limits</p>
+              <p className="text-xs font-semibold text-slate-600 mt-0.5">{durationMinutes} Minutes</p>
+            </div>
+            <div>
+              <p className="text-[9px] font-black uppercase tracking-wider text-slate-400">Questions Count</p>
+              <p className="text-xs font-semibold text-slate-600 mt-0.5">{selectedQuestions.length} Questions</p>
+            </div>
+          </div>
+
+          {/* Scrollable Questions list preview */}
+          <div className="space-y-3">
+            <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Selected Questions Review List</p>
+            <div className="max-h-[220px] overflow-y-auto space-y-2.5 pr-1 border border-slate-100 rounded-2xl p-2.5 [scrollbar-width:thin]">
+              {selectedQuestions.map((q, idx) => (
+                <div key={q.id} className="rounded-xl border border-slate-100 bg-white p-3 space-y-2 text-left">
+                  <p className="text-xs font-extrabold text-slate-800 leading-snug">
+                    {idx + 1}. {q.questionText}
                   </p>
-                  <div className="mt-2 flex flex-wrap gap-2 items-center">
-                    {question.category && (
-                      <span className="rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.1em] text-emerald-700">
-                        {question.category}
-                      </span>
-                    )}
-                    <span className="text-[10px] font-semibold text-slate-400">
-                      Options: {question.options.length}
-                    </span>
+                  <div className="grid grid-cols-2 gap-1.5 pt-1">
+                    {q.options.map((opt, oIdx) => {
+                      const isCorrect = opt === q.correctAnswer;
+                      return (
+                        <span
+                          key={oIdx}
+                          className={`rounded-lg px-2 py-1 text-[10px] font-bold border truncate ${
+                            isCorrect ? "bg-emerald-50 border-emerald-100 text-emerald-700" : "bg-slate-50 border-slate-100 text-slate-455"
+                          }`}
+                          title={opt}
+                        >
+                          {opt} {isCorrect && "✓"}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
-              </label>
+              ))}
 
-              {/* View details action trigger */}
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveDetailQuestion(question);
-                  setShowDetailModal(true);
-                }}
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-100 hover:text-slate-950 transition-all shrink-0"
-                title="Preview details"
-              >
-                <Eye className="h-4 w-4" />
-              </button>
+              {selectedQuestions.length === 0 && (
+                <div className="py-12 text-center text-xs font-bold text-slate-400 border border-dashed border-slate-200 rounded-xl">
+                  Select questions from the left checklist to preview test sheet.
+                </div>
+              )}
             </div>
-          );
-        })}
-
-        {categoryQuestions.length === 0 && (
-          <div className="rounded-2xl border border-dashed border-gray-200 bg-white p-6 text-center text-sm font-bold text-slate-500">
-            {isExternalSubject
-              ? `${selectedCategory} source is empty. Generate questions with AI above to add them here.`
-              : `No ${selectedCategory} questions loaded. Click Generate with AI above or Reload.`}
           </div>
-        )}
-      </div>
+        </div>
 
-      <button
-        type="button"
-        onClick={handlePublish}
-        disabled={!canPublish}
-        className="flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 text-sm font-extrabold text-white shadow-sm transition-all hover:bg-emerald-700 disabled:opacity-50"
-      >
-        {published ? <CheckCircle2 className="h-4 w-4" /> : <Send className="h-4 w-4" />}
-        {published ? "Test Published" : "Publish Test"}
-      </button>
+        {/* Footer info inside preview */}
+        <div className="text-[10px] font-semibold text-slate-400 text-center mt-6">
+          This preview matches the student-facing exam interface format.
+        </div>
+      </section>
+
+    </div>
 
       {/* FOOTER WIDGETS */}
       <div className="grid gap-3 text-xs font-semibold text-slate-500 sm:grid-cols-2">
@@ -615,6 +669,6 @@ export default function FacultyTestCreator() {
         </div>
       )}
 
-    </section>
+    </>
   );
 }

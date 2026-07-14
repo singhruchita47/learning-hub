@@ -62,15 +62,15 @@ export default function FacultySubmissions() {
   return (
     <main className="min-h-screen bg-[#eef2fb] px-4 py-6 md:px-8">
       <div className="mx-auto max-w-[1400px]">
-        <section className="mb-6 rounded-[2rem] border border-[#d8c8ff] bg-gradient-to-br from-[#f7f2ff]/95 via-[#eee7ff]/90 to-white p-7 shadow-xl shadow-violet-200/40">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-violet-600">Faculty review center</p>
-          <div className="mt-2 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <section className="mb-6 rounded-[2rem] border border-[#d8c8ff] bg-gradient-to-br from-[#f7f2ff]/95 via-[#eee7ff]/90 to-white p-6 shadow-xl shadow-violet-200/40">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h1 className="text-4xl font-black text-slate-950">Student Submissions</h1>
-              <p className="mt-2 text-sm font-bold text-slate-600">Review assignment uploads, notes, marks, and feedback status.</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-violet-600">Faculty review center</p>
+              <h1 className="mt-1 text-2xl font-black text-slate-955">Student Submissions</h1>
+              <p className="mt-1 text-xs font-semibold text-slate-500">Review assignment uploads, notes, marks, and feedback status.</p>
             </div>
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-violet-600 shadow-sm">
-              <FileCheck2 className="h-7 w-7" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-violet-600 shadow-sm">
+              <FileCheck2 className="h-6 w-6" />
             </div>
           </div>
         </section>

@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Navbar from "@/components/Navbar";
 import FacultyNav from "@/components/FacultyNav";
+import AdminNav from "@/components/AdminNav";
 import Login from "@/pages/Login";
 import { SearchProvider } from "@/context/SearchContext";
 import { AcademicProvider } from "@/context/AcademicContext";
@@ -19,6 +20,17 @@ import FacultyCreateTest from "@/pages/FacultyCreateTest";
 import FacultyQuizMarks from "@/pages/FacultyQuizMarks";
 import FacultySubmissions from "@/pages/FacultySubmissions";
 import AdminDashboard from "@/pages/AdminDashboard";
+import AdminCourses from "@/pages/admin/AdminCourses";
+import AdminPlacements from "@/pages/admin/AdminPlacements";
+import AdminCurriculum from "@/pages/admin/AdminCurriculum";
+import AdminAttendance from "@/pages/admin/AdminAttendance";
+import AdminCalendar from "@/pages/admin/AdminCalendar";
+import AdminLeaderboard from "@/pages/admin/AdminLeaderboard";
+import AdminReports from "@/pages/admin/AdminReports";
+import AdminSystem from "@/pages/admin/AdminSystem";
+import AdminAnnouncements from "@/pages/admin/AdminAnnouncements";
+import AdminAllocations from "@/pages/admin/AdminAllocations";
+import AdminBadges from "@/pages/admin/AdminBadges";
 import CourseViewer from "@/pages/CourseViewer";
 import Courses from "@/pages/Courses";
 import Resources from "@/pages/Resources";
@@ -37,6 +49,8 @@ import ResumeGenerator from "@/pages/ResumeGenerator";
 import WebDevPlayer from "@/pages/WebDevPlayer";
 import StudentAttendance from "@/pages/StudentAttendance";
 import FacultyAttendance from "@/pages/FacultyAttendance";
+import FacultyCourses from "@/pages/FacultyCourses";
+import FacultyLiveClasses from "@/pages/FacultyLiveClasses";
 
 const queryClient = new QueryClient();
 
@@ -86,14 +100,24 @@ function FacultyLayout({ children, user, onLogout }: { children: React.ReactNode
   );
 }
 
+function AdminLayout({ children, user, onLogout }: { children: React.ReactNode; user: AuthUser; onLogout: () => void }) {
+  return (
+    <Layout user={user} onLogout={onLogout}>
+      <AdminNav name={user.name} onLogout={onLogout}>
+        {children}
+      </AdminNav>
+    </Layout>
+  );
+}
+
 function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
   if (user.role === "faculty") {
     return (
       <FacultyLayout user={user} onLogout={onLogout}>
         <Switch>
           <Route path="/" component={() => <FacultyDashboard user={user} onLogout={onLogout} />} />
-          <Route path="/faculty/courses" component={() => <FacultyDashboard user={user} onLogout={onLogout} initialTab="courses" />} />
-          <Route path="/faculty/classes" component={() => <FacultyDashboard user={user} onLogout={onLogout} initialTab="classes" />} />
+          <Route path="/faculty/courses" component={FacultyCourses} />
+          <Route path="/faculty/classes" component={FacultyLiveClasses} />
           <Route path="/faculty/notices" component={() => <FacultyDashboard user={user} onLogout={onLogout} initialTab="notices" />} />
           <Route path="/faculty/create-assignment" component={FacultyCreateAssignment} />
           <Route path="/faculty/create-test" component={FacultyCreateTest} />
@@ -111,9 +135,24 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
 
   if (user.role === "admin") {
     return (
-      <Layout user={user} onLogout={onLogout}>
-        <HomeDashboard user={user} onLogout={onLogout} />
-      </Layout>
+      <AdminLayout user={user} onLogout={onLogout}>
+        <Switch>
+          <Route path="/" component={() => <AdminDashboard user={user} onLogout={onLogout} />} />
+          <Route path="/admin/dashboard" component={() => <AdminDashboard user={user} onLogout={onLogout} />} />
+          <Route path="/admin/reports" component={AdminReports} />
+          <Route path="/admin/system" component={AdminSystem} />
+          <Route path="/admin/announcements" component={AdminAnnouncements} />
+          <Route path="/admin/allocations" component={AdminAllocations} />
+          <Route path="/admin/courses" component={() => <AdminCourses adminName={user.name} />} />
+          <Route path="/admin/placements" component={AdminPlacements} />
+          <Route path="/admin/curriculum" component={AdminCurriculum} />
+          <Route path="/admin/attendance" component={AdminAttendance} />
+          <Route path="/admin/calendar" component={AdminCalendar} />
+          <Route path="/admin/leaderboard" component={AdminLeaderboard} />
+          <Route path="/admin/badges" component={AdminBadges} />
+          <Route component={NotFound} />
+        </Switch>
+      </AdminLayout>
     );
   }
 

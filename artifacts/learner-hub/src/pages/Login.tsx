@@ -103,9 +103,7 @@ function LearnerIllustration() {
 }
 
 export default function Login({ onLogin }: LoginProps) {
-  const [mode, setMode]       = useState<"login" | "register">("login");
   const [role, setRole]       = useState<Role>("student");
-  const [name, setName]       = useState("");
   const [email, setEmail]     = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -116,22 +114,21 @@ export default function Login({ onLogin }: LoginProps) {
     event.preventDefault();
     setError("");
 
-    if (!email.trim() || !password.trim() || (mode === "register" && !name.trim())) {
-      setError(mode === "register" ? "Name, email and password are required." : "Email and password are required.");
+    if (!email.trim() || !password.trim()) {
+      setError("Email and password are required.");
       return;
     }
 
     setLoading(true);
     try {
-      const response = await fetch(`${API_BASE}/${mode}`, {
+      const response = await fetch(`${API_BASE}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: name.trim(), email: email.trim(), password, role }),
+        body: JSON.stringify({ email: email.trim(), password, role }),
       });
       const data = await response.json() as { message?: string; user?: Omit<AuthUser, "token">; token?: string };
 
       if (!response.ok || !data.user || !data.token) {
-        if (response.status === 404 && mode === "login") setMode("register");
         throw new Error(data.message ?? "Authentication failed.");
       }
 
@@ -144,72 +141,62 @@ export default function Login({ onLogin }: LoginProps) {
   }
 
   return (
-    <main className="min-h-screen bg-[#f0eeff] flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-[1100px] grid lg:grid-cols-2 gap-8 items-center">
+    <main className="min-h-screen flex bg-white">
+      <div className="w-full grid lg:grid-cols-2">
 
-        {/* ── Left: Illustration + Features ── */}
-        <div className="hidden lg:flex flex-col gap-8">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#6c5ce7] text-white shadow-lg shadow-[#6c5ce7]/30">
-              <GraduationCap className="h-7 w-7" />
-            </div>
-            <div>
-              <p className="text-xl font-black text-slate-900">Learner Hub</p>
-              <p className="text-xs font-bold text-slate-400">SGSU Digital Campus</p>
-            </div>
-          </div>
-
-          {/* Illustration with Books Image */}
-          <div className="rounded-[2rem] bg-gradient-to-br from-[#ede9fe] via-[#e0d9ff] to-[#dbeafe] p-8 relative overflow-hidden min-h-[320px] flex items-center justify-center">
-            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#6c5ce7]/10" />
-            <div className="pointer-events-none absolute -left-8 bottom-0 h-32 w-32 rounded-full bg-[#00b894]/10" />
-
-            {/* Floating stat cards */}
-            <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-5 left-5 z-10 rounded-2xl bg-white px-3 py-2.5 shadow-xl text-xs font-black text-[#6c5ce7] border border-purple-100">
-              📊 Data Structures<br /><span className="text-[10px] font-bold text-slate-400">85% complete</span>
-            </motion.div>
-            <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
-              className="absolute top-5 right-5 z-10 rounded-2xl bg-white px-3 py-2.5 shadow-xl text-xs font-black text-amber-600 border border-amber-100">
-              🏆 Rank #3<br /><span className="text-[10px] font-bold text-slate-400">Leaderboard</span>
-            </motion.div>
-            <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
-              className="absolute bottom-5 left-5 z-10 rounded-2xl bg-[#6c5ce7] px-3 py-2.5 shadow-xl text-xs font-black text-white">
-              📈 72% Overall<br /><span className="text-[10px] font-semibold text-purple-200">Progress</span>
-            </motion.div>
-            <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
-              className="absolute bottom-5 right-5 z-10 rounded-2xl bg-white px-3 py-2.5 shadow-xl text-xs font-black text-rose-600 border border-rose-100">
-              ⏰ Due in 2 days<br /><span className="text-[10px] font-bold text-slate-400">Database Exam</span>
-            </motion.div>
-
-            {/* Hero illustration */}
-            <img
-              src="/hero-illustration.jpg"
-              alt="Student Learning"
-              className="relative z-0 w-64 h-64 object-contain mix-blend-multiply opacity-95 select-none pointer-events-none"
-              style={{ maskImage: "radial-gradient(ellipse 80% 80% at center, black 55%, transparent 100%)", WebkitMaskImage: "radial-gradient(ellipse 80% 80% at center, black 55%, transparent 100%)" }}
+        {/* ── Left: Image Background + Text ── */}
+        <div className="hidden lg:flex flex-col justify-center bg-[#1e1b4b] p-16 relative overflow-hidden text-white h-full">
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop"
+              alt="Student Background" 
+              className="w-full h-full object-cover opacity-30 mix-blend-luminosity" 
             />
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/90 to-violet-900/90 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1e1b4b] via-transparent to-transparent opacity-80" />
           </div>
+          {/* Decorative blur elements */}
+          <div className="pointer-events-none absolute -left-10 -top-10 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+          <div className="pointer-events-none absolute -right-10 bottom-0 h-64 w-64 rounded-full bg-indigo-900/20 blur-3xl" />
+          
+          <div className="relative z-10 flex flex-col h-full justify-center gap-12">
+            <div>
+              <h1 className="text-4xl md:text-5xl leading-[1.2] font-black">
+                The future belongs <br />
+                to those who <br />
+                <span className="text-amber-300">keep learning.</span>
+              </h1>
+              <p className="mt-6 text-base font-semibold leading-relaxed text-indigo-100 max-w-sm">
+                Access your courses, track progress, and achieve your academic goals — all in one place.
+              </p>
+            </div>
 
-          {/* Feature list */}
-          <div className="space-y-3">
-            {features.map((f) => (
-              <div key={f} className="flex items-center gap-3">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-[#6c5ce7]" />
-                <p className="text-sm font-bold text-slate-700">{f}</p>
+            <div className="flex items-center gap-4 mt-auto pt-8">
+              <div className="flex-1 rounded-[1.25rem] bg-white/10 border border-white/10 p-5 text-center backdrop-blur-md">
+                <p className="text-2xl font-black text-white">50K+</p>
+                <p className="text-xs font-bold text-indigo-200 mt-1">Students</p>
               </div>
-            ))}
+              <div className="flex-1 rounded-[1.25rem] bg-white/10 border border-white/10 p-5 text-center backdrop-blur-md">
+                <p className="text-2xl font-black text-white">200+</p>
+                <p className="text-xs font-bold text-indigo-200 mt-1">Courses</p>
+              </div>
+              <div className="flex-1 rounded-[1.25rem] bg-white/10 border border-white/10 p-5 text-center backdrop-blur-md">
+                <p className="text-2xl font-black text-white">98%</p>
+                <p className="text-xs font-bold text-indigo-200 mt-1">Success Rate</p>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* ── Right: Login Form ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="w-full"
-        >
+        <div className="flex items-center justify-center p-8 lg:p-12 w-full h-full bg-[#f8f9fe]">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+            className="w-full max-w-[480px]"
+          >
           {/* Mobile logo */}
           <div className="mb-6 flex items-center gap-3 lg:hidden">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#6c5ce7] text-white">
@@ -222,33 +209,13 @@ export default function Login({ onLogin }: LoginProps) {
 
             {/* Header */}
             <div className="mb-6">
-              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#6c5ce7]">Welcome to SGSU LMS</p>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#6c5ce7]">Welcome to Learning Hub</p>
               <h1 className="mt-2 text-3xl font-black text-slate-900">
-                {mode === "login" ? "Sign In" : "Create Account"}
+                Sign In
               </h1>
               <p className="mt-1.5 text-sm font-semibold text-slate-400">
-                {mode === "login"
-                  ? "Enter your credentials to access your dashboard."
-                  : "Register to get started with SGSU Learning Hub."}
+                Enter your system-provided email and password to continue.
               </p>
-            </div>
-
-            {/* Login / Register toggle */}
-            <div className="mb-5 grid grid-cols-2 gap-1.5 rounded-2xl bg-[#f0eeff] p-1.5">
-              {(["login", "register"] as const).map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  onClick={() => { setMode(item); setError(""); }}
-                  className={`h-10 rounded-xl text-xs font-black capitalize transition-all ${
-                    mode === item
-                      ? "bg-white text-[#6c5ce7] shadow-md"
-                      : "text-slate-500 hover:text-[#6c5ce7]"
-                  }`}
-                >
-                  {item === "login" ? "Sign In" : "Register"}
-                </button>
-              ))}
             </div>
 
             {/* Role selector */}
@@ -277,25 +244,13 @@ export default function Login({ onLogin }: LoginProps) {
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
-              {mode === "register" && (
-                <div>
-                  <label className="mb-1.5 block text-xs font-black uppercase tracking-wider text-slate-500">Full Name</label>
-                  <input
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter your full name"
-                    className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#6c5ce7]/50 focus:bg-white focus:ring-4 focus:ring-[#6c5ce7]/10"
-                  />
-                </div>
-              )}
-
               <div>
-                <label className="mb-1.5 block text-xs font-black uppercase tracking-wider text-slate-500">Email</label>
+                <label className="mb-1.5 block text-xs font-black uppercase tracking-wider text-slate-500">Email / ID</label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@sgsu.edu.in"
+                  placeholder="name@learning.hub"
                   className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#6c5ce7]/50 focus:bg-white focus:ring-4 focus:ring-[#6c5ce7]/10"
                 />
               </div>
@@ -330,31 +285,15 @@ export default function Login({ onLogin }: LoginProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#6c5ce7] text-sm font-black text-white shadow-xl shadow-[#6c5ce7]/30 transition hover:bg-[#5b4bd5] disabled:opacity-70"
+                className="group relative flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-2xl bg-[#6c5ce7] text-sm font-black text-white transition-all hover:bg-[#5a4bce] hover:shadow-lg hover:shadow-[#6c5ce7]/30 disabled:opacity-70"
               >
-                {loading ? (
-                  <span className="animate-pulse">Please wait...</span>
-                ) : (
-                  <>
-                    {mode === "login" ? "Sign In" : "Create Account"}
-                    <ArrowRight className="h-4 w-4" />
-                  </>
-                )}
+                {loading ? "Signing in..." : "Sign In to Dashboard"}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             </form>
-
-            <p className="mt-5 text-center text-xs font-bold text-slate-400">
-              {mode === "login" ? "Don't have an account?" : "Already have an account?"}{" "}
-              <button
-                type="button"
-                onClick={() => { setMode(mode === "login" ? "register" : "login"); setError(""); }}
-                className="font-black text-[#6c5ce7] hover:underline"
-              >
-                {mode === "login" ? "Register here" : "Sign in"}
-              </button>
-            </p>
           </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </main>
   );

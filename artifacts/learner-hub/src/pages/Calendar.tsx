@@ -138,47 +138,41 @@ export default function Calendar() {
     .slice(0, 5);
 
   return (
-    <main className="min-h-screen bg-[#eef2fb] px-4 py-6 md:px-8">
-      <div className="mx-auto max-w-[1400px]">
+    <main className="px-4 py-6 md:px-8 animate-in fade-in duration-500">
+      <div className="mx-auto max-w-[1400px] space-y-6">
 
-        {/* Hero Header */}
-        {/* ── Page Header ── */}
-        <section className="relative mb-6 overflow-hidden rounded-2xl bg-white px-8 py-6 shadow-sm ring-1 ring-slate-100">
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-violet-50 to-transparent" />
-          <div className="pointer-events-none absolute -right-4 -top-4 h-32 w-32 rounded-full bg-blue-100/50 blur-2xl" />
-
-          <div className="relative flex items-center justify-between">
-            <div className="flex-1">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-500">Academic Planner</p>
-              <h1 className="mt-1 text-3xl font-black text-slate-900">Calendar &amp; <span className="text-violet-600">Schedule</span></h1>
-              <p className="mt-1.5 text-xs font-semibold text-slate-400">Track live classes, assignments, quizzes and all deadlines in one place.</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {[
-                  { val: scheduleItems.length, label: "Events",       color: "bg-violet-100 text-violet-700 ring-violet-200" },
-                  { val: liveClassesCount,     label: "Live Classes", color: "bg-blue-100 text-blue-700 ring-blue-200"     },
-                  { val: assignmentsCount,     label: "Assignments",  color: "bg-rose-100 text-rose-600 ring-rose-200"     },
-                  { val: quizCount,            label: "Quizzes",      color: "bg-amber-100 text-amber-700 ring-amber-200"  },
-                ].map(({ val, label, color }) => (
-                  <span key={label} className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-black ring-1 ${color}`}>
-                    <span className="text-sm font-black">{val}</span> {label}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="relative ml-6 hidden shrink-0 lg:block">
-              <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-blue-100 to-violet-100 shadow-inner">
-                <span className="text-5xl select-none">📅</span>
-              </div>
-              <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400 text-sm shadow-md">✅</div>
-            </div>
+        {/* ── Title and Alert Row ── */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-black text-slate-900 tracking-tight">Calendar &amp; Schedule</h1>
+            <p className="text-xs font-semibold text-slate-400 mt-1">Track live classes, assignments, quizzes and all deadlines in one place.</p>
           </div>
-        </section>
+          <div className="inline-flex items-center gap-1.5 rounded-2xl bg-violet-50 border border-violet-200 px-4 py-2.5 text-xs font-bold text-violet-850 shadow-sm shrink-0">
+            <span>📅</span>
+            <span>{scheduleItems.length} Events Scheduled</span>
+          </div>
+        </div>
+
+        {/* ── Stats Row ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {[
+            { label: "Total Events",  value: scheduleItems.length, txt: "text-[#6c5ce7]" },
+            { label: "Live Classes",  value: liveClassesCount,     txt: "text-blue-600" },
+            { label: "Assignments",   value: assignmentsCount,     txt: "text-rose-500" },
+            { label: "Quizzes",       value: quizCount,            txt: "text-amber-500" },
+          ].map(({ label, value, txt }) => (
+            <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px]">
+              <span className={`text-4xl font-black ${txt}`}>{value}</span>
+              <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
+            </div>
+          ))}
+        </div>
 
         {/* Main grid */}
         <div className="grid gap-6 lg:grid-cols-[1fr_380px]">
 
           {/* ── Left: Custom Calendar ── */}
-          <section className="rounded-[1.75rem] border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/60">
+          <section className="rounded-[2rem] border border-slate-100/50 bg-white p-6 shadow-sm">
             {/* Month nav */}
             <div className="mb-6 flex items-center justify-between">
               <button

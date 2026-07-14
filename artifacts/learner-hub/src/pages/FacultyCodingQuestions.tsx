@@ -184,6 +184,8 @@ export default function FacultyCodingQuestions() {
   const [aiTopic, setAiTopic] = useState("");
   const [aiDifficulty, setAiDifficulty] = useState<"Easy" | "Medium" | "Hard">("Easy");
   const [aiPreview, setAiPreview] = useState<BankQuestion | null>(null);
+  const [bankQuestionType, setBankQuestionType] = useState<"Practice Set" | "Coding Test">("Practice Set");
+  const [aiQuestionType, setAiQuestionType] = useState<"Practice Set" | "Coding Test">("Practice Set");
   const [form, setForm] = useState({
     title: "",
     difficulty: "Easy",
@@ -191,6 +193,7 @@ export default function FacultyCodingQuestions() {
     inputTestCase: "",
     expectedOutput: "",
     starterCode,
+    questionType: "Practice Set" as "Practice Set" | "Coding Test",
   });
   const [status, setStatus] = useState("");
 
@@ -198,9 +201,10 @@ export default function FacultyCodingQuestions() {
     try {
       const response = await fetch(`${API_BASE}/coding-questions`);
       if (!response.ok) throw new Error("API unavailable");
-      const data = await response.json() as { codingQuestions: CodingQuestion[] };
-      setQuestions(data.codingQuestions);
+      const data = await response.json() as { codingQuestions?: CodingQuestion[] };
+      setQuestions(data.codingQuestions ?? []);
     } catch {
+      setQuestions([]);
       setStatus("Backend offline: questions will save when API server is running.");
     }
   }
@@ -234,6 +238,7 @@ export default function FacultyCodingQuestions() {
     inputTestCase: string;
     expectedOutput: string;
     starterCode: string;
+    questionType?: string;
   }) {
     const user = (() => {
       try {
@@ -248,7 +253,11 @@ export default function FacultyCodingQuestions() {
     const response = await fetch(`${API_BASE}/coding-questions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...payload, facultyId }),
+      body: JSON.stringify({
+        ...payload,
+        questionType: payload.questionType ?? "Practice Set",
+        facultyId,
+      }),
       });
     if (!response.ok) throw new Error("Unable to save");
     return response.json() as Promise<{ codingQuestion: CodingQuestion }>;
@@ -263,7 +272,7 @@ export default function FacultyCodingQuestions() {
     try {
       const data = await saveQuestion(form);
       setQuestions((current) => [data.codingQuestion, ...current]);
-      setForm({ title: "", difficulty: "Easy", description: "", inputTestCase: "", expectedOutput: "", starterCode });
+      setForm({ title: "", difficulty: "Easy", description: "", inputTestCase: "", expectedOutput: "", starterCode, questionType: "Practice Set" });
       setStatus("Coding question saved and sent to student practice module.");
     } catch {
       setStatus("Backend offline: start API server to save coding questions in MongoDB.");
@@ -294,6 +303,7 @@ export default function FacultyCodingQuestions() {
             inputTestCase: question.inputTestCase,
             expectedOutput: question.expectedOutput,
             starterCode: question.starterCode,
+            questionType: bankQuestionType,
           }),
         ),
       );
@@ -325,6 +335,7 @@ export default function FacultyCodingQuestions() {
         inputTestCase: aiPreview.inputTestCase,
         expectedOutput: aiPreview.expectedOutput,
         starterCode: aiPreview.starterCode,
+        questionType: aiQuestionType,
       });
       setQuestions((current) => [data.codingQuestion, ...current]);
       setStatus("AI generated question published to student Coding Practice.");
@@ -340,7 +351,7 @@ export default function FacultyCodingQuestions() {
           <p className="text-xs font-black uppercase tracking-[0.22em] text-violet-600">Coding practice builder</p>
           <div className="mt-2 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h1 className="text-4xl font-black text-slate-950">Create Coding Question</h1>
+              <h1 className="text-2xl font-black text-slate-950">Create Coding Question</h1>
               <p className="mt-2 text-sm font-bold text-slate-600">Add easy coding problems with sample input/output and starter code.</p>
             </div>
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-violet-600 shadow-sm">
@@ -350,108 +361,118 @@ export default function FacultyCodingQuestions() {
         </section>
 
         {openPanel === null && (
-        <div className="mb-6 grid gap-4 xl:grid-cols-4">
+        <div className="mb-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          
+          {/* Card 1: Question Bank (Violet Gradient & Glow) */}
           <button
             type="button"
             onClick={() => setOpenPanel("bank")}
-            className={`rounded-[1.75rem] border p-5 text-left shadow-lg transition ${
-              openPanel === "bank"
-                ? "border-violet-300 bg-white shadow-violet-100"
-                : "border-slate-200 bg-white/80 shadow-slate-200/60 hover:border-violet-200"
-            }`}
+            className="group relative text-left aspect-square rounded-[2.25rem] border border-violet-100/80 bg-gradient-to-br from-white via-white to-violet-50/20 p-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-violet-100/50 hover:border-violet-300 hover:-translate-y-1 overflow-hidden"
           >
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-50 text-violet-600">
-                  <CheckSquare className="h-6 w-6" />
-                </div>
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-violet-600">Select questions</p>
-                  <h2 className="mt-1 text-2xl font-black text-slate-950">Question Bank</h2>
-                  <p className="mt-1 text-sm font-bold text-slate-500">
-                    Choose from {codingBank.length} JavaScript coding questions and publish selected questions.
-                  </p>
-                </div>
+            {/* Background design blob */}
+            <div className="pointer-events-none absolute -right-8 -bottom-8 h-20 w-20 rounded-full bg-violet-200/10 blur-xl group-hover:bg-violet-300/25 transition duration-300" />
+            
+            <div className="flex w-full items-start justify-between relative z-10">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-50 text-violet-600 border border-violet-100/60 shadow-sm group-hover:scale-110 transition duration-300">
+                <CheckSquare className="h-5 w-5" />
               </div>
-              <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-black text-violet-700">
+              <span className="rounded-full bg-violet-50 px-2.5 py-0.5 text-[9px] font-black text-violet-700 border border-violet-150/30 uppercase tracking-wider">
                 {selectedBankIds.length} selected
               </span>
             </div>
-          </button>
 
-          <button
-            type="button"
-            onClick={() => setOpenPanel("create")}
-            className={`rounded-[1.75rem] border p-5 text-left shadow-lg transition ${
-              openPanel === "create"
-                ? "border-indigo-300 bg-white shadow-indigo-100"
-                : "border-slate-200 bg-white/80 shadow-slate-200/60 hover:border-indigo-200"
-            }`}
-          >
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600">
-                <Code2 className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-indigo-600">Create coding test</p>
-                <h2 className="mt-1 text-2xl font-black text-slate-950">Custom Coding Question</h2>
-                <p className="mt-1 text-sm font-bold text-slate-500">
-                  Create your own problem statement, testcase, expected output, and starter code.
-                </p>
-              </div>
-            </div>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setOpenPanel("created")}
-            className={`rounded-[1.75rem] border p-5 text-left shadow-lg transition ${
-              openPanel === "created"
-                ? "border-sky-300 bg-white shadow-sky-100"
-                : "border-slate-200 bg-white/80 shadow-slate-200/60 hover:border-sky-200"
-            }`}
-          >
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-50 text-sky-600">
-                  <Database className="h-6 w-6" />
-                </div>
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-sky-600">Published list</p>
-                  <h2 className="mt-1 text-2xl font-black text-slate-950">Created Questions</h2>
-                  <p className="mt-1 text-sm font-bold text-slate-500">
-                    Review coding questions already sent to student Coding Practice.
-                  </p>
-                </div>
-              </div>
-              <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-700">
-                {questions.length} live
+            <div className="mt-4 flex-1 flex flex-col justify-end relative z-10">
+              <p className="text-[9px] font-black uppercase tracking-[0.16em] text-violet-500">Select questions</p>
+              <h2 className="mt-1 text-base font-black text-slate-800 leading-snug group-hover:text-violet-650 transition-colors">Question Bank</h2>
+              <p className="mt-1.5 text-xs font-semibold text-slate-400 leading-relaxed line-clamp-3">
+                Choose from {codingBank.length} ready-made JavaScript coding questions and publish them instantly.
+              </p>
+              <span className="mt-2 text-[10px] font-black text-violet-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Open Bank <span className="transform group-hover:translate-x-1 transition-transform">→</span>
               </span>
             </div>
           </button>
 
+          {/* Card 2: Custom Coding Question (Indigo Gradient & Glow) */}
+          <button
+            type="button"
+            onClick={() => setOpenPanel("create")}
+            className="group relative text-left aspect-square rounded-[2.25rem] border border-indigo-100/80 bg-gradient-to-br from-white via-white to-indigo-50/20 p-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-indigo-100/50 hover:border-indigo-300 hover:-translate-y-1 overflow-hidden"
+          >
+            {/* Background design blob */}
+            <div className="pointer-events-none absolute -right-8 -bottom-8 h-20 w-20 rounded-full bg-indigo-200/10 blur-xl group-hover:bg-indigo-300/25 transition duration-300" />
+
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-100/60 shadow-sm group-hover:scale-110 transition duration-300 relative z-10">
+              <Code2 className="h-5 w-5" />
+            </div>
+
+            <div className="mt-4 flex-1 flex flex-col justify-end relative z-10">
+              <p className="text-[9px] font-black uppercase tracking-[0.16em] text-indigo-550">Create coding test</p>
+              <h2 className="mt-1 text-base font-black text-slate-800 leading-snug group-hover:text-indigo-650 transition-colors">Custom Question</h2>
+              <p className="mt-1.5 text-xs font-semibold text-slate-400 leading-relaxed line-clamp-3">
+                Create your own custom coding problem statement, test cases, and starter code editor environment.
+              </p>
+              <span className="mt-2 text-[10px] font-black text-indigo-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Create Now <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+              </span>
+            </div>
+          </button>
+
+          {/* Card 3: Generate Question With AI (Fuchsia Gradient & Glow) */}
           <button
             type="button"
             onClick={() => setOpenPanel("ai")}
-            className={`rounded-[1.75rem] border p-5 text-left shadow-lg transition ${
-              openPanel === "ai"
-                ? "border-fuchsia-300 bg-white shadow-fuchsia-100"
-                : "border-slate-200 bg-white/80 shadow-slate-200/60 hover:border-fuchsia-200"
-            }`}
+            className="group relative text-left aspect-square rounded-[2.25rem] border border-fuchsia-100/80 bg-gradient-to-br from-white via-white to-fuchsia-50/20 p-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-fuchsia-100/50 hover:border-fuchsia-300 hover:-translate-y-1 overflow-hidden"
           >
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-fuchsia-50 text-fuchsia-600">
-                <Sparkles className="h-6 w-6" />
-              </div>
-              <div>
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-fuchsia-600">AI generator</p>
-                <h2 className="mt-1 text-2xl font-black text-slate-950">Generate Question</h2>
-                <p className="mt-1 text-sm font-bold text-slate-500">
-                  Enter a topic and preview an AI-style coding problem with testcase.
-                </p>
-              </div>
+            {/* Background design blob */}
+            <div className="pointer-events-none absolute -right-8 -bottom-8 h-20 w-20 rounded-full bg-fuchsia-200/10 blur-xl group-hover:bg-fuchsia-300/25 transition duration-300" />
+
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-fuchsia-50 text-fuchsia-600 border border-fuchsia-100/60 shadow-sm group-hover:scale-110 transition duration-300 relative z-10">
+              <Sparkles className="h-5 w-5" />
+            </div>
+
+            <div className="mt-4 flex-1 flex flex-col justify-end relative z-10">
+              <p className="text-[9px] font-black uppercase tracking-[0.16em] text-fuchsia-550">AI assistant</p>
+              <h2 className="mt-1 text-base font-black text-slate-800 leading-snug group-hover:text-fuchsia-650 transition-colors">Generate Question</h2>
+              <p className="mt-1.5 text-xs font-semibold text-slate-400 leading-relaxed line-clamp-3">
+                Enter topic instructions and let the AI generate customized programming problems with test cases.
+              </p>
+              <span className="mt-2 text-[10px] font-black text-fuchsia-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Generate <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+              </span>
             </div>
           </button>
+
+          {/* Card 4: Created Questions Feed (Sky Gradient & Glow - PLACED LAST AS REQUESTED) */}
+          <button
+            type="button"
+            onClick={() => setOpenPanel("created")}
+            className="group relative text-left aspect-square rounded-[2.25rem] border border-sky-100/80 bg-gradient-to-br from-white via-white to-sky-50/20 p-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-sky-100/50 hover:border-sky-300 hover:-translate-y-1 overflow-hidden"
+          >
+            {/* Background design blob */}
+            <div className="pointer-events-none absolute -right-8 -bottom-8 h-20 w-20 rounded-full bg-sky-200/10 blur-xl group-hover:bg-sky-300/25 transition duration-300" />
+            
+            <div className="flex w-full items-start justify-between relative z-10">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-50 text-sky-600 border border-sky-100/60 shadow-sm group-hover:scale-110 transition duration-300">
+                <Database className="h-5 w-5" />
+              </div>
+              <span className="rounded-full bg-sky-50 px-2.5 py-0.5 text-[9px] font-black text-sky-700 border border-sky-150/30 uppercase tracking-wider">
+                {questions.length} Live
+              </span>
+            </div>
+
+            <div className="mt-4 flex-1 flex flex-col justify-end relative z-10">
+              <p className="text-[9px] font-black uppercase tracking-[0.16em] text-sky-550">Published Feed</p>
+              <h2 className="mt-1 text-base font-black text-slate-800 leading-snug group-hover:text-sky-650 transition-colors">Created Questions</h2>
+              <p className="mt-1.5 text-xs font-semibold text-slate-400 leading-relaxed line-clamp-3">
+                Review, filter and track coding questions already published to student-side Practice.
+              </p>
+              <span className="mt-2 text-[10px] font-black text-sky-600 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                Review Feed <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+              </span>
+            </div>
+          </button>
+
         </div>
         )}
 
@@ -491,6 +512,20 @@ export default function FacultyCodingQuestions() {
                 >
                   Reload API Bank
                 </button>
+
+                {/* ── Assign As dropdown — moved to header ── */}
+                <div className="flex items-center gap-2 rounded-2xl border border-violet-100 bg-white px-3 py-2 shadow-sm">
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider whitespace-nowrap">Assign As:</span>
+                  <select
+                    value={bankQuestionType}
+                    onChange={(e) => setBankQuestionType(e.target.value as "Practice Set" | "Coding Test")}
+                    className="bg-transparent text-xs font-bold text-violet-700 outline-none cursor-pointer"
+                  >
+                    <option value="Practice Set">📘 Practice Set</option>
+                    <option value="Coding Test">🧪 Coding Test</option>
+                  </select>
+                </div>
+
                 <button
                   type="button"
                   onClick={publishSelectedBankQuestions}
@@ -498,7 +533,7 @@ export default function FacultyCodingQuestions() {
                   disabled={selectedBankIds.length === 0}
                 >
                   <Send className="h-4 w-4" />
-                  Publish Selected
+                  Publish as {bankQuestionType}
                 </button>
               </div>
             </div>
@@ -554,92 +589,205 @@ export default function FacultyCodingQuestions() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 border-t border-violet-100 bg-white p-4 md:flex-row md:items-center md:justify-between">
-            <p className="text-xs font-bold text-slate-500">
-              Tip: selected questions are published to the student Coding Practice page.
+          <div className="flex items-center justify-between border-t border-violet-100 bg-white px-5 py-3">
+            <p className="text-xs font-semibold text-slate-400">
+              💡 Tip: select questions above, choose type in header, then publish.
             </p>
-            <button
-              type="button"
-              onClick={publishSelectedBankQuestions}
-              className="flex h-11 items-center justify-center gap-2 rounded-2xl bg-slate-950 px-5 text-xs font-black text-white shadow-lg shadow-slate-900/10 transition hover:bg-violet-700 disabled:bg-slate-300"
-              disabled={selectedBankIds.length === 0}
-            >
-              <Send className="h-4 w-4" />
-              Publish {selectedBankIds.length || ""} Selected
-            </button>
           </div>
         </section>
-        )}
+      )}
 
-        {openPanel === "create" && (
-        <div className="grid gap-6">
-          <section className="rounded-[1.75rem] border border-slate-200 bg-white p-5 shadow-lg shadow-slate-200/60">
+      {openPanel === "create" && (
+        <div className="grid gap-6 lg:grid-cols-[1fr_450px] text-left">
+          
+          {/* ── Left Column: Create Form Box (Compact) ── */}
+          <section className="rounded-[2rem] border border-slate-150 bg-white p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="mb-5 flex items-center justify-between border-b border-slate-100 pb-3">
+                <button
+                  type="button"
+                  onClick={() => setOpenPanel(null)}
+                  className="rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-xs font-black text-indigo-700 hover:bg-indigo-100 transition cursor-pointer"
+                >
+                  ← Back to tools
+                </button>
+                <h2 className="text-lg font-black text-slate-805 text-slate-800">Question Details</h2>
+              </div>
+
+              <div className="grid gap-4">
+                
+                {/* Title */}
+                <input
+                  value={form.title}
+                  onChange={(event) => setForm((current) => ({ ...current, title: event.target.value }))}
+                  placeholder="Question title"
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
+                />
+
+                {/* Difficulty & Type Selection */}
+                <div className="grid gap-4 md:grid-cols-2">
+                  <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                    Difficulty:
+                    <select
+                      value={form.difficulty}
+                      onChange={(event) => setForm((current) => ({ ...current, difficulty: event.target.value }))}
+                      className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-bold text-slate-700 outline-none focus:border-violet-300 focus:bg-white transition cursor-pointer"
+                    >
+                      <option>Easy</option>
+                      <option>Medium</option>
+                      <option>Hard</option>
+                    </select>
+                  </label>
+
+                  {/* Question Type selection dropdown as requested */}
+                  <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                    Assign To:
+                    <select
+                      value={form.questionType}
+                      onChange={(event) => setForm((current) => ({ ...current, questionType: event.target.value as "Practice Set" | "Coding Test" }))}
+                      className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-bold text-slate-700 outline-none focus:border-violet-300 focus:bg-white transition cursor-pointer"
+                    >
+                      <option value="Practice Set">Practice Set</option>
+                      <option value="Coding Test">Coding Test</option>
+                    </select>
+                  </label>
+                </div>
+
+                {/* Description */}
+                <textarea
+                  value={form.description}
+                  onChange={(event) => setForm((current) => ({ ...current, description: event.target.value }))}
+                  placeholder="Problem description / statement"
+                  rows={3}
+                  className="resize-none w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
+                />
+
+                {/* Testcases */}
+                <div className="grid gap-4 md:grid-cols-2">
+                  <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                    Input Test Case:
+                    <textarea
+                      value={form.inputTestCase}
+                      onChange={(event) => setForm((current) => ({ ...current, inputTestCase: event.target.value }))}
+                      placeholder="e.g. 5 10"
+                      rows={2}
+                      className="resize-none font-mono w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
+                    />
+                  </label>
+                  <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                    Expected Output:
+                    <textarea
+                      value={form.expectedOutput}
+                      onChange={(event) => setForm((current) => ({ ...current, expectedOutput: event.target.value }))}
+                      placeholder="e.g. 15"
+                      rows={2}
+                      className="resize-none font-mono w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
+                    />
+                  </label>
+                </div>
+
+                {/* Starter Code */}
+                <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                  Starter Code Template:
+                  <textarea
+                    value={form.starterCode}
+                    onChange={(event) => setForm((current) => ({ ...current, starterCode: event.target.value }))}
+                    placeholder="Starter code snippet..."
+                    rows={4}
+                    className="resize-none font-mono w-full rounded-xl border border-slate-200 bg-slate-950 p-4 text-xs font-semibold text-slate-200 outline-none focus:ring-2 focus:ring-violet-300 transition"
+                  />
+                </label>
+              </div>
+            </div>
+
             <button
               type="button"
-              onClick={() => setOpenPanel(null)}
-              className="mb-4 rounded-full border border-indigo-200 bg-indigo-50 px-4 py-2 text-xs font-black text-indigo-700 transition hover:bg-indigo-100"
+              onClick={createQuestion}
+              className="mt-6 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-violet-600 text-xs font-black text-white hover:bg-violet-700 shadow-md transition cursor-pointer"
             >
-              Back to coding tools
+              <Send className="h-4 w-4" />
+              Save Coding Question
             </button>
-            <h2 className="mb-5 text-2xl font-black text-slate-950">Question Details</h2>
-            <div className="grid gap-4">
-              <input
-                value={form.title}
-                onChange={(event) => setForm((current) => ({ ...current, title: event.target.value }))}
-                placeholder="Question title"
-                className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-100"
-              />
-              <select
-                value={form.difficulty}
-                onChange={(event) => setForm((current) => ({ ...current, difficulty: event.target.value }))}
-                className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-800 outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-100"
-              >
-                <option>Easy</option>
-                <option>Medium</option>
-                <option>Hard</option>
-              </select>
-              <textarea
-                value={form.description}
-                onChange={(event) => setForm((current) => ({ ...current, description: event.target.value }))}
-                placeholder="Problem statement"
-                rows={4}
-                className="resize-none rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-bold outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-100"
-              />
-              <div className="grid gap-4 md:grid-cols-2">
-                <textarea
-                  value={form.inputTestCase}
-                  onChange={(event) => setForm((current) => ({ ...current, inputTestCase: event.target.value }))}
-                  placeholder="Input testcase"
-                  rows={4}
-                  className="resize-none rounded-2xl border border-slate-200 bg-slate-50 p-4 font-mono text-sm outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-100"
-                />
-                <textarea
-                  value={form.expectedOutput}
-                  onChange={(event) => setForm((current) => ({ ...current, expectedOutput: event.target.value }))}
-                  placeholder="Expected output"
-                  rows={4}
-                  className="resize-none rounded-2xl border border-slate-200 bg-slate-50 p-4 font-mono text-sm outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-100"
-                />
+          </section>
+
+          {/* ── Right Column: Live Coding Question Preview Panel ── */}
+          <section className="rounded-[2rem] border border-slate-150 bg-white p-6 shadow-sm flex flex-col justify-between">
+            <div>
+              {/* Header */}
+              <div className="mb-5 flex items-center justify-between border-b border-slate-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-2.5 w-2.5 rounded-full bg-violet-500 animate-pulse" />
+                  <h2 className="text-xs font-black uppercase tracking-wider text-slate-450">Live IDE Preview</h2>
+                </div>
+                <span className={`rounded-full px-2.5 py-0.5 text-[9px] font-black border uppercase tracking-wider ${
+                  form.questionType === "Coding Test" ? "bg-rose-50 text-rose-600 border-rose-100" : "bg-sky-50 text-sky-600 border-sky-100"
+                }`}>
+                  {form.questionType || "Practice Set"}
+                </span>
               </div>
-              <textarea
-                value={form.starterCode}
-                onChange={(event) => setForm((current) => ({ ...current, starterCode: event.target.value }))}
-                placeholder="Starter code"
-                rows={7}
-                className="resize-none rounded-2xl border border-slate-200 bg-slate-950 p-4 font-mono text-sm text-white outline-none focus:ring-4 focus:ring-violet-100"
-              />
-              <button
-                type="button"
-                onClick={createQuestion}
-                className="flex h-12 items-center justify-center gap-2 rounded-2xl bg-violet-600 text-sm font-black text-white shadow-lg shadow-violet-600/20"
-              >
-                <Send className="h-4 w-4" />
-                Save Coding Question
-              </button>
+
+              {/* simulated card view */}
+              <div className="rounded-2xl border border-slate-150 bg-white p-5 shadow-sm space-y-4 text-left">
+                <div className="flex items-center justify-between">
+                  <span className={`rounded-full px-2.5 py-0.5 text-[9px] font-black border uppercase tracking-wider ${
+                    form.difficulty === "Easy" ? "bg-emerald-50 text-emerald-700 border-emerald-100" :
+                    form.difficulty === "Medium" ? "bg-amber-50 text-amber-700 border-amber-100" :
+                    "bg-rose-50 text-rose-700 border-rose-100"
+                  }`}>
+                    {form.difficulty || "Easy"}
+                  </span>
+                  <span className="text-[10px] font-bold text-slate-400">
+                    💻 JavaScript IDE
+                  </span>
+                </div>
+
+                <div>
+                  <h3 className="text-base font-black text-slate-800 leading-snug truncate">
+                    {form.title || "Untitled Coding Question"}
+                  </h3>
+                  <p className="mt-2 text-xs font-semibold text-slate-500 leading-relaxed whitespace-pre-wrap min-h-[60px] max-h-[120px] overflow-y-auto">
+                    {form.description || "Describe the programming challenge instructions here..."}
+                  </p>
+                </div>
+
+                {/* Testcases row */}
+                <div className="grid grid-cols-2 gap-3 pt-2">
+                  <div className="rounded-xl bg-slate-50 p-2.5 border border-slate-100 min-w-0">
+                    <span className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Sample Input</span>
+                    <code className="block mt-0.5 font-mono text-[10px] font-bold truncate text-slate-655">{form.inputTestCase || "—"}</code>
+                  </div>
+                  <div className="rounded-xl bg-emerald-50/40 p-2.5 border border-emerald-100/30 min-w-0">
+                    <span className="text-[9px] font-black uppercase text-emerald-600 tracking-wider">Expected Output</span>
+                    <code className="block mt-0.5 font-mono text-[10px] font-bold truncate text-emerald-700">{form.expectedOutput || "—"}</code>
+                  </div>
+                </div>
+
+                {/* Code Editor mockup */}
+                <div className="space-y-1.5">
+                  <span className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Editor Starter File</span>
+                  <div className="rounded-xl overflow-hidden border border-slate-900 bg-slate-950 p-3.5 relative">
+                    <div className="absolute right-3 top-3 flex gap-1">
+                      <span className="h-2 w-2 rounded-full bg-red-500" />
+                      <span className="h-2 w-2 rounded-full bg-yellow-500" />
+                      <span className="h-2 w-2 rounded-full bg-green-500" />
+                    </div>
+                    <pre className="font-mono text-[10.5px] font-semibold text-slate-350 overflow-x-auto min-h-[60px] max-h-[100px] text-left [scrollbar-width:thin] text-slate-300 leading-relaxed">
+                      {form.starterCode || "// editor template"}
+                    </pre>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div className="text-[10px] font-semibold text-slate-400 text-center mt-6">
+              This preview matches the student-facing compiler workspace interface format.
             </div>
           </section>
+
         </div>
-        )}
+      )}
 
         {openPanel === "ai" && (
           <section className="rounded-[2rem] border border-fuchsia-100 bg-white p-5 shadow-xl shadow-fuchsia-100/70">
@@ -684,10 +832,34 @@ export default function FacultyCodingQuestions() {
                     <option>Hard</option>
                   </select>
                 </label>
+
+                {/* ── Assign As: Practice Set or Coding Test ── */}
+                <label className="mt-4 grid gap-2">
+                  <span className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">Assign As</span>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(["Practice Set", "Coding Test"] as const).map((opt) => (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => setAiQuestionType(opt)}
+                        className={`flex h-11 items-center justify-center gap-1.5 rounded-2xl border text-xs font-black transition cursor-pointer ${
+                          aiQuestionType === opt
+                            ? opt === "Coding Test"
+                              ? "border-rose-300 bg-rose-50 text-rose-700 shadow-sm"
+                              : "border-fuchsia-300 bg-fuchsia-50 text-fuchsia-700 shadow-sm"
+                            : "border-slate-200 bg-white text-slate-400 hover:border-slate-300"
+                        }`}
+                      >
+                        {opt === "Practice Set" ? "📘" : "🧪"} {opt}
+                      </button>
+                    ))}
+                  </div>
+                </label>
+
                 <button
                   type="button"
                   onClick={handleGenerateAiQuestion}
-                  className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-fuchsia-600 text-sm font-black text-white shadow-lg shadow-fuchsia-600/20"
+                  className="mt-5 flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-fuchsia-600 text-sm font-black text-white shadow-lg shadow-fuchsia-600/20 cursor-pointer hover:bg-fuchsia-700 transition"
                 >
                   <Sparkles className="h-4 w-4" />
                   Generate Preview
@@ -699,16 +871,25 @@ export default function FacultyCodingQuestions() {
                   <div>
                     <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                       <div>
-                        <span className="rounded-full bg-fuchsia-100 px-3 py-1 text-xs font-black text-fuchsia-700">{aiPreview.difficulty}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="rounded-full bg-fuchsia-100 px-3 py-1 text-xs font-black text-fuchsia-700">{aiPreview.difficulty}</span>
+                          <span className={`rounded-full border px-3 py-1 text-xs font-black ${
+                            aiQuestionType === "Coding Test"
+                              ? "bg-rose-50 border-rose-200 text-rose-700"
+                              : "bg-sky-50 border-sky-200 text-sky-700"
+                          }`}>
+                            {aiQuestionType === "Coding Test" ? "🧪" : "📘"} {aiQuestionType}
+                          </span>
+                        </div>
                         <h3 className="mt-3 text-2xl font-black text-slate-950">{aiPreview.title}</h3>
                       </div>
                       <button
                         type="button"
                         onClick={publishAiQuestion}
-                        className="flex h-11 items-center justify-center gap-2 rounded-2xl bg-slate-950 px-5 text-xs font-black text-white shadow-lg shadow-slate-900/10 transition hover:bg-fuchsia-700"
+                        className="flex h-11 items-center justify-center gap-2 rounded-2xl bg-slate-950 px-5 text-xs font-black text-white shadow-lg shadow-slate-900/10 transition hover:bg-fuchsia-700 cursor-pointer"
                       >
                         <Send className="h-4 w-4" />
-                        Publish AI Question
+                        Publish as {aiQuestionType}
                       </button>
                     </div>
                     <p className="text-sm font-bold leading-7 text-slate-600">{aiPreview.description}</p>

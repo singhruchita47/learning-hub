@@ -262,36 +262,38 @@ export default function CodingPractice() {
     }
   }
 
-  const langColors: Record<string, { bg: string; icon: string; glow: string }> = {
-    javascript: { bg: "from-yellow-400 to-amber-500",   icon: "☕", glow: "shadow-amber-300/40" },
-    python:     { bg: "from-blue-500 to-indigo-600",    icon: "🐍", glow: "shadow-blue-300/40"  },
-    java:       { bg: "from-red-500 to-rose-600",       icon: "☕", glow: "shadow-red-300/40"   },
-    cpp:        { bg: "from-[#6c5ce7] to-purple-700",   icon: "⚡", glow: "shadow-purple-300/40"},
+  const langColors: Record<string, { bg: string; icon: string; glow: string; border: string; desc: string; text: string }> = {
+    javascript: { bg: "from-yellow-400 to-amber-500",   icon: "JS", glow: "shadow-amber-500/20 hover:shadow-amber-500/40", border: "border-amber-100 hover:border-amber-400/40", desc: "Web & Fullstack Apps", text: "text-amber-600" },
+    python:     { bg: "from-blue-500 to-sky-400",       icon: "PY", glow: "shadow-blue-500/20 hover:shadow-blue-500/40", border: "border-blue-100 hover:border-blue-400/40",   desc: "Data Science & AI Scripts", text: "text-blue-600" },
+    java:       { bg: "from-red-500 to-orange-400",     icon: "JV", glow: "shadow-red-500/20 hover:shadow-red-500/40",   border: "border-red-100 hover:border-red-400/40",    desc: "OOPs & Enterprise Systems", text: "text-red-500" },
+    cpp:        { bg: "from-violet-600 to-indigo-500",  icon: "C++", glow: "shadow-violet-500/20 hover:shadow-violet-500/40", border: "border-violet-100 hover:border-violet-400/40", desc: "Competitive Coding & Core Dev", text: "text-violet-650" },
   };
 
   if (!selectedLanguage) {
     return (
-      <div className="min-h-screen bg-[#eef2fb] px-4 py-6 animate-in fade-in duration-500">
-        <div className="mx-auto max-w-5xl space-y-5">
+      <div className="relative overflow-hidden px-4 py-16 md:px-8 animate-in fade-in duration-700">
+        
+        {/* Glowing Background Decorative Blobs */}
+        <div className="pointer-events-none absolute -left-10 top-1/4 h-72 w-72 rounded-full bg-violet-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-10 bottom-1/4 h-80 w-80 rounded-full bg-blue-400/10 blur-3xl" />
 
-          {/* Compact Header */}
-          <section className="rounded-2xl border border-slate-100 bg-white px-6 py-5 shadow-sm">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-[11px] font-black uppercase tracking-widest text-violet-600">Practice Platform</p>
-                <h1 className="mt-0.5 text-2xl font-black text-slate-900">Coding <span className="text-violet-600">Arena</span></h1>
-                <p className="mt-1 text-xs font-semibold text-slate-400">Choose your language to start solving, run code and climb the leaderboard.</p>
-              </div>
-              <div className="flex gap-2">
-                {["🏆 Competitive", "⚡ Instant run", "📊 Leaderboard"].map(f => (
-                  <span key={f} className="hidden sm:inline-flex rounded-xl bg-violet-50 px-3 py-1.5 text-xs font-bold text-violet-700">{f}</span>
-                ))}
-              </div>
+        <div className="relative mx-auto max-w-4xl text-center space-y-10">
+          
+          {/* Centered Premium Header */}
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-full bg-violet-50 border border-violet-150 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-widest text-violet-700">
+              ⚡ SELECT YOUR ARENA
             </div>
-          </section>
+            <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+              Coding <span className="text-[#6c5ce7]">Arena</span>
+            </h1>
+            <p className="text-sm font-semibold text-slate-400 max-w-md mx-auto leading-relaxed">
+              Select your preferred programming language to initialize the virtual workspace and start solving challenges.
+            </p>
+          </div>
 
-          {/* Language Cards */}
-          <div className="grid gap-4 md:grid-cols-4">
+          {/* 4 Language Selection Cards */}
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-3xl mx-auto pt-4">
             {languages.map((item) => {
               const lc = langColors[item.key];
               return (
@@ -299,14 +301,23 @@ export default function CodingPractice() {
                   key={item.key}
                   type="button"
                   onClick={() => { setSelectedLanguage(item.key); setLocation("/coding-practice"); }}
-                  className="group relative overflow-hidden rounded-2xl bg-white p-5 text-left shadow-sm ring-1 ring-slate-100 transition-all hover:-translate-y-1 hover:shadow-md hover:ring-violet-200"
+                  className={`group relative overflow-hidden rounded-[2.25rem] bg-white/90 backdrop-blur-md p-6 text-center border ${lc.border} shadow-sm ${lc.glow} transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] focus:outline-none flex flex-col items-center justify-between h-56 cursor-pointer`}
                 >
-                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${lc.bg} text-xl shadow-md`}>
+                  {/* Glowing dynamic gradient icon badge */}
+                  <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${lc.bg} text-sm font-black text-white shadow-md transform transition-transform group-hover:scale-110 duration-300`}>
                     {lc.icon}
                   </div>
-                  <h2 className="text-base font-black text-slate-900">{item.label}</h2>
-                  <p className="mt-1 text-xs font-semibold text-slate-400">Practice & climb the leaderboard.</p>
-                  <div className={`mt-3 h-0.5 w-full rounded-full bg-gradient-to-r ${lc.bg} opacity-30 group-hover:opacity-100 transition-opacity`} />
+                  
+                  <div className="w-full space-y-1.5">
+                    <h2 className="text-base font-black text-slate-800 transition-colors">{item.label}</h2>
+                    <p className="text-[10px] font-semibold text-slate-400 leading-normal line-clamp-2 px-1">
+                      {lc.desc}
+                    </p>
+                  </div>
+
+                  <span className={`inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider ${lc.text} group-hover:translate-x-1 transition-transform`}>
+                    Enter Arena <span>→</span>
+                  </span>
                 </button>
               );
             })}
@@ -320,126 +331,177 @@ export default function CodingPractice() {
     const listToRender = activeTab === "test" ? dynamicTestsList : dynamicPracticeList;
 
     return (
-      <div className="min-h-screen bg-[#eef2fb] animate-in fade-in duration-500">
-        <div className="border-b border-slate-100 bg-white px-4 py-3 shadow-sm">
-          <div className="mx-auto flex max-w-[1500px] flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#6c5ce7] text-xs font-black text-white shadow-md">⌨️</div>
-              <div>
-                <h1 className="text-base font-black text-slate-900">Coding Practice</h1>
-                <p className="text-[11px] font-bold text-slate-400">Language: {language?.label}</p>
-              </div>
+      <div className="px-4 py-6 md:px-8 animate-in fade-in duration-500">
+        <div className="mx-auto max-w-[1400px] space-y-6">
+
+          {/* ── Title and Config Row ── */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-black text-slate-900 tracking-tight">Coding Practice</h1>
+              <p className="text-xs font-semibold text-slate-400 mt-1">Solve coding challenges, run code, and track your metrics.</p>
             </div>
-            <button
-              type="button"
-              onClick={() => setSelectedLanguage("")}
-              className="rounded-xl border border-[#6c5ce7]/20 bg-[#6c5ce7]/5 px-4 py-2 text-xs font-black text-[#6c5ce7] hover:bg-[#6c5ce7]/10 transition"
-            >
-              Change Language
-            </button>
+            <div className="flex items-center gap-3 shrink-0">
+              <span className="rounded-2xl bg-slate-50 border border-slate-200 px-4 py-2.5 text-xs font-bold text-slate-650 shadow-sm">
+                Language: {language?.label}
+              </span>
+              <button
+                type="button"
+                onClick={() => setSelectedLanguage("")}
+                className="rounded-2xl bg-[#6c5ce7] px-4 py-2.5 text-xs font-black text-white hover:bg-[#584ac2] shadow-sm transition"
+              >
+                Change Language
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div className="mx-auto grid max-w-[1500px] gap-5 p-5 lg:grid-cols-[1fr_330px]">
-          
-          <main className="rounded-2xl bg-white p-5 shadow-sm space-y-6">
+          {/* ── Stats Row ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              { label: "Solved Count",   value: solvedIds.length,  txt: "text-[#6c5ce7]" },
+              { label: "Daily Practice", value: dynamicPracticeList.length, txt: "text-blue-600" },
+              { label: "Coding Tests",   value: dynamicTestsList.length,   txt: "text-rose-500" },
+              { label: "Streak Status",  value: "5 days",          txt: "text-amber-500" },
+            ].map(({ label, value, txt }) => (
+              <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px]">
+                <span className={`text-4xl font-black ${txt}`}>{value}</span>
+                <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* ── Tabs and Main Area ── */}
+          <div className="grid gap-6 lg:grid-cols-[1fr_400px]">
             
-            {/* Control Panel Toggle Mode */}
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-slate-150 pb-4">
-              <div>
-                <h2 className="text-2xl font-extrabold text-slate-950">Problems Catalog</h2>
-                <p className="text-xs text-slate-500 font-bold mt-0.5">Solve coding challenges, track accuracy and metrics.</p>
-              </div>
-              <div className="flex rounded-xl bg-slate-100 p-1">
-                <button
-                  onClick={() => setActiveTab("practice")}
-                  className={`rounded-lg px-4 py-1.5 text-xs font-black transition-all ${
-                    activeTab === "practice" ? "bg-white text-indigo-700 shadow-sm" : "text-slate-500 hover:text-slate-900"
-                  }`}
-                >
-                  Daily Practice ({dynamicPracticeList.length})
-                </button>
-                <button
-                  onClick={() => setActiveTab("test")}
-                  className={`rounded-lg px-4 py-1.5 text-xs font-black transition-all ${
-                    activeTab === "test" ? "bg-white text-indigo-700 shadow-sm" : "text-slate-500 hover:text-slate-900"
-                  }`}
-                >
-                  Coding Tests ({dynamicTestsList.length})
-                </button>
-              </div>
-            </div>
-
-            {/* List area */}
-            <div className="divide-y divide-slate-100">
-              {listToRender.map((problem) => {
-                const solved = solvedIds.includes(problem.id);
-                return (
-                  <div key={problem.id} className="flex flex-col gap-4 py-5 md:flex-row md:items-center md:justify-between">
-                    <div className="flex items-start gap-3">
-                      <button className="mt-1 text-slate-400">♡</button>
-                      <div>
-                        <h3 className="text-lg font-extrabold text-slate-800">{problem.title}</h3>
-                        <div className="mt-2 flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
-                          <span className="text-indigo-600">{problem.difficulty}</span>
-                          <span>•</span>
-                          <span>{problem.acceptance}</span>
-                          <span>•</span>
-                          <span>{problem.tags.join(", ")}</span>
-                          {solved && <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-black text-emerald-800">Solved</span>}
-                        </div>
-                        <p className="mt-3 max-w-3xl text-sm font-medium leading-6 text-slate-550">{problem.description}</p>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setLocation(`/coding-practice/${problem.id}`)}
-                      className="h-11 min-w-28 rounded-xl border border-indigo-500 px-7 text-sm font-extrabold text-indigo-700 transition-all hover:bg-indigo-50"
-                    >
-                      Solve
-                    </button>
-                  </div>
-                );
-              })}
-
-              {listToRender.length === 0 && (
-                <div className="text-center py-10 text-slate-400">
-                  <p className="text-sm font-extrabold">No questions available under this category.</p>
+            <div className="space-y-6">
+              {/* Tabs selector */}
+              <div className="flex justify-between items-center pb-1">
+                <div className="flex rounded-full border border-slate-200 bg-white p-1 shadow-sm">
+                  <button
+                    onClick={() => setActiveTab("practice")}
+                    className={`rounded-full px-5 py-2 text-xs font-black transition-all ${
+                      activeTab === "practice" ? "bg-violet-600 text-white shadow-sm" : "text-slate-500 hover:text-slate-900"
+                    }`}
+                  >
+                    Daily Practice ({dynamicPracticeList.length})
+                  </button>
+                  <button
+                    onClick={() => setActiveTab("test")}
+                    className={`rounded-full px-5 py-2 text-xs font-black transition-all ${
+                      activeTab === "test" ? "bg-violet-600 text-white shadow-sm" : "text-slate-500 hover:text-slate-900"
+                    }`}
+                  >
+                    Coding Tests ({dynamicTestsList.length})
+                  </button>
                 </div>
-              )}
-            </div>
-          </main>
+              </div>
 
-          <aside className="space-y-4">
-            <div className="rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 p-4 text-white shadow-sm">
-              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-indigo-100">Practice Set</p>
-              <h2 className="mt-2 text-lg font-extrabold">Beginner Friendly</h2>
-              <p className="mt-1 text-sm font-semibold text-indigo-50">
-                {practiceProblems.length} easy questions including faculty assigned tasks.
-              </p>
-            </div>
-            <div className="rounded-2xl bg-white p-5 shadow-sm">
-              <h2 className="mb-4 flex items-center gap-2 text-sm font-extrabold text-slate-900">
-                <Trophy className="h-4 w-4 text-amber-500" />
-                Coding Leaderboard
-              </h2>
-              <div className="space-y-3">
-                {leaderboard.map((item) => (
-                  <div key={item.rank} className="flex items-center gap-3 rounded-xl bg-slate-50 p-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-xs font-extrabold text-white">#{item.rank}</div>
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-extrabold text-slate-900">{item.name}</p>
-                      <p className="text-xs font-bold text-slate-500">{item.solved} solved • {item.score} pts</p>
+              {/* LeetCode-style Problem Table */}
+              <div className="overflow-hidden rounded-[2rem] bg-white border border-slate-100/60 shadow-sm">
+                <div className="grid grid-cols-[50px_1fr_120px_100px] items-center px-6 py-4 bg-slate-50/50 border-b border-slate-100 text-[10px] font-black uppercase tracking-wider text-slate-400">
+                  <span>Status</span>
+                  <span>Title</span>
+                  <span>Difficulty</span>
+                  <span className="text-center">Action</span>
+                </div>
+
+                <div className="divide-y divide-slate-100">
+                  {listToRender.map((problem) => {
+                    const solved = solvedIds.includes(problem.id);
+                    const diffColors = 
+                      problem.difficulty === "Easy" ? "text-emerald-600 bg-emerald-50 border-emerald-100" :
+                      problem.difficulty === "Medium" ? "text-amber-600 bg-amber-50 border-amber-100" :
+                      "text-rose-600 bg-rose-50 border-rose-100";
+
+                    return (
+                      <div key={problem.id} className="grid grid-cols-[50px_1fr_120px_100px] items-center px-6 py-4.5 transition hover:bg-slate-50/40">
+                        {/* Status Check */}
+                        <div className="flex items-center">
+                          {solved ? (
+                            <span className="text-emerald-500 text-base font-black">✓</span>
+                          ) : (
+                            <span className="text-slate-300 text-[9px] font-black">•</span>
+                          )}
+                        </div>
+
+                        {/* Title and details */}
+                        <div>
+                          <h3 className="text-sm font-extrabold text-slate-800">{problem.title}</h3>
+                          <div className="mt-1 flex flex-wrap items-center gap-2 text-[10px] font-bold text-slate-400">
+                            <span className="text-indigo-500">{problem.acceptance}</span>
+                            <span>·</span>
+                            <span>{problem.tags.join(", ")}</span>
+                          </div>
+                        </div>
+
+                        {/* Difficulty */}
+                        <div>
+                          <span className={`inline-flex rounded-full border px-2.5 py-0.5 text-[9px] font-black uppercase tracking-wider ${diffColors}`}>
+                            {problem.difficulty}
+                          </span>
+                        </div>
+
+                        {/* Solve Button */}
+                        <div className="flex justify-center">
+                          <button
+                            type="button"
+                            onClick={() => setLocation(`/coding-practice/${problem.id}`)}
+                            className="rounded-xl border border-violet-650 px-4 py-1.5 text-xs font-black text-[#6c5ce7] hover:bg-[#6c5ce7] hover:text-white shadow-sm transition"
+                          >
+                            Solve
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  {listToRender.length === 0 && (
+                    <div className="text-center py-12 text-slate-400">
+                      <p className="text-sm font-extrabold">No questions available under this category.</p>
                     </div>
-                    <span className="flex items-center gap-1 text-xs font-extrabold text-orange-500">
-                      <Flame className="h-3.5 w-3.5" />
-                      {item.streak}
-                    </span>
-                  </div>
-                ))}
+                  )}
+                </div>
               </div>
             </div>
-          </aside>
+
+            {/* Sidebar */}
+            <aside className="space-y-6">
+              <div className="rounded-[2rem] bg-gradient-to-br from-indigo-600 to-violet-650 p-6 text-white shadow-sm relative overflow-hidden">
+                <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white/10" />
+                <p className="text-[10px] font-black uppercase tracking-wider text-indigo-200">Practice Set</p>
+                <h2 className="mt-2 text-base font-extrabold">Beginner Friendly</h2>
+                <p className="mt-1.5 text-xs font-semibold text-indigo-50 leading-relaxed">
+                  {practiceProblems.length} easy questions including faculty assigned tasks.
+                </p>
+              </div>
+
+              <div className="rounded-[2.5rem] border border-slate-100/50 bg-white p-8 shadow-sm">
+                <h2 className="mb-6 flex items-center gap-3 text-lg font-black text-slate-800">
+                  <Trophy className="h-6 w-6 text-amber-500" />
+                  Coding Leaderboard
+                </h2>
+                <div className="space-y-4">
+                  {leaderboard.map((item) => (
+                    <div key={item.rank} className="flex items-center gap-4 rounded-3xl bg-slate-50 p-4 border border-slate-100/50 transition-transform hover:-translate-y-1 hover:shadow-md cursor-pointer">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-slate-800 text-base font-black text-white shadow-sm">
+                        #{item.rank}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-black text-slate-900">{item.name}</p>
+                        <p className="text-xs font-bold text-slate-500 mt-1">
+                          <span className="text-violet-600">{item.solved} solved</span> • {item.score} pts
+                        </p>
+                      </div>
+                      <span className="flex items-center gap-1.5 text-sm font-black text-rose-600 shrink-0 bg-rose-50 px-3 py-1.5 rounded-full border border-rose-100">
+                        <Flame className="h-4 w-4 fill-rose-100 text-rose-500" />
+                        {item.streak}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </aside>
+
+          </div>
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CalendarDays, FileText, MessageSquareText, Upload, Loader, Image } from "lucide-react";
+import { CalendarDays, FileText, MessageSquareText, Upload, Loader, CheckCircle2 } from "lucide-react";
 import { useAcademic } from "@/context/AcademicContext";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 
@@ -15,7 +15,7 @@ function formatDate(date: string) {
   }
 }
 
-export default function StudentAssignmentsPanel() {
+export default function StudentAssignmentsPanel({ filter = "All" }: { filter?: string }) {
   const { assignments, reloadAssignments, submitAssignment } = useAcademic();
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [uploadingId, setUploadingId] = useState<string | null>(null);
@@ -42,129 +42,154 @@ export default function StudentAssignmentsPanel() {
     }
   };
 
-  return (
-    <section className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm animate-in fade-in duration-500">
-      <div className="mb-5 flex items-center justify-between">
-        <div>
-          <h2 className="text-lg font-extrabold text-slate-900">Assignments</h2>
-          <p className="mt-1 text-sm font-medium text-slate-500">
-            Upload submissions and view faculty feedback.
-          </p>
-        </div>
-        <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-extrabold text-indigo-600">
-          {assignments.length} assigned
-        </span>
-      </div>
+  const filteredAssignments = assignments.filter((item) => {
+    if (filter === "All") return true;
+    if (filter === "Pending") return !item.submittedFileName;
+    if (filter === "Submitted") return item.submittedFileName && !item.feedback;
+    if (filter === "Graded") return !!item.feedback;
+    return true;
+  });
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {assignments.length > 0 ? (
-          assignments.map((assignment) => (
-            <article key={assignment.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4 space-y-3 flex flex-col justify-between">
+  return (
+    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {filteredAssignments.length > 0 ? (
+        filteredAssignments.map((assignment) => {
+          // Determine status text & colors
+          let statusText = "Pending";
+          let statusColor = "bg-amber-50 text-amber-700 border-amber-100";
+          if (assignment.submittedFileName) {
+            statusText = "Submitted";
+            statusColor = "bg-blue-50 text-blue-700 border-blue-100";
+          }
+          if (assignment.feedback) {
+            statusText = "Graded";
+            statusColor = "bg-emerald-50 text-emerald-700 border-emerald-100";
+          }
+
+          return (
+            <article
+              key={assignment.id}
+              className="rounded-[2rem] bg-white p-6 shadow-sm border border-slate-100/60 flex flex-col justify-between gap-4 transition hover:shadow-md animate-in fade-in duration-300"
+            >
               <div>
                 <div className="flex items-center justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-100 text-indigo-650">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-50 text-violet-600">
                     <FileText className="h-5 w-5" />
                   </div>
-                  <span className="text-[10px] font-black uppercase bg-indigo-50 px-2 py-0.5 rounded text-indigo-600">
-                    {assignment.courseCode || "CSE"}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${statusColor}`}>
+                      {statusText}
+                    </span>
+                    <span className="text-[10px] font-black uppercase bg-slate-50 border border-slate-100 px-2 py-0.5 rounded-lg text-slate-500">
+                      {assignment.courseCode || "CSE"}
+                    </span>
+                  </div>
                 </div>
 
-                <h3 className="text-base font-extrabold text-slate-900 mt-2">{assignment.title}</h3>
-                <p className="mt-1 text-sm font-medium leading-relaxed text-slate-600">
+                <h3 className="text-base font-extrabold text-slate-800 mt-3.5 leading-snug">{assignment.title}</h3>
+                <p className="mt-2 text-xs font-semibold leading-relaxed text-slate-400">
                   {assignment.description}
                 </p>
 
                 {/* Render attached reference image */}
                 {assignment.imageUrl && (
-                  <div className="mt-3 rounded-xl overflow-hidden border border-slate-200 max-h-[160px] bg-white shadow-sm p-1">
+                  <div className="mt-3.5 rounded-2xl overflow-hidden border border-slate-100 max-h-[160px] bg-slate-50 shadow-inner p-1">
                     <img
                       src={assignment.imageUrl}
                       alt="Reference attachment"
-                      className="w-full h-full object-contain rounded-lg max-h-[145px]"
+                      className="w-full h-full object-contain rounded-xl max-h-[145px]"
                     />
                   </div>
                 )}
               </div>
 
-              <div>
-                <div className="mt-2 flex items-center gap-2 text-xs font-bold text-slate-500 border-t border-slate-200/50 pt-2">
-                  <CalendarDays className="h-4 w-4 text-indigo-550" />
+              <div className="space-y-3 pt-3 border-t border-slate-100">
+                <div className="flex items-center gap-2 text-xs font-bold text-slate-400">
+                  <CalendarDays className="h-4 w-4 text-violet-500" />
                   Due {formatDate(assignment.dueDate)}
                 </div>
 
                 {assignment.submittedFileName && (
-                  <div className="mt-3 rounded-xl border border-emerald-100 bg-emerald-50 px-3 py-2 text-xs font-bold text-emerald-700">
+                  <div className="rounded-2xl border border-emerald-100 bg-emerald-50/50 p-3 text-xs font-bold text-emerald-700 flex flex-col gap-1">
+                    <div className="flex items-center gap-1.5 font-black">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+                      <span>Uploaded Successfully</span>
+                    </div>
                     {assignment.submittedFileUrl ? (
                       <a
                         href={assignment.submittedFileUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="underline text-emerald-600 hover:text-emerald-800"
+                        className="underline text-emerald-650 font-black mt-0.5 truncate hover:text-emerald-800"
                       >
-                        Uploaded: {assignment.submittedFileName}
+                        File: {assignment.submittedFileName}
                       </a>
                     ) : (
-                      <span>Uploaded: {assignment.submittedFileName}</span>
+                      <span className="truncate font-semibold">File: {assignment.submittedFileName}</span>
                     )}
                     {assignment.studentNote && (
-                      <p className="mt-1 text-emerald-800">Your note: {assignment.studentNote}</p>
+                      <p className="mt-1 text-slate-500 font-semibold italic">" {assignment.studentNote} "</p>
                     )}
                   </div>
                 )}
 
                 {assignment.feedback && (
-                  <div className="mt-3 rounded-xl border border-amber-100 bg-amber-50 p-3 space-y-2">
-                    <p className="mb-1 flex items-center gap-2 text-xs font-extrabold text-amber-700">
-                      <MessageSquareText className="h-4 w-4" />
-                      Faculty Feedback & Grade
+                  <div className="rounded-2xl border border-violet-100 bg-violet-50/40 p-3 space-y-2">
+                    <p className="flex items-center gap-1.5 text-xs font-black text-violet-750">
+                      <MessageSquareText className="h-4 w-4 shrink-0 text-violet-500" />
+                      Faculty Feedback
                     </p>
                     {assignment.marks !== undefined && (
-                      <p className="text-xs font-black text-slate-900 bg-white/65 rounded px-2.5 py-1 w-fit">
-                        Score: <span className="text-[#7b35ad]">{assignment.marks}</span> marks
-                      </p>
+                      <span className="inline-block text-xs font-black text-slate-800 bg-white border border-violet-100 rounded-lg px-2.5 py-1">
+                        Score: <span className="text-violet-600">{assignment.marks}</span> marks
+                      </span>
                     )}
-                    <p className="text-sm font-medium leading-6 text-slate-750">{assignment.feedback}</p>
+                    <p className="text-xs font-semibold leading-relaxed text-slate-500 italic">"{assignment.feedback}"</p>
                   </div>
                 )}
 
-                <textarea
-                  value={notes[assignment.id] ?? ""}
-                  onChange={(event) => setNotes((current) => ({ ...current, [assignment.id]: event.target.value }))}
-                  placeholder="Add a note for faculty..."
-                  rows={2}
-                  className="mt-3 w-full resize-none rounded-xl border border-slate-200 bg-white p-3 text-xs font-bold text-slate-700 outline-none focus:border-indigo-300"
-                />
+                {!assignment.feedback && (
+                  <>
+                    <textarea
+                      value={notes[assignment.id] ?? ""}
+                      onChange={(event) => setNotes((current) => ({ ...current, [assignment.id]: event.target.value }))}
+                      placeholder="Add a note for faculty..."
+                      rows={2}
+                      className="w-full resize-none rounded-xl border border-slate-200 bg-white p-3 text-xs font-bold text-slate-700 outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-50 transition"
+                    />
 
-                <label className="mt-3 flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-indigo-650 text-sm font-extrabold text-white shadow-sm hover:bg-indigo-700 transition-all">
-                  {uploadingId === assignment.id ? (
-                    <Loader className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <Upload className="h-4 w-4" />
-                  )}
-                  {uploadingId === assignment.id ? "Uploading..." : assignment.submittedFileName ? "Replace File" : "Upload Submission"}
-                  <input
-                    type="file"
-                    className="hidden"
-                    disabled={uploadingId === assignment.id}
-                    onChange={(event) => {
-                      const file = event.target.files?.[0];
-                      if (file) void handleUpload(assignment.id, file);
-                    }}
-                  />
-                </label>
+                    <label className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-2xl bg-violet-600 text-xs font-black text-white shadow-md shadow-violet-200 hover:bg-violet-700 transition duration-200">
+                      {uploadingId === assignment.id ? (
+                        <Loader className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Upload className="h-4 w-4" />
+                      )}
+                      {uploadingId === assignment.id ? "Uploading..." : assignment.submittedFileName ? "Replace Submission" : "Upload Submission"}
+                      <input
+                        type="file"
+                        className="hidden"
+                        disabled={uploadingId === assignment.id}
+                        onChange={(event) => {
+                          const file = event.target.files?.[0];
+                          if (file) void handleUpload(assignment.id, file);
+                        }}
+                      />
+                    </label>
+                  </>
+                )}
+                
                 {uploadError[assignment.id] && (
-                  <p className="mt-2 text-xs font-bold text-red-600">{uploadError[assignment.id]}</p>
+                  <p className="text-xs font-bold text-red-600 mt-1">{uploadError[assignment.id]}</p>
                 )}
               </div>
             </article>
-          ))
-        ) : (
-          <div className="col-span-full py-12 text-center text-slate-400 text-xs font-bold border border-dashed border-slate-200 rounded-2xl">
-            No assignments assigned yet.
-          </div>
-        )}
-      </div>
-    </section>
+          );
+        })
+      ) : (
+        <div className="col-span-full py-16 text-center text-slate-400 font-extrabold text-sm border border-dashed border-slate-200 rounded-3xl bg-white">
+          No assignments found in this section.
+        </div>
+      )}
+    </div>
   );
 }

@@ -7,6 +7,15 @@ export interface IUser extends Document {
   email: string;
   passwordHash: string;
   role: UserRole;
+  status: "active" | "banned";
+  mentorId?: mongoose.Types.ObjectId;
+  badges: string[];
+  streak: number;
+  lastActive: Date;
+  // Student specifics
+  branch?: string;
+  course?: string;
+  enrollmentYear?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -28,6 +37,18 @@ const UserSchema = new Schema<IUser>(
       enum: ["student", "faculty", "admin"],
       default: "student",
     },
+    status: {
+      type: String,
+      enum: ["active", "banned"],
+      default: "active",
+    },
+    mentorId: { type: Schema.Types.ObjectId, ref: "User" },
+    badges: { type: [String], default: [] },
+    streak: { type: Number, default: 0 },
+    lastActive: { type: Date, default: Date.now },
+    branch: { type: String },
+    course: { type: String },
+    enrollmentYear: { type: String },
   },
   { timestamps: true },
 );

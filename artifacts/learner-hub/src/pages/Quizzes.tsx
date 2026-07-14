@@ -104,48 +104,41 @@ export default function Quizzes() {
   const totalDone = quizData.filter(q => q.completed).length;
 
   return (
-    <div className="min-h-screen bg-[#eef2fb] px-4 py-6 md:px-8 animate-in fade-in duration-500">
-      <div className="mx-auto max-w-[1400px] space-y-5">
+    <div className="px-4 py-6 md:px-8 animate-in fade-in duration-500">
+      <div className="mx-auto max-w-[1400px] space-y-6">
 
-        {/* ── Page Header ── */}
-        <section className="relative overflow-hidden rounded-2xl bg-white px-8 py-6 shadow-sm ring-1 ring-slate-100">
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-violet-50 to-transparent" />
-          <div className="pointer-events-none absolute -right-4 -top-4 h-32 w-32 rounded-full bg-indigo-100/50 blur-2xl" />
-
-          <div className="relative flex items-center justify-between">
-            <div className="flex-1">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-500">Student Module</p>
-              <h1 className="mt-1 text-3xl font-black text-slate-900">My <span className="text-violet-600">Quizzes</span></h1>
-              <p className="mt-1.5 text-xs font-semibold text-slate-400">Test your knowledge, earn XP and track your progress across all subjects.</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {[
-                  { val: quizData.length,              label: "Total Quizzes", color: "bg-violet-100 text-violet-700 ring-violet-200"    },
-                  { val: totalDone,                    label: "Completed",     color: "bg-emerald-100 text-emerald-700 ring-emerald-200"  },
-                  { val: quizData.length - totalDone,  label: "Remaining",     color: "bg-rose-100 text-rose-600 ring-rose-200"           },
-                  { val: `+${quizData.length * 50} XP`,label: "Available XP",  color: "bg-indigo-100 text-indigo-700 ring-indigo-200"     },
-                ].map(({ val, label, color }) => (
-                  <span key={label} className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-black ring-1 ${color}`}>
-                    <span className="text-sm font-black">{val}</span> {label}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Illustration */}
-            <div className="relative ml-6 hidden shrink-0 lg:block">
-              <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-violet-100 to-indigo-100 shadow-inner">
-                <span className="text-5xl select-none">🧠</span>
-              </div>
-              <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-violet-500 text-sm shadow-md">⚡</div>
-            </div>
+        {/* ── Title and Alert Row ── */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-black text-slate-900 tracking-tight">My Quizzes</h1>
+            <p className="text-xs font-semibold text-slate-400 mt-1">Test your knowledge, earn XP and track your progress across all subjects.</p>
           </div>
-        </section>
+          <div className="inline-flex items-center gap-1.5 rounded-2xl bg-violet-50 border border-violet-200 px-4 py-2.5 text-xs font-bold text-violet-850 shadow-sm shrink-0">
+            <span className="text-sm">⚡</span>
+            <span>+{quizData.length * 50} XP Available</span>
+          </div>
+        </div>
+
+        {/* ── Stats Row ── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {[
+            { label: "Total Quizzes", value: quizData.length,              txt: "text-[#6c5ce7]" },
+            { label: "Completed",     value: totalDone,                    txt: "text-emerald-600" },
+            { label: "Remaining",     value: quizData.length - totalDone,  txt: "text-rose-500" },
+            { label: "Available XP",  value: `+${quizData.length * 50}`,   txt: "text-indigo-600" },
+          ].map(({ label, value, txt }) => (
+            <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px]">
+              <span className={`text-4xl font-black ${txt}`}>{value}</span>
+              <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
+            </div>
+          ))}
+        </div>
 
         {/* ── Live Tests ── */}
         <StudentLiveTestsPanel />
 
-        {/* ── Quiz Cards ── */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* ── Quiz Cards Grid ── */}
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {quizData.map((quiz, i) => (
             <motion.div
               key={quiz.id}
@@ -153,20 +146,17 @@ export default function Quizzes() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.07 }}
               whileHover={{ y: -4 }}
-              className="relative overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-100 flex flex-col transition hover:shadow-md"
+              className="relative overflow-hidden rounded-[2rem] bg-white shadow-sm border border-slate-100/50 flex flex-col transition hover:shadow-md"
             >
-              {/* colored top bar */}
-              <div className="h-1.5 w-full" style={{ background: quiz.color }} />
-
-              <div className="flex flex-col gap-4 p-5 flex-1">
+              <div className="flex flex-col gap-4 p-6 flex-1">
                 <div className="flex items-start justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl text-2xl" style={{ background: `${quiz.color}18` }}>
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl text-2xl" style={{ background: `${quiz.color}15` }}>
                     {quiz.icon}
                   </div>
                   <div className="flex items-center gap-2">
                     {quiz.completed && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
-                        <CheckCircle2 className="h-3 w-3" /> Done
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-black text-emerald-700 border border-emerald-100">
+                        Done
                       </span>
                     )}
                     <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-black ${diffColor[quiz.difficulty]}`}>
@@ -176,22 +166,25 @@ export default function Quizzes() {
                 </div>
 
                 <div>
-                  <h3 className="text-base font-extrabold text-slate-800">{quiz.title}</h3>
-                  <p className="mt-0.5 text-xs font-bold text-indigo-500">{quiz.course}</p>
+                  <h3 className="text-base font-extrabold text-slate-800 leading-snug">{quiz.title}</h3>
+                  <p className="mt-1 text-xs font-bold text-indigo-500">{quiz.course}</p>
                 </div>
 
                 <div className="flex items-center gap-4 text-xs text-slate-400 font-semibold">
-                  <span className="flex items-center gap-1"><HelpCircle className="h-3.5 w-3.5" />{quiz.questions} questions</span>
-                  <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" />{quiz.time}</span>
-                  <span className="flex items-center gap-1 text-violet-600 font-bold"><Zap className="h-3.5 w-3.5" />+50 XP</span>
+                  <span className="flex items-center gap-1"><HelpCircle className="h-4 w-4 text-slate-400" />{quiz.questions} questions</span>
+                  <span className="flex items-center gap-1"><Clock className="h-4 w-4 text-slate-400" />{quiz.time}</span>
+                  <span className="flex items-center gap-1 text-violet-650 font-bold"><Zap className="h-4 w-4 text-violet-500" />+50 XP</span>
                 </div>
 
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={() => startQuiz(quiz)}
-                  className="mt-auto flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-white transition-all"
-                  style={{ background: `linear-gradient(135deg, ${quiz.color}cc, ${quiz.color})` }}
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl py-3 text-xs font-black text-white transition-all shadow-sm"
+                  style={{
+                    background: `linear-gradient(135deg, ${quiz.color}cc, ${quiz.color})`,
+                    boxShadow: `0 4px 12px -2px ${quiz.color}33`,
+                  }}
                 >
                   {quiz.completed ? "Retake Quiz" : "Start Quiz"} <ChevronRight className="h-4 w-4" />
                 </motion.button>

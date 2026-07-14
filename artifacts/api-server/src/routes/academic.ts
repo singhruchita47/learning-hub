@@ -12,22 +12,27 @@ import LiveClass from "../models/liveClass";
 import Resource from "../models/resource";
 import Course from "../models/course";
 import { isCloudinaryConfigured, uploadBufferToCloudinary } from "../lib/cloudinary";
+import { getDB, updateDB } from "../lib/memoryDb";
 
 const router = Router();
 
-const memoryStore = {
-  assignments: [] as any[],
-  assignmentSubmissions: [] as any[],
-  quizAttempts: [] as any[],
-  notifications: [] as any[],
-  codingQuestions: [] as any[],
-  classes: [] as any[],
-  attendance: [] as any[],
-  feedback: [] as any[],
-  liveClasses: [] as any[],
-  resources: [] as any[],
-  courses: [] as any[],
+export let memoryStore = {
+  assignments: getDB("assignments", []) as any[],
+  assignmentSubmissions: getDB("assignmentSubmissions", []) as any[],
+  quizAttempts: getDB("quizAttempts", []) as any[],
+  notifications: getDB("notifications", []) as any[],
+  codingQuestions: getDB("codingQuestions", []) as any[],
+  classes: getDB("classes", []) as any[],
+  attendance: getDB("attendance", []) as any[],
+  feedback: getDB("feedback", []) as any[],
+  liveClasses: getDB("liveClasses", []) as any[],
+  resources: getDB("resources", []) as any[],
+  courses: getDB("courses", []) as any[],
 };
+
+function saveMemoryStore(key: keyof typeof memoryStore) {
+  updateDB(key, memoryStore[key]);
+}
 
 function mongoReady() {
   return mongoose.connection.readyState === 1;
@@ -58,6 +63,7 @@ router.post("/assignments", async (req: Request, res: Response) => {
       updatedAt: new Date().toISOString(),
     };
     memoryStore.assignments.unshift(assignment);
+    saveMemoryStore("assignments");
     memoryStore.notifications.unshift({
       _id: memoryId("notification"),
       title: "New assignment published",
@@ -66,6 +72,7 @@ router.post("/assignments", async (req: Request, res: Response) => {
       type: "assignment",
       createdAt: new Date().toISOString(),
     });
+    saveMemoryStore("notifications");
     return res.status(201).json({ assignment, storage: "memory" });
   }
 
@@ -119,6 +126,7 @@ router.post("/assignments/:assignmentId/submissions", async (req: Request, res: 
       updatedAt: new Date().toISOString(),
     };
     memoryStore.assignmentSubmissions.unshift(submission);
+    saveMemoryStore("assignmentSubmissions");
     memoryStore.notifications.unshift({
       _id: memoryId("notification"),
       title: "Assignment submitted",
@@ -127,6 +135,7 @@ router.post("/assignments/:assignmentId/submissions", async (req: Request, res: 
       type: "assignment",
       createdAt: new Date().toISOString(),
     });
+    saveMemoryStore("notifications");
     return res.status(201).json({ submission, storage: "memory" });
   }
 
@@ -171,6 +180,7 @@ router.patch("/assignment-submissions/:submissionId/feedback", async (req: Reque
     submission.feedback = feedback;
     submission.marks = marks;
     submission.updatedAt = new Date().toISOString();
+    saveMemoryStore("assignmentSubmissions");
     memoryStore.notifications.unshift({
       _id: memoryId("notification"),
       title: "Assignment feedback received",
@@ -180,6 +190,7 @@ router.patch("/assignment-submissions/:submissionId/feedback", async (req: Reque
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     });
+    saveMemoryStore("notifications");
     return res.json({ submission, storage: "memory" });
   }
 
@@ -221,6 +232,7 @@ router.post("/quiz-attempts", async (req: Request, res: Response) => {
       createdAt: new Date().toISOString(),
     };
     memoryStore.quizAttempts.unshift(attempt);
+    saveMemoryStore("quizAttempts");
     memoryStore.notifications.unshift({
       _id: memoryId("notification"),
       title: "Quiz attempt received",
@@ -229,6 +241,7 @@ router.post("/quiz-attempts", async (req: Request, res: Response) => {
       type: "quiz",
       createdAt: new Date().toISOString(),
     });
+    saveMemoryStore("notifications");
     return res.status(201).json({ attempt, storage: "memory" });
   }
 
@@ -271,8 +284,9 @@ router.post("/classes", async (req: Request, res: Response) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-    memoryStore.classes.unshift(classSession);
-    memoryStore.notifications.unshift({
+    db.classes.unshift(classSession);
+    updateDB("classes", db.classes);
+    db.notifications.unshift({
       _id: memoryId("notification"),
       title: "Live class scheduled",
       message: `${title} is scheduled for ${new Date(startsAt).toLocaleString("en-IN")}.`,
@@ -280,6 +294,7 @@ router.post("/classes", async (req: Request, res: Response) => {
       type: "class",
       createdAt: new Date().toISOString(),
     });
+    updateDB("notifications", db.notifications);
     return res.status(201).json({ classSession, storage: "memory" });
   }
 
@@ -304,7 +319,7 @@ router.post("/classes", async (req: Request, res: Response) => {
 
 router.get("/classes", async (_req: Request, res: Response) => {
   if (!mongoReady()) {
-    return res.json({ classes: memoryStore.classes, storage: "memory" });
+    return res.json({ classes: getDB().classes, storage: "memory" });
   }
 
   const classes = await ClassSession.find().sort({ startsAt: 1 }).lean();
@@ -316,11 +331,13 @@ router.patch("/classes/:classId/status", async (req: Request, res: Response) => 
   const { status, recordingUrl } = req.body;
 
   if (!mongoReady()) {
-    const classSession = memoryStore.classes.find((item) => item._id === classId);
+    const db = getDB();
+    const classSession = db.classes.find((item) => item._id === classId);
     if (!classSession) return res.status(404).json({ message: "Class session not found." });
     classSession.status = status;
     classSession.recordingUrl = recordingUrl;
     classSession.updatedAt = new Date().toISOString();
+    updateDB("classes", db.classes);
     return res.json({ classSession, storage: "memory" });
   }
 
@@ -345,6 +362,7 @@ router.post("/notifications", async (req: Request, res: Response) => {
   }
 
   if (!mongoReady()) {
+    const db = getDB();
     const notification = {
       _id: memoryId("notification"),
       title,
@@ -355,7 +373,8 @@ router.post("/notifications", async (req: Request, res: Response) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-    memoryStore.notifications.unshift(notification);
+    db.notifications.unshift(notification);
+    updateDB("notifications", db.notifications);
     return res.status(201).json({ notification, storage: "memory" });
   }
 
@@ -366,7 +385,7 @@ router.post("/notifications", async (req: Request, res: Response) => {
 router.get("/notifications", async (req: Request, res: Response) => {
   const audience = typeof req.query.audience === "string" ? req.query.audience : undefined;
   if (!mongoReady()) {
-    const notifications = memoryStore.notifications.filter(
+    const notifications = getDB().notifications.filter(
       (item) => !audience || item.audience === audience || item.audience === "all",
     );
     return res.json({ notifications, storage: "memory" });
@@ -386,10 +405,12 @@ router.patch("/notifications/:notificationId/read", async (req: Request, res: Re
   }
 
   if (!mongoReady()) {
-    const notification = memoryStore.notifications.find((item) => item._id === notificationId);
+    const db = getDB();
+    const notification = db.notifications.find((item) => item._id === notificationId);
     if (!notification) return res.status(404).json({ message: "Notification not found." });
     notification.readBy = Array.from(new Set([...(notification.readBy ?? []), userId]));
     notification.updatedAt = new Date().toISOString();
+    updateDB("notifications", db.notifications);
     return res.json({ notification, storage: "memory" });
   }
 
@@ -416,6 +437,7 @@ router.post("/coding-questions", async (req: Request, res: Response) => {
   }
 
   if (!mongoReady()) {
+    const db = getDB();
     const codingQuestion = {
       _id: memoryId("coding-question"),
       title,
@@ -428,8 +450,9 @@ router.post("/coding-questions", async (req: Request, res: Response) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-    memoryStore.codingQuestions.unshift(codingQuestion);
-    memoryStore.notifications.unshift({
+    db.codingQuestions.unshift(codingQuestion);
+    updateDB("codingQuestions", db.codingQuestions);
+    db.notifications.unshift({
       _id: memoryId("notification"),
       title: "New coding question added",
       message: `${title} is now available for coding practice.`,
@@ -437,6 +460,7 @@ router.post("/coding-questions", async (req: Request, res: Response) => {
       type: "general",
       createdAt: new Date().toISOString(),
     });
+    updateDB("notifications", db.notifications);
     return res.status(201).json({ codingQuestion, storage: "memory" });
   }
 
@@ -462,7 +486,7 @@ router.post("/coding-questions", async (req: Request, res: Response) => {
 
 router.get("/coding-questions", async (_req: Request, res: Response) => {
   if (!mongoReady()) {
-    return res.json({ codingQuestions: memoryStore.codingQuestions, storage: "memory" });
+    return res.json({ codingQuestions: getDB().codingQuestions, storage: "memory" });
   }
 
   const codingQuestions = await CodingQuestion.find().sort({ createdAt: -1 }).lean();
@@ -479,12 +503,14 @@ router.post("/attendance/mark", async (req: Request, res: Response) => {
   }
 
   if (!mongoReady()) {
-    const existing = memoryStore.attendance.find((item) => item.studentId === studentId && item.date === dateStr);
+    const db = getDB();
+    const existing = db.attendance.find((item) => item.studentId === studentId && item.date === dateStr);
     if (existing) {
       return res.status(200).json({ attendance: existing, message: "Attendance already marked for today.", storage: "memory" });
     }
     const log = { _id: memoryId("attendance"), studentId, date: dateStr, marked: true, createdAt: new Date().toISOString() };
-    memoryStore.attendance.push(log);
+    db.attendance.push(log);
+    updateDB("attendance", db.attendance);
     return res.status(201).json({ attendance: log, storage: "memory" });
   }
 
@@ -499,7 +525,7 @@ router.post("/attendance/mark", async (req: Request, res: Response) => {
 
 router.get("/attendance/list", async (_req: Request, res: Response) => {
   if (!mongoReady()) {
-    return res.json({ attendance: memoryStore.attendance, storage: "memory" });
+    return res.json({ attendance: getDB().attendance, storage: "memory" });
   }
   const attendance = await Attendance.find().sort({ createdAt: -1 }).lean();
   return res.json({ attendance });
@@ -514,6 +540,7 @@ router.post("/feedback", async (req: Request, res: Response) => {
   }
 
   if (!mongoReady()) {
+    const db = getDB();
     const log = {
       _id: memoryId("feedback"),
       studentId,
@@ -522,7 +549,8 @@ router.post("/feedback", async (req: Request, res: Response) => {
       comments,
       createdAt: new Date().toISOString(),
     };
-    memoryStore.feedback.push(log);
+    db.feedback.push(log);
+    updateDB("feedback", db.feedback);
     return res.status(201).json({ feedback: log, storage: "memory" });
   }
 
@@ -532,7 +560,7 @@ router.post("/feedback", async (req: Request, res: Response) => {
 
 router.get("/feedback", async (_req: Request, res: Response) => {
   if (!mongoReady()) {
-    return res.json({ feedback: memoryStore.feedback, storage: "memory" });
+    return res.json({ feedback: getDB().feedback, storage: "memory" });
   }
   const feedback = await Feedback.find().sort({ createdAt: -1 }).lean();
   return res.json({ feedback });
@@ -547,6 +575,7 @@ router.post("/live-classes", async (req: Request, res: Response) => {
   }
 
   if (!mongoReady()) {
+    const db = getDB();
     const liveClass = {
       _id: memoryId("liveclass"),
       title,
@@ -557,10 +586,11 @@ router.post("/live-classes", async (req: Request, res: Response) => {
       status: "scheduled",
       createdAt: new Date().toISOString(),
     };
-    memoryStore.liveClasses.unshift(liveClass);
+    db.liveClasses.unshift(liveClass);
+    updateDB("liveClasses", db.liveClasses);
     
     // Trigger notification
-    memoryStore.notifications.unshift({
+    db.notifications.unshift({
       _id: memoryId("notification"),
       title: "Live class scheduled",
       message: `${title} starts at ${new Date(startsAt).toLocaleString("en-IN")}.`,
@@ -568,6 +598,7 @@ router.post("/live-classes", async (req: Request, res: Response) => {
       type: "class",
       createdAt: new Date().toISOString(),
     });
+    updateDB("notifications", db.notifications);
     
     return res.status(201).json({ liveClass, storage: "memory" });
   }
@@ -592,7 +623,7 @@ router.post("/live-classes", async (req: Request, res: Response) => {
 
 router.get("/live-classes", async (_req: Request, res: Response) => {
   if (!mongoReady()) {
-    return res.json({ liveClasses: memoryStore.liveClasses, storage: "memory" });
+    return res.json({ liveClasses: getDB().liveClasses, storage: "memory" });
   }
   const liveClasses = await LiveClass.find().sort({ startsAt: 1 }).lean();
   return res.json({ liveClasses });
@@ -603,9 +634,11 @@ router.patch("/live-classes/:classId/status", async (req: Request, res: Response
   const { status } = req.body;
 
   if (!mongoReady()) {
-    const liveClass = memoryStore.liveClasses.find((item) => item._id === classId);
+    const db = getDB();
+    const liveClass = db.liveClasses.find((item) => item._id === classId);
     if (!liveClass) return res.status(404).json({ message: "Live class not found." });
     liveClass.status = status;
+    updateDB("liveClasses", db.liveClasses);
     return res.json({ liveClass, storage: "memory" });
   }
 
@@ -625,6 +658,7 @@ router.post("/coding-questions/batch", async (req: Request, res: Response) => {
   const createdQuestions = [];
 
   if (!mongoReady()) {
+    const db = getDB();
     for (const q of questions) {
       const codingQuestion = {
         _id: memoryId("coding-question"),
@@ -637,11 +671,12 @@ router.post("/coding-questions/batch", async (req: Request, res: Response) => {
         facultyId: q.facultyId,
         createdAt: new Date().toISOString(),
       };
-      memoryStore.codingQuestions.unshift(codingQuestion);
+      db.codingQuestions.unshift(codingQuestion);
       createdQuestions.push(codingQuestion);
     }
+    updateDB("codingQuestions", db.codingQuestions);
 
-    memoryStore.notifications.unshift({
+    db.notifications.unshift({
       _id: memoryId("notification"),
       title: "New coding practice available",
       message: `Faculty has added ${questions.length} new practice coding questions.`,
@@ -649,6 +684,7 @@ router.post("/coding-questions/batch", async (req: Request, res: Response) => {
       type: "general",
       createdAt: new Date().toISOString(),
     });
+    updateDB("notifications", db.notifications);
 
     return res.status(201).json({ codingQuestions: createdQuestions, storage: "memory" });
   }
@@ -697,6 +733,7 @@ router.post("/resources", async (req: Request, res: Response) => {
       createdAt: new Date().toISOString(),
     };
     memoryStore.resources.unshift(resource);
+    updateDB("resources", memoryStore.resources);
 
     // Trigger notification
     memoryStore.notifications.unshift({
@@ -707,6 +744,7 @@ router.post("/resources", async (req: Request, res: Response) => {
       type: "general",
       createdAt: new Date().toISOString(),
     });
+    updateDB("notifications", memoryStore.notifications);
 
     return res.status(201).json({ resource, storage: "memory" });
   }
@@ -733,7 +771,7 @@ router.post("/resources", async (req: Request, res: Response) => {
 
 router.get("/resources", async (_req: Request, res: Response) => {
   if (!mongoReady()) {
-    return res.json({ resources: memoryStore.resources, storage: "memory" });
+    return res.json({ resources: getDB().resources, storage: "memory" });
   }
   const resources = await Resource.find().sort({ createdAt: -1 }).lean();
   return res.json({ resources });
@@ -754,11 +792,12 @@ router.post("/courses", async (req: Request, res: Response) => {
       title,
       color: color || "#7130a1",
       teacher: teacher || "Dr. Faculty",
-      students: 48,
-      progress: 68,
+      students: 0,
+      progress: 0,
       createdAt: new Date().toISOString(),
     };
     memoryStore.courses.push(course);
+    updateDB("courses", memoryStore.courses);
     return res.status(201).json({ course, storage: "memory" });
   }
 
@@ -783,6 +822,59 @@ router.get("/courses", async (_req: Request, res: Response) => {
   }
   const courses = await Course.find().sort({ createdAt: 1 }).lean();
   return res.json({ courses });
+});
+
+// Enroll student in a course (memory mode: store enrollments in memoryStore)
+if (!memoryStore.enrollments) (memoryStore as any).enrollments = (getDB("enrollments", []) as any[]);
+
+router.post("/courses/:id/enroll", async (req: Request, res: Response) => {
+  const { studentId, studentName } = req.body;
+  const courseId = req.params.id;
+
+  if (!studentId || !courseId) {
+    return res.status(400).json({ message: "studentId and courseId are required." });
+  }
+
+  if (!mongoReady()) {
+    const enrollments = (memoryStore as any).enrollments as any[];
+    const alreadyEnrolled = enrollments.find(e => e.courseId === courseId && e.studentId === studentId);
+    if (alreadyEnrolled) {
+      return res.status(409).json({ message: "Already enrolled." });
+    }
+    const enrollment = {
+      _id: memoryId("enrollment"),
+      courseId,
+      studentId,
+      studentName: studentName || "Student",
+      enrolledAt: new Date().toISOString(),
+    };
+    enrollments.push(enrollment);
+    updateDB("enrollments", enrollments);
+
+    // Increment student count on the course
+    const course = memoryStore.courses.find(c => c._id === courseId);
+    if (course) {
+      course.students = (course.students || 0) + 1;
+      updateDB("courses", memoryStore.courses);
+    }
+
+    return res.status(201).json({ enrollment, storage: "memory" });
+  }
+
+  return res.status(501).json({ message: "MongoDB enrollment not implemented." });
+});
+
+// Get enrolled course IDs for a student
+router.get("/courses/enrolled/:studentId", async (req: Request, res: Response) => {
+  const { studentId } = req.params;
+
+  if (!mongoReady()) {
+    const enrollments = (memoryStore as any).enrollments as any[] || [];
+    const studentEnrollments = enrollments.filter((e: any) => e.studentId === studentId);
+    return res.json({ enrollments: studentEnrollments, storage: "memory" });
+  }
+
+  return res.json({ enrollments: [] });
 });
 
 // Upload file base64 endpoint

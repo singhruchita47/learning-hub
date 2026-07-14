@@ -245,7 +245,7 @@ export default function Navbar({ user, onLogout }: { user?: NavbarUser; onLogout
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`group flex h-9 shrink-0 items-center gap-2 rounded-xl px-3.5 text-xs font-black transition-all ${
+                  className={`group flex h-9 shrink-0 items-center gap-2 rounded-xl px-3.5 text-[10px] font-black transition-all ${
                     isActive
                       ? `bg-gradient-to-r ${item.activeBg} text-white shadow-md`
                       : `text-slate-500 hover:bg-slate-50 hover:text-slate-800`

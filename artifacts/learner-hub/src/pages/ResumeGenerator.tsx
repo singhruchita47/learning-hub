@@ -24,7 +24,7 @@ type ResumeForm = {
 
 const initialForm: ResumeForm = {
   name: "Ruchita Singh",
-  email: "ruchita.singh@sgsu.edu.in",
+  email: "ruchita.singh@learning.hub",
   phone: "",
   role: "Frontend Developer Intern",
   education: "B.Tech CSE, Scope Global Skills University",
@@ -144,7 +144,29 @@ export default function ResumeGenerator() {
             ))}
           </section>
 
-          <section className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/70 print:border-none print:shadow-none">
+          {/* Custom print CSS so only the resume preview container itself is visible on print preview */}
+          <style>{`
+            @media print {
+              body * {
+                visibility: hidden;
+              }
+              #print-area, #print-area * {
+                visibility: visible;
+              }
+              #print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                border: none !important;
+                box-shadow: none !important;
+              }
+            }
+          `}</style>
+
+          <section id="print-area" className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/70 print:border-none print:shadow-none">
             <div className="border-b border-slate-200 pb-6">
               <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                 <div>

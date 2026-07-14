@@ -1,13 +1,73 @@
 {
-  "attendance": [
+  "users": [
     {
-      "_id": "att-1783917538071",
-      "studentId": "singhruchita47@gmail.com",
-      "studentName": "ruchita",
-      "courseCode": "WEBDEV001",
-      "date": "2026-07-13",
-      "status": "present",
-      "markedAt": "2026-07-13T04:38:58.071Z"
+      "id": "usr_admin_default",
+      "name": "System Admin",
+      "email": "admin@learning.hub",
+      "role": "admin",
+      "passwordHash": "778e00ab2cb1228db160a62ac6a5b757:cca8032ec5b37d0b55b8829d6394612d92fb50f8ee896f71ee8de2fc79c0a373719fbe119e20a0c1c9cae190ac1e940967bf8a8bd1221b349bd08e0381c442f4"
+    }
+  ],
+  "courses": [
+    {
+      "_id": "course-1784010654839-b5c3afb1d7c358",
+      "code": "webdev001",
+      "title": "web development",
+      "color": "#7130a1",
+      "teacher": "mrs . Teena tiwari",
+      "students": 0,
+      "progress": 0,
+      "createdAt": "2026-07-14T06:30:54.839Z"
+    }
+  ],
+  "resources": [
+    {
+      "_id": "resource-1784010709671-4bfcc2d6acb268",
+      "title": "web development notes",
+      "category": "Lecture Notes",
+      "courseCode": "webdev001",
+      "fileUrl": "https://res.cloudinary.com/j9wsxc4f/image/upload/v1784010709/wfzguyfxrqixn8fxikqa.png",
+      "format": "PDF Document",
+      "size": "1.5 MB",
+      "pages": 0,
+      "createdAt": "2026-07-14T06:31:49.671Z"
+    },
+    {
+      "_id": "resource-1784010686710-72408790ed38d8",
+      "title": "web development (masterclass)",
+      "category": "Video Lectures",
+      "courseCode": "webdev001",
+      "fileUrl": "https://youtu.be/tVzUXW6siu0?si=19C1-UDTLU5F8OUB",
+      "format": "Video Playlist / File",
+      "size": "1.5 MB",
+      "pages": 0,
+      "createdAt": "2026-07-14T06:31:26.710Z"
+    }
+  ],
+  "notifications": [
+    {
+      "_id": "notification-1784010709674-09636196779bc8",
+      "title": "New resource uploaded in Lecture Notes",
+      "message": "Faculty uploaded: web development notes (webdev001).",
+      "audience": "student",
+      "type": "general",
+      "createdAt": "2026-07-14T06:31:49.674Z",
+      "readBy": [
+        "ruchita@learning.hub"
+      ],
+      "updatedAt": "2026-07-14T06:37:26.459Z"
+    },
+    {
+      "_id": "notification-1784010686717-17768cba0eea38",
+      "title": "New resource uploaded in Video Lectures",
+      "message": "Faculty uploaded: web development (masterclass) (webdev001).",
+      "audience": "student",
+      "type": "general",
+      "createdAt": "2026-07-14T06:31:26.717Z",
+      "readBy": [
+        "ruchita@learning.hub"
+      ],
+      "updatedAt": "2026-07-14T06:37:26.471Z"
     }
   ]
 }

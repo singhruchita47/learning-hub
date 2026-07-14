@@ -48,29 +48,109 @@ function CircularProgress({ pct }: { pct: number }) {
 
 function StudentIllustration() {
   return (
-    <div className="relative flex h-full min-h-[240px] items-center justify-center select-none pointer-events-none">
-      <div className="absolute top-4 left-2 animate-bounce rounded-2xl bg-white px-3 py-2 shadow-lg ring-1 ring-violet-100 text-xs font-black text-violet-700">
-        📊 Data Structures<br /><span className="text-[10px] font-semibold text-slate-400">85% complete</span>
+    <div className="relative flex h-full min-h-[260px] items-center justify-center select-none pointer-events-none">
+      {/* Floating Badges */}
+      
+      {/* 1. Data Structures Badge */}
+      <div className="absolute -top-4 left-4 z-10 rounded-2xl bg-white px-4 py-2.5 shadow-md border border-slate-100 flex items-center gap-2">
+        <span className="text-blue-500">📖</span>
+        <div className="text-[10px] leading-tight">
+          <p className="font-extrabold text-slate-800">Data Structures</p>
+          <p className="font-semibold text-slate-400">85% complete</p>
+        </div>
       </div>
-      <div className="absolute top-2 right-0 rounded-2xl bg-white px-3 py-2 shadow-lg ring-1 ring-amber-100 text-xs font-black text-amber-600">
-        🏆 Rank #3<br /><span className="text-[10px] font-semibold text-slate-400">Leaderboard</span>
+
+      {/* 2. Rank #3 Leaderboard Badge */}
+      <div className="absolute top-8 right-6 z-10 rounded-2xl bg-white px-4 py-2.5 shadow-md border border-slate-100 flex items-center gap-2">
+        <span className="text-base">🏆</span>
+        <div className="text-[10px] leading-tight">
+          <p className="font-extrabold text-amber-600">Rank #3</p>
+          <p className="font-semibold text-slate-400">Leaderboard</p>
+        </div>
       </div>
-      <div className="absolute bottom-10 left-0 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 px-3 py-2 shadow-lg text-xs font-black text-white">
-        📈 72% Overall<br /><span className="text-[10px] font-semibold text-violet-200">Progress</span>
+
+      {/* 3. Progress Badge */}
+      <div className="absolute bottom-6 left-0 z-10 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-2 shadow-lg shadow-indigo-500/20 text-white flex items-center gap-2">
+        <span className="text-sm">🔥</span>
+        <div className="text-[10px] leading-tight">
+          <p className="font-extrabold">2,450 XP</p>
+          <p className="font-semibold text-violet-100">Level 12 Scholar</p>
+        </div>
       </div>
-      <div className="absolute bottom-2 right-2 rounded-2xl bg-white px-3 py-2 shadow-lg ring-1 ring-rose-100 text-xs font-black text-rose-600">
-        ⏰ Due in 2 days<br /><span className="text-[10px] font-semibold text-slate-400">Database Exam</span>
+
+      {/* 4. Due in 2 days Badge */}
+      <div className="absolute bottom-4 right-2 z-10 rounded-2xl bg-white px-4 py-2.5 shadow-md border border-slate-100/80 flex items-center gap-2">
+        <span className="text-red-500">⏰</span>
+        <div className="text-[10px] leading-tight">
+          <p className="font-extrabold text-red-600">Due in 2 days</p>
+          <p className="font-semibold text-slate-400">Database Exam</p>
+        </div>
       </div>
-      {/* Hero illustration */}
-      <img
-        src="/hero-illustration.jpg"
-        alt="Student Learning"
-        className="w-56 h-56 object-contain mix-blend-multiply opacity-95 drop-shadow-xl"
-        style={{ maskImage: "radial-gradient(ellipse 80% 80% at center, black 55%, transparent 100%)", WebkitMaskImage: "radial-gradient(ellipse 80% 80% at center, black 55%, transparent 100%)" }}
-      />
+
+      {/* 5. Mini check badge */}
+      <div className="absolute top-24 right-4 z-10 rounded-xl bg-white px-2 py-1.5 shadow-sm border border-slate-100 flex items-center gap-1.5">
+        <div className="flex h-4.5 w-4.5 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+          <span className="text-[10px] font-black">✓</span>
+        </div>
+        <div className="flex flex-col gap-0.5">
+          <div className="h-1 w-6 rounded bg-slate-200" />
+          <div className="h-1 w-4 rounded bg-slate-200" />
+        </div>
+      </div>
+
+      {/* Bookish Cartoon SVG Illustration (Larger size) */}
+      <div className="relative z-0 w-80 h-80 lg:w-[320px] lg:h-[320px] mt-4 lg:mt-0 rounded-full overflow-hidden shadow-[0_20px_50px_rgba(108,_92,_231,_0.2)] ring-8 ring-white bg-[#f8f7ff] flex items-center justify-center">
+        <svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Background Glow */}
+          <circle cx="100" cy="100" r="80" fill="#ede9fe" opacity="0.5" />
+          
+          {/* Stack of Books */}
+          <g transform="translate(40, 70)">
+            {/* Bottom Book */}
+            <path d="M10 70 L110 70 A5 5 0 0 1 115 75 L115 85 A5 5 0 0 1 110 90 L10 90 A5 5 0 0 1 5 85 L5 75 A5 5 0 0 1 10 70 Z" fill="#4f46e5"/>
+            <path d="M5 75 L115 75" stroke="#3730a3" strokeWidth="2"/>
+            <rect x="10" y="75" width="105" height="10" fill="#fff"/>
+            <path d="M15 75 L15 85" stroke="#e2e8f0" strokeWidth="2"/>
+            <path d="M25 75 L25 85" stroke="#e2e8f0" strokeWidth="2"/>
+            
+            {/* Middle Book 1 */}
+            <path d="M15 50 L105 50 A5 5 0 0 1 110 55 L110 65 A5 5 0 0 1 105 70 L15 70 A5 5 0 0 1 10 65 L10 55 A5 5 0 0 1 15 50 Z" fill="#06b6d4"/>
+            <path d="M10 55 L110 55" stroke="#0891b2" strokeWidth="2"/>
+            <rect x="15" y="55" width="95" height="10" fill="#fff"/>
+            <path d="M20 55 L20 65" stroke="#e2e8f0" strokeWidth="2"/>
+            
+            {/* Middle Book 2 */}
+            <path d="M20 30 L100 30 A5 5 0 0 1 105 35 L105 45 A5 5 0 0 1 100 50 L20 50 A5 5 0 0 1 15 45 L15 35 A5 5 0 0 1 20 30 Z" fill="#f59e0b"/>
+            <path d="M15 35 L105 35" stroke="#d97706" strokeWidth="2"/>
+            <rect x="20" y="35" width="85" height="10" fill="#fff"/>
+            <path d="M25 35 L25 45" stroke="#e2e8f0" strokeWidth="2"/>
+
+            {/* Top Book */}
+            <path d="M25 10 L95 10 A5 5 0 0 1 100 15 L100 25 A5 5 0 0 1 95 30 L25 30 A5 5 0 0 1 20 25 L20 15 A5 5 0 0 1 25 10 Z" fill="#ec4899"/>
+            <path d="M20 15 L100 15" stroke="#db2777" strokeWidth="2"/>
+            <rect x="25" y="15" width="75" height="10" fill="#fff"/>
+            <path d="M30 15 L30 25" stroke="#e2e8f0" strokeWidth="2"/>
+          </g>
+
+          {/* Apple/Fruit on top */}
+          <g transform="translate(90, 60)">
+            <circle cx="10" cy="10" r="12" fill="#ef4444"/>
+            <path d="M10 10 Q15 -5 20 0" stroke="#166534" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
+            <path d="M10 10 Q5 -5 0 0" stroke="#22c55e" strokeWidth="3" fill="none" strokeLinecap="round"/>
+            <circle cx="6" cy="6" r="3" fill="#fff" opacity="0.4"/>
+          </g>
+
+          {/* Floating Elements (Stars & Pencil) */}
+          <path d="M40 50 L42 40 L52 38 L42 36 L40 26 L38 36 L28 38 L38 40 Z" fill="#fbbf24"/>
+          <path d="M150 70 L151.5 62 L159 60.5 L151.5 59 L150 51 L148.5 59 L141 60.5 L148.5 62 Z" fill="#a78bfa"/>
+          <circle cx="160" cy="120" r="4" fill="#38bdf8"/>
+          <circle cx="30" cy="130" r="5" fill="#f472b6"/>
+        </svg>
+      </div>
     </div>
   );
 }
+
 
 export default function Dashboard() {
   const [student, setStudent]         = useState<any>(null);
@@ -101,47 +181,56 @@ export default function Dashboard() {
     : quickCards;
 
   return (
-    <div className="min-h-screen bg-[#eef2fb]">
+    <div className="animate-in fade-in duration-500">
       <div className="mx-auto max-w-[1440px] px-4 py-6 md:px-8 space-y-5">
 
         {/* ── Hero Banner ── */}
-        <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-violet-50 via-indigo-50 to-blue-50 p-8 shadow-md ring-1 ring-violet-100">
-          {/* decorative blobs */}
-          <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-violet-200/40 blur-2xl" />
-          <div className="pointer-events-none absolute -bottom-10 left-1/4 h-48 w-48 rounded-full bg-indigo-200/30 blur-2xl" />
-
-          <div className="relative grid lg:grid-cols-[1fr_300px] gap-6">
+        <section className="relative overflow-hidden rounded-[2.5rem] bg-[#f3f0ff] p-8 md:p-12 shadow-sm border border-purple-100/40 animate-in fade-in duration-500">
+          <div className="relative grid lg:grid-cols-[1fr_360px] gap-8 items-center">
             <div>
-              <p className="text-xs font-black uppercase tracking-widest text-violet-500">Welcome back 👋</p>
-              <h1 className="mt-2 text-4xl font-black leading-tight text-slate-900 md:text-5xl">
-                Hello, <span className="text-violet-600">{firstName}!</span>
+              {/* Top Badge */}
+              <div className="mb-5 inline-flex items-center gap-1.5 rounded-full bg-blue-50/70 border border-blue-100 px-3.5 py-1.5 text-xs font-bold text-[#312e81]">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                6 classes ongoing today
+              </div>
+
+              {/* Title */}
+              <h1 className="text-4xl md:text-5xl font-black leading-tight text-slate-900 tracking-tight">
+                Welcome Back,<br />
+                <span className="text-blue-600">{firstName}!</span>
               </h1>
-              <p className="mt-3 max-w-md text-sm font-semibold text-slate-500">
-                Keep learning and achieve your goals. You have{" "}
-                <span className="font-black text-violet-700">2 upcoming deadlines</span> this week.
+
+              {/* Description */}
+              <p className="mt-4 max-w-md text-sm font-semibold text-slate-500 leading-relaxed">
+                Keep learning and achieve your goals today. You have{" "}
+                <span className="font-black text-slate-800">2 upcoming deadlines</span> this week.
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
+
+              {/* Buttons */}
+              <div className="mt-6 flex flex-wrap gap-3.5">
                 <Link href="/courses"
-                  className="flex items-center gap-2 rounded-2xl bg-violet-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-violet-400/30 hover:bg-violet-700 transition">
-                  Continue Learning <ArrowRight className="h-4 w-4" />
+                  className="flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-black text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition duration-200">
+                  Continue Learning →
                 </Link>
                 <Link href="/courses"
-                  className="flex items-center gap-2 rounded-2xl border-2 border-violet-200 bg-white px-5 py-3 text-sm font-black text-violet-700 hover:bg-violet-50 transition">
+                  className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-black text-slate-700 hover:bg-slate-50 shadow-sm transition duration-200">
                   Browse Courses
                 </Link>
               </div>
-              <div className="mt-8 flex gap-8">
+              {/* Stats */}
+              <div className="mt-12 flex gap-10">
                 {[
-                  { val: courses.length || 11, label: "Courses" },
+                  { val: 11, label: "Courses" },
                   { val: 24, label: "Quizzes Done" },
                   { val: 3, label: "Certificates" },
                 ].map(({ val, label }) => (
-                  <div key={label}>
-                    <p className="text-3xl font-black text-violet-700">{val}</p>
-                    <p className="text-xs font-bold text-slate-500">{label}</p>
+                  <div key={label} className="flex flex-col gap-0.5">
+                    <p className="text-3xl font-black text-slate-900 leading-none">{val}</p>
+                    <p className="text-xs font-bold text-slate-400">{label}</p>
                   </div>
                 ))}
               </div>
+
             </div>
             <div className="hidden lg:block">
               <StudentIllustration />

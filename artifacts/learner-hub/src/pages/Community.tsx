@@ -1,6 +1,7 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Heart, MessageCircle, Share2, PlusCircle, Send, ChevronDown, ChevronUp, Flame, Users, TrendingUp, MessageSquare } from "lucide-react";
+import { Heart, MessageCircle, Share2, PlusCircle, Send, ChevronDown, ChevronUp, Flame, TrendingUp } from "lucide-react";
+import { ACADEMIC_API_BASE } from "@/lib/api";
 
 interface Reply { id: number; author: string; initials: string; text: string; time: string; }
 interface Thread {
@@ -16,8 +17,8 @@ const initialThreads: Thread[] = [
     body: "Hey everyone! Exam is next week and I'm struggling with tree traversals. Any good resources or tips?",
     time: "2 hrs ago", likes: 14,
     replies: [
-      { id: 1, author: "Dr. Sarah Chen", initials: "SC", text: "Try LeetCode's tree problems – start with easy ones. Also, drawing the tree on paper helps a lot!", time: "1 hr ago" },
-      { id: 2, author: "Rahul Verma",   initials: "RV", text: "I found visualizing DFS vs BFS with animations on YouTube super helpful. Check 'Back to Back SWE'!", time: "45 min ago" },
+      { id: 1, author: "Dr. Sarah Chen", initials: "SC", text: "Try LeetCode's tree problems – start with easy ones. Drawing the tree on paper helps a lot!", time: "1 hr ago" },
+      { id: 2, author: "Rahul Verma",   initials: "RV", text: "Visualizing DFS vs BFS with YouTube animations is super helpful. Check 'Back to Back SWE'!", time: "45 min ago" },
     ],
   },
   {
@@ -36,16 +37,6 @@ const initialThreads: Thread[] = [
     time: "1 day ago", likes: 31,
     replies: [],
   },
-  {
-    id: 4, author: "Dr. Sarah Chen", initials: "SC", role: "Faculty", color: "#10B981",
-    title: "📢 Assignment 3 deadline extended to July 8th", tag: "Announcement", tagColor: "#F59E0B",
-    body: "Due to server issues, I've extended the CS301 Assignment 3 deadline by 3 days. Please ensure you test your code before submission.",
-    time: "2 days ago", likes: 48,
-    replies: [
-      { id: 1, author: "Arjun Singh",  initials: "AS", text: "Thank you Dr. Chen! 🙏", time: "2 days ago" },
-      { id: 2, author: "Priya Sharma", initials: "PS", text: "Much appreciated! Will make sure to submit a quality solution.", time: "2 days ago" },
-    ],
-  },
 ];
 
 const tagStyles: Record<string, string> = {
@@ -56,91 +47,127 @@ const tagStyles: Record<string, string> = {
   "General":      "bg-purple-100 text-purple-700",
 };
 
+function timeAgo(dateStr: string) {
+  try {
+    const diff = (Date.now() - new Date(dateStr).getTime()) / 1000;
+    if (diff < 60) return "just now";
+    if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)} hrs ago`;
+    return `${Math.floor(diff / 86400)} days ago`;
+  } catch { return "recently"; }
+}
+
 export default function Community() {
-  const [threads, setThreads]       = useState(initialThreads);
-  const [likedIds, setLikedIds]     = useState<Set<number>>(new Set());
-  const [expandedId, setExpandedId] = useState<number | null>(1);
-  const [replyText, setReplyText]   = useState<Record<number, string>>({});
-  const [showNewPost, setShowNewPost] = useState(false);
-  const [newTitle, setNewTitle]     = useState("");
-  const [newBody, setNewBody]       = useState("");
+  const [threads, setThreads]             = useState(initialThreads);
+  const [apiAnnouncements, setApiAnnouncements] = useState<Thread[]>([]);
+  const [likedIds, setLikedIds]           = useState<Set<number>>(new Set());
+  const [expandedId, setExpandedId]       = useState<number | null>(null);
+  const [replyText, setReplyText]         = useState<Record<number, string>>({});
+  const [showNewPost, setShowNewPost]     = useState(false);
+  const [newTitle, setNewTitle]           = useState("");
+  const [newBody, setNewBody]             = useState("");
+
+  useEffect(() => {
+    fetch(`${ACADEMIC_API_BASE}/notifications`)
+      .then(r => r.ok ? r.json() : null)
+      .then((data: any) => {
+        if (!data) return;
+        const notifs: any[] = data.notifications || [];
+        const announcements: Thread[] = notifs
+          .filter(n => n.audience === "student" || n.audience === "all")
+          .map((n, i) => {
+            const poster = n.postedBy || n.author || "Faculty / Admin";
+            return {
+              id: 90000 + i,
+              author: poster,
+              initials: poster.split(" ").map((w: string) => w[0] ?? "").join("").slice(0, 2).toUpperCase() || "FA",
+              role: "Faculty",
+              color: "#F59E0B",
+              title: `📢 ${n.title}`,
+              body: n.message,
+              time: timeAgo(n.createdAt),
+              tag: "Announcement",
+              tagColor: "#F59E0B",
+              likes: 0,
+              replies: [],
+            };
+          });
+        setApiAnnouncements(announcements);
+      })
+      .catch(() => {});
+  }, []);
 
   const toggleLike = (id: number) => {
-    setLikedIds(prev => {
-      const n = new Set(prev);
-      n.has(id) ? n.delete(id) : n.add(id);
-      return n;
-    });
-    setThreads(prev => prev.map(t => t.id === id
-      ? { ...t, likes: t.likes + (likedIds.has(id) ? -1 : 1) } : t));
+    const isAlreadyLiked = likedIds.has(id);
+    setLikedIds(prev => { const n = new Set(prev); isAlreadyLiked ? n.delete(id) : n.add(id); return n; });
+    const delta = isAlreadyLiked ? -1 : 1;
+    setThreads(prev => prev.map(t => t.id === id ? { ...t, likes: t.likes + delta } : t));
+    setApiAnnouncements(prev => prev.map(t => t.id === id ? { ...t, likes: t.likes + delta } : t));
   };
 
   const sendReply = (threadId: number) => {
     const text = replyText[threadId]?.trim();
     if (!text) return;
-    setThreads(prev => prev.map(t => t.id === threadId
-      ? { ...t, replies: [...t.replies, { id: Date.now(), author: "You", initials: "AS", text, time: "just now" }] }
-      : t));
+    const newReply = { id: Date.now(), author: "You", initials: "ME", text, time: "just now" };
+    setThreads(prev => prev.map(t => t.id === threadId ? { ...t, replies: [...t.replies, newReply] } : t));
+    setApiAnnouncements(prev => prev.map(t => t.id === threadId ? { ...t, replies: [...t.replies, newReply] } : t));
     setReplyText(prev => ({ ...prev, [threadId]: "" }));
   };
 
   const postThread = () => {
     if (!newTitle.trim() || !newBody.trim()) return;
     setThreads(prev => [{
-      id: Date.now(), author: "You", initials: "AS", role: "Student", color: "#6c5ce7",
+      id: Date.now(), author: "You", initials: "ME", role: "Student", color: "#6c5ce7",
       title: newTitle, body: newBody, time: "just now", tag: "General", tagColor: "#6c5ce7",
       likes: 0, replies: [],
     }, ...prev]);
     setNewTitle(""); setNewBody(""); setShowNewPost(false);
   };
 
-  const sortedThreads = useMemo(() =>
-    [...threads].sort((a, b) => {
-      const aAnn = a.tag === "Announcement";
-      const bAnn = b.tag === "Announcement";
-      return aAnn === bAnn ? 0 : aAnn ? -1 : 1;
-    }), [threads]);
+  const allThreads = useMemo(() => [
+    ...apiAnnouncements,
+    ...threads,
+  ], [threads, apiAnnouncements]);
 
-  const totalLikes   = threads.reduce((s, t) => s + t.likes, 0);
-  const totalReplies = threads.reduce((s, t) => s + t.replies.length, 0);
+  const totalLikes   = allThreads.reduce((s, t) => s + t.likes, 0);
+  const totalReplies = allThreads.reduce((s, t) => s + t.replies.length, 0);
 
   return (
-    <div className="min-h-screen bg-[#eef2fb]">
-      <div className="mx-auto max-w-[900px] px-4 py-6 md:px-8 space-y-6">
-
-        {/* ── Hero Banner ── */}
-        <section className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#fdf4ff] via-[#ede9fe] to-[#dbeafe] p-8 shadow-lg">
-          <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#6c5ce7]/10" />
-          <div className="pointer-events-none absolute bottom-0 left-1/4 h-28 w-28 rounded-full bg-pink-400/10" />
-
-          <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-[#6c5ce7]/10 px-3 py-1.5">
-                <Users className="h-4 w-4 text-[#6c5ce7]" />
-                <span className="text-xs font-black text-[#6c5ce7]">Student Community</span>
-              </div>
-              <h1 className="text-4xl font-black text-slate-900">
-                Community <span className="text-[#6c5ce7]">Hub</span>
-              </h1>
-              <p className="mt-1.5 text-sm font-semibold text-slate-500">Discuss, collaborate, ask doubts and learn together.</p>
-            </div>
-            <div className="grid grid-cols-3 gap-3 shrink-0">
-              {[
-                { icon: MessageSquare, val: threads.length, label: "Posts",   bg: "bg-[#6c5ce7]/10", txt: "text-[#6c5ce7]" },
-                { icon: Heart,         val: totalLikes,     label: "Likes",   bg: "bg-rose-50",      txt: "text-rose-500" },
-                { icon: MessageCircle, val: totalReplies,   label: "Replies", bg: "bg-emerald-50",   txt: "text-emerald-600" },
-              ].map(({ icon: Icon, val, label, bg, txt }) => (
-                <div key={label} className={`rounded-2xl ${bg} p-3 text-center min-w-[72px]`}>
-                  <Icon className={`mx-auto mb-1 h-4 w-4 ${txt}`} />
-                  <p className={`text-lg font-black ${txt}`}>{val}</p>
-                  <p className="text-[10px] font-bold text-slate-400">{label}</p>
-                </div>
-              ))}
-            </div>
+    <div className="px-4 py-6 md:px-8 animate-in fade-in duration-500">
+      <div className="mx-auto max-w-[1000px] space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-black text-slate-900 tracking-tight">Community Hub</h1>
+            <p className="text-xs font-semibold text-slate-400 mt-1">Discuss, collaborate, ask doubts — and see all faculty notices here.</p>
           </div>
-        </section>
+          <div className="inline-flex items-center gap-1.5 rounded-2xl bg-[#6c5ce7]/10 border border-[#6c5ce7]/20 px-4 py-2.5 text-xs font-bold text-[#6c5ce7] shadow-sm shrink-0">
+            <span>💬</span>
+            <span>{allThreads.length} Active Discussions</span>
+          </div>
+        </div>
 
-        {/* ── Actions bar ── */}
+        <div className="grid grid-cols-3 gap-5">
+          {[
+            { label: "Posts",   value: allThreads.length, txt: "text-[#6c5ce7]" },
+            { label: "Likes",   value: totalLikes,         txt: "text-rose-500" },
+            { label: "Replies", value: totalReplies,       txt: "text-emerald-600" },
+          ].map(({ label, value, txt }) => (
+            <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px] text-center">
+              <span className={`text-4xl font-black ${txt}`}>{value}</span>
+              <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
+            </div>
+          ))}
+        </div>
+
+        {apiAnnouncements.length > 0 && (
+          <div className="flex items-center gap-2 rounded-2xl bg-amber-50 border border-amber-200 px-4 py-2.5">
+            <span className="text-base">📌</span>
+            <span className="text-xs font-black text-amber-800">
+              {apiAnnouncements.length} official notice{apiAnnouncements.length > 1 ? "s" : ""} pinned from Faculty / Admin
+            </span>
+          </div>
+        )}
+
         <div className="flex items-center justify-between">
           <h2 className="flex items-center gap-2 text-lg font-black text-slate-900">
             <TrendingUp className="h-5 w-5 text-[#6c5ce7]" /> Discussions
@@ -153,7 +180,6 @@ export default function Community() {
           </button>
         </div>
 
-        {/* ── New Post form ── */}
         <AnimatePresence>
           {showNewPost && (
             <motion.div
@@ -163,19 +189,10 @@ export default function Community() {
               className="rounded-2xl border border-[#6c5ce7]/20 bg-white p-5 shadow-lg"
             >
               <h3 className="mb-3 text-sm font-black text-slate-900">✍️ Create a new post</h3>
-              <input
-                value={newTitle}
-                onChange={e => setNewTitle(e.target.value)}
-                placeholder="Post title..."
-                className="mb-3 h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-900 outline-none focus:border-[#6c5ce7]/40 focus:ring-4 focus:ring-[#6c5ce7]/10"
-              />
-              <textarea
-                value={newBody}
-                onChange={e => setNewBody(e.target.value)}
-                placeholder="Share your question or thoughts..."
-                rows={3}
-                className="mb-3 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 outline-none focus:border-[#6c5ce7]/40 focus:ring-4 focus:ring-[#6c5ce7]/10"
-              />
+              <input value={newTitle} onChange={e => setNewTitle(e.target.value)} placeholder="Post title..."
+                className="mb-3 h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-900 outline-none focus:border-[#6c5ce7]/40 focus:ring-4 focus:ring-[#6c5ce7]/10" />
+              <textarea value={newBody} onChange={e => setNewBody(e.target.value)} placeholder="Share your question or thoughts..." rows={3}
+                className="mb-3 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-700 outline-none focus:border-[#6c5ce7]/40 focus:ring-4 focus:ring-[#6c5ce7]/10" />
               <div className="flex justify-end gap-2">
                 <button onClick={() => setShowNewPost(false)} className="rounded-xl border border-slate-200 px-4 py-2 text-xs font-black text-slate-600 hover:bg-slate-50">Cancel</button>
                 <button onClick={postThread} disabled={!newTitle.trim() || !newBody.trim()}
@@ -187,29 +204,31 @@ export default function Community() {
           )}
         </AnimatePresence>
 
-        {/* ── Thread list ── */}
         <div className="flex flex-col gap-4">
-          {sortedThreads.map((thread, i) => {
-            const isExpanded = expandedId === thread.id;
-            const isLiked    = likedIds.has(thread.id);
-            const tagStyle   = tagStyles[thread.tag] ?? "bg-purple-100 text-purple-700";
+          {allThreads.map((thread, i) => {
+            const isExpanded     = expandedId === thread.id;
+            const isLiked        = likedIds.has(thread.id);
+            const tagStyle       = tagStyles[thread.tag] ?? "bg-purple-100 text-purple-700";
+            const isAnnouncement = thread.tag === "Announcement";
 
             return (
               <motion.div
                 key={thread.id}
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.06 }}
-                className="overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-lg transition-shadow"
+                transition={{ delay: i * 0.05 }}
+                className={`overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-lg transition-shadow ${isAnnouncement ? "ring-1 ring-amber-200" : ""}`}
                 style={{ borderLeft: `4px solid ${thread.color}` }}
               >
+                {isAnnouncement && (
+                  <div className="bg-amber-50 px-5 py-1.5 flex items-center gap-2 border-b border-amber-100">
+                    <span className="text-xs font-black text-amber-700">📌 Official Notice from {thread.author}</span>
+                  </div>
+                )}
+
                 <div className="p-5">
-                  {/* Author */}
                   <div className="mb-3 flex items-start gap-3">
-                    <div
-                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-xs font-black text-white shadow-md"
-                      style={{ background: thread.color }}
-                    >
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-xs font-black text-white shadow-md" style={{ background: thread.color }}>
                       {thread.initials}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -217,7 +236,7 @@ export default function Community() {
                         <span className="text-sm font-black text-slate-900">{thread.author}</span>
                         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500 capitalize">{thread.role}</span>
                         <span className={`rounded-full px-2.5 py-0.5 text-[10px] font-black ${tagStyle}`}>{thread.tag}</span>
-                        {thread.id === 1 && (
+                        {!isAnnouncement && i === apiAnnouncements.length && (
                           <span className="flex items-center gap-1 rounded-full bg-orange-50 px-2 py-0.5 text-[10px] font-black text-orange-600">
                             <Flame className="h-3 w-3 fill-orange-400" /> Trending
                           </span>
@@ -230,18 +249,13 @@ export default function Community() {
                   <h3 className="mb-2 text-sm font-black text-slate-900">{thread.title}</h3>
                   <p className="text-sm font-semibold leading-relaxed text-slate-600">{thread.body}</p>
 
-                  {/* Actions */}
                   <div className="mt-4 flex items-center gap-5">
-                    <button
-                      onClick={() => toggleLike(thread.id)}
-                      className={`flex items-center gap-1.5 text-xs font-black transition-colors ${isLiked ? "text-rose-500" : "text-slate-400 hover:text-rose-400"}`}
-                    >
+                    <button onClick={() => toggleLike(thread.id)}
+                      className={`flex items-center gap-1.5 text-xs font-black transition-colors ${isLiked ? "text-rose-500" : "text-slate-400 hover:text-rose-400"}`}>
                       <Heart className={`h-4 w-4 ${isLiked ? "fill-rose-500" : ""}`} /> {thread.likes}
                     </button>
-                    <button
-                      onClick={() => setExpandedId(isExpanded ? null : thread.id)}
-                      className="flex items-center gap-1.5 text-xs font-black text-slate-400 hover:text-[#6c5ce7] transition-colors"
-                    >
+                    <button onClick={() => setExpandedId(isExpanded ? null : thread.id)}
+                      className="flex items-center gap-1.5 text-xs font-black text-slate-400 hover:text-[#6c5ce7] transition-colors">
                       <MessageCircle className="h-4 w-4" /> {thread.replies.length} replies
                       {isExpanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
                     </button>
@@ -251,15 +265,10 @@ export default function Community() {
                   </div>
                 </div>
 
-                {/* Replies panel */}
                 <AnimatePresence>
                   {isExpanded && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      className="overflow-hidden border-t border-slate-100 bg-[#f8f7ff]"
-                    >
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
+                      className="overflow-hidden border-t border-slate-100 bg-[#f8f7ff]">
                       <div className="space-y-3 px-5 py-4">
                         {thread.replies.map(r => (
                           <div key={r.id} className="flex items-start gap-3">
@@ -273,21 +282,13 @@ export default function Community() {
                             </div>
                           </div>
                         ))}
-
-                        {/* Reply input */}
                         <div className="flex items-center gap-2 pt-1">
-                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#6c5ce7] text-[10px] font-black text-white">AS</div>
-                          <input
-                            value={replyText[thread.id] ?? ""}
-                            onChange={e => setReplyText(p => ({ ...p, [thread.id]: e.target.value }))}
-                            onKeyDown={e => e.key === "Enter" && sendReply(thread.id)}
-                            placeholder="Write a reply..."
-                            className="flex-1 h-9 rounded-xl border border-slate-200 bg-white px-3 text-xs font-semibold text-slate-800 outline-none focus:border-[#6c5ce7]/40"
-                          />
-                          <button
-                            onClick={() => sendReply(thread.id)}
-                            className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#6c5ce7] text-white hover:bg-[#5b4bd5] transition-colors"
-                          >
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#6c5ce7] text-[10px] font-black text-white">ME</div>
+                          <input value={replyText[thread.id] ?? ""} onChange={e => setReplyText(p => ({ ...p, [thread.id]: e.target.value }))}
+                            onKeyDown={e => e.key === "Enter" && sendReply(thread.id)} placeholder="Write a reply..."
+                            className="flex-1 h-9 rounded-xl border border-slate-200 bg-white px-3 text-xs font-semibold text-slate-800 outline-none focus:border-[#6c5ce7]/40" />
+                          <button onClick={() => sendReply(thread.id)}
+                            className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#6c5ce7] text-white hover:bg-[#5b4bd5] transition-colors">
                             <Send className="h-3.5 w-3.5" />
                           </button>
                         </div>

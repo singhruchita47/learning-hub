@@ -2,6 +2,7 @@ import { Router, type Request, type Response } from "express";
 import crypto from "node:crypto";
 import mongoose from "mongoose";
 import User, { type UserRole } from "../models/user";
+import { getDB, updateDB } from "../lib/memoryDb";
 
 const router = Router();
 
@@ -16,8 +17,24 @@ type MemoryUser = PublicUser & {
   passwordHash: string;
 };
 
-const memoryUsers: MemoryUser[] = [];
+export let memoryUsers: MemoryUser[] = getDB("users", []);
 const allowedRoles: UserRole[] = ["student", "faculty", "admin"];
+
+function saveMemoryUsers() {
+  updateDB("users", memoryUsers);
+}
+
+// Seed default admin if memory is empty
+if (memoryUsers.length === 0) {
+  memoryUsers.push({
+    id: "usr_admin_default",
+    name: "System Admin",
+    email: "admin@learning.hub",
+    role: "admin",
+    passwordHash: createPasswordHash("admin123")
+  });
+  saveMemoryUsers();
+}
 
 function mongoReady() {
   return mongoose.connection.readyState === 1;
@@ -96,6 +113,7 @@ router.post("/register", async (req: Request, res: Response) => {
       passwordHash: createPasswordHash(password),
     };
     memoryUsers.push(user);
+    saveMemoryUsers();
 
     const publicUser = toPublicUser(user);
     return res.status(201).json({ user: publicUser, token: signToken(publicUser), storage: "memory" });

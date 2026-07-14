@@ -1,50 +1,81 @@
-import { ClipboardList, CheckCircle2, Clock, AlertCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { AlertCircle } from "lucide-react";
+import { useAcademic } from "@/context/AcademicContext";
 import FacultyAssignmentManager from "@/components/FacultyAssignmentManager";
 import StudentAssignmentsPanel from "@/components/StudentAssignmentsPanel";
 
 export default function Assignments({ role = "student" }: { role?: "student" | "faculty" | "admin" }) {
+  const { assignments, reloadAssignments } = useAcademic();
+  const [activeTab, setActiveTab] = useState("All");
+
+  useEffect(() => {
+    void reloadAssignments();
+  }, [reloadAssignments]);
+
+  const pendingCount = assignments.filter(a => !a.submittedFileName).length;
+  const gradedCount = assignments.filter(a => a.feedback).length;
+
   return (
-    <div className="min-h-screen bg-[#eef2fb] px-4 py-6 md:px-8 animate-in fade-in duration-500">
-      <div className="mx-auto max-w-[1200px] space-y-5">
+    <div className="px-4 py-6 md:px-8 animate-in fade-in duration-500">
+      <div className="mx-auto max-w-[1400px] space-y-6">
 
-        {/* ── Page Header ── */}
-        <section className="relative overflow-hidden rounded-2xl bg-white px-8 py-6 shadow-sm ring-1 ring-slate-100">
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-violet-50 to-transparent" />
-          <div className="pointer-events-none absolute -right-4 -top-4 h-32 w-32 rounded-full bg-violet-100/50 blur-2xl" />
-
-          <div className="relative flex items-center justify-between">
-            <div className="flex-1">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-500">Student Module</p>
-              <h1 className="mt-1 text-3xl font-black text-slate-900">Assign<span className="text-violet-600">ments</span></h1>
-              <p className="mt-1.5 text-xs font-semibold text-slate-400">Track, submit and review your pending and completed assignments.</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {[
-                  { val: "2",  label: "Pending",    color: "bg-rose-100 text-rose-600 ring-rose-200"           },
-                  { val: "1",  label: "Submitted",   color: "bg-emerald-100 text-emerald-700 ring-emerald-200"  },
-                  { val: "50", label: "Marks Today",  color: "bg-indigo-100 text-indigo-700 ring-indigo-200"    },
-                ].map(({ val, label, color }) => (
-                  <span key={label} className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-black ring-1 ${color}`}>
-                    <span className="text-sm font-black">{val}</span> {label}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Illustration */}
-            <div className="relative ml-6 hidden shrink-0 lg:block">
-              <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-gradient-to-br from-violet-100 to-indigo-100 shadow-inner">
-                <span className="text-5xl select-none">📋</span>
-              </div>
-              <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400 text-sm shadow-md">✅</div>
-            </div>
+        {/* ── Title and Alert Row ── */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-black text-slate-900 tracking-tight">Assignments</h1>
+            <p className="text-xs font-semibold text-slate-400 mt-1">Track, submit, and review your assignments.</p>
           </div>
-        </section>
+          {role === "student" && pendingCount > 0 && (
+            <div className="inline-flex items-center gap-1.5 rounded-2xl bg-amber-50 border border-amber-200 px-4 py-2.5 text-xs font-bold text-amber-800 shadow-sm shrink-0">
+              <AlertCircle className="h-4 w-4 text-amber-600" />
+              <span>{pendingCount} assignments pending</span>
+            </div>
+          )}
+        </div>
+
+        {role === "student" && (
+          <>
+            {/* ── Stats Row ── */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
+                { label: "Total",   value: assignments.length, txt: "text-[#6c5ce7]" },
+                { label: "Pending", value: pendingCount,       txt: "text-amber-500" },
+                { label: "Graded",  value: gradedCount,        txt: "text-emerald-600" },
+              ].map(({ label, value, txt }) => (
+                <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px] text-center">
+                  <span className={`text-4xl font-black ${txt}`}>{value}</span>
+                  <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* ── Filter Tabs ── */}
+            <div className="flex flex-wrap gap-2.5">
+              {["All", "Pending", "Submitted", "Graded"].map((tab) => {
+                const isActive = activeTab === tab;
+                return (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`rounded-full px-5 py-2.5 text-xs font-black transition-all ${
+                      isActive
+                        ? "bg-violet-600 text-white shadow-md shadow-violet-200"
+                        : "border border-slate-200 bg-white text-slate-500 hover:bg-slate-50"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                );
+              })}
+            </div>
+          </>
+        )}
 
         {/* ── Content ── */}
         {role === "faculty" ? (
           <FacultyAssignmentManager />
         ) : (
-          <StudentAssignmentsPanel />
+          <StudentAssignmentsPanel filter={activeTab} />
         )}
       </div>
     </div>
