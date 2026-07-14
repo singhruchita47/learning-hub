@@ -9,9 +9,11 @@ export default function AdminAnnouncements() {
   const [annTitle, setAnnTitle] = useState("");
   const [annSent, setAnnSent] = useState(false);
   const [pastAnn, setPastAnn] = useState<any[]>([]);
+  const [facultyNotices, setFacultyNotices] = useState<any[]>([]);
 
   useEffect(() => {
     fetchAnnouncements();
+    fetchFacultyNotices();
   }, []);
 
   const fetchAnnouncements = async () => {
@@ -19,6 +21,18 @@ export default function AdminAnnouncements() {
       const res = await fetch(`${ACADEMIC_API_BASE}/admin/announcements`);
       const data = await res.json();
       if (data.announcements) setPastAnn(data.announcements);
+    } catch {}
+  };
+
+  const fetchFacultyNotices = async () => {
+    try {
+      // Faculty manual notices are sent with audience=student and type=general
+      const res = await fetch(`${ACADEMIC_API_BASE}/notifications?audience=student`);
+      const data = await res.json();
+      if (data.notifications) {
+        // Faculty activities (notices, assignments, classes) generally target students
+        setFacultyNotices(data.notifications);
+      }
     } catch {}
   };
 
@@ -104,6 +118,24 @@ export default function AdminAnnouncements() {
                   <span className="rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-extrabold text-emerald-600 shrink-0">✓ Sent</span>
                 </div>
               ))}
+            </div>
+
+            <h3 className="text-lg font-extrabold text-slate-800 mt-6">Faculty Notices</h3>
+            <div className="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-1">
+              {facultyNotices.length > 0 ? facultyNotices.map((n) => (
+                <div key={n._id || Math.random()} className="flex items-start gap-4 rounded-2xl border border-gray-100 bg-slate-50 p-5 shadow-sm">
+                  <div className="flex-1">
+                    <h4 className="text-sm font-bold text-slate-900">{n.title}</h4>
+                    <p className="text-xs font-medium text-slate-600 mt-0.5">{n.message}</p>
+                    <div className="flex gap-2 mt-1.5 text-[10px] font-bold text-slate-400">
+                      <span className="text-violet-600 uppercase">Target: {n.audience || "student"}</span><span>·</span>
+                      <span>{n.createdAt ? new Date(n.createdAt).toLocaleDateString() : "Recent"}</span>
+                    </div>
+                  </div>
+                </div>
+              )) : (
+                <p className="text-xs font-bold text-slate-400 border border-dashed rounded-xl p-4 text-center">No faculty notices yet.</p>
+              )}
             </div>
           </div>
         </div>

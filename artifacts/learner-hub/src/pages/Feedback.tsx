@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, Send, CheckCircle2 } from "lucide-react";
+import { Star, Send, CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ACADEMIC_API_BASE } from "@/lib/api";
+import { useToast } from "@/hooks/use-toast";
 
 const courseOptions = [
   { code: "CS301", name: "Data Structures & Algorithms" },
@@ -35,18 +37,53 @@ function StarRating({ value, onChange }: { value: number; onChange: (v: number) 
 const ratingLabel = (v: number) => ["", "Poor", "Fair", "Good", "Great", "Excellent!"][v] ?? "";
 
 export default function Feedback() {
+  const { toast } = useToast();
   const [selectedCourse, setSelectedCourse] = useState("");
   const [ratings, setRatings] = useState<Record<string, number>>({ content: 0, teaching: 0, pace: 0, overall: 0 });
   const [comment, setComment] = useState("");
   const [wouldRecommend, setWouldRecommend] = useState<boolean | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const user = (() => {
+    try { return JSON.parse(localStorage.getItem("learningHubUser") || "null"); }
+    catch { return null; }
+  })();
+  const studentId = user?.email || user?.id || "student-demo";
 
   const allRated = Object.values(ratings).every((r) => r > 0);
-  const canSubmit = selectedCourse && allRated && comment.trim().length > 10;
+  const canSubmit = selectedCourse && allRated && comment.trim().length >= 10;
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!canSubmit) return;
-    setSubmitted(true);
+    setIsSubmitting(true);
+    
+    const avgRating = Object.values(ratings).reduce((a, b) => a + b, 0) / 4;
+
+    try {
+      const res = await fetch(`${ACADEMIC_API_BASE}/feedback`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          studentId,
+          courseCode: selectedCourse,
+          rating: avgRating,
+          comments: comment,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Failed to submit feedback");
+      
+      setSubmitted(true);
+    } catch (err) {
+      toast({
+        title: "Submission Failed",
+        description: "Could not submit feedback at this time.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -157,9 +194,10 @@ export default function Feedback() {
         </div>
       </div>
 
-      <Button onClick={handleSubmit} disabled={!canSubmit}
+      <Button onClick={handleSubmit} disabled={!canSubmit || isSubmitting}
         className="w-full h-12 rounded-xl text-base font-bold gap-2">
-        <Send className="h-5 w-5" /> Submit Feedback
+        {isSubmitting ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />} 
+        {isSubmitting ? "Submitting..." : "Submit Feedback"}
       </Button>
     </div>
   );

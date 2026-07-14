@@ -3,11 +3,68 @@ import {
   BarChart2, BookOpen, Users, LogOut, 
   Settings, LayoutDashboard, Calendar,
   Trophy, BookMarked, UserCheck, CheckCircle2, ShieldCheck,
-  TrendingUp, Megaphone, Link2, Award, Search, Code2, ClipboardList
+  TrendingUp, Megaphone, Link2, Award, Search, Code2, ClipboardList,
+  Bell, Star
 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ACADEMIC_API_BASE } from "@/lib/api";
+
+const API_BASE = ACADEMIC_API_BASE;
+
+type ApiNotification = {
+  _id: string;
+  title: string;
+  message: string;
+  createdAt?: string;
+  readBy?: string[];
+};
 
 export default function AdminNav({ name, onLogout, children }: { name: string, onLogout: () => void, children: React.ReactNode }) {
   const [location] = useLocation();
+  const [notifications, setNotifications] = useState<ApiNotification[]>([]);
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  const user = (() => {
+    try {
+      const saved = localStorage.getItem("learningHubUser");
+      return saved ? JSON.parse(saved) : null;
+    } catch { return null; }
+  })();
+  const userId = user?.email ?? user?.id ?? "admin-demo";
+  const unreadCount = notifications.filter((item) => !(item.readBy ?? []).includes(userId)).length;
+
+  useEffect(() => {
+    let mounted = true;
+    async function loadNotifications() {
+      try {
+        const response = await fetch(`${API_BASE}/notifications?audience=admin`);
+        if (!response.ok) return;
+        const data = await response.json() as { notifications?: ApiNotification[] };
+        if (mounted) setNotifications(data.notifications ?? []);
+      } catch { /* ignore */ }
+    }
+    void loadNotifications();
+    const timer = window.setInterval(loadNotifications, 12000);
+    return () => { mounted = false; window.clearInterval(timer); };
+  }, []);
+
+  async function openNotifications() {
+    setShowNotifications((c) => !c);
+    await Promise.allSettled(
+      notifications
+        .filter((item) => !(item.readBy ?? []).includes(userId))
+        .map((item) =>
+          fetch(`${API_BASE}/notifications/${item._id}/read`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userId }),
+          })
+        )
+    );
+    setNotifications((c) =>
+      c.map((item) => ({ ...item, readBy: Array.from(new Set([...(item.readBy ?? []), userId])) }))
+    );
+  }
 
   const links = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -23,6 +80,7 @@ export default function AdminNav({ name, onLogout, children }: { name: string, o
     { href: "/admin/timetable", label: "Timetable", icon: Calendar },
     { href: "/admin/calendar", label: "Calendar", icon: Calendar },
     { href: "/admin/permissions", label: "Permissions", icon: ShieldCheck },
+    { href: "/admin/feedback", label: "Feedback", icon: Star },
     { href: "/admin/leaderboard", label: "Leaderboard", icon: Trophy },
     { href: "/admin/badges", label: "Badges", icon: Award },
     { href: "/admin/system", label: "System", icon: Settings },
@@ -67,6 +125,47 @@ export default function AdminNav({ name, onLogout, children }: { name: string, o
 
             {/* Right Profile & Actions */}
             <div className="flex shrink-0 items-center gap-3">
+              {/* Notifications */}
+              <div className="relative">
+                <button
+                  onClick={openNotifications}
+                  className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 shadow-sm hover:bg-violet-50 hover:text-violet-600 transition cursor-pointer"
+                >
+                  <Bell className="h-4.5 w-4.5" />
+                  {unreadCount > 0 && (
+                    <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-white bg-red-500 px-1 text-[10px] font-black text-white">
+                      {unreadCount}
+                    </span>
+                  )}
+                </button>
+                {showNotifications && (
+                  <div className="absolute right-0 top-12 z-50 w-80 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-300/60">
+                    <div className="border-b border-slate-100 px-4 py-3 text-left">
+                      <p className="text-sm font-black text-slate-900">Admin Notices</p>
+                      <p className="text-xs font-bold text-slate-400">System updates and reports</p>
+                    </div>
+                    <div className="max-h-80 overflow-y-auto p-2 text-left">
+                      {notifications.length > 0 ? notifications.slice(0, 8).map((item) => (
+                        <article key={item._id} className="rounded-xl p-3 hover:bg-violet-50 transition">
+                          <p className="text-sm font-black text-slate-900">{item.title}</p>
+                          <p className="mt-1 text-xs font-semibold text-slate-500 leading-relaxed">{item.message}</p>
+                          {item.createdAt && (
+                            <p className="mt-1 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                              {new Date(item.createdAt).toLocaleString("en-IN")}
+                            </p>
+                          )}
+                        </article>
+                      )) : (
+                        <div className="p-6 text-center">
+                          <p className="text-sm font-black text-slate-700">No notifications yet</p>
+                          <p className="mt-1 text-xs font-bold text-slate-400">System alerts will appear here.</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
               <div className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white py-1.5 pl-1.5 pr-3 shadow-sm">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-600 text-xs font-black text-white">
                   {name.substring(0, 2).toUpperCase()}

@@ -1,4 +1,4 @@
-import { Bell, BookOpen, ClipboardList, Code2, FileCheck2, HelpCircle, Home, LogOut, Radio, Search, Trophy, UserCheck, ChevronRight, Menu, X } from "lucide-react";
+import { Bell, BookOpen, ClipboardList, Code2, FileCheck2, HelpCircle, Home, LogOut, Radio, Search, Trophy, UserCheck, ChevronRight, Menu, X, Star } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { useEffect, useState } from "react";
 import { ACADEMIC_API_BASE } from "@/lib/api";
@@ -25,6 +25,7 @@ const facultyLinks = [
   { href: "/faculty/coding-questions",  label: "Coding Questions",      icon: Code2,         color: "text-cyan-600",    bg: "bg-cyan-50"    },
   { href: "/faculty/attendance",        label: "Attendance",            icon: UserCheck,     color: "text-teal-600",    bg: "bg-teal-50"    },
   { href: "/faculty/timetable",         label: "Timetable",             icon: BookOpen,      color: "text-sky-600",     bg: "bg-sky-50"     },
+  { href: "/faculty/feedback",          label: "Feedback",              icon: Star,          color: "text-amber-600",   bg: "bg-amber-50"   },
   { href: "/faculty/notices",           label: "Notices",               icon: Bell,          color: "text-pink-600",    bg: "bg-pink-50"    },
 ];
 

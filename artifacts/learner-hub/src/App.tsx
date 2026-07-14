@@ -59,6 +59,8 @@ import FacultyTimetable from "@/pages/FacultyTimetable";
 import StudentTimetable from "@/pages/StudentTimetable";
 import StudentProgress from "@/pages/StudentProgress";
 import AdminPermissions from "@/pages/admin/AdminPermissions";
+import FacultyFeedback from "@/pages/FacultyFeedback";
+import AdminFeedback from "@/pages/admin/AdminFeedback";
 const queryClient = new QueryClient();
 
 type Role = "student" | "faculty" | "admin";
@@ -135,6 +137,7 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
           <Route path="/faculty/analytics" component={() => <FacultyDashboard user={user} onLogout={onLogout} />} />
           <Route path="/faculty/attendance" component={FacultyAttendance} />
           <Route path="/faculty/timetable" component={FacultyTimetable} />
+          <Route path="/faculty/feedback" component={FacultyFeedback} />
           <Route component={NotFound} />
         </Switch>
       </FacultyLayout>
@@ -162,6 +165,7 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
           <Route path="/admin/badges" component={AdminBadges} />
           <Route path="/admin/quiz-coding" component={AdminQuizCoding} />
           <Route path="/admin/assignments" component={AdminAssignments} />
+          <Route path="/admin/feedback" component={AdminFeedback} />
           <Route component={NotFound} />
         </Switch>
       </AdminLayout>

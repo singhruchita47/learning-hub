@@ -105,6 +105,7 @@ export default function FacultyDashboard({
   const [classDate, setClassDate] = useState("");
   const [classTime, setClassTime] = useState("");
   const [classCourse, setClassCourse] = useState("CS301");
+  const [classCustomLink, setClassCustomLink] = useState("");
   const [scheduledList, setScheduledList] = useState<any[]>([]);
   const [attendanceList, setAttendanceList] = useState<any[]>([]);
   const [coursesList, setCoursesList] = useState<any[]>([]);
@@ -193,7 +194,7 @@ export default function FacultyDashboard({
       return;
     }
     const startsAt = new Date(`${classDate}T${classTime}`).toISOString();
-    const meetingUrl = `https://meet.jit.si/sgsu-${classTopic.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
+    const meetingUrl = classCustomLink.trim() || `https://meet.jit.si/sgsu-${classTopic.toLowerCase().replace(/[^a-z0-9]/g, "-")}`;
     const payload = {
       title: classTopic.trim(),
       courseCode: classCourse,
@@ -213,6 +214,7 @@ export default function FacultyDashboard({
         setClassTopic("");
         setClassDate("");
         setClassTime("");
+        setClassCustomLink("");
         void fetchScheduledClasses();
       }
     } catch {
@@ -649,6 +651,12 @@ export default function FacultyDashboard({
                       className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none focus:border-violet-300 focus:bg-white transition cursor-pointer"
                     />
                   </div>
+                  <input
+                    value={classCustomLink}
+                    onChange={(e) => setClassCustomLink(e.target.value)}
+                    className="h-12 rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none focus:border-violet-300 focus:bg-white focus:ring-4 focus:ring-violet-100 transition"
+                    placeholder="Custom Meeting Link (Optional - e.g. Zoom, GMeet)"
+                  />
                   <button
                     onClick={handleScheduleClass}
                     className="mt-2 flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#6c5ce7] text-sm font-black text-white hover:bg-[#584ac2] shadow-sm transition cursor-pointer"
