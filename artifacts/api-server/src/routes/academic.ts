@@ -1110,12 +1110,12 @@ router.get("/attendance/student/:studentId", async (req: Request, res: Response)
   if (!db.attendance) db.attendance = [];
 
   const records = db.attendance.map((s: any) => {
-    if (s.attendance[studentId]) {
+    if (s.attendance[studentId as string]) {
       return {
         _id: s.id + "_" + studentId,
         courseCode: s.course,
         date: s.date,
-        status: s.attendance[studentId],
+        status: s.attendance[studentId as string],
         markedAt: s.createdAt
       };
     }

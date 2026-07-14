@@ -11,13 +11,13 @@ type PublicUser = {
   name: string;
   email: string;
   role: UserRole;
+  branch?: string;
+  course?: string;
+  enrollmentYear?: string;
 };
 
 type MemoryUser = PublicUser & {
   passwordHash: string;
-  branch?: string;
-  course?: string;
-  enrollmentYear?: string;
 };
 
 export let memoryUsers: MemoryUser[] = getDB("users", []);
