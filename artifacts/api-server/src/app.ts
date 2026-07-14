@@ -4,8 +4,18 @@ import path from "path";
 import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
+import { connectToMongo } from "./lib/mongo";
 
 const app: Express = express();
+
+let isConnected = false;
+app.use(async (req, res, next) => {
+  if (process.env.VERCEL && !isConnected) {
+    await connectToMongo();
+    isConnected = true;
+  }
+  next();
+});
 
 app.use(
   pinoHttp({
