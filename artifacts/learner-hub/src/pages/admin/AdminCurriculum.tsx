@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BookMarked, Plus, Edit2, Layers, Loader, GraduationCap } from "lucide-react";
+import { BookMarked, Plus, Edit2, Layers, Loader, GraduationCap, Trash2 } from "lucide-react";
 import { ACADEMIC_API_BASE } from "@/lib/api";
 
 export default function AdminCurriculum() {
@@ -21,8 +21,24 @@ export default function AdminCurriculum() {
       .finally(() => setLoading(false));
   }, []);
 
+  const handleDeleteCourse = async (code: string) => {
+    if (!window.confirm("Are you sure you want to delete this course?")) return;
+    try {
+      const res = await fetch(`${ACADEMIC_API_BASE}/courses/${code}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        setFacultyCourses((prev: any[]) => prev.filter((c: any) => c.code !== code));
+      } else {
+        alert("Failed to delete course.");
+      }
+    } catch {
+      alert("Error deleting course.");
+    }
+  };
+
   // Map faculty courses to subject format (real courses only)
-  const allSubjects = facultyCourses.map(c => ({
+  const allSubjects = facultyCourses.map((c: any) => ({
     code: c.code,
     title: c.title,
     credits: 3,
@@ -30,7 +46,7 @@ export default function AdminCurriculum() {
     teacher: c.teacher || "Faculty",
   }));
 
-  const totalCredits = allSubjects.reduce((s, c) => s + (c.credits || 3), 0);
+  const totalCredits = allSubjects.reduce((s: number, c: any) => s + (c.credits || 3), 0);
 
   return (
     <div className="p-4 md:p-8 space-y-8 max-w-[1540px] mx-auto">
@@ -92,11 +108,20 @@ export default function AdminCurriculum() {
                 🎓 Faculty Courses ({facultyCourses.length})
               </h3>
               <div className="space-y-2">
-                {facultyCourses.map(c => (
-                  <div key={c._id} className="rounded-xl bg-white border border-violet-100 px-3 py-2">
-                    <p className="text-xs font-black text-violet-700">{c.code}</p>
-                    <p className="text-[11px] font-semibold text-slate-600 truncate">{c.title}</p>
-                    {c.teacher && <p className="text-[10px] text-slate-400">{c.teacher}</p>}
+                {facultyCourses.map((c: any) => (
+                  <div key={c._id} className="rounded-xl bg-white border border-violet-100 px-3 py-2 flex items-center justify-between gap-2">
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-black text-violet-700">{c.code}</p>
+                      <p className="text-[11px] font-semibold text-slate-600 truncate">{c.title}</p>
+                      {c.teacher && <p className="text-[10px] text-slate-400">{c.teacher}</p>}
+                    </div>
+                    <button
+                      onClick={() => handleDeleteCourse(c.code)}
+                      className="text-slate-400 hover:text-red-600 transition shrink-0"
+                      title="Delete Course"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
                   </div>
                 ))}
               </div>
@@ -131,7 +156,7 @@ export default function AdminCurriculum() {
                 </tr>
               </thead>
               <tbody>
-                {allSubjects.map((sub) => (
+                {allSubjects.map((sub: any) => (
                   <tr key={sub.code} className="border-b border-slate-50 hover:bg-slate-50/50 transition">
                     <td className="px-6 py-4 font-black text-violet-600">{sub.code}</td>
                     <td className="px-6 py-4 font-bold text-slate-900">
@@ -160,9 +185,16 @@ export default function AdminCurriculum() {
                         {sub.type}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-right">
+                    <td className="px-6 py-4 text-right flex items-center justify-end gap-2">
                       <button className="text-slate-400 hover:text-violet-600 transition">
                         <Edit2 className="h-4 w-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteCourse(sub.code)}
+                        className="text-slate-400 hover:text-red-600 transition"
+                        title="Delete Course"
+                      >
+                        <Trash2 className="h-4 w-4" />
                       </button>
                     </td>
                   </tr>

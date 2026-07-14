@@ -824,6 +824,30 @@ router.get("/courses", async (_req: Request, res: Response) => {
   return res.json({ courses });
 });
 
+router.delete("/courses/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  if (!mongoReady()) {
+    const index = memoryStore.courses.findIndex((c: any) => c.code === id || c._id === id);
+    if (index === -1) {
+      return res.status(404).json({ message: "Course not found." });
+    }
+    const deletedCourse = memoryStore.courses.splice(index, 1)[0];
+    updateDB("courses", memoryStore.courses);
+    return res.json({ message: "Course deleted successfully.", course: deletedCourse });
+  }
+
+  try {
+    const course = await Course.findOneAndDelete({ $or: [{ code: id }, { _id: id }] });
+    if (!course) {
+      return res.status(404).json({ message: "Course not found." });
+    }
+    return res.json({ message: "Course deleted successfully.", course });
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message });
+  }
+});
+
 // Enroll student in a course (memory mode: store enrollments in memoryStore)
 router.post("/courses/:id/enroll", async (req: Request, res: Response) => {
   const { studentId, studentName } = req.body;
