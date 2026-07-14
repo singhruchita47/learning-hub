@@ -1,7 +1,9 @@
 import fs from "fs";
 import path from "path";
 
-const DB_FILE = path.join(process.cwd(), "local_memory_db.json");
+const DB_FILE = process.env.VERCEL
+  ? path.join("/tmp", "local_memory_db.json")
+  : path.join(process.cwd(), "local_memory_db.json");
 
 export function readDB(): Record<string, any> {
   try {
