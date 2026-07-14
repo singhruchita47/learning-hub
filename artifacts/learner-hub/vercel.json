@@ -1,8 +1,7 @@
 {
-  "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/((?!assets/|public/|favicon.ico).*)" ,
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
