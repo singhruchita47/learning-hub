@@ -32,7 +32,10 @@ router.get("/users", async (req, res) => {
       name: u.name,
       email: u.email,
       role: u.role,
-      status: "active"
+      status: "active",
+      branch: u.branch,
+      course: u.course,
+      enrollmentYear: u.enrollmentYear
     }));
     return res.json({ users, storage: "memory" });
   }
@@ -67,12 +70,15 @@ router.post("/users", async (req, res) => {
         name,
         email,
         passwordHash, 
-        role
+        role,
+        branch,
+        course,
+        enrollmentYear
       };
       memoryUsers.push(newUser);
       saveMemoryUsers(); // Persist to disk so users survive cold starts
       
-      const userObj = { _id: newUser.id, name, email, role, status: "active" };
+      const userObj = { _id: newUser.id, name, email, role, status: "active", branch, course, enrollmentYear };
       return res.status(201).json({ user: userObj, storage: "memory" });
     }
 

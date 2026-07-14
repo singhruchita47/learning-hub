@@ -15,6 +15,9 @@ type PublicUser = {
 
 type MemoryUser = PublicUser & {
   passwordHash: string;
+  branch?: string;
+  course?: string;
+  enrollmentYear?: string;
 };
 
 export let memoryUsers: MemoryUser[] = getDB("users", []);
@@ -79,6 +82,9 @@ function toPublicUser(user: { _id?: unknown; id?: string; name: string; email: s
     name: user.name,
     email: user.email,
     role: user.role,
+    branch: (user as any).branch,
+    course: (user as any).course,
+    enrollmentYear: (user as any).enrollmentYear,
   };
 }
 
