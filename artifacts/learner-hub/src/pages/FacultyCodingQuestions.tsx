@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { CheckSquare, Code2, Database, Send, Sparkles } from "lucide-react";
+import { CheckSquare, Code2, Database, Send, Sparkles, UploadCloud, Loader } from "lucide-react";
 import { ACADEMIC_API_BASE } from "@/lib/api";
+import { uploadToCloudinary } from "@/lib/cloudinary";
 
 const API_BASE = ACADEMIC_API_BASE;
 const CODING_BANK_API = "https://api.jsonbin.io/v3/b/66ebfa4ae41b4d34e433145a?meta=false";
@@ -199,6 +200,23 @@ export default function FacultyCodingQuestions() {
     questionType: "Practice Set" as "Practice Set" | "Coding Test",
   });
   const [status, setStatus] = useState("");
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsUploadingImage(true);
+    setStatus("Uploading image...");
+    try {
+      const secureUrl = await uploadToCloudinary(file);
+      setForm((prev) => ({ ...prev, imageUrl: secureUrl }));
+      setStatus("Image uploaded successfully!");
+    } catch {
+      setStatus("Image upload failed. Please try again or paste a URL.");
+    } finally {
+      setIsUploadingImage(false);
+    }
+  }
 
   async function loadQuestions() {
     try {
@@ -668,13 +686,20 @@ export default function FacultyCodingQuestions() {
                   className="resize-none w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
                 />
 
-                {/* Optional Image URL */}
-                <input
-                  value={form.imageUrl}
-                  onChange={(event) => setForm((current) => ({ ...current, imageUrl: event.target.value }))}
-                  placeholder="Optional: Image URL (diagram/chart)"
-                  className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
-                />
+                {/* Optional Image URL or Upload */}
+                <div className="flex items-center gap-3">
+                  <input
+                    value={form.imageUrl}
+                    onChange={(event) => setForm((current) => ({ ...current, imageUrl: event.target.value }))}
+                    placeholder="Optional: Image URL (diagram/chart)"
+                    className="h-11 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-4 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
+                  />
+                  <label className={`flex h-11 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 text-xs font-bold text-slate-600 transition hover:bg-slate-100 ${isUploadingImage ? "opacity-50 pointer-events-none" : ""}`}>
+                    {isUploadingImage ? <Loader className="h-4 w-4 animate-spin" /> : <UploadCloud className="h-4 w-4" />}
+                    {isUploadingImage ? "Uploading..." : "Upload Image"}
+                    <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} disabled={isUploadingImage} />
+                  </label>
+                </div>
 
                 {/* Testcases */}
                 <div className="grid gap-4 md:grid-cols-2">
