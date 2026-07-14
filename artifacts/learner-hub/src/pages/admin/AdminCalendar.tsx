@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Calendar as CalendarIcon, Plus, Clock, MapPin, Search } from "lucide-react";
-import { ACADEMIC_API_BASE } from "@/lib/api";
+import { API_ROOT } from "@/lib/api";
 
 export default function AdminCalendar() {
   const [events, setEvents] = useState<any[]>([]);
@@ -11,7 +11,7 @@ export default function AdminCalendar() {
 
   const fetchEvents = async () => {
     try {
-      const res = await fetch(`${ACADEMIC_API_BASE}/admin/events`);
+      const res = await fetch(`${API_ROOT}/admin/events`);
       const data = await res.json();
       if (data.events) setEvents(data.events);
     } catch {}
@@ -22,11 +22,19 @@ export default function AdminCalendar() {
 
   const handleAddEvent = async () => {
     if (!newEvent.title || !newEvent.date) return;
+
+    // Smart defaults for time and venue/location (especially for Holiday types)
+    const eventPayload = {
+      ...newEvent,
+      time: newEvent.time.trim() || (newEvent.type === "Holiday" ? "All Day" : "N/A"),
+      location: newEvent.location.trim() || (newEvent.type === "Holiday" ? "Campus Wide" : "N/A"),
+    };
+
     try {
-      const res = await fetch(`${ACADEMIC_API_BASE}/admin/events`, {
+      const res = await fetch(`${API_ROOT}/admin/events`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newEvent)
+        body: JSON.stringify(eventPayload)
       });
       if (res.ok) {
         fetchEvents();

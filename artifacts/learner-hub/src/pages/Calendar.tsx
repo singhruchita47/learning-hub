@@ -4,7 +4,7 @@ import {
   ChevronLeft, ChevronRight, Flame, Target, Star, Zap
 } from "lucide-react";
 import { useAcademic } from "@/context/AcademicContext";
-import { ACADEMIC_API_BASE } from "@/lib/api";
+import { ACADEMIC_API_BASE, API_ROOT } from "@/lib/api";
 
 interface LiveClassItem {
   _id: string;
@@ -20,7 +20,7 @@ interface CalendarEvent {
   date: string;
   title: string;
   time: string;
-  type: "Assignment" | "Live Class" | "Quiz";
+  type: string;
   color: string;
   dotColor: string;
   icon: any;
@@ -44,6 +44,7 @@ const DAY_NAMES = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 export default function Calendar() {
   const { assignments } = useAcademic();
   const [liveClasses, setLiveClasses] = useState<LiveClassItem[]>([]);
+  const [academicEvents, setAcademicEvents] = useState<any[]>([]);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [viewDate, setViewDate] = useState<Date>(new Date());
 
@@ -51,6 +52,11 @@ export default function Calendar() {
     fetch(`${ACADEMIC_API_BASE}/live-classes`)
       .then((r) => r.json())
       .then((d: { liveClasses?: LiveClassItem[] }) => setLiveClasses(d.liveClasses || []))
+      .catch(() => {});
+
+    fetch(`${API_ROOT}/admin/events`)
+      .then((r) => r.json())
+      .then((d: { events?: any[] }) => setAcademicEvents(d.events || []))
       .catch(() => {});
   }, []);
 
@@ -80,6 +86,26 @@ export default function Calendar() {
         icon: Radio,
       });
     });
+    
+    academicEvents.forEach((evt) => {
+      if (!evt.date) return;
+      let color = "#8B5CF6"; // default event color: purple
+      if (evt.type === "Exam") {
+        color = "#EF4444"; // red
+      } else if (evt.type === "Holiday") {
+        color = "#10B981"; // green
+      }
+      list.push({
+        date: evt.date.slice(0, 10),
+        title: evt.title,
+        time: evt.time || "All Day",
+        type: evt.type || "Event",
+        color: color,
+        dotColor: color,
+        icon: CalendarIcon,
+      });
+    });
+
     const baseDate = new Date();
     const quizDate = new Date(baseDate.setDate(baseDate.getDate() + 1)).toISOString().slice(0, 10);
     list.push({
@@ -92,7 +118,7 @@ export default function Calendar() {
       icon: Video,
     });
     return list;
-  }, [assignments, liveClasses]);
+  }, [assignments, liveClasses, academicEvents]);
 
   const selectedEvents = useMemo(() => {
     const key = formatDateKey(selectedDate);

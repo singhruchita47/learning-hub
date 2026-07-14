@@ -28,6 +28,7 @@ export let memoryStore = {
   liveClasses: getDB("liveClasses", []) as any[],
   resources: getDB("resources", []) as any[],
   courses: getDB("courses", []) as any[],
+  enrollments: getDB("enrollments", []) as any[],
 };
 
 function saveMemoryStore(key: keyof typeof memoryStore) {
@@ -284,9 +285,9 @@ router.post("/classes", async (req: Request, res: Response) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-    db.classes.unshift(classSession);
-    updateDB("classes", db.classes);
-    db.notifications.unshift({
+    memoryStore.classes.unshift(classSession);
+    updateDB("classes", memoryStore.classes);
+    memoryStore.notifications.unshift({
       _id: memoryId("notification"),
       title: "Live class scheduled",
       message: `${title} is scheduled for ${new Date(startsAt).toLocaleString("en-IN")}.`,
@@ -294,7 +295,7 @@ router.post("/classes", async (req: Request, res: Response) => {
       type: "class",
       createdAt: new Date().toISOString(),
     });
-    updateDB("notifications", db.notifications);
+    updateDB("notifications", memoryStore.notifications);
     return res.status(201).json({ classSession, storage: "memory" });
   }
 
@@ -655,10 +656,9 @@ router.post("/coding-questions/batch", async (req: Request, res: Response) => {
     return res.status(400).json({ message: "questions must be a non-empty array." });
   }
 
-  const createdQuestions = [];
+  const createdQuestions: any[] = [];
 
   if (!mongoReady()) {
-    const db = getDB();
     for (const q of questions) {
       const codingQuestion = {
         _id: memoryId("coding-question"),
@@ -671,12 +671,12 @@ router.post("/coding-questions/batch", async (req: Request, res: Response) => {
         facultyId: q.facultyId,
         createdAt: new Date().toISOString(),
       };
-      db.codingQuestions.unshift(codingQuestion);
+      memoryStore.codingQuestions.unshift(codingQuestion);
       createdQuestions.push(codingQuestion);
     }
-    updateDB("codingQuestions", db.codingQuestions);
+    updateDB("codingQuestions", memoryStore.codingQuestions);
 
-    db.notifications.unshift({
+    memoryStore.notifications.unshift({
       _id: memoryId("notification"),
       title: "New coding practice available",
       message: `Faculty has added ${questions.length} new practice coding questions.`,
@@ -684,7 +684,7 @@ router.post("/coding-questions/batch", async (req: Request, res: Response) => {
       type: "general",
       createdAt: new Date().toISOString(),
     });
-    updateDB("notifications", db.notifications);
+    updateDB("notifications", memoryStore.notifications);
 
     return res.status(201).json({ codingQuestions: createdQuestions, storage: "memory" });
   }
@@ -825,8 +825,6 @@ router.get("/courses", async (_req: Request, res: Response) => {
 });
 
 // Enroll student in a course (memory mode: store enrollments in memoryStore)
-if (!memoryStore.enrollments) (memoryStore as any).enrollments = (getDB("enrollments", []) as any[]);
-
 router.post("/courses/:id/enroll", async (req: Request, res: Response) => {
   const { studentId, studentName } = req.body;
   const courseId = req.params.id;
@@ -836,7 +834,7 @@ router.post("/courses/:id/enroll", async (req: Request, res: Response) => {
   }
 
   if (!mongoReady()) {
-    const enrollments = (memoryStore as any).enrollments as any[];
+    const enrollments = memoryStore.enrollments;
     const alreadyEnrolled = enrollments.find(e => e.courseId === courseId && e.studentId === studentId);
     if (alreadyEnrolled) {
       return res.status(409).json({ message: "Already enrolled." });
@@ -869,7 +867,7 @@ router.get("/courses/enrolled/:studentId", async (req: Request, res: Response) =
   const { studentId } = req.params;
 
   if (!mongoReady()) {
-    const enrollments = (memoryStore as any).enrollments as any[] || [];
+    const enrollments = memoryStore.enrollments || [];
     const studentEnrollments = enrollments.filter((e: any) => e.studentId === studentId);
     return res.json({ enrollments: studentEnrollments, storage: "memory" });
   }

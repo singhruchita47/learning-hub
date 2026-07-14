@@ -15,12 +15,34 @@ const activityData = [
 ];
 
 export default function AdminReports() {
+  function handleExport() {
+    const csvContent = [
+      "--- Student Enrollment Trend ---",
+      "Month,Students",
+      ...enrollmentData.map(e => `${e.month},${e.students}`),
+      "",
+      "--- Weekly Platform Activity ---",
+      "Day,Logins,Submissions",
+      ...activityData.map(a => `${a.day},${a.logins},${a.submissions}`)
+    ].join("\n");
+
+    const encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `analytics_report_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   return (
     <div className="flex-1 px-4 md:px-8 py-6 max-w-[1540px] mx-auto w-full">
       <div className="space-y-7">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-black text-slate-900 tracking-tight">Analytics & Reports</h2>
-          <Button size="sm" className="gap-2 rounded-xl font-bold border-slate-200" variant="outline"><Download className="h-4 w-4" /> Export Report</Button>
+          <Button size="sm" onClick={handleExport} className="gap-2 rounded-xl font-bold border-slate-200" variant="outline">
+            <Download className="h-4 w-4" /> Export Report
+          </Button>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-sm">

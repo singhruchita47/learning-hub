@@ -7,6 +7,7 @@ import Event from "../models/event";
 import Announcement from "../models/announcement";
 import { memoryUsers } from "./auth";
 import { memoryStore } from "./academic";
+import { getDB, updateDB } from "../lib/memoryDb";
 
 const router = Router();
 
@@ -202,6 +203,12 @@ router.patch("/courses/:id/faculty", async (req, res) => {
 // ==========================================
 
 router.get("/events", async (req, res) => {
+  if (!mongoReady()) {
+    const events = getDB("events", []);
+    // sort by date ascending
+    const sorted = [...events].sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    return res.json({ events: sorted, storage: "memory" });
+  }
   try {
     const events = await Event.find().sort({ date: 1 });
     res.json({ events });
@@ -211,6 +218,22 @@ router.get("/events", async (req, res) => {
 });
 
 router.post("/events", async (req, res) => {
+  const { title, date, time, type, location } = req.body;
+  if (!mongoReady()) {
+    const events = getDB("events", []);
+    const event = {
+      _id: "evt_" + Math.random().toString(36).substring(2, 9),
+      title,
+      date,
+      time: time || "All Day",
+      type: type || "Event",
+      location: location || "N/A",
+      createdAt: new Date().toISOString()
+    };
+    events.push(event);
+    updateDB("events", events);
+    return res.status(201).json({ event, storage: "memory" });
+  }
   try {
     const event = new Event(req.body);
     await event.save();
@@ -225,6 +248,11 @@ router.post("/events", async (req, res) => {
 // ==========================================
 
 router.get("/announcements", async (req, res) => {
+  if (!mongoReady()) {
+    const announcements = getDB("announcements", []);
+    const sorted = [...announcements].sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    return res.json({ announcements: sorted, storage: "memory" });
+  }
   try {
     const announcements = await Announcement.find().sort({ createdAt: -1 });
     res.json({ announcements });
@@ -234,6 +262,19 @@ router.get("/announcements", async (req, res) => {
 });
 
 router.post("/announcements", async (req, res) => {
+  const { title, message } = req.body;
+  if (!mongoReady()) {
+    const announcements = getDB("announcements", []);
+    const announcement = {
+      _id: "ann_" + Math.random().toString(36).substring(2, 9),
+      title,
+      message,
+      createdAt: new Date().toISOString()
+    };
+    announcements.push(announcement);
+    updateDB("announcements", announcements);
+    return res.status(201).json({ announcement, storage: "memory" });
+  }
   try {
     const announcement = new Announcement(req.body);
     await announcement.save();

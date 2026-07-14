@@ -6,10 +6,11 @@
     "outDir": "dist",
     "rootDir": "src",
     "types": ["node"],
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "strict": false,
     "noImplicitAny": false,
+    "noImplicitReturns": false,
     "skipLibCheck": true
   },
   "include": ["src"],

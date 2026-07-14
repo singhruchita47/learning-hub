@@ -200,11 +200,13 @@ export default function App() {
 
   function handleLogin(nextUser: AuthUser) {
     window.localStorage.setItem("learningHubUser", JSON.stringify(nextUser));
+    window.history.pushState({}, "", import.meta.env.BASE_URL || "/");
     setUser(nextUser);
   }
 
   function handleLogout() {
     window.localStorage.removeItem("learningHubUser");
+    window.history.pushState({}, "", import.meta.env.BASE_URL || "/");
     setUser(null);
   }
 

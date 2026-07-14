@@ -121,4 +121,55 @@ router.get("/faculty-summary", (req: Request, res: Response) => {
   res.json({ date: targetDate, summary: Object.values(byCourse) });
 });
 
+// GET /api/attendance/faculty - get all faculty attendance records
+router.get("/faculty", (req: Request, res: Response) => {
+  const db = readDB();
+  const records = db.facultyAttendance || [];
+  const { date } = req.query as { date?: string };
+  const targetDate = date || new Date().toISOString().slice(0, 10);
+  
+  const filtered = records.filter((r: any) => r.date === targetDate);
+  res.json({ attendance: filtered });
+});
+
+// POST /api/attendance/faculty - mark/update faculty attendance
+router.post("/faculty", (req: Request, res: Response) => {
+  const { facultyId, facultyName, date, status } = req.body as {
+    facultyId: string;
+    facultyName: string;
+    date: string;
+    status: "present" | "absent";
+  };
+
+  if (!facultyId || !date || !status) {
+    res.status(400).json({ message: "facultyId, date, status are required" });
+    return;
+  }
+
+  const db = readDB();
+  if (!db.facultyAttendance) db.facultyAttendance = [];
+
+  const idx = (db.facultyAttendance as any[]).findIndex(
+    (r: any) => r.facultyId === facultyId && r.date === date
+  );
+
+  const record = {
+    _id: idx >= 0 ? db.facultyAttendance[idx]._id : `fatt-${Date.now()}`,
+    facultyId,
+    facultyName: facultyName || facultyId,
+    date,
+    status,
+    markedAt: new Date().toISOString(),
+  };
+
+  if (idx >= 0) {
+    db.facultyAttendance[idx] = record;
+  } else {
+    db.facultyAttendance.push(record);
+  }
+
+  writeDB(db);
+  res.status(200).json({ message: "Faculty attendance recorded", record });
+});
+
 export default router;

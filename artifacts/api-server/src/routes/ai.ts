@@ -41,7 +41,7 @@ router.post("/generate-questions", async (req: Request, res: Response) => {
 
   // Fallback MCQ generation
   const baseQuestions = mockMcqs[subject] || mockMcqs["GK Question"];
-  const generated = [];
+  const generated: any[] = [];
 
   for (let i = 0; i < Number(count); i++) {
     const template = baseQuestions[i % baseQuestions.length];

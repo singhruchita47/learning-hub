@@ -21,25 +21,15 @@ export default function AdminCurriculum() {
       .finally(() => setLoading(false));
   }, []);
 
-  // Static base subjects always shown
-  const staticSubjects = [
-    { code: "CS401", title: "Data Structures & Algorithms", credits: 4, type: "Core", teacher: "" },
-    { code: "CS402", title: "Operating Systems",            credits: 4, type: "Core", teacher: "" },
-    { code: "CS403", title: "Computer Networks",            credits: 3, type: "Core", teacher: "" },
-    { code: "CS404", title: "Web Development",              credits: 3, type: "Elective", teacher: "" },
-  ];
-
-  // Map faculty courses to subject format
-  const facultySubjects = facultyCourses.map(c => ({
+  // Map faculty courses to subject format (real courses only)
+  const allSubjects = facultyCourses.map(c => ({
     code: c.code,
     title: c.title,
     credits: 3,
-    type: "Faculty",
-    teacher: c.teacher || "",
+    type: "Core",
+    teacher: c.teacher || "Faculty",
   }));
 
-  // Combine all — show static + faculty courses
-  const allSubjects = [...staticSubjects, ...facultySubjects];
   const totalCredits = allSubjects.reduce((s, c) => s + (c.credits || 3), 0);
 
   return (

@@ -243,7 +243,7 @@ export default function Login({ onLogin }: LoginProps) {
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
               <div>
                 <label className="mb-1.5 block text-xs font-black uppercase tracking-wider text-slate-500">Email / ID</label>
                 <input
@@ -251,6 +251,7 @@ export default function Login({ onLogin }: LoginProps) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="name@learning.hub"
+                  autoComplete="off"
                   className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#6c5ce7]/50 focus:bg-white focus:ring-4 focus:ring-[#6c5ce7]/10"
                 />
               </div>
@@ -264,6 +265,7 @@ export default function Login({ onLogin }: LoginProps) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Minimum 6 characters"
+                    autoComplete="new-password"
                     className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-12 text-sm font-bold text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#6c5ce7]/50 focus:bg-white focus:ring-4 focus:ring-[#6c5ce7]/10"
                   />
                   <button
