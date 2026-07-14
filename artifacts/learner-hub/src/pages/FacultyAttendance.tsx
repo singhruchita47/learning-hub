@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Users, CalendarDays, CheckCircle2, XCircle, BarChart3,
   Save, BookOpen, ChevronDown, ClipboardList
 } from "lucide-react";
+import { ACADEMIC_API_BASE } from "@/lib/api";
 
 // ─── Mock Data ───────────────────────────────────────────────────────────────
 const COURSES = [
@@ -54,6 +55,27 @@ export default function FacultyAttendance() {
   const absentCount = Object.values(attendance).filter(v => v === "absent").length;
   const pct = Math.round((presentCount / MOCK_STUDENTS.length) * 100);
 
+  const user = (() => {
+    try {
+      const saved = localStorage.getItem("learningHubUser");
+      return saved ? JSON.parse(saved) : null;
+    } catch { return null; }
+  })();
+
+  const fetchAttendance = async () => {
+    try {
+      const res = await fetch(`${ACADEMIC_API_BASE}/attendance`);
+      if (res.ok) {
+        const data = await res.json();
+        setSavedSessions(data.attendance || []);
+      }
+    } catch {}
+  };
+
+  useEffect(() => {
+    fetchAttendance();
+  }, []);
+
   function markAll(status: "present" | "absent") {
     const next: AttendanceMap = {};
     MOCK_STUDENTS.forEach(s => { next[s.id] = status; });
@@ -64,13 +86,24 @@ export default function FacultyAttendance() {
     setAttendance(prev => ({ ...prev, [id]: prev[id] === "present" ? "absent" : "present" }));
   }
 
-  function saveAttendance() {
-    setSavedSessions(prev => {
-      const filtered = prev.filter(s => !(s.course === selectedCourse && s.date === selectedDate));
-      return [{ course: selectedCourse, date: selectedDate, attendance: { ...attendance } }, ...filtered];
-    });
-    setSaveStatus("saved");
-    setTimeout(() => setSaveStatus("idle"), 2500);
+  async function saveAttendance() {
+    try {
+      const res = await fetch(`${ACADEMIC_API_BASE}/attendance`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          course: selectedCourse,
+          date: selectedDate,
+          attendance,
+          facultyId: user?.name || "Faculty"
+        })
+      });
+      if (res.ok) {
+        fetchAttendance();
+        setSaveStatus("saved");
+        setTimeout(() => setSaveStatus("idle"), 2500);
+      }
+    } catch {}
   }
 
   const courseInfo = COURSES.find(c => c.code === selectedCourse)!;

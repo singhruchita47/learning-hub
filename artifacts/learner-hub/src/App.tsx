@@ -53,7 +53,12 @@ import StudentAttendance from "@/pages/StudentAttendance";
 import FacultyAttendance from "@/pages/FacultyAttendance";
 import FacultyCourses from "@/pages/FacultyCourses";
 import FacultyLiveClasses from "@/pages/FacultyLiveClasses";
-
+import StudentGradeCard from "@/pages/StudentGradeCard";
+import AdminTimetable from "@/pages/admin/AdminTimetable";
+import FacultyTimetable from "@/pages/FacultyTimetable";
+import StudentTimetable from "@/pages/StudentTimetable";
+import StudentProgress from "@/pages/StudentProgress";
+import AdminPermissions from "@/pages/admin/AdminPermissions";
 const queryClient = new QueryClient();
 
 type Role = "student" | "faculty" | "admin";
@@ -129,6 +134,7 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
           <Route path="/faculty/coding-questions" component={FacultyCodingQuestions} />
           <Route path="/faculty/analytics" component={() => <FacultyDashboard user={user} onLogout={onLogout} />} />
           <Route path="/faculty/attendance" component={FacultyAttendance} />
+          <Route path="/faculty/timetable" component={FacultyTimetable} />
           <Route component={NotFound} />
         </Switch>
       </FacultyLayout>
@@ -149,6 +155,8 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
           <Route path="/admin/placements" component={AdminPlacements} />
           <Route path="/admin/curriculum" component={AdminCurriculum} />
           <Route path="/admin/attendance" component={AdminAttendance} />
+          <Route path="/admin/timetable" component={AdminTimetable} />
+          <Route path="/admin/permissions" component={AdminPermissions} />
           <Route path="/admin/calendar" component={AdminCalendar} />
           <Route path="/admin/leaderboard" component={AdminLeaderboard} />
           <Route path="/admin/badges" component={AdminBadges} />
@@ -177,7 +185,10 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
         <Route path="/community" component={Community} />
         <Route path="/leaderboard" component={Leaderboard} />
         <Route path="/calendar" component={Calendar} />
+        <Route path="/timetable" component={StudentTimetable} />
+        <Route path="/progress" component={StudentProgress} />
         <Route path="/attendance" component={StudentAttendance} />
+        <Route path="/grade-card" component={StudentGradeCard} />
         <Route path="/certificates" component={Certificates} />
         <Route path="/profile" component={Profile} />
         <Route path="/settings" component={Settings} />

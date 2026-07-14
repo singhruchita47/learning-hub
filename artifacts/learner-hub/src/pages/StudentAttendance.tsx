@@ -52,7 +52,7 @@ export default function StudentAttendance() {
       .then((d: { courses?: Course[] }) => setCourses(d.courses || []))
       .catch(() => {});
 
-    fetch(`${API}/attendance/student/${encodeURIComponent(studentId)}`)
+    fetch(`${ACADEMIC_API_BASE}/attendance/student/${encodeURIComponent(studentId)}`)
       .then((r) => r.json())
       .then((d: { attendance?: AttendanceRecord[] }) => setRecords(d.attendance || []))
       .catch(() => {});
@@ -66,7 +66,7 @@ export default function StudentAttendance() {
   async function markAttendance(courseCode: string, status: "present" | "absent") {
     setMarking(courseCode + status);
     try {
-      const res = await fetch(`${API}/attendance`, {
+      const res = await fetch(`${ACADEMIC_API_BASE}/attendance`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ studentId, studentName, courseCode, date: TODAY, status }),

@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { 
   BarChart2, BookOpen, Users, LogOut, 
   Settings, LayoutDashboard, Calendar,
-  Trophy, BookMarked, UserCheck, CheckCircle2,
+  Trophy, BookMarked, UserCheck, CheckCircle2, ShieldCheck,
   TrendingUp, Megaphone, Link2, Award, Search, Code2, ClipboardList
 } from "lucide-react";
 
@@ -17,10 +17,12 @@ export default function AdminNav({ name, onLogout, children }: { name: string, o
     { href: "/admin/quiz-coding", label: "Quiz & Coding", icon: Code2 },
     { href: "/admin/assignments", label: "Assignments", icon: ClipboardList },
     { href: "/admin/allocations", label: "Allocations", icon: Link2 },
-    { href: "/admin/placements", label: "Students", icon: Users },
+    { href: "/admin/placements", label: "Students & Import", icon: Users },
     { href: "/admin/curriculum", label: "Curriculum", icon: BookMarked },
     { href: "/admin/attendance", label: "Attendance", icon: UserCheck },
+    { href: "/admin/timetable", label: "Timetable", icon: Calendar },
     { href: "/admin/calendar", label: "Calendar", icon: Calendar },
+    { href: "/admin/permissions", label: "Permissions", icon: ShieldCheck },
     { href: "/admin/leaderboard", label: "Leaderboard", icon: Trophy },
     { href: "/admin/badges", label: "Badges", icon: Award },
     { href: "/admin/system", label: "System", icon: Settings },

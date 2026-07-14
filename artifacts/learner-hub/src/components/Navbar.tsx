@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
   Award, Bell, BookOpen, CalendarDays, ClipboardList,
   Code2, FileText, HelpCircle, LayoutDashboard, Library,
-  LogOut, Radio, Search, Trophy, UserCheck, Users, Sparkles, X,
+  LogOut, Radio, Search, Trophy, UserCheck, Users, Sparkles, X, FileSpreadsheet, TrendingUp
 } from "lucide-react";
 import { useSearch } from "@/context/SearchContext";
 import { ACADEMIC_API_BASE } from "@/lib/api";
@@ -21,6 +21,7 @@ type ApiNotification = {
 
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard",      href: "/",                color: "text-violet-600",  activeBg: "from-violet-600 to-indigo-600" },
+  { icon: TrendingUp,      label: "My Progress",    href: "/progress",        color: "text-rose-600",    activeBg: "from-rose-500 to-red-500"      },
   { icon: BookOpen,        label: "Courses",         href: "/courses",         color: "text-blue-600",    activeBg: "from-blue-600 to-cyan-600"     },
   { icon: Library,         label: "Resources",       href: "/resources",       color: "text-indigo-600",  activeBg: "from-indigo-600 to-violet-600" },
   { icon: Radio,           label: "Classes",         href: "/classes",         color: "text-emerald-600", activeBg: "from-emerald-600 to-teal-600"  },
@@ -28,9 +29,11 @@ const navItems = [
   { icon: HelpCircle,      label: "Quizzes",         href: "/quizzes",         color: "text-purple-600",  activeBg: "from-purple-600 to-violet-600" },
   { icon: Code2,           label: "Coding",          href: "/coding-practice", color: "text-cyan-600",    activeBg: "from-cyan-600 to-blue-600"     },
   { icon: CalendarDays,    label: "Calendar",        href: "/calendar",        color: "text-sky-600",     activeBg: "from-sky-600 to-blue-600"      },
+  { icon: CalendarDays,    label: "Timetable",       href: "/timetable",       color: "text-blue-600",    activeBg: "from-blue-600 to-indigo-600"   },
   { icon: Trophy,          label: "Leaderboard",     href: "/leaderboard",     color: "text-orange-600",  activeBg: "from-orange-500 to-amber-500"  },
   { icon: Users,           label: "Community",       href: "/community",       color: "text-teal-600",    activeBg: "from-teal-600 to-emerald-600"  },
   { icon: Award,           label: "Certificates",    href: "/certificates",    color: "text-yellow-600",  activeBg: "from-yellow-500 to-orange-500" },
+  { icon: FileSpreadsheet, label: "Grade Card",      href: "/grade-card",      color: "text-emerald-600", activeBg: "from-emerald-500 to-teal-500"  },
   { icon: FileText,        label: "AI Resume",       href: "/resume-generator",color: "text-fuchsia-600", activeBg: "from-fuchsia-600 to-pink-600"  },
 ];
 

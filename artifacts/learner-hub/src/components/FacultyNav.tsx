@@ -24,6 +24,7 @@ const facultyLinks = [
   { href: "/faculty/quiz-marks",        label: "Quiz Marks",            icon: Trophy,        color: "text-orange-600",  bg: "bg-orange-50"  },
   { href: "/faculty/coding-questions",  label: "Coding Questions",      icon: Code2,         color: "text-cyan-600",    bg: "bg-cyan-50"    },
   { href: "/faculty/attendance",        label: "Attendance",            icon: UserCheck,     color: "text-teal-600",    bg: "bg-teal-50"    },
+  { href: "/faculty/timetable",         label: "Timetable",             icon: BookOpen,      color: "text-sky-600",     bg: "bg-sky-50"     },
   { href: "/faculty/notices",           label: "Notices",               icon: Bell,          color: "text-pink-600",    bg: "bg-pink-50"    },
 ];
 

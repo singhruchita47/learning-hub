@@ -9,10 +9,14 @@ import {
   Search,
   Send,
   Trophy,
+  Trophy,
   XCircle,
   Loader,
+  GripVertical,
+  TerminalSquare
 } from "lucide-react";
 import { useLocation } from "wouter";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import { codingPracticeProblems, type PracticeProblem } from "@/data/codingPracticeProblems";
 import { ACADEMIC_API_BASE, RUN_CODE_DIRECT_URL } from "@/lib/api";
 
@@ -77,9 +81,10 @@ function runJavaScript(sourceCode: string, stdin: string, expected: string): Run
       message: accepted ? "Accepted" : "Wrong Answer",
     };
   } catch (error) {
+    const errObj = error instanceof Error ? error : new Error(String(error));
     return {
       status: "error",
-      output: error instanceof Error ? error.message : "Runtime error",
+      output: errObj.stack || errObj.message || "Runtime error",
       expected,
       message: "Runtime Error",
     };
@@ -144,6 +149,7 @@ export default function CodingPractice() {
         description: string;
         inputTestCase: string;
         expectedOutput: string;
+        imageUrl?: string;
         isTest?: boolean;
       }> }) => {
         if (!mounted) return;
@@ -166,6 +172,7 @@ export default function CodingPractice() {
             constraints: ["Follow the input/output format exactly."],
             stdin: question.inputTestCase,
             expectedOutput: question.expectedOutput,
+            imageUrl: question.imageUrl,
             isTest
           };
         });
@@ -235,11 +242,20 @@ export default function CodingPractice() {
         result = runJavaScript(currentCode, activeProblem.stdin, activeProblem.expectedOutput);
       } else {
         const judgeResult = await runWithJudge0(activeProblem, currentCode, language.judge0Id);
-        const output = (judgeResult.stdout || judgeResult.stderr || judgeResult.compile_output || "").trim();
         const accepted = judgeResult.status?.description === "Accepted";
+        
+        let output = "";
+        if (judgeResult.compile_output) {
+          output = judgeResult.compile_output;
+        } else if (judgeResult.stderr) {
+          output = judgeResult.stderr;
+        } else {
+          output = judgeResult.stdout || "";
+        }
+
         result = {
-          status: accepted ? "accepted" : "wrong",
-          output: output || "(no output)",
+          status: accepted ? "accepted" : judgeResult.status?.description === "Compilation Error" ? "error" : "wrong",
+          output: output.trim() || "(no output)",
           expected: activeProblem.expectedOutput,
           message: judgeResult.status?.description ?? "Judge0 result",
         };
@@ -530,116 +546,170 @@ export default function CodingPractice() {
         </div>
       </div>
 
-      <div className="mx-auto grid min-h-0 w-full max-w-[1600px] flex-1 grid-cols-[40fr_60fr] items-stretch gap-1 px-3 pb-2 pt-2">
-        
-        {/* Left Side details */}
-        <section className="h-full overflow-y-auto rounded-l-2xl border border-slate-200 bg-white p-6 space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <h1 className="text-2xl font-extrabold text-slate-950">{activeProblem.title}</h1>
-            <span className="rounded-lg bg-indigo-50 px-2 py-1 text-[10px] font-black uppercase text-indigo-700 tracking-wider">
-              {parsedDescription.topic}
-            </span>
-          </div>
-          <div className="mt-4 flex flex-wrap items-center gap-5 text-xs font-black text-slate-400">
-            <span>DIFFICULTY: <b className="text-indigo-600 uppercase">{activeProblem.difficulty}</b></span>
-            <span>ACCURACY: <b className="text-slate-600">{activeProblem.acceptance}</b></span>
-            <span>POINTS: <b className="text-slate-600">2</b></span>
-          </div>
-          <div className="my-5 h-px bg-slate-200" />
-          <p className="text-sm font-semibold leading-relaxed text-slate-700">{parsedDescription.description}</p>
+      <div className="mx-auto flex h-[calc(100vh-60px)] min-h-0 w-full max-w-[1600px] flex-1 flex-col pb-2 pt-2">
+        <PanelGroup direction="horizontal" className="h-full w-full rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+          
+          {/* Left Side details */}
+          <Panel defaultSize={40} minSize={30} className="flex h-full flex-col bg-white">
+            <div className="h-full overflow-y-auto p-6 space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h1 className="text-2xl font-extrabold text-slate-950">{activeProblem.title}</h1>
+                <span className="rounded-lg bg-indigo-50 px-2 py-1 text-[10px] font-black uppercase text-indigo-700 tracking-wider">
+                  {parsedDescription.topic}
+                </span>
+              </div>
+              <div className="mt-4 flex flex-wrap items-center gap-5 text-xs font-black text-slate-400">
+                <span>DIFFICULTY: <b className="text-indigo-600 uppercase">{activeProblem.difficulty}</b></span>
+                <span>ACCURACY: <b className="text-slate-600">{activeProblem.acceptance}</b></span>
+                <span>POINTS: <b className="text-slate-600">2</b></span>
+              </div>
+              <div className="my-5 h-px bg-slate-200" />
+              <p className="text-sm font-semibold leading-relaxed text-slate-700 whitespace-pre-wrap">{parsedDescription.description}</p>
+              
+              {activeProblem.imageUrl && (
+                <div className="mt-6 border border-slate-200 rounded-xl overflow-hidden bg-slate-50 p-2 shadow-sm">
+                  <img src={activeProblem.imageUrl} alt="Problem visual" className="w-full h-auto object-contain max-h-[300px] rounded-lg" />
+                </div>
+              )}
 
-          <div className="mt-7 space-y-5">
-            {activeProblem.examples.map((example, index) => (
-              <div key={index}>
-                <h3 className="mb-2 text-sm font-extrabold text-slate-900">Example {index + 1}:</h3>
-                <div className="rounded-xl border border-slate-200 bg-slate-55/40 p-4 text-xs leading-normal text-slate-700 font-semibold space-y-1">
-                  <p><b>Input:</b> {example.input}</p>
-                  <p><b>Output:</b> {example.output}</p>
-                  <p><b>Explanation:</b> {example.explanation}</p>
+              <div className="mt-7 space-y-5">
+                {activeProblem.examples.map((example, index) => (
+                  <div key={index}>
+                    <h3 className="mb-2 text-sm font-extrabold text-slate-900">Example {index + 1}:</h3>
+                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs leading-normal text-slate-700 font-semibold space-y-1">
+                      <p><b>Input:</b> {example.input}</p>
+                      <p><b>Output:</b> {example.output}</p>
+                      <p><b>Explanation:</b> {example.explanation}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-slate-100">
+                <h3 className="mb-3 text-sm font-extrabold text-slate-900">Constraints:</h3>
+                <div className="space-y-2">
+                  {activeProblem.constraints.map((item) => (
+                    <p key={item} className="font-mono text-xs text-slate-650">{item}</p>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
-
-          <div className="mt-8 pt-4 border-t border-slate-100">
-            <h3 className="mb-3 text-sm font-extrabold text-slate-900">Constraints:</h3>
-            <div className="space-y-2">
-              {activeProblem.constraints.map((item) => (
-                <p key={item} className="font-mono text-xs text-slate-650">{item}</p>
-              ))}
             </div>
-          </div>
-        </section>
+          </Panel>
 
-        {/* Right Side Editor */}
-        <section className="flex h-full min-h-0 flex-col rounded-r-2xl border border-slate-200 bg-white">
-          <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3">
-            <div className="flex items-center gap-2 text-sm font-extrabold text-slate-800">
-              <Code2 className="h-4 w-4 text-indigo-600" />
-              Code Editor
-            </div>
-            <select
-              value={selectedLanguage}
-              onChange={(event) => setSelectedLanguage(event.target.value as LanguageKey)}
-              className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm font-bold text-slate-700 outline-none"
-            >
-              {languages.map((item) => (
-                <option key={item.key} value={item.key}>{item.label}</option>
-              ))}
-            </select>
-          </div>
+          <PanelResizeHandle className="w-1.5 bg-slate-100 hover:bg-indigo-300 transition-colors flex flex-col justify-center items-center cursor-col-resize group">
+            <div className="h-8 w-1 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors" />
+          </PanelResizeHandle>
 
-          <textarea
-            value={currentCode}
-            onChange={(event) => setSolutions((current) => ({ ...current, [solutionKey]: event.target.value }))}
-            spellCheck={false}
-            className="min-h-0 flex-1 resize-none bg-white p-4 font-mono text-sm leading-6 text-slate-900 outline-none"
-          />
-
-          <div className="shrink-0 border-t border-slate-200 bg-slate-50 p-4">
-            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-sm font-extrabold text-slate-700">
-                <CheckCircle2 className="h-4 w-4 text-indigo-600" />
-                Testcase
-              </div>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleRun(false)}
-                  className="h-11 rounded-xl bg-slate-700 px-5 text-sm font-extrabold text-white hover:bg-slate-800"
-                >
-                  Compile & Run
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleRun(true)}
-                  className="h-11 rounded-xl bg-indigo-600 px-6 text-sm font-extrabold text-white hover:bg-indigo-700"
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
-            <div className="grid gap-3 md:grid-cols-2">
-              <pre className="rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-700 font-mono">Input: {activeProblem.stdin}</pre>
-              <pre className="rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-700 font-mono">Expected: {activeProblem.expectedOutput}</pre>
-            </div>
-            {currentRun && (
-              <div className={`mt-3 rounded-xl border p-3 text-sm ${
-                currentRun.status === "accepted"
-                  ? "border-indigo-200 bg-indigo-50 text-indigo-800"
-                  : currentRun.status === "running"
-                    ? "border-blue-200 bg-blue-50 text-blue-800"
-                    : "border-red-200 bg-red-50 text-red-800"
-              }`}>
-                <div className="mb-2 flex items-center gap-2 font-extrabold">
-                  {currentRun.status === "accepted" ? <CheckCircle2 className="h-4 w-4" /> : <XCircle className="h-4 w-4" />}
-                  {currentRun.message}
+          {/* Right Side Editor & Console */}
+          <Panel defaultSize={60} minSize={30} className="flex h-full flex-col min-h-0 bg-white">
+            <PanelGroup direction="vertical">
+              
+              {/* Code Editor Panel */}
+              <Panel defaultSize={70} minSize={30} className="flex flex-col min-h-0 relative">
+                <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3 shrink-0">
+                  <div className="flex items-center gap-2 text-sm font-extrabold text-slate-800">
+                    <Code2 className="h-4 w-4 text-indigo-600" />
+                    Code Editor
+                  </div>
+                  <select
+                    value={selectedLanguage}
+                    onChange={(event) => setSelectedLanguage(event.target.value as LanguageKey)}
+                    className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm font-bold text-slate-700 outline-none"
+                  >
+                    {languages.map((item) => (
+                      <option key={item.key} value={item.key}>{item.label}</option>
+                    ))}
+                  </select>
                 </div>
-                <pre className="whitespace-pre-wrap rounded-lg bg-white/70 p-2 font-mono text-xs">Your Output: {currentRun.output}</pre>
-              </div>
-            )}
-          </div>
-        </section>
+                
+                <textarea
+                  value={currentCode}
+                  onChange={(event) => setSolutions((current) => ({ ...current, [solutionKey]: event.target.value }))}
+                  spellCheck={false}
+                  className="min-h-0 flex-1 resize-none bg-slate-950 p-4 font-mono text-sm leading-6 text-slate-200 outline-none focus:ring-inset focus:ring-1 focus:ring-indigo-500"
+                />
+              </Panel>
+
+              <PanelResizeHandle className="h-1.5 bg-slate-200 hover:bg-indigo-300 transition-colors flex justify-center items-center cursor-row-resize group">
+                <div className="w-8 h-1 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors" />
+              </PanelResizeHandle>
+
+              {/* Console / Output Panel */}
+              <Panel defaultSize={30} minSize={15} className="flex flex-col min-h-0 bg-slate-50">
+                <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-2 shrink-0">
+                  <div className="flex items-center gap-2 text-xs font-black text-slate-600 uppercase tracking-wider">
+                    <TerminalSquare className="h-4 w-4 text-slate-400" />
+                    Console
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleRun(false)}
+                      className="h-8 rounded-lg bg-slate-700 px-4 text-xs font-bold text-white hover:bg-slate-800 transition shadow-sm"
+                    >
+                      Run
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleRun(true)}
+                      className="h-8 rounded-lg bg-indigo-600 px-4 text-xs font-bold text-white hover:bg-indigo-700 transition shadow-sm"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                  {currentRun ? (
+                    <div className={`rounded-xl border p-4 text-sm font-mono ${
+                      currentRun.status === "accepted"
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-900 shadow-sm"
+                        : currentRun.status === "running"
+                          ? "border-blue-200 bg-blue-50 text-blue-900 shadow-sm"
+                          : currentRun.status === "error"
+                            ? "border-rose-200 bg-rose-50 text-rose-900 shadow-sm"
+                            : "border-amber-200 bg-amber-50 text-amber-900 shadow-sm"
+                    }`}>
+                      <div className="mb-3 flex items-center gap-2 font-black text-base border-b border-current/10 pb-2">
+                        {currentRun.status === "accepted" ? <CheckCircle2 className="h-5 w-5 text-emerald-600" /> : <XCircle className="h-5 w-5" />}
+                        {currentRun.message}
+                      </div>
+                      
+                      <div className="space-y-3">
+                        {currentRun.status !== "error" && currentRun.status !== "running" && (
+                          <div className="grid gap-3 md:grid-cols-2">
+                            <div>
+                              <p className="text-[10px] uppercase font-black opacity-60 mb-1">Input</p>
+                              <div className="rounded bg-black/5 p-2 text-xs">{activeProblem.stdin}</div>
+                            </div>
+                            <div>
+                              <p className="text-[10px] uppercase font-black opacity-60 mb-1">Expected Output</p>
+                              <div className="rounded bg-black/5 p-2 text-xs">{activeProblem.expectedOutput}</div>
+                            </div>
+                          </div>
+                        )}
+                        
+                        <div>
+                          <p className="text-[10px] uppercase font-black opacity-60 mb-1">
+                            {currentRun.status === "error" ? "Compiler / Runtime Error" : "Your Output"}
+                          </p>
+                          <div className={`rounded bg-black/5 p-2 text-xs overflow-x-auto ${currentRun.status === "error" ? "text-rose-600" : ""}`}>
+                            <pre className="whitespace-pre-wrap">{currentRun.output}</pre>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-sm font-bold text-slate-400">
+                      Run code to see output here
+                    </div>
+                  )}
+                </div>
+              </Panel>
+              
+            </PanelGroup>
+          </Panel>
+        </PanelGroup>
       </div>
     </div>
   );

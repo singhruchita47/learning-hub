@@ -429,7 +429,7 @@ router.patch("/notifications/:notificationId/read", async (req: Request, res: Re
 });
 
 router.post("/coding-questions", async (req: Request, res: Response) => {
-  const { title, difficulty = "Easy", description, inputTestCase, expectedOutput, starterCode = "", facultyId } = req.body;
+  const { title, difficulty = "Easy", description, inputTestCase, expectedOutput, starterCode = "", facultyId, imageUrl } = req.body;
 
   if (!title || !description || !inputTestCase || !expectedOutput || !facultyId) {
     return res.status(400).json({
@@ -448,6 +448,7 @@ router.post("/coding-questions", async (req: Request, res: Response) => {
       expectedOutput,
       starterCode,
       facultyId,
+      imageUrl,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -473,6 +474,7 @@ router.post("/coding-questions", async (req: Request, res: Response) => {
     expectedOutput,
     starterCode,
     facultyId,
+    imageUrl,
   });
 
   await Notification.create({
@@ -669,6 +671,7 @@ router.post("/coding-questions/batch", async (req: Request, res: Response) => {
         expectedOutput: q.expectedOutput,
         starterCode: q.starterCode || "",
         facultyId: q.facultyId,
+        imageUrl: q.imageUrl,
         createdAt: new Date().toISOString(),
       };
       memoryStore.codingQuestions.unshift(codingQuestion);
@@ -698,6 +701,7 @@ router.post("/coding-questions/batch", async (req: Request, res: Response) => {
       expectedOutput: q.expectedOutput,
       starterCode: q.starterCode || "",
       facultyId: q.facultyId,
+      imageUrl: q.imageUrl,
     });
     createdQuestions.push(codingQuestion);
   }
@@ -946,6 +950,359 @@ router.post("/reset-db", async (_req: Request, res: Response) => {
   }
 
   return res.json({ message: "Database reset successful" });
+});
+
+// ==========================================
+// Doubt Forum endpoints
+// ==========================================
+router.get("/forum/threads", async (_req: Request, res: Response) => {
+  if (!mongoReady()) {
+    const db = getDB();
+    if (!db.forumThreads) db.forumThreads = [];
+    return res.json({ threads: db.forumThreads, storage: "memory" });
+  }
+  // If mongo is ready, we would fetch from DB. For now, fallback to memory if no model.
+  return res.json({ threads: getDB().forumThreads || [], storage: "memory" });
+});
+
+router.post("/forum/threads", async (req: Request, res: Response) => {
+  const { author, initials, role, color, title, body, tag, tagColor } = req.body;
+  if (!title || !body) {
+    return res.status(400).json({ message: "title and body are required." });
+  }
+
+  const db = getDB();
+  if (!db.forumThreads) db.forumThreads = [];
+
+  const thread = {
+    id: Date.now(),
+    author: author || "Student",
+    initials: initials || "ST",
+    role: role || "Student",
+    color: color || "#6c5ce7",
+    title,
+    body,
+    time: new Date().toISOString(),
+    tag: tag || "General",
+    tagColor: tagColor || "#6c5ce7",
+    likes: 0,
+    replies: []
+  };
+
+  db.forumThreads.unshift(thread);
+  updateDB("forumThreads", db.forumThreads);
+  
+  return res.status(201).json({ thread, storage: "memory" });
+});
+
+router.post("/forum/threads/:id/replies", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { author, initials, text } = req.body;
+
+  if (!text) {
+    return res.status(400).json({ message: "text is required." });
+  }
+
+  const db = getDB();
+  if (!db.forumThreads) db.forumThreads = [];
+  
+  const thread = db.forumThreads.find((t: any) => t.id.toString() === id);
+  if (!thread) return res.status(404).json({ message: "Thread not found." });
+
+  const reply = {
+    id: Date.now(),
+    author: author || "User",
+    initials: initials || "US",
+    text,
+    time: new Date().toISOString()
+  };
+
+  thread.replies.push(reply);
+  updateDB("forumThreads", db.forumThreads);
+
+  return res.status(201).json({ reply, storage: "memory" });
+});
+
+router.patch("/forum/threads/:id/like", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { delta } = req.body; // usually 1 or -1
+
+  const db = getDB();
+  if (!db.forumThreads) db.forumThreads = [];
+  
+  const thread = db.forumThreads.find((t: any) => t.id.toString() === id);
+  if (!thread) return res.status(404).json({ message: "Thread not found." });
+
+  thread.likes = Math.max(0, (thread.likes || 0) + (delta || 1));
+  updateDB("forumThreads", db.forumThreads);
+
+  return res.json({ likes: thread.likes, storage: "memory" });
+});
+
+// ==========================================
+// Attendance endpoints
+// ==========================================
+router.get("/attendance", async (_req: Request, res: Response) => {
+  if (!mongoReady()) {
+    const db = getDB();
+    if (!db.attendance) db.attendance = [];
+    return res.json({ attendance: db.attendance, storage: "memory" });
+  }
+  return res.json({ attendance: getDB().attendance || [], storage: "memory" });
+});
+
+router.post("/attendance", async (req: Request, res: Response) => {
+  const { course, date, attendance, facultyId, studentId, courseCode, status } = req.body;
+  
+  const db = getDB();
+  if (!db.attendance) db.attendance = [];
+
+  // Faculty batch submission
+  if (course && date && attendance) {
+    const session = {
+      id: Date.now().toString(),
+      course,
+      date,
+      attendance,
+      facultyId: facultyId || "Faculty",
+      createdAt: new Date().toISOString()
+    };
+    db.attendance.unshift(session);
+    updateDB("attendance", db.attendance);
+    return res.status(201).json({ session, storage: "memory" });
+  }
+
+  // Student individual submission
+  if (studentId && courseCode && date && status) {
+    let session = db.attendance.find((s: any) => s.course === courseCode && s.date === date);
+    if (!session) {
+      session = {
+        id: Date.now().toString(),
+        course: courseCode,
+        date,
+        attendance: {},
+        facultyId: "System",
+        createdAt: new Date().toISOString()
+      };
+      db.attendance.unshift(session);
+    }
+    session.attendance[studentId] = status;
+    updateDB("attendance", db.attendance);
+    
+    return res.status(201).json({
+      record: {
+        _id: session.id + "_" + studentId,
+        courseCode,
+        date,
+        status,
+        markedAt: new Date().toISOString()
+      },
+      storage: "memory"
+    });
+  }
+
+  return res.status(400).json({ message: "Invalid payload for attendance." });
+});
+
+router.get("/attendance/student/:studentId", async (req: Request, res: Response) => {
+  const { studentId } = req.params;
+  const db = getDB();
+  if (!db.attendance) db.attendance = [];
+
+  const records = db.attendance.map((s: any) => {
+    if (s.attendance[studentId]) {
+      return {
+        _id: s.id + "_" + studentId,
+        courseCode: s.course,
+        date: s.date,
+        status: s.attendance[studentId],
+        markedAt: s.createdAt
+      };
+    }
+    return null;
+  }).filter(Boolean);
+
+  return res.json({ attendance: records, storage: "memory" });
+});
+
+router.get("/attendance/all", async (_req: Request, res: Response) => {
+  const db = getDB();
+  if (!db.attendance) db.attendance = [];
+  
+  // Flatten sessions into individual records
+  const allRecords: any[] = [];
+  db.attendance.forEach((s: any) => {
+    for (const [studentId, status] of Object.entries(s.attendance || {})) {
+      allRecords.push({
+        _id: s.id + "_" + studentId,
+        studentId,
+        studentName: "Student", // Without a lookup table, fallback to generic
+        courseCode: s.course,
+        date: s.date,
+        status,
+        markedAt: s.createdAt
+      });
+    }
+  });
+
+  return res.json({ attendance: allRecords, storage: "memory" });
+});
+
+router.get("/attendance/faculty", async (req: Request, res: Response) => {
+  const { date } = req.query;
+  const db = getDB();
+  if (!db.facultyAttendance) db.facultyAttendance = [];
+  
+  let records = db.facultyAttendance;
+  if (date) {
+    records = records.filter((r: any) => r.date === date);
+  }
+  return res.json({ attendance: records, storage: "memory" });
+});
+
+router.post("/attendance/faculty", async (req: Request, res: Response) => {
+  const { facultyId, facultyName, date, status } = req.body;
+  const db = getDB();
+  if (!db.facultyAttendance) db.facultyAttendance = [];
+  
+  let record = db.facultyAttendance.find((r: any) => r.facultyId === facultyId && r.date === date);
+  if (record) {
+    record.status = status;
+    record.markedAt = new Date().toISOString();
+  } else {
+    record = {
+      _id: Date.now().toString(),
+      facultyId,
+      facultyName,
+      date,
+      status,
+      markedAt: new Date().toISOString()
+    };
+    db.facultyAttendance.unshift(record);
+  }
+  updateDB("facultyAttendance", db.facultyAttendance);
+  
+  return res.status(201).json({ record, storage: "memory" });
+});
+
+// ==========================================
+// Timetable endpoints
+// ==========================================
+router.get("/timetable", async (_req: Request, res: Response) => {
+  const db = getDB();
+  if (!db.timetable) db.timetable = [];
+  return res.json({ timetable: db.timetable, storage: "memory" });
+});
+
+router.post("/timetable", async (req: Request, res: Response) => {
+  const { courseCode, subject, facultyId, facultyName, day, startTime, endTime, type, location } = req.body;
+  if (!courseCode || !day || !startTime || !endTime) {
+    return res.status(400).json({ message: "courseCode, day, startTime, and endTime are required." });
+  }
+
+  const db = getDB();
+  if (!db.timetable) db.timetable = [];
+
+  const slot = {
+    id: Date.now().toString(),
+    courseCode,
+    subject: subject || courseCode,
+    facultyId: facultyId || "faculty-demo",
+    facultyName: facultyName || "Faculty",
+    day,
+    startTime,
+    endTime,
+    type: type || "Lecture",
+    location: location || "TBA",
+    createdAt: new Date().toISOString()
+  };
+
+  db.timetable.push(slot);
+  updateDB("timetable", db.timetable);
+  
+  return res.status(201).json({ slot, storage: "memory" });
+});
+
+router.delete("/timetable/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const db = getDB();
+  if (!db.timetable) db.timetable = [];
+  
+  const index = db.timetable.findIndex((t: any) => t.id === id);
+  if (index !== -1) {
+    db.timetable.splice(index, 1);
+    updateDB("timetable", db.timetable);
+    return res.json({ message: "Timetable slot deleted." });
+  }
+  return res.status(404).json({ message: "Slot not found." });
+});
+
+router.get("/timetable/student/:studentId", async (req: Request, res: Response) => {
+  const { studentId } = req.params;
+  const db = getDB();
+  if (!db.timetable) db.timetable = [];
+  if (!db.enrollments) db.enrollments = [];
+
+  // Get courses the student is enrolled in
+  // Mocking: If the student has no enrollments, we just return all timetable slots as a fallback/demo, 
+  // or return specific courses. For a demo, returning all if empty might be better, or standard CS301.
+  const studentEnrollments = db.enrollments.filter((e: any) => e.studentId === studentId);
+  let courseCodes = studentEnrollments.map((e: any) => e.courseId);
+  
+  // If no enrollments, return a default mock schedule based on CS301, CS302, CS303
+  if (courseCodes.length === 0) {
+    courseCodes = ["CS301", "CS302", "CS303"];
+  }
+
+  const slots = db.timetable.filter((t: any) => courseCodes.includes(t.courseCode));
+  return res.json({ timetable: slots, storage: "memory" });
+});
+
+router.get("/timetable/faculty/:facultyId", async (req: Request, res: Response) => {
+  const { facultyId } = req.params;
+  const db = getDB();
+  if (!db.timetable) db.timetable = [];
+  
+  // For demo, if facultyId is generic or demo, return all. Otherwise filter by exact email/ID.
+  let slots = db.timetable.filter((t: any) => t.facultyId === facultyId);
+  if (slots.length === 0 && facultyId.includes("demo")) {
+    slots = db.timetable;
+  }
+  
+  return res.json({ timetable: slots, storage: "memory" });
+});
+
+// ==========================================
+// Role Permissions Endpoints
+// ==========================================
+const DEFAULT_PERMISSIONS = {
+  admin: ["manage_users", "manage_courses", "view_reports", "manage_permissions", "manage_timetable", "manage_announcements"],
+  faculty: ["create_courses", "create_assignments", "mark_attendance", "view_submissions", "schedule_classes"],
+  student: ["view_courses", "submit_assignments", "view_grades", "participate_forum", "view_timetable"]
+};
+
+router.get("/permissions", async (_req: Request, res: Response) => {
+  const db = getDB();
+  if (!db.permissions) {
+    db.permissions = DEFAULT_PERMISSIONS;
+    updateDB("permissions", db.permissions);
+  }
+  return res.json({ permissions: db.permissions, storage: "memory" });
+});
+
+router.post("/permissions", async (req: Request, res: Response) => {
+  const { role, permissions } = req.body;
+  if (!role || !permissions) {
+    return res.status(400).json({ message: "role and permissions array are required." });
+  }
+
+  const db = getDB();
+  if (!db.permissions) db.permissions = DEFAULT_PERMISSIONS;
+
+  db.permissions[role] = permissions;
+  updateDB("permissions", db.permissions);
+
+  return res.json({ message: "Permissions updated successfully", permissions: db.permissions, storage: "memory" });
 });
 
 export default router;

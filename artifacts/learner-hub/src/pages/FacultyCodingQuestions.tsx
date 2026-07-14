@@ -13,6 +13,7 @@ type CodingQuestion = {
   inputTestCase: string;
   expectedOutput: string;
   starterCode: string;
+  imageUrl?: string;
   createdAt: string;
 };
 
@@ -30,6 +31,7 @@ type BankQuestion = {
   inputTestCase: string;
   expectedOutput: string;
   starterCode: string;
+  imageUrl?: string;
 };
 
 type RawBankQuestion = Record<string, unknown>;
@@ -193,6 +195,7 @@ export default function FacultyCodingQuestions() {
     inputTestCase: "",
     expectedOutput: "",
     starterCode,
+    imageUrl: "",
     questionType: "Practice Set" as "Practice Set" | "Coding Test",
   });
   const [status, setStatus] = useState("");
@@ -238,6 +241,7 @@ export default function FacultyCodingQuestions() {
     inputTestCase: string;
     expectedOutput: string;
     starterCode: string;
+    imageUrl?: string;
     questionType?: string;
   }) {
     const user = (() => {
@@ -272,7 +276,7 @@ export default function FacultyCodingQuestions() {
     try {
       const data = await saveQuestion(form);
       setQuestions((current) => [data.codingQuestion, ...current]);
-      setForm({ title: "", difficulty: "Easy", description: "", inputTestCase: "", expectedOutput: "", starterCode, questionType: "Practice Set" });
+      setForm({ title: "", difficulty: "Easy", description: "", inputTestCase: "", expectedOutput: "", starterCode, imageUrl: "", questionType: "Practice Set" });
       setStatus("Coding question saved and sent to student practice module.");
     } catch {
       setStatus("Backend offline: start API server to save coding questions in MongoDB.");
@@ -303,6 +307,7 @@ export default function FacultyCodingQuestions() {
             inputTestCase: question.inputTestCase,
             expectedOutput: question.expectedOutput,
             starterCode: question.starterCode,
+            imageUrl: question.imageUrl,
             questionType: bankQuestionType,
           }),
         ),
@@ -335,6 +340,7 @@ export default function FacultyCodingQuestions() {
         inputTestCase: aiPreview.inputTestCase,
         expectedOutput: aiPreview.expectedOutput,
         starterCode: aiPreview.starterCode,
+        imageUrl: aiPreview.imageUrl,
         questionType: aiQuestionType,
       });
       setQuestions((current) => [data.codingQuestion, ...current]);
@@ -662,6 +668,14 @@ export default function FacultyCodingQuestions() {
                   className="resize-none w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
                 />
 
+                {/* Optional Image URL */}
+                <input
+                  value={form.imageUrl}
+                  onChange={(event) => setForm((current) => ({ ...current, imageUrl: event.target.value }))}
+                  placeholder="Optional: Image URL (diagram/chart)"
+                  className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-xs font-bold outline-none focus:border-violet-300 focus:bg-white transition"
+                />
+
                 {/* Testcases */}
                 <div className="grid gap-4 md:grid-cols-2">
                   <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
@@ -748,6 +762,9 @@ export default function FacultyCodingQuestions() {
                   <p className="mt-2 text-xs font-semibold text-slate-500 leading-relaxed whitespace-pre-wrap min-h-[60px] max-h-[120px] overflow-y-auto">
                     {form.description || "Describe the programming challenge instructions here..."}
                   </p>
+                  {form.imageUrl && (
+                    <img src={form.imageUrl} alt="Problem visual" className="mt-4 max-h-40 w-auto rounded-xl border border-slate-200 object-cover shadow-sm" />
+                  )}
                 </div>
 
                 {/* Testcases row */}

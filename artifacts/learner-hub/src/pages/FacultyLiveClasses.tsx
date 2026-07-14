@@ -37,43 +37,93 @@ const STATUS_STYLES = {
 
 const BLANK = { subject: COURSES[0].name, courseCode: COURSES[0].code, topic: "", meetLink: "", scheduledAt: "", duration: 60 };
 
+const API_BASE = "http://localhost:3000/api/academic";
+
 export default function FacultyLiveClasses() {
-  const [classes, setClasses] = useState<LiveClass[]>([
-    { id: "1", subject: "Data Structures", courseCode: "CS301", topic: "Binary Trees & Traversals", meetLink: "https://meet.google.com/abc-defg-hij", scheduledAt: new Date(Date.now() + 3600000).toISOString(), duration: 60, status: "live" },
-    { id: "2", subject: "Machine Learning", courseCode: "CS401", topic: "Gradient Descent Optimisation", meetLink: "https://meet.google.com/xyz-uvwq-rst", scheduledAt: new Date(Date.now() + 86400000).toISOString(), duration: 90, status: "scheduled" },
-    { id: "3", subject: "Operating Systems", courseCode: "CS303", topic: "Process Scheduling Algorithms", meetLink: "https://meet.google.com/pqr-mnop-lkj", scheduledAt: new Date(Date.now() - 7200000).toISOString(), duration: 60, status: "ended" },
-  ]);
+  const [classes, setClasses] = useState<LiveClass[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ ...BLANK });
   const [saving, setSaving] = useState(false);
   const [filter, setFilter] = useState<"all" | "live" | "scheduled" | "ended">("all");
 
-  function scheduleClass() {
+  const user = (() => {
+    try {
+      const saved = localStorage.getItem("learningHubUser");
+      return saved ? JSON.parse(saved) : null;
+    } catch { return null; }
+  })();
+
+  const fetchClasses = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/live-classes`);
+      if (res.ok) {
+        const data = await res.json();
+        const apiClasses = data.liveClasses.map((c: any) => ({
+          id: c._id,
+          subject: c.title,
+          courseCode: c.courseCode,
+          topic: c.title,
+          meetLink: c.meetingUrl,
+          scheduledAt: c.startsAt,
+          duration: 60,
+          status: c.status || "scheduled"
+        }));
+        setClasses(apiClasses);
+      }
+    } catch {}
+  };
+
+  useEffect(() => {
+    fetchClasses();
+  }, []);
+
+  async function scheduleClass() {
     if (!form.topic.trim() || !form.scheduledAt) { return; }
     setSaving(true);
-    setTimeout(() => {
-      const newClass: LiveClass = {
-        id: Date.now().toString(),
-        ...form,
-        status: "scheduled",
-      };
-      setClasses(prev => [newClass, ...prev]);
-      setForm({ ...BLANK });
-      setShowForm(false);
-      setSaving(false);
-    }, 800);
+    
+    try {
+      const res = await fetch(`${API_BASE}/live-classes`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: form.topic,
+          courseCode: form.courseCode,
+          facultyId: user?.name || "Faculty",
+          startsAt: form.scheduledAt,
+          meetingUrl: form.meetLink
+        })
+      });
+      if (res.ok) {
+        fetchClasses();
+      }
+    } catch {}
+
+    setForm({ ...BLANK });
+    setShowForm(false);
+    setSaving(false);
   }
 
-  function toggleStatus(id: string) {
-    setClasses(prev => prev.map(c => {
-      if (c.id !== id) return c;
-      if (c.status === "scheduled") return { ...c, status: "live" };
-      if (c.status === "live") return { ...c, status: "ended" };
-      return c;
-    }));
+  async function toggleStatus(id: string) {
+    const cls = classes.find(c => c.id === id);
+    if (!cls) return;
+    let newStatus = "scheduled";
+    if (cls.status === "scheduled") newStatus = "live";
+    if (cls.status === "live") newStatus = "ended";
+    
+    setClasses(prev => prev.map(c => c.id === id ? { ...c, status: newStatus as any } : c));
+
+    try {
+      await fetch(`${API_BASE}/live-classes/${id}/status`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus })
+      });
+    } catch {}
   }
 
-  function deleteClass(id: string) {
+  async function deleteClass(id: string) {
+    // We don't have a DELETE endpoint in the backend for live-classes yet, so we just remove locally for now, 
+    // or we could add a DELETE endpoint. For now, local hide.
     setClasses(prev => prev.filter(c => c.id !== id));
   }
 

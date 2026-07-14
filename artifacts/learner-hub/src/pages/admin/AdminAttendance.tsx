@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { UserCheck, Search, Filter, Download, Users, UsersIcon, Check, X, ShieldAlert } from "lucide-react";
-import { API_ROOT } from "@/lib/api";
+import { API_ROOT, ACADEMIC_API_BASE } from "@/lib/api";
 
 interface AttendanceRecord {
   _id: string;
@@ -51,7 +51,7 @@ export default function AdminAttendance() {
     setLoading(true);
     try {
       if (activeTab === "students") {
-        const res = await fetch(`${API_ROOT}/attendance`);
+        const res = await fetch(`${ACADEMIC_API_BASE}/attendance/all`);
         if (res.ok) {
           const data = await res.json() as { attendance: AttendanceRecord[] };
           setStudentRecords(data.attendance || []);
@@ -60,7 +60,7 @@ export default function AdminAttendance() {
         // Load faculty users & their attendance
         const [usersRes, attRes] = await Promise.all([
           fetch(`${API_ROOT}/admin/users`),
-          fetch(`${API_ROOT}/attendance/faculty?date=${todayStr}`)
+          fetch(`${ACADEMIC_API_BASE}/attendance/faculty?date=${todayStr}`)
         ]);
 
         if (usersRes.ok) {
@@ -164,7 +164,7 @@ export default function AdminAttendance() {
   async function handleMarkFaculty(faculty: FacultyUser, status: "present" | "absent") {
     setUpdatingFacultyId(faculty.email);
     try {
-      const res = await fetch(`${API_ROOT}/attendance/faculty`, {
+      const res = await fetch(`${ACADEMIC_API_BASE}/attendance/faculty`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -176,7 +176,7 @@ export default function AdminAttendance() {
       });
       if (res.ok) {
         // Reload today's records
-        const attRes = await fetch(`${API_ROOT}/attendance/faculty?date=${todayStr}`);
+        const attRes = await fetch(`${ACADEMIC_API_BASE}/attendance/faculty?date=${todayStr}`);
         if (attRes.ok) {
           const aData = await attRes.json() as { attendance: FacultyAttendanceRecord[] };
           setFacultyRecords(aData.attendance || []);

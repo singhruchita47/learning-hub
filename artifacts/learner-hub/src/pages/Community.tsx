@@ -10,34 +10,7 @@ interface Thread {
   likes: number; replies: Reply[];
 }
 
-const initialThreads: Thread[] = [
-  {
-    id: 1, author: "Priya Sharma", initials: "PS", role: "Student", color: "#4F46E5",
-    title: "Best way to revise Binary Trees before exam?", tag: "CS301", tagColor: "#4F46E5",
-    body: "Hey everyone! Exam is next week and I'm struggling with tree traversals. Any good resources or tips?",
-    time: "2 hrs ago", likes: 14,
-    replies: [
-      { id: 1, author: "Dr. Sarah Chen", initials: "SC", text: "Try LeetCode's tree problems – start with easy ones. Drawing the tree on paper helps a lot!", time: "1 hr ago" },
-      { id: 2, author: "Rahul Verma",   initials: "RV", text: "Visualizing DFS vs BFS with YouTube animations is super helpful. Check 'Back to Back SWE'!", time: "45 min ago" },
-    ],
-  },
-  {
-    id: 2, author: "Arjun Singh", initials: "AS", role: "Student", color: "#7C3AED",
-    title: "SQL vs NoSQL – which should I focus on for placements?", tag: "CS302", tagColor: "#0EA5E9",
-    body: "Placement season is coming. Should I go deep on SQL or also learn MongoDB? What do companies prefer?",
-    time: "5 hrs ago", likes: 22,
-    replies: [
-      { id: 1, author: "Prof. Wilson", initials: "PW", text: "For most software roles, strong SQL skills are must-have. NoSQL is a bonus. Master SQL first!", time: "4 hrs ago" },
-    ],
-  },
-  {
-    id: 3, author: "Sneha Reddy", initials: "SR", role: "Student", color: "#0EA5E9",
-    title: "Study group for OS final exam – anyone interested?", tag: "CS303", tagColor: "#10B981",
-    body: "Looking for 3-4 people to form a study group for the OS exam. We can meet in the library on weekends.",
-    time: "1 day ago", likes: 31,
-    replies: [],
-  },
-];
+// Removing unused static initialThreads
 
 const tagStyles: Record<string, string> = {
   "CS301":        "bg-indigo-100 text-indigo-700",
@@ -58,7 +31,7 @@ function timeAgo(dateStr: string) {
 }
 
 export default function Community() {
-  const [threads, setThreads]             = useState(initialThreads);
+  const [threads, setThreads]             = useState<Thread[]>([]);
   const [apiAnnouncements, setApiAnnouncements] = useState<Thread[]>([]);
   const [likedIds, setLikedIds]           = useState<Set<number>>(new Set());
   const [expandedId, setExpandedId]       = useState<number | null>(null);
@@ -67,7 +40,25 @@ export default function Community() {
   const [newTitle, setNewTitle]           = useState("");
   const [newBody, setNewBody]             = useState("");
 
+  const user = (() => {
+    try {
+      const saved = localStorage.getItem("learningHubUser");
+      return saved ? JSON.parse(saved) : null;
+    } catch { return null; }
+  })();
+
+  const fetchThreads = async () => {
+    try {
+      const r = await fetch(`${ACADEMIC_API_BASE}/forum/threads`);
+      if (r.ok) {
+        const data = await r.json();
+        setThreads(data.threads || []);
+      }
+    } catch {}
+  };
+
   useEffect(() => {
+    fetchThreads();
     fetch(`${ACADEMIC_API_BASE}/notifications`)
       .then(r => r.ok ? r.json() : null)
       .then((data: any) => {
@@ -97,30 +88,67 @@ export default function Community() {
       .catch(() => {});
   }, []);
 
-  const toggleLike = (id: number) => {
+  const toggleLike = async (id: number) => {
     const isAlreadyLiked = likedIds.has(id);
     setLikedIds(prev => { const n = new Set(prev); isAlreadyLiked ? n.delete(id) : n.add(id); return n; });
     const delta = isAlreadyLiked ? -1 : 1;
-    setThreads(prev => prev.map(t => t.id === id ? { ...t, likes: t.likes + delta } : t));
-    setApiAnnouncements(prev => prev.map(t => t.id === id ? { ...t, likes: t.likes + delta } : t));
+    setThreads(prev => prev.map(t => t.id === id ? { ...t, likes: Math.max(0, t.likes + delta) } : t));
+    setApiAnnouncements(prev => prev.map(t => t.id === id ? { ...t, likes: Math.max(0, t.likes + delta) } : t));
+    
+    if (id < 90000) {
+      await fetch(`${ACADEMIC_API_BASE}/forum/threads/${id}/like`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ delta })
+      });
+    }
   };
 
-  const sendReply = (threadId: number) => {
+  const sendReply = async (threadId: number) => {
     const text = replyText[threadId]?.trim();
     if (!text) return;
-    const newReply = { id: Date.now(), author: "You", initials: "ME", text, time: "just now" };
-    setThreads(prev => prev.map(t => t.id === threadId ? { ...t, replies: [...t.replies, newReply] } : t));
-    setApiAnnouncements(prev => prev.map(t => t.id === threadId ? { ...t, replies: [...t.replies, newReply] } : t));
+
+    const author = user?.name || "Student";
+    const initials = author.substring(0, 2).toUpperCase();
+
+    try {
+      const res = await fetch(`${ACADEMIC_API_BASE}/forum/threads/${threadId}/replies`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ author, initials, text })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const newReply = data.reply;
+        setThreads(prev => prev.map(t => t.id === threadId ? { ...t, replies: [...t.replies, newReply] } : t));
+        setApiAnnouncements(prev => prev.map(t => t.id === threadId ? { ...t, replies: [...t.replies, newReply] } : t));
+      }
+    } catch {}
+    
     setReplyText(prev => ({ ...prev, [threadId]: "" }));
   };
 
-  const postThread = () => {
+  const postThread = async () => {
     if (!newTitle.trim() || !newBody.trim()) return;
-    setThreads(prev => [{
-      id: Date.now(), author: "You", initials: "ME", role: "Student", color: "#6c5ce7",
-      title: newTitle, body: newBody, time: "just now", tag: "General", tagColor: "#6c5ce7",
-      likes: 0, replies: [],
-    }, ...prev]);
+    
+    const author = user?.name || "Student";
+    const initials = author.substring(0, 2).toUpperCase();
+    const role = user?.role || "student";
+
+    try {
+      const res = await fetch(`${ACADEMIC_API_BASE}/forum/threads`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          author, initials, role, color: "#6c5ce7", title: newTitle, body: newBody, tag: "General", tagColor: "#6c5ce7"
+        })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setThreads(prev => [data.thread, ...prev]);
+      }
+    } catch {}
+    
     setNewTitle(""); setNewBody(""); setShowNewPost(false);
   };
 
