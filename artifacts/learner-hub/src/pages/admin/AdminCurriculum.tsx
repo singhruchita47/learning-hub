@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BookMarked, Plus, Edit2, Layers, Loader, GraduationCap, Trash2 } from "lucide-react";
+import { BookMarked, Edit2, Layers, Loader, GraduationCap, Trash2 } from "lucide-react";
 import { ACADEMIC_API_BASE } from "@/lib/api";
 
 export default function AdminCurriculum() {
@@ -50,14 +50,9 @@ export default function AdminCurriculum() {
 
   return (
     <div className="p-4 md:p-8 space-y-8 max-w-[1540px] mx-auto">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-black text-slate-900 tracking-tight">Curriculum Management</h1>
-          <p className="text-xs font-semibold text-slate-400 mt-1">Define syllabus, subjects, and credits for all branches.</p>
-        </div>
-        <button className="flex items-center gap-2 rounded-xl bg-violet-600 px-4 py-2.5 text-sm font-black text-white hover:bg-violet-700 transition shadow-md shadow-violet-200">
-          <Plus className="h-4.5 w-4.5" /> Add Subject
-        </button>
+      <div>
+        <h1 className="text-3xl font-black text-slate-900 tracking-tight">Curriculum Management</h1>
+        <p className="text-xs font-semibold text-slate-400 mt-1">Define syllabus, subjects, and credits for all branches.</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -209,11 +204,7 @@ export default function AdminCurriculum() {
             </div>
           )}
 
-          <div className="p-6 mt-auto">
-            <button className="w-full py-3 rounded-xl border-2 border-dashed border-slate-200 text-sm font-bold text-slate-400 hover:border-violet-300 hover:text-violet-600 transition bg-slate-50/50 flex items-center justify-center gap-2">
-              <Plus className="h-4 w-4" /> Add Another Subject to Semester {activeSem}
-            </button>
-          </div>
+
         </div>
       </div>
     </div>
