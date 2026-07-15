@@ -11,6 +11,7 @@ import Feedback from "../models/feedback";
 import LiveClass from "../models/liveClass";
 import Resource from "../models/resource";
 import Course from "../models/course";
+import Enrollment from "../models/enrollment";
 import { isCloudinaryConfigured, uploadBufferToCloudinary } from "../lib/cloudinary";
 import { getDB, updateDB } from "../lib/memoryDb";
 
@@ -856,7 +857,7 @@ router.delete("/courses/:id", async (req: Request, res: Response) => {
   }
 });
 
-// Enroll student in a course (memory mode: store enrollments in memoryStore)
+// Enroll student in a course
 router.post("/courses/:id/enroll", async (req: Request, res: Response) => {
   const { studentId, studentName } = req.body;
   const courseId = req.params.id;
@@ -891,7 +892,25 @@ router.post("/courses/:id/enroll", async (req: Request, res: Response) => {
     return res.status(201).json({ enrollment, storage: "memory" });
   }
 
-  return res.status(501).json({ message: "MongoDB enrollment not implemented." });
+  // MongoDB mode
+  try {
+    const existing = await Enrollment.findOne({ courseId, studentId });
+    if (existing) {
+      return res.status(409).json({ message: "Already enrolled." });
+    }
+
+    const enrollment = await Enrollment.create({
+      courseId,
+      studentId,
+      studentName: studentName || "Student",
+    });
+
+    await Course.findByIdAndUpdate(courseId, { $inc: { students: 1 } });
+
+    return res.status(201).json({ enrollment });
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message });
+  }
 });
 
 // Get enrolled course IDs for a student
@@ -904,7 +923,12 @@ router.get("/courses/enrolled/:studentId", async (req: Request, res: Response) =
     return res.json({ enrollments: studentEnrollments, storage: "memory" });
   }
 
-  return res.json({ enrollments: [] });
+  try {
+    const enrollments = await Enrollment.find({ studentId });
+    return res.json({ enrollments });
+  } catch (error: any) {
+    return res.status(500).json({ message: error.message });
+  }
 });
 
 // Upload file base64 endpoint
