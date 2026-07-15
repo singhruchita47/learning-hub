@@ -27,8 +27,8 @@ function saveMemoryUsers() {
   updateDB("users", memoryUsers);
 }
 
-// Seed default admin if memory is empty
-if (memoryUsers.length === 0) {
+// Seed default admin if it doesn't exist
+if (!memoryUsers.find((u) => u.email === "admin@learning.hub")) {
   memoryUsers.push({
     id: "usr_admin_default",
     name: "System Admin",
