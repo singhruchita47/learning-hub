@@ -540,7 +540,10 @@ export default function FacultyCodingQuestions() {
                     className="bg-transparent text-xs font-bold text-violet-700 outline-none cursor-pointer"
                   >
                     <option value="All">All Topics</option>
-                    <option value="Graph">Graph</option>
+                    <option value="Linear Regression">Linear Regression</option>
+                    <option value="Numpy">NumPy</option>
+                    <option value="Pandas">Pandas</option>
+                    <option value="Graph">Graph Data Structures</option>
                   </select>
                 </div>
                 <span className="rounded-full border border-violet-100 bg-white px-4 py-2 text-xs font-black text-violet-700 shadow-sm">

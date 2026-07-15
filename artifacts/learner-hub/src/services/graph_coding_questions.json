@@ -1,450 +1,900 @@
 [
   {
-    "id": "graph-coding-1",
-    "title": "Graph Challenge: Perform BFS traversal 1",
+    "id": "graph-lr-1",
+    "title": "Linear Regression & Plotting 1: Fit and Predict",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, perform bfs traversal. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "1, 3, 5\n2, 6, 10",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-2",
+    "title": "Linear Regression & Plotting 2: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "2, 4, 6\n4, 8, 12",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-3",
+    "title": "Linear Regression & Plotting 3: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "3, 5, 7\n6, 10, 14",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-4",
+    "title": "Linear Regression & Plotting 4: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "4, 6, 8\n8, 12, 16",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-5",
+    "title": "Linear Regression & Plotting 5: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "5, 7, 9\n10, 14, 18",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-6",
+    "title": "Linear Regression & Plotting 6: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "6, 8, 10\n12, 16, 20",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-7",
+    "title": "Linear Regression & Plotting 7: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "7, 9, 11\n14, 18, 22",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-8",
+    "title": "Linear Regression & Plotting 8: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "8, 10, 12\n16, 20, 24",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-9",
+    "title": "Linear Regression & Plotting 9: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "9, 11, 13\n18, 22, 26",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-10",
+    "title": "Linear Regression & Plotting 10: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "10, 12, 14\n20, 24, 28",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-11",
+    "title": "Linear Regression & Plotting 11: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "11, 13, 15\n22, 26, 30",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-12",
+    "title": "Linear Regression & Plotting 12: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "12, 14, 16\n24, 28, 32",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-13",
+    "title": "Linear Regression & Plotting 13: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "13, 15, 17\n26, 30, 34",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-14",
+    "title": "Linear Regression & Plotting 14: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "14, 16, 18\n28, 32, 36",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-15",
+    "title": "Linear Regression & Plotting 15: Fit and Predict",
+    "difficulty": "Medium",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "15, 17, 19\n30, 34, 38",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-16",
+    "title": "Linear Regression & Plotting 16: Fit and Predict",
+    "difficulty": "Hard",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "16, 18, 20\n32, 36, 40",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-17",
+    "title": "Linear Regression & Plotting 17: Fit and Predict",
+    "difficulty": "Hard",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "17, 19, 21\n34, 38, 42",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-18",
+    "title": "Linear Regression & Plotting 18: Fit and Predict",
+    "difficulty": "Hard",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "18, 20, 22\n36, 40, 44",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-19",
+    "title": "Linear Regression & Plotting 19: Fit and Predict",
+    "difficulty": "Hard",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "19, 21, 23\n38, 42, 46",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-20",
+    "title": "Linear Regression & Plotting 20: Fit and Predict",
+    "difficulty": "Hard",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "20, 22, 24\n40, 44, 48",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-21",
+    "title": "Linear Regression & Plotting 21: Fit and Predict",
+    "difficulty": "Hard",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "21, 23, 25\n42, 46, 50",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-22",
+    "title": "Linear Regression & Plotting 22: Fit and Predict",
+    "difficulty": "Hard",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "22, 24, 26\n44, 48, 52",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-23",
+    "title": "Linear Regression & Plotting 23: Fit and Predict",
+    "difficulty": "Hard",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "23, 25, 27\n46, 50, 54",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-24",
+    "title": "Linear Regression & Plotting 24: Fit and Predict",
+    "difficulty": "Hard",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "24, 26, 28\n48, 52, 56",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-lr-25",
+    "title": "Linear Regression & Plotting 25: Fit and Predict",
+    "difficulty": "Hard",
+    "description": "Given a dataset of X and y values, fit a Simple Linear Regression model. Calculate the slope and intercept, and predict the value of y for a given X. (Note: In a real environment, you would use matplotlib to plot the graph of the regression line).",
+    "inputTestCase": "25, 27, 29\n50, 54, 58",
+    "expectedOutput": "Slope: 2.0\nIntercept: 0.0",
+    "starterCode": "import sys\nimport numpy as np\nfrom sklearn.linear_model import LinearRegression\n# import matplotlib.pyplot as plt\n\ndef solve(input_data):\n    # Parse input, fit LinearRegression, and return slope/intercept\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-1",
+    "title": "NumPy Challenge 1: Array Operations",
+    "difficulty": "Easy",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-2",
+    "title": "NumPy Challenge 2: Array Operations",
+    "difficulty": "Easy",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-3",
+    "title": "NumPy Challenge 3: Array Operations",
+    "difficulty": "Easy",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-4",
+    "title": "NumPy Challenge 4: Array Operations",
+    "difficulty": "Easy",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-5",
+    "title": "NumPy Challenge 5: Array Operations",
+    "difficulty": "Easy",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-6",
+    "title": "NumPy Challenge 6: Array Operations",
+    "difficulty": "Medium",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-7",
+    "title": "NumPy Challenge 7: Array Operations",
+    "difficulty": "Medium",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-8",
+    "title": "NumPy Challenge 8: Array Operations",
+    "difficulty": "Medium",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-9",
+    "title": "NumPy Challenge 9: Array Operations",
+    "difficulty": "Medium",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-10",
+    "title": "NumPy Challenge 10: Array Operations",
+    "difficulty": "Medium",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-11",
+    "title": "NumPy Challenge 11: Array Operations",
+    "difficulty": "Medium",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-12",
+    "title": "NumPy Challenge 12: Array Operations",
+    "difficulty": "Medium",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-13",
+    "title": "NumPy Challenge 13: Array Operations",
+    "difficulty": "Medium",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-14",
+    "title": "NumPy Challenge 14: Array Operations",
+    "difficulty": "Medium",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-15",
+    "title": "NumPy Challenge 15: Array Operations",
+    "difficulty": "Medium",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-16",
+    "title": "NumPy Challenge 16: Array Operations",
+    "difficulty": "Hard",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-17",
+    "title": "NumPy Challenge 17: Array Operations",
+    "difficulty": "Hard",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-18",
+    "title": "NumPy Challenge 18: Array Operations",
+    "difficulty": "Hard",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-19",
+    "title": "NumPy Challenge 19: Array Operations",
+    "difficulty": "Hard",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-20",
+    "title": "NumPy Challenge 20: Array Operations",
+    "difficulty": "Hard",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-21",
+    "title": "NumPy Challenge 21: Array Operations",
+    "difficulty": "Hard",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-22",
+    "title": "NumPy Challenge 22: Array Operations",
+    "difficulty": "Hard",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-23",
+    "title": "NumPy Challenge 23: Array Operations",
+    "difficulty": "Hard",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-24",
+    "title": "NumPy Challenge 24: Array Operations",
+    "difficulty": "Hard",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-numpy-25",
+    "title": "NumPy Challenge 25: Array Operations",
+    "difficulty": "Hard",
+    "description": "Given a list of numbers, convert them into a NumPy array, reshape them into a 2D matrix, and compute the sum of the elements along the main diagonal.",
+    "inputTestCase": "1 2 3\n4 5 6\n7 8 9",
+    "expectedOutput": "15",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-1",
+    "title": "Pandas Challenge 1: Data Manipulation",
+    "difficulty": "Easy",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 10, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,5\n2,15\n3,20",
+    "expectedOutput": "17.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-2",
+    "title": "Pandas Challenge 2: Data Manipulation",
+    "difficulty": "Easy",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 20, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,10\n2,30\n3,40",
+    "expectedOutput": "35",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-3",
+    "title": "Pandas Challenge 3: Data Manipulation",
+    "difficulty": "Easy",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 30, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,15\n2,45\n3,60",
+    "expectedOutput": "52.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-4",
+    "title": "Pandas Challenge 4: Data Manipulation",
+    "difficulty": "Easy",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 40, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,20\n2,60\n3,80",
+    "expectedOutput": "70",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-5",
+    "title": "Pandas Challenge 5: Data Manipulation",
+    "difficulty": "Easy",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 50, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,25\n2,75\n3,100",
+    "expectedOutput": "87.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-6",
+    "title": "Pandas Challenge 6: Data Manipulation",
+    "difficulty": "Medium",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 60, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,30\n2,90\n3,120",
+    "expectedOutput": "105",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-7",
+    "title": "Pandas Challenge 7: Data Manipulation",
+    "difficulty": "Medium",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 70, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,35\n2,105\n3,140",
+    "expectedOutput": "122.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-8",
+    "title": "Pandas Challenge 8: Data Manipulation",
+    "difficulty": "Medium",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 80, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,40\n2,120\n3,160",
+    "expectedOutput": "140",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-9",
+    "title": "Pandas Challenge 9: Data Manipulation",
+    "difficulty": "Medium",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 90, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,45\n2,135\n3,180",
+    "expectedOutput": "157.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-10",
+    "title": "Pandas Challenge 10: Data Manipulation",
+    "difficulty": "Medium",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 100, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,50\n2,150\n3,200",
+    "expectedOutput": "175",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-11",
+    "title": "Pandas Challenge 11: Data Manipulation",
+    "difficulty": "Medium",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 110, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,55\n2,165\n3,220",
+    "expectedOutput": "192.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-12",
+    "title": "Pandas Challenge 12: Data Manipulation",
+    "difficulty": "Medium",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 120, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,60\n2,180\n3,240",
+    "expectedOutput": "210",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-13",
+    "title": "Pandas Challenge 13: Data Manipulation",
+    "difficulty": "Medium",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 130, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,65\n2,195\n3,260",
+    "expectedOutput": "227.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-14",
+    "title": "Pandas Challenge 14: Data Manipulation",
+    "difficulty": "Medium",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 140, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,70\n2,210\n3,280",
+    "expectedOutput": "245",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-15",
+    "title": "Pandas Challenge 15: Data Manipulation",
+    "difficulty": "Medium",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 150, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,75\n2,225\n3,300",
+    "expectedOutput": "262.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-16",
+    "title": "Pandas Challenge 16: Data Manipulation",
+    "difficulty": "Hard",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 160, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,80\n2,240\n3,320",
+    "expectedOutput": "280",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-17",
+    "title": "Pandas Challenge 17: Data Manipulation",
+    "difficulty": "Hard",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 170, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,85\n2,255\n3,340",
+    "expectedOutput": "297.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-18",
+    "title": "Pandas Challenge 18: Data Manipulation",
+    "difficulty": "Hard",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 180, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,90\n2,270\n3,360",
+    "expectedOutput": "315",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-19",
+    "title": "Pandas Challenge 19: Data Manipulation",
+    "difficulty": "Hard",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 190, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,95\n2,285\n3,380",
+    "expectedOutput": "332.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-20",
+    "title": "Pandas Challenge 20: Data Manipulation",
+    "difficulty": "Hard",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 200, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,100\n2,300\n3,400",
+    "expectedOutput": "350",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-21",
+    "title": "Pandas Challenge 21: Data Manipulation",
+    "difficulty": "Hard",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 210, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,105\n2,315\n3,420",
+    "expectedOutput": "367.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-22",
+    "title": "Pandas Challenge 22: Data Manipulation",
+    "difficulty": "Hard",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 220, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,110\n2,330\n3,440",
+    "expectedOutput": "385",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-23",
+    "title": "Pandas Challenge 23: Data Manipulation",
+    "difficulty": "Hard",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 230, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,115\n2,345\n3,460",
+    "expectedOutput": "402.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-24",
+    "title": "Pandas Challenge 24: Data Manipulation",
+    "difficulty": "Hard",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 240, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,120\n2,360\n3,480",
+    "expectedOutput": "420",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-pandas-25",
+    "title": "Pandas Challenge 25: Data Manipulation",
+    "difficulty": "Hard",
+    "description": "Given CSV formatted text, load it into a Pandas DataFrame. Filter out rows where the 'Value' column is less than 250, and compute the mean of the remaining values.",
+    "inputTestCase": "ID,Value\n1,125\n2,375\n3,500",
+    "expectedOutput": "437.5",
+    "starterCode": "import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve(input_data):\n    # Write your Python code here\n    pass\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    print(solve(input_data))"
+  },
+  {
+    "id": "graph-ds-1",
+    "title": "Graph Data Structure 1: Perform BFS traversal",
+    "difficulty": "Medium",
+    "description": "Given an adjacency list representation of a graph, perform bfs traversal. Ensure your algorithm is optimized.",
     "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
     "expectedOutput": "1 2 3 4",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-2",
-    "title": "Graph Challenge: Perform DFS traversal 2",
+    "id": "graph-ds-2",
+    "title": "Graph Data Structure 2: Perform DFS traversal",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, perform dfs traversal. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, perform dfs traversal. Ensure your algorithm is optimized.",
     "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
     "expectedOutput": "1 2 4 3",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-3",
-    "title": "Graph Challenge: Find the shortest path 3",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, find the shortest path using bfs. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "id": "graph-ds-3",
+    "title": "Graph Data Structure 3: Find the shortest path using BFS",
+    "difficulty": "Medium",
+    "description": "Given an adjacency list representation of a graph, find the shortest path using bfs. Ensure your algorithm is optimized.",
     "inputTestCase": "5 5\n1 2\n2 3\n3 5\n1 4\n4 5",
     "expectedOutput": "2",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-4",
-    "title": "Graph Challenge: Detect a cycle in 4",
+    "id": "graph-ds-4",
+    "title": "Graph Data Structure 4: Detect a cycle in an undirected graph",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, detect a cycle in an undirected graph. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, detect a cycle in an undirected graph. Ensure your algorithm is optimized.",
     "inputTestCase": "3 3\n1 2\n2 3\n3 1",
     "expectedOutput": "True",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-5",
-    "title": "Graph Challenge: Detect a cycle in 5",
+    "id": "graph-ds-5",
+    "title": "Graph Data Structure 5: Find the number of connected components",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, detect a cycle in a directed graph. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n2 3\n3 4\n4 2",
-    "expectedOutput": "True",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-6",
-    "title": "Graph Challenge: Find Topological Sort of 6",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, find topological sort of a dag. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
-    "expectedOutput": "1 2 3 4",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-7",
-    "title": "Graph Challenge: Find the minimum spanning 7",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the minimum spanning tree weight. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "3 3\n1 2 5\n2 3 10\n1 3 15",
-    "expectedOutput": "15",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-8",
-    "title": "Graph Challenge: Find shortest path using 8",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find shortest path using dijkstra. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "3 3\n1 2 2\n2 3 3\n1 3 6",
-    "expectedOutput": "5",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-9",
-    "title": "Graph Challenge: Check if graph is 9",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, check if graph is bipartite. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n2 3\n3 4\n4 1",
-    "expectedOutput": "True",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-10",
-    "title": "Graph Challenge: Find the number of 10",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the number of connected components. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, find the number of connected components. Ensure your algorithm is optimized.",
     "inputTestCase": "5 4\n1 2\n2 3\n4 5\n1 3",
     "expectedOutput": "2",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-11",
-    "title": "Graph Challenge: Perform BFS traversal 11",
+    "id": "graph-ds-6",
+    "title": "Graph Data Structure 6: Perform BFS traversal",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, perform bfs traversal. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, perform bfs traversal. Ensure your algorithm is optimized.",
     "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
     "expectedOutput": "1 2 3 4",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-12",
-    "title": "Graph Challenge: Perform DFS traversal 12",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, perform dfs traversal. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "id": "graph-ds-7",
+    "title": "Graph Data Structure 7: Perform DFS traversal",
+    "difficulty": "Medium",
+    "description": "Given an adjacency list representation of a graph, perform dfs traversal. Ensure your algorithm is optimized.",
     "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
     "expectedOutput": "1 2 4 3",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-13",
-    "title": "Graph Challenge: Find the shortest path 13",
+    "id": "graph-ds-8",
+    "title": "Graph Data Structure 8: Find the shortest path using BFS",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the shortest path using bfs. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, find the shortest path using bfs. Ensure your algorithm is optimized.",
     "inputTestCase": "5 5\n1 2\n2 3\n3 5\n1 4\n4 5",
     "expectedOutput": "2",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-14",
-    "title": "Graph Challenge: Detect a cycle in 14",
+    "id": "graph-ds-9",
+    "title": "Graph Data Structure 9: Detect a cycle in an undirected graph",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, detect a cycle in an undirected graph. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, detect a cycle in an undirected graph. Ensure your algorithm is optimized.",
     "inputTestCase": "3 3\n1 2\n2 3\n3 1",
     "expectedOutput": "True",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-15",
-    "title": "Graph Challenge: Detect a cycle in 15",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, detect a cycle in a directed graph. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n2 3\n3 4\n4 2",
-    "expectedOutput": "True",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-16",
-    "title": "Graph Challenge: Find Topological Sort of 16",
+    "id": "graph-ds-10",
+    "title": "Graph Data Structure 10: Find the number of connected components",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find topological sort of a dag. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
-    "expectedOutput": "1 2 3 4",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-17",
-    "title": "Graph Challenge: Find the minimum spanning 17",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the minimum spanning tree weight. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "3 3\n1 2 5\n2 3 10\n1 3 15",
-    "expectedOutput": "15",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-18",
-    "title": "Graph Challenge: Find shortest path using 18",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, find shortest path using dijkstra. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "3 3\n1 2 2\n2 3 3\n1 3 6",
-    "expectedOutput": "5",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-19",
-    "title": "Graph Challenge: Check if graph is 19",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, check if graph is bipartite. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n2 3\n3 4\n4 1",
-    "expectedOutput": "True",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-20",
-    "title": "Graph Challenge: Find the number of 20",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the number of connected components. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, find the number of connected components. Ensure your algorithm is optimized.",
     "inputTestCase": "5 4\n1 2\n2 3\n4 5\n1 3",
     "expectedOutput": "2",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-21",
-    "title": "Graph Challenge: Perform BFS traversal 21",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, perform bfs traversal. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "id": "graph-ds-11",
+    "title": "Graph Data Structure 11: Perform BFS traversal",
+    "difficulty": "Medium",
+    "description": "Given an adjacency list representation of a graph, perform bfs traversal. Ensure your algorithm is optimized.",
     "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
     "expectedOutput": "1 2 3 4",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-22",
-    "title": "Graph Challenge: Perform DFS traversal 22",
+    "id": "graph-ds-12",
+    "title": "Graph Data Structure 12: Perform DFS traversal",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, perform dfs traversal. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, perform dfs traversal. Ensure your algorithm is optimized.",
     "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
     "expectedOutput": "1 2 4 3",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-23",
-    "title": "Graph Challenge: Find the shortest path 23",
+    "id": "graph-ds-13",
+    "title": "Graph Data Structure 13: Find the shortest path using BFS",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the shortest path using bfs. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, find the shortest path using bfs. Ensure your algorithm is optimized.",
     "inputTestCase": "5 5\n1 2\n2 3\n3 5\n1 4\n4 5",
     "expectedOutput": "2",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-24",
-    "title": "Graph Challenge: Detect a cycle in 24",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, detect a cycle in an undirected graph. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "id": "graph-ds-14",
+    "title": "Graph Data Structure 14: Detect a cycle in an undirected graph",
+    "difficulty": "Medium",
+    "description": "Given an adjacency list representation of a graph, detect a cycle in an undirected graph. Ensure your algorithm is optimized.",
     "inputTestCase": "3 3\n1 2\n2 3\n3 1",
     "expectedOutput": "True",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-25",
-    "title": "Graph Challenge: Detect a cycle in 25",
+    "id": "graph-ds-15",
+    "title": "Graph Data Structure 15: Find the number of connected components",
     "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, detect a cycle in a directed graph. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n2 3\n3 4\n4 2",
-    "expectedOutput": "True",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-26",
-    "title": "Graph Challenge: Find Topological Sort of 26",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find topological sort of a dag. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
-    "expectedOutput": "1 2 3 4",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-27",
-    "title": "Graph Challenge: Find the minimum spanning 27",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, find the minimum spanning tree weight. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "3 3\n1 2 5\n2 3 10\n1 3 15",
-    "expectedOutput": "15",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-28",
-    "title": "Graph Challenge: Find shortest path using 28",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find shortest path using dijkstra. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "3 3\n1 2 2\n2 3 3\n1 3 6",
-    "expectedOutput": "5",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-29",
-    "title": "Graph Challenge: Check if graph is 29",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, check if graph is bipartite. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n2 3\n3 4\n4 1",
-    "expectedOutput": "True",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-30",
-    "title": "Graph Challenge: Find the number of 30",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, find the number of connected components. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, find the number of connected components. Ensure your algorithm is optimized.",
     "inputTestCase": "5 4\n1 2\n2 3\n4 5\n1 3",
     "expectedOutput": "2",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-31",
-    "title": "Graph Challenge: Perform BFS traversal 31",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, perform bfs traversal. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "id": "graph-ds-16",
+    "title": "Graph Data Structure 16: Perform BFS traversal",
+    "difficulty": "Hard",
+    "description": "Given an adjacency list representation of a graph, perform bfs traversal. Ensure your algorithm is optimized.",
     "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
     "expectedOutput": "1 2 3 4",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-32",
-    "title": "Graph Challenge: Perform DFS traversal 32",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, perform dfs traversal. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "id": "graph-ds-17",
+    "title": "Graph Data Structure 17: Perform DFS traversal",
+    "difficulty": "Hard",
+    "description": "Given an adjacency list representation of a graph, perform dfs traversal. Ensure your algorithm is optimized.",
     "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
     "expectedOutput": "1 2 4 3",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-33",
-    "title": "Graph Challenge: Find the shortest path 33",
+    "id": "graph-ds-18",
+    "title": "Graph Data Structure 18: Find the shortest path using BFS",
     "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, find the shortest path using bfs. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, find the shortest path using bfs. Ensure your algorithm is optimized.",
     "inputTestCase": "5 5\n1 2\n2 3\n3 5\n1 4\n4 5",
     "expectedOutput": "2",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-34",
-    "title": "Graph Challenge: Detect a cycle in 34",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, detect a cycle in an undirected graph. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "id": "graph-ds-19",
+    "title": "Graph Data Structure 19: Detect a cycle in an undirected graph",
+    "difficulty": "Hard",
+    "description": "Given an adjacency list representation of a graph, detect a cycle in an undirected graph. Ensure your algorithm is optimized.",
     "inputTestCase": "3 3\n1 2\n2 3\n3 1",
     "expectedOutput": "True",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-35",
-    "title": "Graph Challenge: Detect a cycle in 35",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, detect a cycle in a directed graph. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n2 3\n3 4\n4 2",
-    "expectedOutput": "True",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-36",
-    "title": "Graph Challenge: Find Topological Sort of 36",
+    "id": "graph-ds-20",
+    "title": "Graph Data Structure 20: Find the number of connected components",
     "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, find topological sort of a dag. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
-    "expectedOutput": "1 2 3 4",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-37",
-    "title": "Graph Challenge: Find the minimum spanning 37",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the minimum spanning tree weight. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "3 3\n1 2 5\n2 3 10\n1 3 15",
-    "expectedOutput": "15",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-38",
-    "title": "Graph Challenge: Find shortest path using 38",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find shortest path using dijkstra. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "3 3\n1 2 2\n2 3 3\n1 3 6",
-    "expectedOutput": "5",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-39",
-    "title": "Graph Challenge: Check if graph is 39",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, check if graph is bipartite. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n2 3\n3 4\n4 1",
-    "expectedOutput": "True",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-40",
-    "title": "Graph Challenge: Find the number of 40",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the number of connected components. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, find the number of connected components. Ensure your algorithm is optimized.",
     "inputTestCase": "5 4\n1 2\n2 3\n4 5\n1 3",
     "expectedOutput": "2",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-41",
-    "title": "Graph Challenge: Perform BFS traversal 41",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, perform bfs traversal. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "id": "graph-ds-21",
+    "title": "Graph Data Structure 21: Perform BFS traversal",
+    "difficulty": "Hard",
+    "description": "Given an adjacency list representation of a graph, perform bfs traversal. Ensure your algorithm is optimized.",
     "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
     "expectedOutput": "1 2 3 4",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-42",
-    "title": "Graph Challenge: Perform DFS traversal 42",
+    "id": "graph-ds-22",
+    "title": "Graph Data Structure 22: Perform DFS traversal",
     "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, perform dfs traversal. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, perform dfs traversal. Ensure your algorithm is optimized.",
     "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
     "expectedOutput": "1 2 4 3",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-43",
-    "title": "Graph Challenge: Find the shortest path 43",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the shortest path using bfs. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "id": "graph-ds-23",
+    "title": "Graph Data Structure 23: Find the shortest path using BFS",
+    "difficulty": "Hard",
+    "description": "Given an adjacency list representation of a graph, find the shortest path using bfs. Ensure your algorithm is optimized.",
     "inputTestCase": "5 5\n1 2\n2 3\n3 5\n1 4\n4 5",
     "expectedOutput": "2",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-44",
-    "title": "Graph Challenge: Detect a cycle in 44",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, detect a cycle in an undirected graph. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "id": "graph-ds-24",
+    "title": "Graph Data Structure 24: Detect a cycle in an undirected graph",
+    "difficulty": "Hard",
+    "description": "Given an adjacency list representation of a graph, detect a cycle in an undirected graph. Ensure your algorithm is optimized.",
     "inputTestCase": "3 3\n1 2\n2 3\n3 1",
     "expectedOutput": "True",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
   },
   {
-    "id": "graph-coding-45",
-    "title": "Graph Challenge: Detect a cycle in 45",
+    "id": "graph-ds-25",
+    "title": "Graph Data Structure 25: Find the number of connected components",
     "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, detect a cycle in a directed graph. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n2 3\n3 4\n4 2",
-    "expectedOutput": "True",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-46",
-    "title": "Graph Challenge: Find Topological Sort of 46",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find topological sort of a dag. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n1 3\n2 4\n3 4",
-    "expectedOutput": "1 2 3 4",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-47",
-    "title": "Graph Challenge: Find the minimum spanning 47",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the minimum spanning tree weight. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "3 3\n1 2 5\n2 3 10\n1 3 15",
-    "expectedOutput": "15",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-48",
-    "title": "Graph Challenge: Find shortest path using 48",
-    "difficulty": "Hard",
-    "description": "Given an adjacency list or edge list representation of a graph, find shortest path using dijkstra. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "3 3\n1 2 2\n2 3 3\n1 3 6",
-    "expectedOutput": "5",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-49",
-    "title": "Graph Challenge: Check if graph is 49",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, check if graph is bipartite. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
-    "inputTestCase": "4 4\n1 2\n2 3\n3 4\n4 1",
-    "expectedOutput": "True",
-    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
-  },
-  {
-    "id": "graph-coding-50",
-    "title": "Graph Challenge: Find the number of 50",
-    "difficulty": "Medium",
-    "description": "Given an adjacency list or edge list representation of a graph, find the number of connected components. Ensure your algorithm is optimized for O(V + E) or O(E log V) time complexity depending on the problem type.",
+    "description": "Given an adjacency list representation of a graph, find the number of connected components. Ensure your algorithm is optimized.",
     "inputTestCase": "5 4\n1 2\n2 3\n4 5\n1 3",
     "expectedOutput": "2",
     "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal graph solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
