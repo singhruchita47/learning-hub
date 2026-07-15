@@ -62,7 +62,8 @@ for (let i = 0; i < 25; i++) {
     description: `${t.desc} Calculate for Target = ${nTarget}. \nData X: ${nx.join(", ")} \nData Y: ${ny.join(", ")}`,
     inputTestCase: `${nx.join(",")}\n${ny.join(",")}\n${nTarget}`,
     expectedOutput: out,
-    starterCode: lrStarter
+    starterCode: lrStarter,
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/400px-Linear_regression.svg.png"
   });
 }
 
@@ -86,7 +87,8 @@ for (let i = 0; i < 25; i++) {
     description: `${t.desc}\nEnsure to use numpy functions for optimization.`,
     inputTestCase: t.input.split(" ").map(x => isNaN(x) ? x : parseInt(x) + i).join(" "),
     expectedOutput: isNaN(t.out) ? t.out : (parseFloat(t.out) + i*(t.input.split(" ").length)).toString(), // Rough mock output, doesn't matter for faculty UI preview
-    starterCode: pythonStarter
+    starterCode: pythonStarter,
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Matrix_multiplication_diagram_2.svg/300px-Matrix_multiplication_diagram_2.svg.png"
   });
 }
 
@@ -110,7 +112,8 @@ for (let i = 0; i < 25; i++) {
     description: `${t.desc}\nParse the input as CSV, perform the DataFrame operation, and print the exact scalar output.`,
     inputTestCase: t.input,
     expectedOutput: t.out,
-    starterCode: pythonStarter
+    starterCode: pythonStarter,
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Data_table.svg/400px-Data_table.svg.png"
   });
 }
 
@@ -138,7 +141,8 @@ for (let i = 0; i < 25; i++) {
     description: `Given an adjacency list representation of a graph, ${t.action.toLowerCase()}. Ensure your algorithm is optimized for O(V + E) complexity.`,
     inputTestCase: t.input,
     expectedOutput: t.output,
-    starterCode: jsStarter
+    starterCode: jsStarter,
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/6n-graf.svg/300px-6n-graf.svg.png"
   });
 }
 

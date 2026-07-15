@@ -1085,6 +1085,12 @@ export default function FacultyCodingQuestions() {
                 <p className="text-sm font-bold text-slate-700 leading-relaxed whitespace-pre-wrap">{previewQuestion.description}</p>
               </div>
 
+              {previewQuestion.imageUrl && (
+                <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 flex justify-center">
+                  <img src={previewQuestion.imageUrl} alt="Question Visual" className="max-h-[250px] w-auto rounded-lg shadow-sm" />
+                </div>
+              )}
+
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
                   <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2">Sample Input</p>
