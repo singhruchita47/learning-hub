@@ -68,12 +68,12 @@ export default function AdminNav({ name, onLogout, children }: { name: string, o
 
   const links = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/admin/classes", label: "Live Classes", icon: Video },
     { href: "/admin/reports", label: "Reports", icon: TrendingUp },
     { href: "/admin/announcements", label: "Announcements", icon: Megaphone },
     { href: "/admin/courses", label: "Courses", icon: BookOpen },
     { href: "/admin/quiz-coding", label: "Quiz & Coding", icon: Code2 },
     { href: "/admin/assignments", label: "Assignments", icon: ClipboardList },
-    { href: "/admin/classes", label: "Live Classes", icon: Video },
     { href: "/admin/allocations", label: "Allocations", icon: Link2 },
     { href: "/admin/placements", label: "Students & Import", icon: Users },
     { href: "/admin/curriculum", label: "Curriculum", icon: BookMarked },
