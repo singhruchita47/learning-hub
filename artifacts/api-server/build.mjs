@@ -16,8 +16,7 @@ async function buildAll() {
 
   await esbuild({
     entryPoints: [
-      path.resolve(artifactDir, "src/index.ts"),
-      path.resolve(artifactDir, "src/vercel-entry.ts")
+      path.resolve(artifactDir, "src/index.ts")
     ],
     platform: "node",
     bundle: true,
@@ -110,6 +109,22 @@ async function buildAll() {
       esbuildPluginPino({ transports: ["pino-pretty"] })
     ],
     // Removed ESM banner since we are outputting CommonJS
+  });
+  await esbuild({
+    entryPoints: [path.resolve(artifactDir, "src/vercel-entry.ts")],
+    platform: "node",
+    bundle: true,
+    format: "cjs",
+    outfile: path.resolve(artifactDir, "api/index.cjs"),
+    logLevel: "info",
+    external: [
+      "express",
+      "mongoose",
+      "pino",
+      "pino-http",
+      "cors",
+      "dotenv"
+    ],
   });
 }
 
