@@ -14,8 +14,12 @@ export function readDB(): Record<string, any> {
   }
 }
 
-export function writeDB(data: Record<string, any>) {
-  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
+export function writeDB(data: any) {
+  try {
+    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), "utf8");
+  } catch (err) {
+    console.error("Failed to write memory DB to file:", err);
+  }
 }
 
 export function updateDB(key: string, value: any) {
