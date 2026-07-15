@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CheckSquare, Code2, Database, Send, Sparkles, UploadCloud, Loader } from "lucide-react";
+import { CheckSquare, Code2, Database, Send, Sparkles, UploadCloud, Loader, Eye, X } from "lucide-react";
 import { ACADEMIC_API_BASE } from "@/lib/api";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import generatedQuestions from "@/services/coding_questions.json";
@@ -204,6 +204,7 @@ export default function FacultyCodingQuestions() {
   const [status, setStatus] = useState("");
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [topicFilter, setTopicFilter] = useState("All");
+  const [previewQuestion, setPreviewQuestion] = useState<BankQuestion | null>(null);
 
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -605,12 +606,25 @@ export default function FacultyCodingQuestions() {
                       </div>
                       <h3 className="line-clamp-1 text-sm font-black text-slate-950 group-hover:text-violet-700">{question.title}</h3>
                     </div>
-                    <input
-                      type="checkbox"
-                      checked={selected}
-                      onChange={() => toggleBankQuestion(question.id)}
-                      className="mt-1 h-5 w-5 accent-violet-600"
-                    />
+                    <div className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setPreviewQuestion(question);
+                        }}
+                        className="rounded-full p-2 text-slate-400 hover:bg-violet-100 hover:text-violet-700 transition"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </button>
+                      <input
+                        type="checkbox"
+                        checked={selected}
+                        onChange={() => toggleBankQuestion(question.id)}
+                        className="h-5 w-5 accent-violet-600"
+                      />
+                    </div>
                   </div>
                   <p className="line-clamp-2 min-h-12 text-xs font-bold leading-6 text-slate-600">{question.description}</p>
                   <div className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -1040,6 +1054,73 @@ export default function FacultyCodingQuestions() {
           </section>
         )}
       </div>
+
+      {/* Coding Bank Question Preview Modal */}
+      {previewQuestion && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="w-full max-w-2xl rounded-[2rem] bg-white shadow-2xl animate-in zoom-in-95 duration-200 max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between border-b border-slate-100 p-6">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="rounded-full bg-indigo-50 px-2.5 py-1 text-[10px] font-black text-indigo-700">
+                    {previewQuestion.difficulty}
+                  </span>
+                </div>
+                <h2 className="text-xl font-black text-slate-900">{previewQuestion.title}</h2>
+              </div>
+              <button
+                onClick={() => setPreviewQuestion(null)}
+                className="rounded-full p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-y-auto [scrollbar-width:thin] space-y-6">
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2">Description</p>
+                <p className="text-sm font-bold text-slate-700 leading-relaxed whitespace-pre-wrap">{previewQuestion.description}</p>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2">Sample Input</p>
+                  <pre className="font-mono text-sm font-bold text-slate-800 whitespace-pre-wrap">{previewQuestion.inputTestCase}</pre>
+                </div>
+                <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2">Expected Output</p>
+                  <pre className="font-mono text-sm font-bold text-slate-800 whitespace-pre-wrap">{previewQuestion.expectedOutput}</pre>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-2">Starter Code Template</p>
+                <div className="rounded-2xl border border-slate-200 bg-slate-900 p-4 overflow-x-auto">
+                  <pre className="font-mono text-xs font-medium text-emerald-400 whitespace-pre-wrap">{previewQuestion.starterCode}</pre>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-slate-100 p-6 flex justify-end gap-3 bg-slate-50 rounded-b-[2rem]">
+              <button
+                onClick={() => setPreviewQuestion(null)}
+                className="rounded-xl bg-white border border-slate-200 px-5 py-2.5 text-xs font-black text-slate-600 hover:bg-slate-50 transition"
+              >
+                Close Preview
+              </button>
+              <button
+                onClick={() => {
+                  toggleBankQuestion(previewQuestion.id);
+                  setPreviewQuestion(null);
+                }}
+                className="rounded-xl bg-violet-600 px-5 py-2.5 text-xs font-black text-white hover:bg-violet-700 transition"
+              >
+                {selectedBankIds.includes(previewQuestion.id) ? "Deselect Question" : "Select Question"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
