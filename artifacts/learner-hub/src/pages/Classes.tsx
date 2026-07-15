@@ -115,13 +115,13 @@ export default function Classes() {
         {/* ── Stats Row ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {[
-            { label: "Total Sessions", value: liveClasses.length, txt: "text-[#6c5ce7]" },
-            { label: "Live Now",       value: liveCount,       txt: "text-emerald-600" },
-            { label: "Scheduled",      value: scheduledCount,  txt: "text-blue-600" },
-            { label: "Completed",      value: completedCount,  txt: "text-slate-500" },
-          ].map(({ label, value, txt }) => (
+            { label: "Total Sessions", value: liveClasses.length },
+            { label: "Live Now",       value: liveCount },
+            { label: "Scheduled",      value: scheduledCount },
+            { label: "Completed",      value: completedCount },
+          ].map(({ label, value }) => (
             <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px]">
-              <span className={`text-4xl font-black ${txt}`}>{value}</span>
+              <span className="text-4xl font-black text-slate-900">{value}</span>
               <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
             </div>
           ))}
@@ -225,7 +225,7 @@ export default function Classes() {
                   Attendance
                 </h2>
                 <div className="rounded-2xl bg-[#6c5ce7]/5 p-5 border border-purple-100/10">
-                  <p className="text-4xl font-black text-[#6c5ce7]">94%</p>
+                  <p className="text-4xl font-black text-slate-900">94%</p>
                   <p className="mt-1 text-xs font-bold text-slate-400 leading-normal">Current semester live class attendance</p>
                 </div>
               </section>

@@ -43,7 +43,7 @@ export default function Assignments({ role = "student" }: { role?: "student" | "
                 { label: "Graded",  value: gradedCount,        txt: "text-emerald-600" },
               ].map(({ label, value, txt }) => (
                 <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px] text-center">
-                  <span className={`text-4xl font-black ${txt}`}>{value}</span>
+                  <span className="text-4xl font-black text-slate-900">{value}</span>
                   <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
                 </div>
               ))}

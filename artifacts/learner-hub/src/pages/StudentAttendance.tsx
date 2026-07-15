@@ -143,7 +143,7 @@ export default function StudentAttendance() {
             { label: "Overall Attendance", value: `${overallPct}%`, txt: overallPct >= 75 ? "text-emerald-600" : "text-rose-500", extra: overallPct >= 75 ? "✅ Safe" : "⚠️ Low" },
           ].map(({ label, value, txt, extra }) => (
             <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px] relative">
-              <span className={`text-4xl font-black ${txt}`}>{value}</span>
+              <span className="text-4xl font-black text-slate-900">{value}</span>
               <span className="text-xs font-bold text-slate-400 mt-1 flex items-center gap-1.5">
                 {label}
                 {extra && (

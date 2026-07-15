@@ -128,7 +128,7 @@ export default function Quizzes() {
             { label: "Available XP",  value: `+${quizData.length * 50}`,   txt: "text-indigo-600" },
           ].map(({ label, value, txt }) => (
             <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px]">
-              <span className={`text-4xl font-black ${txt}`}>{value}</span>
+              <span className="text-4xl font-black text-slate-900">{value}</span>
               <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
             </div>
           ))}

@@ -182,13 +182,13 @@ export default function Calendar() {
         {/* ── Stats Row ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {[
-            { label: "Total Events",  value: scheduleItems.length, txt: "text-[#6c5ce7]" },
-            { label: "Live Classes",  value: liveClassesCount,     txt: "text-blue-600" },
-            { label: "Assignments",   value: assignmentsCount,     txt: "text-rose-500" },
-            { label: "Quizzes",       value: quizCount,            txt: "text-amber-500" },
-          ].map(({ label, value, txt }) => (
+            { label: "Total Events",  value: scheduleItems.length },
+            { label: "Live Classes",  value: liveClassesCount },
+            { label: "Assignments",   value: assignmentsCount },
+            { label: "Quizzes",       value: quizCount },
+          ].map(({ label, value }) => (
             <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex flex-col justify-center min-h-[100px]">
-              <span className={`text-4xl font-black ${txt}`}>{value}</span>
+              <span className="text-4xl font-black text-slate-900">{value}</span>
               <span className="text-xs font-bold text-slate-400 mt-1">{label}</span>
             </div>
           ))}
