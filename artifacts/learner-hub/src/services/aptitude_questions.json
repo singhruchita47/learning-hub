@@ -5143,5 +5143,869 @@
     "correctAnswer": "5 m/s",
     "category": "Quantitative Aptitude",
     "topic": "SimpleInterest"
+  },
+  {
+    "questionText": "A can do a piece of work in 10 days and B can do the same work in 15 days. If they work together, how many days will they take to complete the work?",
+    "options": [
+      "4.80 days",
+      "8.10 days",
+      "6.00 days",
+      "7.50 days"
+    ],
+    "correctAnswer": "6.00 days",
+    "topic": "Time and Work",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A shopkeeper buys an article for Rs. 1200 and sells it at a profit of 20%. Find the selling price.",
+    "options": [
+      "Rs. 1440",
+      "Rs. 1410",
+      "Rs. 1560",
+      "Rs. 1490"
+    ],
+    "correctAnswer": "Rs. 1440",
+    "topic": "Profit and Loss",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A car travels a distance of 140 km at a speed of 45 km/hr. How much time does it take?",
+    "options": [
+      "2.61 hrs",
+      "4.11 hrs",
+      "3.11 hrs",
+      "5.11 hrs"
+    ],
+    "correctAnswer": "3.11 hrs",
+    "topic": "Speed, Distance and Time",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Simple Interest - Variant 4. Calculate the required metric.",
+    "options": [
+      "490",
+      "505",
+      "480",
+      "475"
+    ],
+    "correctAnswer": "480",
+    "topic": "Simple Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "If 35% of a number is 90, what is the number?",
+    "options": [
+      "277.14",
+      "242.14",
+      "307.14",
+      "257.14"
+    ],
+    "correctAnswer": "257.14",
+    "topic": "Percentages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Ratio and Proportion - Variant 6. Calculate the required metric.",
+    "options": [
+      "325",
+      "300",
+      "310",
+      "295"
+    ],
+    "correctAnswer": "300",
+    "topic": "Ratio and Proportion",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Averages - Variant 7. Calculate the required metric.",
+    "options": [
+      "450",
+      "435",
+      "465",
+      "440"
+    ],
+    "correctAnswer": "440",
+    "topic": "Averages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Problems on Trains - Variant 8. Calculate the required metric.",
+    "options": [
+      "600",
+      "595",
+      "610",
+      "625"
+    ],
+    "correctAnswer": "600",
+    "topic": "Problems on Trains",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Boats and Streams - Variant 9. Calculate the required metric.",
+    "options": [
+      "805",
+      "780",
+      "775",
+      "790"
+    ],
+    "correctAnswer": "780",
+    "topic": "Boats and Streams",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Compound Interest - Variant 10. Calculate the required metric.",
+    "options": [
+      "975",
+      "990",
+      "980",
+      "1005"
+    ],
+    "correctAnswer": "980",
+    "topic": "Compound Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A can do a piece of work in 10 days and B can do the same work in 15 days. If they work together, how many days will they take to complete the work?",
+    "options": [
+      "6.00 days",
+      "4.80 days",
+      "7.50 days",
+      "8.10 days"
+    ],
+    "correctAnswer": "6.00 days",
+    "topic": "Time and Work",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A shopkeeper buys an article for Rs. 1200 and sells it at a profit of 20%. Find the selling price.",
+    "options": [
+      "Rs. 1440",
+      "Rs. 1560",
+      "Rs. 1410",
+      "Rs. 1490"
+    ],
+    "correctAnswer": "Rs. 1440",
+    "topic": "Profit and Loss",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A car travels a distance of 140 km at a speed of 45 km/hr. How much time does it take?",
+    "options": [
+      "3.11 hrs",
+      "2.61 hrs",
+      "4.11 hrs",
+      "5.11 hrs"
+    ],
+    "correctAnswer": "3.11 hrs",
+    "topic": "Speed, Distance and Time",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Simple Interest - Variant 14. Calculate the required metric.",
+    "options": [
+      "480",
+      "490",
+      "475",
+      "505"
+    ],
+    "correctAnswer": "480",
+    "topic": "Simple Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "If 35% of a number is 90, what is the number?",
+    "options": [
+      "277.14",
+      "257.14",
+      "242.14",
+      "307.14"
+    ],
+    "correctAnswer": "257.14",
+    "topic": "Percentages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Ratio and Proportion - Variant 16. Calculate the required metric.",
+    "options": [
+      "300",
+      "295",
+      "325",
+      "310"
+    ],
+    "correctAnswer": "300",
+    "topic": "Ratio and Proportion",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Averages - Variant 17. Calculate the required metric.",
+    "options": [
+      "435",
+      "440",
+      "450",
+      "465"
+    ],
+    "correctAnswer": "440",
+    "topic": "Averages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Problems on Trains - Variant 18. Calculate the required metric.",
+    "options": [
+      "625",
+      "600",
+      "610",
+      "595"
+    ],
+    "correctAnswer": "600",
+    "topic": "Problems on Trains",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Boats and Streams - Variant 19. Calculate the required metric.",
+    "options": [
+      "805",
+      "790",
+      "775",
+      "780"
+    ],
+    "correctAnswer": "780",
+    "topic": "Boats and Streams",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Compound Interest - Variant 20. Calculate the required metric.",
+    "options": [
+      "990",
+      "975",
+      "1005",
+      "980"
+    ],
+    "correctAnswer": "980",
+    "topic": "Compound Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A can do a piece of work in 10 days and B can do the same work in 15 days. If they work together, how many days will they take to complete the work?",
+    "options": [
+      "6.00 days",
+      "7.50 days",
+      "4.80 days",
+      "8.10 days"
+    ],
+    "correctAnswer": "6.00 days",
+    "topic": "Time and Work",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A shopkeeper buys an article for Rs. 1200 and sells it at a profit of 20%. Find the selling price.",
+    "options": [
+      "Rs. 1490",
+      "Rs. 1410",
+      "Rs. 1560",
+      "Rs. 1440"
+    ],
+    "correctAnswer": "Rs. 1440",
+    "topic": "Profit and Loss",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A car travels a distance of 140 km at a speed of 45 km/hr. How much time does it take?",
+    "options": [
+      "2.61 hrs",
+      "3.11 hrs",
+      "5.11 hrs",
+      "4.11 hrs"
+    ],
+    "correctAnswer": "3.11 hrs",
+    "topic": "Speed, Distance and Time",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Simple Interest - Variant 24. Calculate the required metric.",
+    "options": [
+      "480",
+      "505",
+      "475",
+      "490"
+    ],
+    "correctAnswer": "480",
+    "topic": "Simple Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "If 35% of a number is 90, what is the number?",
+    "options": [
+      "242.14",
+      "307.14",
+      "257.14",
+      "277.14"
+    ],
+    "correctAnswer": "257.14",
+    "topic": "Percentages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Ratio and Proportion - Variant 26. Calculate the required metric.",
+    "options": [
+      "295",
+      "325",
+      "310",
+      "300"
+    ],
+    "correctAnswer": "300",
+    "topic": "Ratio and Proportion",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Averages - Variant 27. Calculate the required metric.",
+    "options": [
+      "465",
+      "450",
+      "440",
+      "435"
+    ],
+    "correctAnswer": "440",
+    "topic": "Averages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Problems on Trains - Variant 28. Calculate the required metric.",
+    "options": [
+      "610",
+      "625",
+      "595",
+      "600"
+    ],
+    "correctAnswer": "600",
+    "topic": "Problems on Trains",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Boats and Streams - Variant 29. Calculate the required metric.",
+    "options": [
+      "790",
+      "775",
+      "780",
+      "805"
+    ],
+    "correctAnswer": "780",
+    "topic": "Boats and Streams",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Compound Interest - Variant 30. Calculate the required metric.",
+    "options": [
+      "975",
+      "990",
+      "980",
+      "1005"
+    ],
+    "correctAnswer": "980",
+    "topic": "Compound Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A can do a piece of work in 10 days and B can do the same work in 15 days. If they work together, how many days will they take to complete the work?",
+    "options": [
+      "7.50 days",
+      "8.10 days",
+      "6.00 days",
+      "4.80 days"
+    ],
+    "correctAnswer": "6.00 days",
+    "topic": "Time and Work",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A shopkeeper buys an article for Rs. 1200 and sells it at a profit of 20%. Find the selling price.",
+    "options": [
+      "Rs. 1560",
+      "Rs. 1490",
+      "Rs. 1410",
+      "Rs. 1440"
+    ],
+    "correctAnswer": "Rs. 1440",
+    "topic": "Profit and Loss",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A car travels a distance of 140 km at a speed of 45 km/hr. How much time does it take?",
+    "options": [
+      "4.11 hrs",
+      "2.61 hrs",
+      "5.11 hrs",
+      "3.11 hrs"
+    ],
+    "correctAnswer": "3.11 hrs",
+    "topic": "Speed, Distance and Time",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Simple Interest - Variant 34. Calculate the required metric.",
+    "options": [
+      "480",
+      "490",
+      "475",
+      "505"
+    ],
+    "correctAnswer": "480",
+    "topic": "Simple Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "If 35% of a number is 90, what is the number?",
+    "options": [
+      "307.14",
+      "277.14",
+      "257.14",
+      "242.14"
+    ],
+    "correctAnswer": "257.14",
+    "topic": "Percentages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Ratio and Proportion - Variant 36. Calculate the required metric.",
+    "options": [
+      "310",
+      "295",
+      "325",
+      "300"
+    ],
+    "correctAnswer": "300",
+    "topic": "Ratio and Proportion",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Averages - Variant 37. Calculate the required metric.",
+    "options": [
+      "435",
+      "450",
+      "465",
+      "440"
+    ],
+    "correctAnswer": "440",
+    "topic": "Averages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Problems on Trains - Variant 38. Calculate the required metric.",
+    "options": [
+      "600",
+      "595",
+      "610",
+      "625"
+    ],
+    "correctAnswer": "600",
+    "topic": "Problems on Trains",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Boats and Streams - Variant 39. Calculate the required metric.",
+    "options": [
+      "780",
+      "790",
+      "775",
+      "805"
+    ],
+    "correctAnswer": "780",
+    "topic": "Boats and Streams",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Compound Interest - Variant 40. Calculate the required metric.",
+    "options": [
+      "990",
+      "980",
+      "1005",
+      "975"
+    ],
+    "correctAnswer": "980",
+    "topic": "Compound Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A can do a piece of work in 10 days and B can do the same work in 15 days. If they work together, how many days will they take to complete the work?",
+    "options": [
+      "8.10 days",
+      "6.00 days",
+      "7.50 days",
+      "4.80 days"
+    ],
+    "correctAnswer": "6.00 days",
+    "topic": "Time and Work",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A shopkeeper buys an article for Rs. 1200 and sells it at a profit of 20%. Find the selling price.",
+    "options": [
+      "Rs. 1410",
+      "Rs. 1440",
+      "Rs. 1560",
+      "Rs. 1490"
+    ],
+    "correctAnswer": "Rs. 1440",
+    "topic": "Profit and Loss",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A car travels a distance of 140 km at a speed of 45 km/hr. How much time does it take?",
+    "options": [
+      "2.61 hrs",
+      "3.11 hrs",
+      "4.11 hrs",
+      "5.11 hrs"
+    ],
+    "correctAnswer": "3.11 hrs",
+    "topic": "Speed, Distance and Time",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Simple Interest - Variant 44. Calculate the required metric.",
+    "options": [
+      "475",
+      "490",
+      "480",
+      "505"
+    ],
+    "correctAnswer": "480",
+    "topic": "Simple Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "If 35% of a number is 90, what is the number?",
+    "options": [
+      "257.14",
+      "242.14",
+      "277.14",
+      "307.14"
+    ],
+    "correctAnswer": "257.14",
+    "topic": "Percentages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Ratio and Proportion - Variant 46. Calculate the required metric.",
+    "options": [
+      "295",
+      "310",
+      "325",
+      "300"
+    ],
+    "correctAnswer": "300",
+    "topic": "Ratio and Proportion",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Averages - Variant 47. Calculate the required metric.",
+    "options": [
+      "450",
+      "440",
+      "465",
+      "435"
+    ],
+    "correctAnswer": "440",
+    "topic": "Averages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Problems on Trains - Variant 48. Calculate the required metric.",
+    "options": [
+      "625",
+      "610",
+      "600",
+      "595"
+    ],
+    "correctAnswer": "600",
+    "topic": "Problems on Trains",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Boats and Streams - Variant 49. Calculate the required metric.",
+    "options": [
+      "805",
+      "780",
+      "775",
+      "790"
+    ],
+    "correctAnswer": "780",
+    "topic": "Boats and Streams",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Compound Interest - Variant 50. Calculate the required metric.",
+    "options": [
+      "980",
+      "975",
+      "1005",
+      "990"
+    ],
+    "correctAnswer": "980",
+    "topic": "Compound Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A can do a piece of work in 10 days and B can do the same work in 15 days. If they work together, how many days will they take to complete the work?",
+    "options": [
+      "7.50 days",
+      "6.00 days",
+      "8.10 days",
+      "4.80 days"
+    ],
+    "correctAnswer": "6.00 days",
+    "topic": "Time and Work",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A shopkeeper buys an article for Rs. 1200 and sells it at a profit of 20%. Find the selling price.",
+    "options": [
+      "Rs. 1560",
+      "Rs. 1440",
+      "Rs. 1410",
+      "Rs. 1490"
+    ],
+    "correctAnswer": "Rs. 1440",
+    "topic": "Profit and Loss",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A car travels a distance of 140 km at a speed of 45 km/hr. How much time does it take?",
+    "options": [
+      "5.11 hrs",
+      "2.61 hrs",
+      "3.11 hrs",
+      "4.11 hrs"
+    ],
+    "correctAnswer": "3.11 hrs",
+    "topic": "Speed, Distance and Time",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Simple Interest - Variant 54. Calculate the required metric.",
+    "options": [
+      "475",
+      "490",
+      "480",
+      "505"
+    ],
+    "correctAnswer": "480",
+    "topic": "Simple Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "If 35% of a number is 90, what is the number?",
+    "options": [
+      "277.14",
+      "242.14",
+      "307.14",
+      "257.14"
+    ],
+    "correctAnswer": "257.14",
+    "topic": "Percentages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Ratio and Proportion - Variant 56. Calculate the required metric.",
+    "options": [
+      "300",
+      "295",
+      "325",
+      "310"
+    ],
+    "correctAnswer": "300",
+    "topic": "Ratio and Proportion",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Averages - Variant 57. Calculate the required metric.",
+    "options": [
+      "465",
+      "440",
+      "450",
+      "435"
+    ],
+    "correctAnswer": "440",
+    "topic": "Averages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Problems on Trains - Variant 58. Calculate the required metric.",
+    "options": [
+      "595",
+      "625",
+      "600",
+      "610"
+    ],
+    "correctAnswer": "600",
+    "topic": "Problems on Trains",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Boats and Streams - Variant 59. Calculate the required metric.",
+    "options": [
+      "790",
+      "780",
+      "805",
+      "775"
+    ],
+    "correctAnswer": "780",
+    "topic": "Boats and Streams",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Compound Interest - Variant 60. Calculate the required metric.",
+    "options": [
+      "990",
+      "1005",
+      "975",
+      "980"
+    ],
+    "correctAnswer": "980",
+    "topic": "Compound Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A can do a piece of work in 10 days and B can do the same work in 15 days. If they work together, how many days will they take to complete the work?",
+    "options": [
+      "6.00 days",
+      "8.10 days",
+      "7.50 days",
+      "4.80 days"
+    ],
+    "correctAnswer": "6.00 days",
+    "topic": "Time and Work",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A shopkeeper buys an article for Rs. 1200 and sells it at a profit of 20%. Find the selling price.",
+    "options": [
+      "Rs. 1490",
+      "Rs. 1440",
+      "Rs. 1410",
+      "Rs. 1560"
+    ],
+    "correctAnswer": "Rs. 1440",
+    "topic": "Profit and Loss",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A car travels a distance of 140 km at a speed of 45 km/hr. How much time does it take?",
+    "options": [
+      "3.11 hrs",
+      "5.11 hrs",
+      "2.61 hrs",
+      "4.11 hrs"
+    ],
+    "correctAnswer": "3.11 hrs",
+    "topic": "Speed, Distance and Time",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Simple Interest - Variant 64. Calculate the required metric.",
+    "options": [
+      "480",
+      "490",
+      "475",
+      "505"
+    ],
+    "correctAnswer": "480",
+    "topic": "Simple Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "If 35% of a number is 90, what is the number?",
+    "options": [
+      "242.14",
+      "257.14",
+      "307.14",
+      "277.14"
+    ],
+    "correctAnswer": "257.14",
+    "topic": "Percentages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Ratio and Proportion - Variant 66. Calculate the required metric.",
+    "options": [
+      "325",
+      "295",
+      "300",
+      "310"
+    ],
+    "correctAnswer": "300",
+    "topic": "Ratio and Proportion",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Averages - Variant 67. Calculate the required metric.",
+    "options": [
+      "450",
+      "465",
+      "440",
+      "435"
+    ],
+    "correctAnswer": "440",
+    "topic": "Averages",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Problems on Trains - Variant 68. Calculate the required metric.",
+    "options": [
+      "610",
+      "595",
+      "625",
+      "600"
+    ],
+    "correctAnswer": "600",
+    "topic": "Problems on Trains",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Boats and Streams - Variant 69. Calculate the required metric.",
+    "options": [
+      "790",
+      "775",
+      "805",
+      "780"
+    ],
+    "correctAnswer": "780",
+    "topic": "Boats and Streams",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "Advanced aptitude question on Compound Interest - Variant 70. Calculate the required metric.",
+    "options": [
+      "990",
+      "980",
+      "1005",
+      "975"
+    ],
+    "correctAnswer": "980",
+    "topic": "Compound Interest",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A can do a piece of work in 10 days and B can do the same work in 15 days. If they work together, how many days will they take to complete the work?",
+    "options": [
+      "8.10 days",
+      "7.50 days",
+      "6.00 days",
+      "4.80 days"
+    ],
+    "correctAnswer": "6.00 days",
+    "topic": "Time and Work",
+    "category": "Quantitative Aptitude"
+  },
+  {
+    "questionText": "A shopkeeper buys an article for Rs. 1200 and sells it at a profit of 20%. Find the selling price.",
+    "options": [
+      "Rs. 1560",
+      "Rs. 1490",
+      "Rs. 1440",
+      "Rs. 1410"
+    ],
+    "correctAnswer": "Rs. 1440",
+    "topic": "Profit and Loss",
+    "category": "Quantitative Aptitude"
   }
 ]
