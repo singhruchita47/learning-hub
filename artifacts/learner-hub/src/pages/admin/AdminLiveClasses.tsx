@@ -24,10 +24,17 @@ const COURSES = [
 ];
 
 function formatDateTime(dt: string) {
-  return new Date(dt).toLocaleString("en-IN", {
-    weekday: "short", day: "numeric", month: "short",
-    hour: "2-digit", minute: "2-digit",
-  });
+  if (!dt) return "Not Scheduled";
+  try {
+    const d = new Date(dt);
+    if (isNaN(d.getTime())) return "Invalid Date";
+    return d.toLocaleString("en-IN", {
+      weekday: "short", day: "numeric", month: "short",
+      hour: "2-digit", minute: "2-digit",
+    });
+  } catch {
+    return "Invalid Date";
+  }
 }
 
 const STATUS_STYLES = {
@@ -59,7 +66,7 @@ export default function AdminLiveClasses() {
       const res = await fetch(`${API_BASE}/live-classes`);
       if (res.ok) {
         const data = await res.json();
-        const apiClasses = data.liveClasses.map((c: any) => ({
+        const apiClasses = (data.liveClasses || []).map((c: any) => ({
           id: c._id,
           subject: c.title,
           courseCode: c.courseCode,
