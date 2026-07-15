@@ -182,7 +182,7 @@ function generateAiQuestion(topic: string, difficulty: "Easy" | "Medium" | "Hard
   };
 }
 
-export default function FacultyCodingQuestions() {
+export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: boolean }) {
   const [questions, setQuestions] = useState<CodingQuestion[]>([]);
   const [codingBank, setCodingBank] = useState<BankQuestion[]>(localCodingBank);
   const [selectedBankIds, setSelectedBankIds] = useState<string[]>([]);
@@ -378,18 +378,20 @@ export default function FacultyCodingQuestions() {
   return (
     <main className="min-h-screen bg-[#eef2fb] px-4 py-6 md:px-8">
       <div className="mx-auto max-w-[1400px]">
-        <section className="mb-6 rounded-[2rem] border border-[#d8c8ff] bg-gradient-to-br from-[#f7f2ff]/95 via-[#eee7ff]/90 to-white p-7 shadow-xl shadow-violet-200/40">
-          <p className="text-xs font-black uppercase tracking-[0.22em] text-violet-600">Coding practice builder</p>
-          <div className="mt-2 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <h1 className="text-2xl font-black text-slate-950">Create Coding Question</h1>
-              <p className="mt-2 text-sm font-bold text-slate-600">Add easy coding problems with sample input/output and starter code.</p>
+        {!isAdmin && (
+          <section className="mb-6 rounded-[2rem] border border-[#d8c8ff] bg-gradient-to-br from-[#f7f2ff]/95 via-[#eee7ff]/90 to-white p-7 shadow-xl shadow-violet-200/40">
+            <p className="text-xs font-black uppercase tracking-[0.22em] text-violet-600">Coding practice builder</p>
+            <div className="mt-2 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h1 className="text-2xl font-black text-slate-950">Create Coding Question</h1>
+                <p className="mt-2 text-sm font-bold text-slate-600">Add easy coding problems with sample input/output and starter code.</p>
+              </div>
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-violet-600 shadow-sm">
+                <Code2 className="h-7 w-7" />
+              </div>
             </div>
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-violet-600 shadow-sm">
-              <Code2 className="h-7 w-7" />
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {openPanel === null && (
         <div className="mb-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

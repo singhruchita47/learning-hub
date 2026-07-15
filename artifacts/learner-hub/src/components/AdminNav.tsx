@@ -74,7 +74,6 @@ export default function AdminNav({ name, onLogout, children }: { name: string, o
     { href: "/admin/courses", label: "Courses", icon: BookOpen },
     { href: "/admin/quiz-coding", label: "Quiz & Coding", icon: Code2 },
     { href: "/admin/assignments", label: "Assignments", icon: ClipboardList },
-    { href: "/admin/allocations", label: "Allocations", icon: Link2 },
     { href: "/admin/placements", label: "Students & Import", icon: Users },
     { href: "/admin/curriculum", label: "Curriculum", icon: BookMarked },
     { href: "/admin/attendance", label: "Attendance", icon: UserCheck },

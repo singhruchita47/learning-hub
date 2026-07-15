@@ -218,7 +218,7 @@ export default function AdminQuizCoding() {
 
         {/* ══════════════════ CODING TAB ══════════════════ */}
         {tab === "coding" && (
-          <FacultyCodingQuestions />
+          <FacultyCodingQuestions isAdmin={true} />
         )}
 
       </div>
