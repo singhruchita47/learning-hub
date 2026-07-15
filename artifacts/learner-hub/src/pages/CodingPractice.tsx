@@ -9,7 +9,6 @@ import {
   Search,
   Send,
   Trophy,
-  Trophy,
   XCircle,
   Loader,
   GripVertical,
@@ -566,9 +565,9 @@ export default function CodingPractice() {
               <div className="my-5 h-px bg-slate-200" />
               <p className="text-sm font-semibold leading-relaxed text-slate-700 whitespace-pre-wrap">{parsedDescription.description}</p>
               
-              {activeProblem.imageUrl && (
+              {(activeProblem as any).imageUrl && (
                 <div className="mt-6 border border-slate-200 rounded-xl overflow-hidden bg-slate-50 p-2 shadow-sm">
-                  <img src={activeProblem.imageUrl} alt="Problem visual" className="w-full h-auto object-contain max-h-[300px] rounded-lg" />
+                  <img src={(activeProblem as any).imageUrl} alt="Problem visual" className="w-full h-auto object-contain max-h-[300px] rounded-lg" />
                 </div>
               )}
 

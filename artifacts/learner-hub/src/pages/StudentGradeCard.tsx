@@ -56,10 +56,10 @@ export default function StudentGradeCard() {
   const quizGrades = quizAttempts.map(q => {
     const test = publishedTests.find(t => t.id === q.quizId);
     const title = test?.title || `Quiz ${q.quizId}`;
-    const course = test?.courseCode || "General";
+    const course = (test as any)?.courseCode || "General";
     totalScore += q.score || 0;
     totalMaxScore += q.total || 0;
-    return { title, course, score: q.score, total: q.total, type: "Quiz" };
+    return { title, course, score: q.score, total: q.total, type: "Quiz", isGraded: true };
   });
 
   const assignmentGrades = submissions.map(s => {
