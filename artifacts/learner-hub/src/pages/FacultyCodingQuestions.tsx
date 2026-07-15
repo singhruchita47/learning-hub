@@ -4,6 +4,7 @@ import { ACADEMIC_API_BASE } from "@/lib/api";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import generatedQuestions from "@/services/coding_questions.json";
 import graphQuestions from "@/services/graph_coding_questions.json";
+import leetcodeQuestions from "@/services/scraped_leetcode.json";
 
 const API_BASE = ACADEMIC_API_BASE;
 const CODING_BANK_API = "https://api.jsonbin.io/v3/b/66ebfa4ae41b4d34e433145a?meta=false";
@@ -241,13 +242,13 @@ export default function FacultyCodingQuestions() {
       const data = await response.json();
       const remoteQuestions = listFromApi(data).slice(0, 50).map(mapRemoteBankQuestion);
       
-      const combinedBank = [...remoteQuestions, ...generatedQuestions as BankQuestion[], ...graphQuestions as BankQuestion[]];
+      const combinedBank = [...leetcodeQuestions as BankQuestion[], ...remoteQuestions, ...generatedQuestions as BankQuestion[], ...graphQuestions as BankQuestion[]];
       
       setCodingBank(combinedBank);
       setSelectedBankIds([]);
       setStatus(`${combinedBank.length} JavaScript coding questions available in the question bank.`);
     } catch {
-      const fallbackBank = [...localCodingBank, ...generatedQuestions as BankQuestion[], ...graphQuestions as BankQuestion[]];
+      const fallbackBank = [...leetcodeQuestions as BankQuestion[], ...localCodingBank, ...generatedQuestions as BankQuestion[], ...graphQuestions as BankQuestion[]];
       setCodingBank(fallbackBank);
       setStatus(`Successfully loaded ${fallbackBank.length} JavaScript coding questions from local databank.`);
     }
@@ -540,6 +541,7 @@ export default function FacultyCodingQuestions() {
                     className="bg-transparent text-xs font-bold text-violet-700 outline-none cursor-pointer"
                   >
                     <option value="All">All Topics</option>
+                    <option value="LeetCode">LeetCode (Scraped)</option>
                     <option value="Linear Regression">Linear Regression</option>
                     <option value="Numpy">NumPy</option>
                     <option value="Pandas">Pandas</option>
@@ -585,7 +587,11 @@ export default function FacultyCodingQuestions() {
 
           <div className="max-h-[560px] overflow-y-auto bg-slate-50/70 p-5 [scrollbar-width:thin]">
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {codingBank.filter(q => topicFilter === "All" || q.title.toLowerCase().includes(topicFilter.toLowerCase())).map((question, index) => {
+            {codingBank.filter(q => {
+              if (topicFilter === "All") return true;
+              if (topicFilter === "LeetCode") return q.id.startsWith("leetcode-");
+              return q.title.toLowerCase().includes(topicFilter.toLowerCase());
+            }).map((question, index) => {
               const selected = selectedBankIds.includes(question.id);
 
               return (

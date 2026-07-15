@@ -1,0 +1,182 @@
+[
+  {
+    "id": "leetcode-74",
+    "title": "Search a 2D Matrix",
+    "difficulty": "Medium",
+    "description": "You are given an m x n integer matrix matrix with the following two properties:\n\n\n\tEach row is sorted in non-decreasing order.\n\tThe first integer of each row is greater than the last integer of the previous row.\n\n\nGiven an integer target, return true if target is in matrix or false otherwise.\n\nYou must write a solution in O(log(m * n)) time complexity.\n\n\u00a0",
+    "inputTestCase": "matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3",
+    "expectedOutput": "true",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-75",
+    "title": "Sort Colors",
+    "difficulty": "Medium",
+    "description": "Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.\n\nWe will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively.\n\nYou must solve this problem without using the library's sort function.\n\n\u00a0",
+    "inputTestCase": "nums = [2,0,2,1,1,0]",
+    "expectedOutput": "[0,0,1,1,2,2]",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-40",
+    "title": "Combination Sum II",
+    "difficulty": "Medium",
+    "description": "Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates\u00a0where the candidate numbers sum to target.\n\nEach number in candidates\u00a0may only be used once in the combination.\n\nNote:\u00a0The solution set must not contain duplicate combinations.\n\n\u00a0",
+    "inputTestCase": "candidates = [10,1,2,7,6,1,5], target = 8",
+    "expectedOutput": "",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-100",
+    "title": "Same Tree",
+    "difficulty": "Easy",
+    "description": "Given the roots of two binary trees p and q, write a function to check if they are the same or not.\n\nTwo binary trees are considered the same if they are structurally identical, and the nodes have the same value.\n\n\u00a0",
+    "inputTestCase": "p = [1,2,3], q = [1,2,3]",
+    "expectedOutput": "true",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-95",
+    "title": "Unique Binary Search Trees II",
+    "difficulty": "Medium",
+    "description": "Given an integer n, return all the structurally unique BST's (binary search trees), which has exactly n nodes of unique values from 1 to n. Return the answer in any order.\n\n\u00a0",
+    "inputTestCase": "n = 3",
+    "expectedOutput": "[[1,null,2,null,3],[1,null,3,2],[2,1,3],[3,1,null,null,2],[3,2,null,1]]",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-86",
+    "title": "Partition List",
+    "difficulty": "Medium",
+    "description": "Given the head of a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.\n\nYou should preserve the original relative order of the nodes in each of the two partitions.\n\n\u00a0",
+    "inputTestCase": "head = [1,4,3,2,5,2], x = 3",
+    "expectedOutput": "[1,2,2,4,3,5]",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-72",
+    "title": "Edit Distance",
+    "difficulty": "Medium",
+    "description": "Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.\n\nYou have the following three operations permitted on a word:\n\n\n\tInsert a character\n\tDelete a character\n\tReplace a character\n\n\n\u00a0",
+    "inputTestCase": "word1 = \"horse\", word2 = \"ros\"",
+    "expectedOutput": "3",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-60",
+    "title": "Permutation Sequence",
+    "difficulty": "Hard",
+    "description": "The set [1, 2, 3, ...,\u00a0n] contains a total of n! unique permutations.\n\nBy listing and labeling all of the permutations in order, we get the following sequence for n = 3:\n\n\n\t\"123\"\n\t\"132\"\n\t\"213\"\n\t\"231\"\n\t\"312\"\n\t\"321\"\n\n\nGiven n and k, return the kth permutation sequence.\n\n\u00a0",
+    "inputTestCase": "n = 3, k = 3",
+    "expectedOutput": "\"213\"",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-58",
+    "title": "Length of Last Word",
+    "difficulty": "Easy",
+    "description": "Given a string s consisting of words and spaces, return the length of the last word in the string.\n\nA word is a maximal substring consisting of non-space characters only.\n\n\u00a0",
+    "inputTestCase": "s = \"Hello World\"",
+    "expectedOutput": "5",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-115",
+    "title": "Distinct Subsequences",
+    "difficulty": "Hard",
+    "description": "Given two strings s and t, return the number of distinct subsequences of s which equals t.\n\nThe test cases are generated so that the answer fits on a 32-bit signed integer.\n\n\u00a0",
+    "inputTestCase": "s = \"rabbbit\", t = \"rabbit\"",
+    "expectedOutput": "3",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-177",
+    "title": "Nth Highest Salary",
+    "difficulty": "Medium",
+    "description": "Table: Employee\n\n\n+-------------+------+\n| Column Name | Type |\n+-------------+------+\n| id          | int  |\n| salary      | int  |\n+-------------+------+\nid is the primary key (column with unique values) for this table.\nEach row of this table contains information about the salary of an employee.\n\n\n\u00a0\n\nWrite a solution to find the nth highest distinct salary from the Employee table. If there are less than n distinct salaries, return\u00a0null.\n\nThe result format is in the following example.\n\n\u00a0",
+    "inputTestCase": "",
+    "expectedOutput": "",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-198",
+    "title": "House Robber",
+    "difficulty": "Medium",
+    "description": "You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.\n\nGiven an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.\n\n\u00a0",
+    "inputTestCase": "nums = [1,2,3,1]",
+    "expectedOutput": "4",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-212",
+    "title": "Word Search II",
+    "difficulty": "Hard",
+    "description": "Given an m x n board\u00a0of characters and a list of strings words, return all words on the board.\n\nEach word must be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.\n\n\u00a0",
+    "inputTestCase": "board = [[\"o\",\"a\",\"a\",\"n\"],[\"e\",\"t\",\"a\",\"e\"],[\"i\",\"h\",\"k\",\"r\"],[\"i\",\"f\",\"l\",\"v\"]], words = [\"oath\",\"pea\",\"eat\",\"rain\"]",
+    "expectedOutput": "[\"eat\",\"oath\"]",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-209",
+    "title": "Minimum Size Subarray Sum",
+    "difficulty": "Medium",
+    "description": "Given an array of positive integers nums and a positive integer target, return the minimal length of a subarray whose sum is greater than or equal to target. If there is no such subarray, return 0 instead.\n\n\u00a0",
+    "inputTestCase": "target = 7, nums = [2,3,1,2,4,3]",
+    "expectedOutput": "2",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-194",
+    "title": "Transpose File",
+    "difficulty": "Medium",
+    "description": "Given a text file file.txt, transpose its content.\n\nYou may assume that each row has the same number of columns, and each field is separated by the ' ' character.\n\nExample:\n\nIf file.txt has the following content:\n\n\nname age\nalice 21\nryan 30\n\n\nOutput the following:\n\n\nname alice ryan\nage 21 30",
+    "inputTestCase": "",
+    "expectedOutput": "",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-168",
+    "title": "Excel Sheet Column Title",
+    "difficulty": "Easy",
+    "description": "Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.\n\nFor example:\n\n\nA -> 1\nB -> 2\nC -> 3\n...\nZ -> 26\nAA -> 27\nAB -> 28 \n...\n\n\n\u00a0",
+    "inputTestCase": "columnNumber = 1",
+    "expectedOutput": "\"A\"",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-130",
+    "title": "Surrounded Regions",
+    "difficulty": "Medium",
+    "description": "You are given an m x n matrix board containing letters 'X' and 'O', capture regions that are surrounded:\n\n\n\tConnect: A cell is connected to adjacent cells horizontally or vertically.\n\tRegion: To form a region connect every 'O' cell.\n\tSurround: A region is surrounded if none of the 'O' cells in that region are on the edge of the board. Such regions are completely enclosed by 'X' cells.\n\n\nTo capture a surrounded region, replace all 'O's with 'X's in-place within the original board. You do not need to return anything.\n\n\u00a0",
+    "inputTestCase": "",
+    "expectedOutput": "",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-117",
+    "title": "Populating Next Right Pointers in Each Node II",
+    "difficulty": "Medium",
+    "description": "Given a binary tree\n\n\nstruct Node {\n  int val;\n  Node *left;\n  Node *right;\n  Node *next;\n}\n\n\nPopulate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.\n\nInitially, all next pointers are set to NULL.\n\n\u00a0",
+    "inputTestCase": "root = [1,2,3,4,5,null,7]",
+    "expectedOutput": "[1,#,2,3,#,4,5,7,#]",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-172",
+    "title": "Factorial Trailing Zeroes",
+    "difficulty": "Medium",
+    "description": "Given an integer n, return the number of trailing zeroes in n!.\n\nNote that n! = n * (n - 1) * (n - 2) * ... * 3 * 2 * 1.\n\n\u00a0",
+    "inputTestCase": "n = 3",
+    "expectedOutput": "0",
+    "starterCode": "def solve():\n    pass\n"
+  },
+  {
+    "id": "leetcode-85",
+    "title": "Maximal Rectangle",
+    "difficulty": "Hard",
+    "description": "Given a rows x cols\u00a0binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.\n\n\u00a0",
+    "inputTestCase": "matrix = [[\"1\",\"0\",\"1\",\"0\",\"0\"],[\"1\",\"0\",\"1\",\"1\",\"1\"],[\"1\",\"1\",\"1\",\"1\",\"1\"],[\"1\",\"0\",\"0\",\"1\",\"0\"]]",
+    "expectedOutput": "6",
+    "starterCode": "def solve():\n    pass\n"
+  }
+]
