@@ -22,8 +22,8 @@ import { ACADEMIC_API_BASE, RUN_CODE_DIRECT_URL } from "@/lib/api";
 const API_BASE = ACADEMIC_API_BASE;
 
 const languages = [
-  { key: "javascript", label: "JavaScript", judge0Id: 63 },
-  { key: "python", label: "Python 3", judge0Id: 71 },
+  { key: "javascript", label: "JavaScript (Node)", judge0Id: 63 },
+  { key: "python", label: "Python (NumPy, Pandas, Scikit)", judge0Id: 71 }, // Assuming backend supports DS libs on this ID
   { key: "java", label: "Java", judge0Id: 62 },
   { key: "cpp", label: "C++", judge0Id: 54 },
 ] as const;
@@ -44,9 +44,13 @@ const leaderboard = [
   { rank: 4, name: "Rahul Verma", solved: 3, score: 310, streak: 3 },
 ];
 
-function starterCode(language: LanguageKey, problem: PracticeProblem) {
+function getDefaultStarterCode(language: LanguageKey, problem: PracticeProblem) {
+  if ((problem as any).starterCode) {
+    return (problem as any).starterCode;
+  }
+
   if (language === "python") {
-    return `class Solution:\n    def solve(self):\n        data = input().strip()\n        # code here\n\nSolution().solve()\n`;
+    return `import sys\nimport numpy as np\nimport pandas as pd\n\ndef solve():\n    data = sys.stdin.read().strip()\n    # code here\n\nif __name__ == '__main__':\n    solve()\n`;
   }
 
   if (language === "java") {
@@ -130,7 +134,7 @@ export default function CodingPractice() {
   const solutionKey = activeProblem ? `${activeProblem.id}-${selectedLanguage}` : "";
   const currentCode =
     activeProblem && selectedLanguage
-      ? solutions[solutionKey] ?? starterCode(selectedLanguage, activeProblem)
+      ? solutions[solutionKey] ?? getDefaultStarterCode(selectedLanguage, activeProblem)
       : "";
   const currentRun = solutionKey ? runStates[solutionKey] : undefined;
 
@@ -172,6 +176,7 @@ export default function CodingPractice() {
             stdin: question.inputTestCase,
             expectedOutput: question.expectedOutput,
             imageUrl: question.imageUrl,
+            starterCode: (question as any).starterCode,
             isTest
           };
         });
