@@ -8,11 +8,35 @@ import { connectToMongo } from "./lib/mongo";
 
 const app: Express = express();
 
+import User from "./models/user";
+import crypto from "node:crypto";
+
+function createPasswordHash(password: string) {
+  const salt = crypto.randomBytes(16).toString("hex");
+  const derived = crypto.pbkdf2Sync(password, salt, 120000, 64, "sha512").toString("hex");
+  return `${salt}:${derived}`;
+}
+
 let isConnected = false;
 app.use(async (req, res, next) => {
   if (process.env.VERCEL && !isConnected) {
-    await connectToMongo();
-    isConnected = true;
+    try {
+      await connectToMongo();
+      isConnected = true;
+      
+      // Seed Mongo Admin
+      const adminExists = await User.findOne({ email: "admin@learning.hub" });
+      if (!adminExists) {
+        await User.create({
+          name: "System Admin",
+          email: "admin@learning.hub",
+          role: "admin",
+          passwordHash: createPasswordHash("admin123"),
+        });
+      }
+    } catch (error) {
+      console.error("MongoDB Connection/Seeding failed, falling back to memory:", error);
+    }
   }
   next();
 });
