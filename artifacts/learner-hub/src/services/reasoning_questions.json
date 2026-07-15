@@ -1,0 +1,4402 @@
+[
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "10",
+      "12",
+      "9",
+      "11"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 1 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If C is the brother of D; D is the sister of E; and E is the father of S, how is C related to S?",
+    "options": [
+      "Father",
+      "Grandfather",
+      "Uncle",
+      "Brother"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "North",
+      "East",
+      "South",
+      "West"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Forest",
+      "Beak",
+      "Grass",
+      "Bush"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 1 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 1 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 1 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 1 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 1 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "10",
+      "11",
+      "9"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 2 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "A is the mother of B. B is the sister of C. D is the father of C. How is D related to A?",
+    "options": [
+      "Son",
+      "Brother",
+      "Uncle",
+      "Husband"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "East",
+      "North",
+      "South",
+      "West"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Stream",
+      "Canal",
+      "Rain",
+      "Pool"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 2 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 2 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 2 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 2 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 2 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "10",
+      "11",
+      "9"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 3 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Mointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His father's",
+      "His nephew's",
+      "His own",
+      "His son's"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "East",
+      "West",
+      "North"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "Water",
+      "Sea",
+      "Waves",
+      "River"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 3 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 3 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 3 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 3 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 3 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "10",
+      "9",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 4 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If M is the brother of S; S is the sister of M; and M is the father of S, how is M related to S?",
+    "options": [
+      "Brother",
+      "Uncle",
+      "Father",
+      "Grandfather"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "West",
+      "North",
+      "East"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Bush",
+      "Beak",
+      "Forest",
+      "Grass"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 4 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 4 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 4 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 4 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 4 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "9",
+      "11",
+      "10"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 5 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "P is the mother of Q. Q is the sister of R. D is the father of R. How is D related to P?",
+    "options": [
+      "Son",
+      "Brother",
+      "Uncle",
+      "Husband"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "East",
+      "West",
+      "North"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Stream",
+      "Canal",
+      "Rain",
+      "Pool"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 5 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 5 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 5 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 5 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 5 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "12",
+      "9",
+      "10"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 6 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Eointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His son's",
+      "His father's",
+      "His own",
+      "His nephew's"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "West",
+      "North",
+      "East"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "River",
+      "Waves",
+      "Water",
+      "Sea"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 6 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 6 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 6 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 6 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 6 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "10",
+      "9",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 7 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If C is the brother of D; D is the sister of E; and E is the father of S, how is C related to S?",
+    "options": [
+      "Brother",
+      "Grandfather",
+      "Father",
+      "Uncle"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "North",
+      "West",
+      "East"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Forest",
+      "Grass",
+      "Bush",
+      "Beak"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 7 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 7 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 7 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 7 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 7 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "9",
+      "10",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 8 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "A is the mother of B. B is the sister of C. D is the father of C. How is D related to A?",
+    "options": [
+      "Uncle",
+      "Brother",
+      "Husband",
+      "Son"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "East",
+      "South",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Canal",
+      "Pool",
+      "Rain",
+      "Stream"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 8 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 8 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 8 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 8 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 8 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "11",
+      "9",
+      "10"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 9 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Mointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His nephew's",
+      "His son's",
+      "His father's",
+      "His own"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "East",
+      "North",
+      "West"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "River",
+      "Water",
+      "Waves",
+      "Sea"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 9 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 9 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 9 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 9 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 9 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "9",
+      "10",
+      "11"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 10 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If M is the brother of S; S is the sister of M; and M is the father of S, how is M related to S?",
+    "options": [
+      "Father",
+      "Uncle",
+      "Grandfather",
+      "Brother"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "North",
+      "West",
+      "East",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Grass",
+      "Beak",
+      "Forest",
+      "Bush"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 10 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 10 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 10 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 10 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 10 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "9",
+      "10",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 11 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "P is the mother of Q. Q is the sister of R. D is the father of R. How is D related to P?",
+    "options": [
+      "Brother",
+      "Son",
+      "Husband",
+      "Uncle"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "East",
+      "West",
+      "North",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Canal",
+      "Pool",
+      "Stream",
+      "Rain"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 11 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 11 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 11 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 11 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 11 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "10",
+      "12",
+      "9",
+      "11"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 12 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Eointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His nephew's",
+      "His father's",
+      "His son's",
+      "His own"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "East",
+      "North",
+      "West",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "River",
+      "Waves",
+      "Water",
+      "Sea"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 12 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 12 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 12 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 12 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 12 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "10",
+      "12",
+      "11",
+      "9"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 13 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If C is the brother of D; D is the sister of E; and E is the father of S, how is C related to S?",
+    "options": [
+      "Grandfather",
+      "Father",
+      "Brother",
+      "Uncle"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "East",
+      "North",
+      "West",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Grass",
+      "Forest",
+      "Beak",
+      "Bush"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 13 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 13 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 13 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 13 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 13 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "10",
+      "12",
+      "9"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 14 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "A is the mother of B. B is the sister of C. D is the father of C. How is D related to A?",
+    "options": [
+      "Son",
+      "Brother",
+      "Husband",
+      "Uncle"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "West",
+      "South",
+      "East",
+      "North"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Rain",
+      "Pool",
+      "Canal",
+      "Stream"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 14 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 14 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 14 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 14 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 14 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "9",
+      "11",
+      "10",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 15 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Mointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His nephew's",
+      "His own",
+      "His father's",
+      "His son's"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "West",
+      "North",
+      "East",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "Water",
+      "Sea",
+      "Waves",
+      "River"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 15 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 15 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 15 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 15 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 15 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "9",
+      "11",
+      "10"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 16 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If M is the brother of S; S is the sister of M; and M is the father of S, how is M related to S?",
+    "options": [
+      "Uncle",
+      "Grandfather",
+      "Brother",
+      "Father"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "North",
+      "East",
+      "West"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Grass",
+      "Forest",
+      "Bush",
+      "Beak"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 16 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 16 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 16 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 16 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 16 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "10",
+      "9",
+      "11",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 17 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "P is the mother of Q. Q is the sister of R. D is the father of R. How is D related to P?",
+    "options": [
+      "Brother",
+      "Husband",
+      "Son",
+      "Uncle"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "West",
+      "South",
+      "North",
+      "East"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Pool",
+      "Rain",
+      "Canal",
+      "Stream"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 17 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 17 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 17 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 17 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 17 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "9",
+      "11",
+      "12",
+      "10"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 18 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Eointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His son's",
+      "His nephew's",
+      "His father's",
+      "His own"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "North",
+      "West",
+      "East"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "River",
+      "Water",
+      "Sea",
+      "Waves"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 18 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 18 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 18 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 18 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 18 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "9",
+      "12",
+      "10",
+      "11"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 19 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If C is the brother of D; D is the sister of E; and E is the father of S, how is C related to S?",
+    "options": [
+      "Father",
+      "Brother",
+      "Grandfather",
+      "Uncle"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "West",
+      "South",
+      "North",
+      "East"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Beak",
+      "Grass",
+      "Forest",
+      "Bush"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 19 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 19 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 19 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 19 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 19 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "10",
+      "9",
+      "11",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 20 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "A is the mother of B. B is the sister of C. D is the father of C. How is D related to A?",
+    "options": [
+      "Husband",
+      "Son",
+      "Brother",
+      "Uncle"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "West",
+      "South",
+      "North",
+      "East"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Canal",
+      "Pool",
+      "Rain",
+      "Stream"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 20 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 20 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 20 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 20 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 20 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "10",
+      "9",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 21 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Mointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His son's",
+      "His father's",
+      "His own",
+      "His nephew's"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "East",
+      "North",
+      "West",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "Waves",
+      "Water",
+      "River",
+      "Sea"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 21 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 21 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 21 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 21 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 21 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "10",
+      "11",
+      "9"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 22 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If M is the brother of S; S is the sister of M; and M is the father of S, how is M related to S?",
+    "options": [
+      "Uncle",
+      "Father",
+      "Brother",
+      "Grandfather"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "West",
+      "East",
+      "North",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Bush",
+      "Beak",
+      "Forest",
+      "Grass"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 22 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 22 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 22 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 22 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 22 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "11",
+      "9",
+      "10"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 23 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "P is the mother of Q. Q is the sister of R. D is the father of R. How is D related to P?",
+    "options": [
+      "Brother",
+      "Uncle",
+      "Son",
+      "Husband"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "North",
+      "West",
+      "South",
+      "East"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Canal",
+      "Pool",
+      "Rain",
+      "Stream"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 23 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 23 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 23 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 23 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 23 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "10",
+      "12",
+      "11",
+      "9"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 24 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Eointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His nephew's",
+      "His son's",
+      "His own",
+      "His father's"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "East",
+      "West",
+      "North"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "Waves",
+      "River",
+      "Sea",
+      "Water"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 24 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 24 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 24 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 24 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 24 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "12",
+      "10",
+      "9"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 25 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If C is the brother of D; D is the sister of E; and E is the father of S, how is C related to S?",
+    "options": [
+      "Grandfather",
+      "Brother",
+      "Father",
+      "Uncle"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "North",
+      "East",
+      "South",
+      "West"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Grass",
+      "Beak",
+      "Forest",
+      "Bush"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 25 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 25 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 25 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 25 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 25 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "9",
+      "10",
+      "11"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 26 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "A is the mother of B. B is the sister of C. D is the father of C. How is D related to A?",
+    "options": [
+      "Brother",
+      "Husband",
+      "Uncle",
+      "Son"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "West",
+      "East",
+      "South",
+      "North"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Canal",
+      "Pool",
+      "Rain",
+      "Stream"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 26 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 26 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 26 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 26 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 26 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "12",
+      "10",
+      "9"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 27 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Mointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His nephew's",
+      "His father's",
+      "His son's",
+      "His own"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "North",
+      "West",
+      "East",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "Sea",
+      "River",
+      "Waves",
+      "Water"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 27 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 27 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 27 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 27 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 27 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "9",
+      "11",
+      "10",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 28 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If M is the brother of S; S is the sister of M; and M is the father of S, how is M related to S?",
+    "options": [
+      "Grandfather",
+      "Father",
+      "Brother",
+      "Uncle"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "North",
+      "South",
+      "East",
+      "West"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Grass",
+      "Forest",
+      "Beak",
+      "Bush"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 28 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 28 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 28 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 28 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 28 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "9",
+      "10",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 29 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "P is the mother of Q. Q is the sister of R. D is the father of R. How is D related to P?",
+    "options": [
+      "Husband",
+      "Brother",
+      "Uncle",
+      "Son"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "West",
+      "North",
+      "East",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Rain",
+      "Stream",
+      "Canal",
+      "Pool"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 29 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 29 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 29 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 29 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 29 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "9",
+      "10",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 30 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Eointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His own",
+      "His father's",
+      "His son's",
+      "His nephew's"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "West",
+      "North",
+      "South",
+      "East"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "Water",
+      "River",
+      "Sea",
+      "Waves"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 30 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 30 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 30 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 30 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 30 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "10",
+      "11",
+      "12",
+      "9"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 31 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If C is the brother of D; D is the sister of E; and E is the father of S, how is C related to S?",
+    "options": [
+      "Uncle",
+      "Father",
+      "Brother",
+      "Grandfather"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "North",
+      "East",
+      "West",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Beak",
+      "Grass",
+      "Forest",
+      "Bush"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 31 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 31 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 31 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 31 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 31 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "9",
+      "10",
+      "12",
+      "11"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 32 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "A is the mother of B. B is the sister of C. D is the father of C. How is D related to A?",
+    "options": [
+      "Uncle",
+      "Brother",
+      "Son",
+      "Husband"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "East",
+      "South",
+      "West",
+      "North"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Stream",
+      "Canal",
+      "Pool",
+      "Rain"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 32 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 32 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 32 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 32 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 32 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "10",
+      "12",
+      "9",
+      "11"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 33 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Mointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His son's",
+      "His nephew's",
+      "His own",
+      "His father's"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "North",
+      "West",
+      "East",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "River",
+      "Water",
+      "Waves",
+      "Sea"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 33 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 33 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 33 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 33 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 33 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option A",
+      "Option B",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "9",
+      "10",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 34 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If M is the brother of S; S is the sister of M; and M is the father of S, how is M related to S?",
+    "options": [
+      "Father",
+      "Grandfather",
+      "Uncle",
+      "Brother"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "North",
+      "East",
+      "West",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Grass",
+      "Forest",
+      "Beak",
+      "Bush"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 34 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 34 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 34 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 34 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 34 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "9",
+      "10",
+      "11"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 35 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "P is the mother of Q. Q is the sister of R. D is the father of R. How is D related to P?",
+    "options": [
+      "Brother",
+      "Uncle",
+      "Son",
+      "Husband"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "East",
+      "West",
+      "South",
+      "North"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Rain",
+      "Canal",
+      "Stream",
+      "Pool"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 35 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 35 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option B",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 35 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 35 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 35 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "10",
+      "11",
+      "9",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 36 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Eointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His father's",
+      "His son's",
+      "His own",
+      "His nephew's"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "East",
+      "West",
+      "North"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "River",
+      "Sea",
+      "Water",
+      "Waves"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 36 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option C",
+      "Option D",
+      "Option B"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 36 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 36 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 36 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 36 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "12",
+      "10",
+      "11",
+      "9"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 37 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If C is the brother of D; D is the sister of E; and E is the father of S, how is C related to S?",
+    "options": [
+      "Brother",
+      "Uncle",
+      "Father",
+      "Grandfather"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "East",
+      "West",
+      "South",
+      "North"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Forest",
+      "Beak",
+      "Bush",
+      "Grass"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 37 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 37 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 37 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 37 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option C",
+      "Option A",
+      "Option B"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 37 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option D",
+      "Option A"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "11",
+      "12",
+      "9",
+      "10"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 38 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "A is the mother of B. B is the sister of C. D is the father of C. How is D related to A?",
+    "options": [
+      "Brother",
+      "Husband",
+      "Uncle",
+      "Son"
+    ],
+    "correctAnswer": "Husband"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "East",
+      "North",
+      "South",
+      "West"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Flow : River :: Stagnant : ?",
+    "options": [
+      "Pool",
+      "Rain",
+      "Stream",
+      "Canal"
+    ],
+    "correctAnswer": "Pool"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 38 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 38 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 38 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option A",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 38 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 38 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "10",
+      "11",
+      "9",
+      "12"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 39 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "Mointing to a photograph, a man said, 'I have no brother or sister but that man's father is my father's son.' Whose photograph was it?",
+    "options": [
+      "His nephew's",
+      "His own",
+      "His son's",
+      "His father's"
+    ],
+    "correctAnswer": "His son's"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "West",
+      "North",
+      "East",
+      "South"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Oasis : Sand :: Island : ?",
+    "options": [
+      "Water",
+      "Waves",
+      "River",
+      "Sea"
+    ],
+    "correctAnswer": "Water"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 39 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 39 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option D",
+      "Option B",
+      "Option A"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 39 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 39 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option D",
+      "Option C",
+      "Option A"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 39 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option D",
+      "Option B",
+      "Option A",
+      "Option C"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Number Series",
+    "questionText": "Find the next number in the series: 2, 4, 6, 8, ?",
+    "options": [
+      "9",
+      "12",
+      "10",
+      "11"
+    ],
+    "correctAnswer": "10"
+  },
+  {
+    "topic": "Letter Series",
+    "questionText": "Reasoning Question on Letter Series - Set 40 Variant 2. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option B",
+      "Option D",
+      "Option C"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Blood Relations",
+    "questionText": "If M is the brother of S; S is the sister of M; and M is the father of S, how is M related to S?",
+    "options": [
+      "Uncle",
+      "Brother",
+      "Grandfather",
+      "Father"
+    ],
+    "correctAnswer": "Uncle"
+  },
+  {
+    "topic": "Direction Sense",
+    "questionText": "Rahul put his timepiece on the table in such a way that at 6 P.M. hour hand points to North. In which direction the minute hand will point at 9.15 P.M. ?",
+    "options": [
+      "South",
+      "North",
+      "West",
+      "East"
+    ],
+    "correctAnswer": "West"
+  },
+  {
+    "topic": "Analogy",
+    "questionText": "Cup : Lip :: Bird : ?",
+    "options": [
+      "Bush",
+      "Grass",
+      "Beak",
+      "Forest"
+    ],
+    "correctAnswer": "Beak"
+  },
+  {
+    "topic": "Coding-Decoding",
+    "questionText": "Reasoning Question on Coding-Decoding - Set 40 Variant 6. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option A",
+      "Option C",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  },
+  {
+    "topic": "Syllogism",
+    "questionText": "Reasoning Question on Syllogism - Set 40 Variant 7. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option A"
+  },
+  {
+    "topic": "Seating Arrangement",
+    "questionText": "Reasoning Question on Seating Arrangement - Set 40 Variant 8. What is the logical deduction?",
+    "options": [
+      "Option B",
+      "Option C",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option B"
+  },
+  {
+    "topic": "Odd One Out",
+    "questionText": "Reasoning Question on Odd One Out - Set 40 Variant 9. What is the logical deduction?",
+    "options": [
+      "Option A",
+      "Option D",
+      "Option C",
+      "Option B"
+    ],
+    "correctAnswer": "Option C"
+  },
+  {
+    "topic": "Clock & Calendar",
+    "questionText": "Reasoning Question on Clock & Calendar - Set 40 Variant 10. What is the logical deduction?",
+    "options": [
+      "Option C",
+      "Option B",
+      "Option A",
+      "Option D"
+    ],
+    "correctAnswer": "Option D"
+  }
+]

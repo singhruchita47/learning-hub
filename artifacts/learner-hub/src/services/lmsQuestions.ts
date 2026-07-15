@@ -1,11 +1,12 @@
 import aptitudeJson from "./aptitude_questions.json";
+import reasoningJson from "./reasoning_questions.json";
 
 export interface LMSQuestion {
   id: number;
   questionText: string;
   options: string[];
   correctAnswer: string;
-  category: "GK Question" | "Quantitative Aptitude";
+  category: "GK Question" | "Quantitative Aptitude" | "Reasoning";
   difficulty?: string;
   sourceId?: string;
   topic?: string;
@@ -116,16 +117,35 @@ async function fetchGKQuestions(startIndex: number): Promise<LMSQuestion[]> {
   }
 }
 
+// ─── Load Reasoning questions from our static JSON dataset ────────
+function loadReasoningQuestions(startIndex: number): LMSQuestion[] {
+  const rawItems = reasoningJson as AptitudeJsonItem[];
+  return rawItems
+    .filter(item => item.questionText && Array.isArray(item.options) && item.correctAnswer)
+    .map((item, index) => ({
+      id: startIndex + index,
+      sourceId: `reasoning-${index + 1}`,
+      category: "Reasoning" as const,
+      topic: item.topic ?? "Reasoning",
+      questionText: item.questionText!,
+      options: item.options!,
+      correctAnswer: item.correctAnswer!,
+    }));
+}
+
 // ─── Main export ──────────────────────────────────────────────────────────────
 
 export async function loadLMSQuestions(): Promise<LMSQuestion[]> {
   // Load aptitude questions from static JSON (always available, no API needed)
   const aptitudeQuestions = loadQuantitativeAptitudeQuestions();
+  
+  // Load reasoning questions
+  const reasoningQuestions = loadReasoningQuestions(10000);
 
   // Fetch GK questions from OpenTrivia API (best-effort, returns empty on failure)
   const gkQuestions = await fetchGKQuestions(0);
 
-  return [...gkQuestions, ...aptitudeQuestions];
+  return [...gkQuestions, ...aptitudeQuestions, ...reasoningQuestions];
 }
 
 // ─── Export counts for display in UI ─────────────────────────────────────────
