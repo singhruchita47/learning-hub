@@ -33,6 +33,7 @@ import AdminAllocations from "@/pages/admin/AdminAllocations";
 import AdminBadges from "@/pages/admin/AdminBadges";
 import AdminQuizCoding from "@/pages/admin/AdminQuizCoding";
 import AdminAssignments from "@/pages/admin/AdminAssignments";
+import AdminLiveClasses from "@/pages/admin/AdminLiveClasses";
 import CourseViewer from "@/pages/CourseViewer";
 import Courses from "@/pages/Courses";
 import Resources from "@/pages/Resources";
@@ -165,6 +166,7 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
           <Route path="/admin/badges" component={AdminBadges} />
           <Route path="/admin/quiz-coding" component={AdminQuizCoding} />
           <Route path="/admin/assignments" component={AdminAssignments} />
+          <Route path="/admin/classes" component={AdminLiveClasses} />
           <Route path="/admin/feedback" component={AdminFeedback} />
           <Route component={NotFound} />
         </Switch>

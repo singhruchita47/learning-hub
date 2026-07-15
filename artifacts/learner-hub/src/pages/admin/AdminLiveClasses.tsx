@@ -40,7 +40,7 @@ const BLANK = { subject: COURSES[0].name, courseCode: COURSES[0].code, topic: ""
 
 const API_BASE = ACADEMIC_API_BASE;
 
-export default function FacultyLiveClasses() {
+export default function AdminLiveClasses() {
   const [classes, setClasses] = useState<LiveClass[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ ...BLANK });
@@ -89,7 +89,7 @@ export default function FacultyLiveClasses() {
         body: JSON.stringify({
           title: form.topic,
           courseCode: form.courseCode,
-          facultyId: user?.name || "Faculty",
+          facultyId: user?.name || "Admin",
           startsAt: form.scheduledAt,
           meetingUrl: form.meetLink
         })
@@ -140,7 +140,7 @@ export default function FacultyLiveClasses() {
         <section className="rounded-[2rem] border border-[#d8c8ff] bg-gradient-to-br from-[#f7f2ff]/95 via-[#eee7ff]/90 to-white p-6 shadow-xl shadow-violet-200/40">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-violet-600">Faculty live sessions</p>
+              <p className="text-[10px] font-black uppercase tracking-[0.22em] text-violet-600">Admin live sessions</p>
               <h1 className="mt-1 text-2xl font-black text-slate-900">Live Classes</h1>
               <p className="mt-1 text-xs font-semibold text-slate-500">
                 Schedule, manage and broadcast live class sessions for your students.

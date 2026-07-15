@@ -4,7 +4,7 @@ import {
   Settings, LayoutDashboard, Calendar,
   Trophy, BookMarked, UserCheck, CheckCircle2, ShieldCheck,
   TrendingUp, Megaphone, Link2, Award, Search, Code2, ClipboardList,
-  Bell, Star
+  Bell, Star, Video
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ACADEMIC_API_BASE } from "@/lib/api";
@@ -73,6 +73,7 @@ export default function AdminNav({ name, onLogout, children }: { name: string, o
     { href: "/admin/courses", label: "Courses", icon: BookOpen },
     { href: "/admin/quiz-coding", label: "Quiz & Coding", icon: Code2 },
     { href: "/admin/assignments", label: "Assignments", icon: ClipboardList },
+    { href: "/admin/classes", label: "Live Classes", icon: Video },
     { href: "/admin/allocations", label: "Allocations", icon: Link2 },
     { href: "/admin/placements", label: "Students & Import", icon: Users },
     { href: "/admin/curriculum", label: "Curriculum", icon: BookMarked },
