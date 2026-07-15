@@ -146,7 +146,7 @@ export default function CodingPractice() {
         if (!response.ok) throw new Error("Coding question API unavailable");
         return response.json();
       })
-      .then((data: { codingQuestions?: Array<{
+      .then((data: { codingQuestions: Array<{
         _id: string;
         title: string;
         description: string;
@@ -156,7 +156,10 @@ export default function CodingPractice() {
         isTest?: boolean;
       }> }) => {
         if (!mounted) return;
-        const mapped = (data.codingQuestions ?? []).map((question) => {
+        const apiQuestions = data.codingQuestions ?? [];
+        const localQuestions = JSON.parse(localStorage.getItem('local_coding_questions') || '[]');
+        const combined = [...localQuestions, ...apiQuestions];
+        const mapped = combined.map((question) => {
           const isTest = question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
           return {
             id: `faculty-${question._id}`,
@@ -183,7 +186,33 @@ export default function CodingPractice() {
         setFacultyProblems(mapped);
       })
       .catch(() => {
-        if (mounted) setFacultyProblems([]);
+        if (!mounted) return;
+        const localQuestions = JSON.parse(localStorage.getItem('local_coding_questions') || '[]');
+        const mapped = localQuestions.map((question: any) => {
+          const isTest = question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
+          return {
+            id: `faculty-${question._id}`,
+            title: question.title,
+            difficulty: "Easy" as const,
+            tags: [isTest ? "Coding Test" : "Practice Question", "Faculty Assigned"],
+            acceptance: "New",
+            description: question.description,
+            examples: [
+              {
+                input: question.inputTestCase,
+                output: question.expectedOutput,
+                explanation: "This sample is provided by faculty.",
+              },
+            ],
+            constraints: ["Follow the input/output format exactly."],
+            stdin: question.inputTestCase,
+            expectedOutput: question.expectedOutput,
+            imageUrl: question.imageUrl,
+            starterCode: question.starterCode,
+            isTest
+          };
+        });
+        setFacultyProblems(mapped);
       });
 
     return () => {

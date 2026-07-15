@@ -228,10 +228,13 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
       const response = await fetch(`${API_BASE}/coding-questions`);
       if (!response.ok) throw new Error("API unavailable");
       const data = await response.json() as { codingQuestions?: CodingQuestion[] };
-      setQuestions(data.codingQuestions ?? []);
+      const apiQuestions = data.codingQuestions ?? [];
+      const localQuestions = JSON.parse(localStorage.getItem('local_coding_questions') || '[]');
+      setQuestions([...localQuestions, ...apiQuestions]);
     } catch {
-      setQuestions([]);
-      setStatus("Backend offline: questions will save when API server is running.");
+      const existing = JSON.parse(localStorage.getItem('local_coding_questions') || '[]');
+      setQuestions(existing);
+      setStatus("Backend offline: loading questions from local storage.");
     }
   }
 
@@ -279,17 +282,29 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
     })();
     const facultyId = user?.email ?? user?.id ?? "faculty-demo";
 
-    const response = await fetch(`${API_BASE}/coding-questions`, {
+      const response = await fetch(`${API_BASE}/coding-questions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+        body: JSON.stringify({
+          ...payload,
+          questionType: payload.questionType ?? "Practice Set",
+          facultyId,
+        }),
+      });
+      if (!response.ok) throw new Error("Unable to save");
+      return response.json() as Promise<{ codingQuestion: CodingQuestion }>;
+    } catch {
+      const offlineQuestion = {
+        _id: "local-" + Date.now() + Math.floor(Math.random() * 1000),
         ...payload,
         questionType: payload.questionType ?? "Practice Set",
         facultyId,
-      }),
-      });
-    if (!response.ok) throw new Error("Unable to save");
-    return response.json() as Promise<{ codingQuestion: CodingQuestion }>;
+        createdAt: new Date().toISOString()
+      } as CodingQuestion;
+      const existing = JSON.parse(localStorage.getItem('local_coding_questions') || '[]');
+      localStorage.setItem('local_coding_questions', JSON.stringify([offlineQuestion, ...existing]));
+      return { codingQuestion: offlineQuestion };
+    }
   }
 
   async function createQuestion() {

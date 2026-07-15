@@ -12,9 +12,15 @@ export default function AdminCalendar() {
   const fetchEvents = async () => {
     try {
       const res = await fetch(`${API_ROOT}/admin/events`);
+      if (!res.ok) throw new Error();
       const data = await res.json();
-      if (data.events) setEvents(data.events);
-    } catch {}
+      if (data.events) {
+        setEvents(data.events);
+      }
+    } catch {
+      const existing = JSON.parse(localStorage.getItem('local_events') || '[]');
+      if (existing.length) setEvents(existing);
+    }
   };
 
   const [showAddForm, setShowAddForm] = useState(false);
@@ -38,8 +44,15 @@ export default function AdminCalendar() {
       });
       if (res.ok) {
         fetchEvents();
+      } else {
+        throw new Error();
       }
-    } catch {}
+    } catch {
+      const newEventData = { ...eventPayload, _id: "local-" + Date.now() };
+      setEvents(prev => [...prev, newEventData].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
+      const existing = JSON.parse(localStorage.getItem('local_events') || '[]');
+      localStorage.setItem('local_events', JSON.stringify([...existing, newEventData]));
+    }
     setShowAddForm(false);
     setNewEvent({ title: "", date: "", time: "", type: "Event", location: "" });
   };
