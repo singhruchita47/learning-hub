@@ -5,6 +5,10 @@ let isConnected = false;
 
 // Middleware to ensure Mongo is connected before handling requests
 app.use(async (req, res, next) => {
+  if (req.method === "OPTIONS") {
+    return next();
+  }
+  
   if (!isConnected) {
     await connectToMongo();
     isConnected = true;
