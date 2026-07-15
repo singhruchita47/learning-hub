@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, Clock, FileQuestion, Send, Sparkles, X, Eye, Edit3, Trash2 } from "lucide-react";
+import { CheckCircle2, Clock, FileQuestion, Send, Sparkles, X, Eye, Edit3, Trash2, BookOpen, Brain } from "lucide-react";
 import { useAcademic } from "@/context/AcademicContext";
 import { ACADEMIC_API_BASE } from "@/lib/api";
 
@@ -54,7 +54,12 @@ export default function FacultyTestCreator() {
     return (question.category ?? fallbackCategory) === selectedCategory;
   });
   const canPublish = selectedQuestions.length > 0 && testDate && startTime && Number(durationMinutes) > 0;
-  const isExternalSubject = selectedCategory === "Reasoning" || selectedCategory === "English";
+
+  // Per-category question counts for display
+  const gkCount = questionBank.filter((q) => (q.category ?? "") === "GK Question").length;
+  const aptitudeCount = questionBank.filter((q) => (q.category ?? "") === "Quantitative Aptitude").length;
+  const reasoningCount = questionBank.filter((q) => (q.category ?? "") === "Reasoning").length;
+  const englishCount = questionBank.filter((q) => (q.category ?? "") === "English").length;
 
   function changeCategory(category: QuestionCategory) {
     setSelectedCategory(category);
@@ -163,6 +168,36 @@ export default function FacultyTestCreator() {
 
   return (
     <>
+      {/* ── Question Bank Stats Banner ── */}
+      <div className="rounded-[1.5rem] border border-violet-100 bg-gradient-to-r from-violet-50/80 via-indigo-50/60 to-emerald-50/50 p-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-2">
+            <BookOpen className="h-4 w-4 text-violet-600" />
+            <span className="text-xs font-black text-slate-700 uppercase tracking-wider">Question Bank</span>
+          </div>
+          <div className="flex flex-wrap gap-2 ml-auto">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-100 border border-blue-200 px-3 py-1 text-[11px] font-black text-blue-700">
+              <Brain className="h-3 w-3" />
+              GK: {questionsLoading ? "..." : gkCount} questions
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 border border-emerald-200 px-3 py-1 text-[11px] font-black text-emerald-700">
+              <FileQuestion className="h-3 w-3" />
+              Aptitude: {questionsLoading ? "..." : aptitudeCount} questions
+            </span>
+            {reasoningCount > 0 && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-100 border border-orange-200 px-3 py-1 text-[11px] font-black text-orange-700">
+                Reasoning: {reasoningCount}
+              </span>
+            )}
+            {englishCount > 0 && (
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-pink-100 border border-pink-200 px-3 py-1 text-[11px] font-black text-pink-700">
+                English: {englishCount}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-[1fr_450px]">
         {/* ── Left Column: Test Creator Control Panel ── */}
         <section className="rounded-[2rem] border border-slate-150 bg-white p-6 shadow-sm space-y-5">
@@ -299,7 +334,10 @@ export default function FacultyTestCreator() {
 
         {/* Question Bank Checklist (Compact) */}
         <div className="space-y-2">
-          <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Checklist ({categoryQuestions.length} available)</p>
+          <div className="flex items-center justify-between">
+            <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">Checklist ({categoryQuestions.length} questions available)</p>
+            <span className="rounded-full bg-violet-50 border border-violet-100 px-2 py-0.5 text-[9px] font-black text-violet-600">{selectedCategory}</span>
+          </div>
           <div className="max-h-[220px] space-y-2 overflow-y-auto rounded-2xl border border-slate-150 bg-slate-50/50 p-3 [scrollbar-width:thin]">
             {categoryQuestions.map((question) => {
               const isSelected = selectedIds.includes(question.id);

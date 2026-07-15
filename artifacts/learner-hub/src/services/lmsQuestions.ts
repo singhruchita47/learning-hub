@@ -1,3 +1,5 @@
+import aptitudeJson from "./aptitude_questions.json";
+
 export interface LMSQuestion {
   id: number;
   questionText: string;
@@ -6,16 +8,17 @@ export interface LMSQuestion {
   category: "GK Question" | "Quantitative Aptitude";
   difficulty?: string;
   sourceId?: string;
+  topic?: string;
 }
 
-interface TriviaApiQuestion {
-  id?: string;
-  question?: {
-    text?: string;
-  };
+// ─── Types for JSON shapes ────────────────────────────────────────────────────
+
+interface AptitudeJsonItem {
+  questionText?: string;
+  options?: string[];
   correctAnswer?: string;
-  incorrectAnswers?: string[];
-  difficulty?: string;
+  topic?: string;
+  category?: string;
 }
 
 interface OpenTriviaQuestion {
@@ -32,88 +35,109 @@ interface OpenTriviaResponse {
   results?: OpenTriviaQuestion[];
 }
 
-const REASONING_API =
-  "https://the-trivia-api.com/v2/questions?limit=50&categories=science,geography";
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
-const QUANTITATIVE_API =
-  "https://the-trivia-api.com/v2/questions?limit=50&categories=science&tags=mathematics,numbers";
-
-function decodeHtml(value: string) {
-  const textarea = document.createElement("textarea");
-  textarea.innerHTML = value;
-  return textarea.value;
+function decodeHtml(value: string): string {
+  try {
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = value;
+    return textarea.value;
+  } catch {
+    return value;
+  }
 }
 
-function shuffleOptions(options: string[]) {
+function shuffleOptions(options: string[]): string[] {
   return [...options].sort(() => Math.random() - 0.5);
 }
 
-function mapTriviaQuestion(
-  item: TriviaApiQuestion,
-  index: number,
-  category: LMSQuestion["category"],
-): LMSQuestion {
-  const correctAnswer = item.correctAnswer ?? "";
-  const incorrectAnswers = item.incorrectAnswers ?? [];
+// ─── Load Quantitative Aptitude questions from our static JSON dataset ────────
+// This JSON was collected from https://aptitude-gold.vercel.app/ API (429 real questions)
 
-  return {
-    id: index + 1,
-    sourceId: item.id,
-    category,
-    difficulty: item.difficulty,
-    questionText: item.question?.text ?? "Question text unavailable",
-    correctAnswer,
-    options: shuffleOptions([correctAnswer, ...incorrectAnswers].filter(Boolean)),
-  };
+function loadQuantitativeAptitudeQuestions(): LMSQuestion[] {
+  const rawItems = aptitudeJson as AptitudeJsonItem[];
+
+  return rawItems
+    .filter(
+      (item) =>
+        item.questionText &&
+        Array.isArray(item.options) &&
+        item.options.length >= 2 &&
+        item.correctAnswer &&
+        // Filter out malformed entries (options that look like JSON strings)
+        !item.options.some(
+          (opt) => opt.startsWith("[") || opt.includes("\\\"")
+        )
+    )
+    .map((item, index) => ({
+      id: 1000 + index,
+      sourceId: `aptitude-${index + 1}`,
+      category: "Quantitative Aptitude" as const,
+      topic: item.topic ?? "Quantitative Aptitude",
+      questionText: item.questionText!,
+      options: item.options!,
+      correctAnswer: item.correctAnswer!,
+    }));
 }
 
-function mapOpenTriviaQuestion(
-  item: OpenTriviaQuestion,
-  index: number,
-  category: LMSQuestion["category"],
-): LMSQuestion {
-  const correctAnswer = decodeHtml(item.correct_answer ?? "");
-  const incorrectAnswers = item.incorrect_answers ?? [];
+// ─── Load GK questions from OpenTrivia API ────────────────────────────────────
 
-  return {
-    id: index + 1,
-    sourceId: `${category}-${index + 1}`,
-    category,
-    difficulty: item.difficulty,
-    questionText: decodeHtml(item.question ?? "Question text unavailable"),
-    correctAnswer,
-    options: shuffleOptions([correctAnswer, ...incorrectAnswers.map(decodeHtml)].filter(Boolean)),
-  };
-}
+async function fetchGKQuestions(startIndex: number): Promise<LMSQuestion[]> {
+  try {
+    const response = await fetch(
+      "https://opentdb.com/api.php?amount=50&category=9&type=multiple"
+    );
+    if (!response.ok) {
+      throw new Error(`OpenTrivia API returned ${response.status}`);
+    }
 
-async function fetchTriviaQuestions(url: string, category: LMSQuestion["category"], startIndex: number) {
-  const response = await fetch(url);
+    const data = (await response.json()) as OpenTriviaResponse;
+    const results = data.results ?? [];
 
-  if (!response.ok) {
-    throw new Error(`Failed to load ${category} questions`);
+    return results.map((item, index) => {
+      const correctAnswer = decodeHtml(item.correct_answer ?? "");
+      const incorrectAnswers = item.incorrect_answers ?? [];
+      return {
+        id: startIndex + index,
+        sourceId: `gk-${index + 1}`,
+        category: "GK Question" as const,
+        difficulty: item.difficulty,
+        topic: "General Knowledge",
+        questionText: decodeHtml(item.question ?? "Question text unavailable"),
+        correctAnswer,
+        options: shuffleOptions(
+          [correctAnswer, ...incorrectAnswers.map(decodeHtml)].filter(Boolean)
+        ),
+      };
+    });
+  } catch {
+    // Return empty if API is unavailable
+    return [];
   }
-
-  const data = (await response.json()) as TriviaApiQuestion[];
-  return data.slice(0, 50).map((item, index) => mapTriviaQuestion(item, startIndex + index, category));
 }
 
-async function fetchOpenTriviaQuestions(url: string, category: LMSQuestion["category"], startIndex: number) {
-  const response = await fetch(url);
+// ─── Main export ──────────────────────────────────────────────────────────────
 
-  if (!response.ok) {
-    throw new Error(`Failed to load ${category} questions`);
-  }
+export async function loadLMSQuestions(): Promise<LMSQuestion[]> {
+  // Load aptitude questions from static JSON (always available, no API needed)
+  const aptitudeQuestions = loadQuantitativeAptitudeQuestions();
 
-  const data = (await response.json()) as OpenTriviaResponse;
-  const results = data.results ?? [];
-  return results.slice(0, 50).map((item, index) => mapOpenTriviaQuestion(item, startIndex + index, category));
+  // Fetch GK questions from OpenTrivia API (best-effort, returns empty on failure)
+  const gkQuestions = await fetchGKQuestions(0);
+
+  return [...gkQuestions, ...aptitudeQuestions];
 }
 
-export async function loadLMSQuestions() {
-  const [reasoningQuestions, quantitativeQuestions] = await Promise.all([
-    fetchTriviaQuestions(REASONING_API, "GK Question", 0),
-    fetchTriviaQuestions(QUANTITATIVE_API, "Quantitative Aptitude", 50),
-  ]);
+// ─── Export counts for display in UI ─────────────────────────────────────────
 
-  return [...reasoningQuestions, ...quantitativeQuestions];
+export function getAptitudeQuestionCount(): number {
+  const rawItems = aptitudeJson as AptitudeJsonItem[];
+  return rawItems.filter(
+    (item) =>
+      item.questionText &&
+      Array.isArray(item.options) &&
+      item.options.length >= 2 &&
+      item.correctAnswer &&
+      !item.options.some((opt) => opt.startsWith("[") || opt.includes("\\\""))
+  ).length;
 }
