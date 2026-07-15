@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { CheckSquare, Code2, Database, Send, Sparkles, UploadCloud, Loader } from "lucide-react";
 import { ACADEMIC_API_BASE } from "@/lib/api";
 import { uploadToCloudinary } from "@/lib/cloudinary";
+import generatedQuestions from "@/services/coding_questions.json";
 
 const API_BASE = ACADEMIC_API_BASE;
 const CODING_BANK_API = "https://api.jsonbin.io/v3/b/66ebfa4ae41b4d34e433145a?meta=false";
@@ -236,14 +237,16 @@ export default function FacultyCodingQuestions() {
       if (!response.ok) throw new Error("Question bank API unavailable");
       const data = await response.json();
       const remoteQuestions = listFromApi(data).slice(0, 50).map(mapRemoteBankQuestion);
-      if (remoteQuestions.length > 0) {
-        setCodingBank(remoteQuestions);
-        setSelectedBankIds([]);
-        setStatus(`${remoteQuestions.length} JavaScript coding questions loaded from API.`);
-      }
+      
+      const combinedBank = [...remoteQuestions, ...generatedQuestions as BankQuestion[]];
+      
+      setCodingBank(combinedBank);
+      setSelectedBankIds([]);
+      setStatus(`${combinedBank.length} JavaScript coding questions available in the question bank.`);
     } catch {
-      setCodingBank(localCodingBank);
-      setStatus("Remote coding bank unavailable, using 50 local JavaScript fallback questions.");
+      const fallbackBank = [...localCodingBank, ...generatedQuestions as BankQuestion[]];
+      setCodingBank(fallbackBank);
+      setStatus(`Remote coding bank unavailable, using ${fallbackBank.length} local JavaScript fallback questions.`);
     }
   }
 

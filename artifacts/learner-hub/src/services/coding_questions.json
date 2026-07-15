@@ -1,0 +1,1352 @@
+[
+  {
+    "id": "med-coding-1",
+    "title": "String Challenge: Find the longest 1",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a string problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-2",
+    "title": "Matrix Challenge: Rotate the array 2",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a matrix problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-3",
+    "title": "Two Pointers Challenge: Merge overlapping intervals 3",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a two pointers problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-4",
+    "title": "Sliding Window Challenge: Find the first 4",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sliding window problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-5",
+    "title": "HashMap Challenge: Find peak element 5",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a hashmap problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-6",
+    "title": "Dynamic Programming Challenge: Count palindromic substrings 6",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a dynamic programming problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-7",
+    "title": "Stack Challenge: Find Kth largest 7",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a stack problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-8",
+    "title": "Queue Challenge: Check if valid 8",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a queue problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-9",
+    "title": "Math Challenge: Evaluate Reverse Polish 9",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a math problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-10",
+    "title": "Sorting Challenge: Find the maximum 10",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sorting problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-11",
+    "title": "Searching Challenge: Find the longest 11",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a searching problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-12",
+    "title": "Greedy Challenge: Rotate the array 12",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a greedy problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-13",
+    "title": "Backtracking Challenge: Merge overlapping intervals 13",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a backtracking problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-14",
+    "title": "Bit Manipulation Challenge: Find the first 14",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a bit manipulation problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-15",
+    "title": "Array Challenge: Find peak element 15",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a array problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-16",
+    "title": "String Challenge: Count palindromic substrings 16",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a string problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-17",
+    "title": "Matrix Challenge: Find Kth largest 17",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a matrix problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-18",
+    "title": "Two Pointers Challenge: Check if valid 18",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a two pointers problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-19",
+    "title": "Sliding Window Challenge: Evaluate Reverse Polish 19",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sliding window problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-20",
+    "title": "HashMap Challenge: Find the maximum 20",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a hashmap problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-21",
+    "title": "Dynamic Programming Challenge: Find the longest 21",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a dynamic programming problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-22",
+    "title": "Stack Challenge: Rotate the array 22",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a stack problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-23",
+    "title": "Queue Challenge: Merge overlapping intervals 23",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a queue problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-24",
+    "title": "Math Challenge: Find the first 24",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a math problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-25",
+    "title": "Sorting Challenge: Find peak element 25",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sorting problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-26",
+    "title": "Searching Challenge: Count palindromic substrings 26",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a searching problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-27",
+    "title": "Greedy Challenge: Find Kth largest 27",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a greedy problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-28",
+    "title": "Backtracking Challenge: Check if valid 28",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a backtracking problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-29",
+    "title": "Bit Manipulation Challenge: Evaluate Reverse Polish 29",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a bit manipulation problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-30",
+    "title": "Array Challenge: Find the maximum 30",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a array problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-31",
+    "title": "String Challenge: Find the longest 31",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a string problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-32",
+    "title": "Matrix Challenge: Rotate the array 32",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a matrix problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-33",
+    "title": "Two Pointers Challenge: Merge overlapping intervals 33",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a two pointers problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-34",
+    "title": "Sliding Window Challenge: Find the first 34",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sliding window problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-35",
+    "title": "HashMap Challenge: Find peak element 35",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a hashmap problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-36",
+    "title": "Dynamic Programming Challenge: Count palindromic substrings 36",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a dynamic programming problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-37",
+    "title": "Stack Challenge: Find Kth largest 37",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a stack problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-38",
+    "title": "Queue Challenge: Check if valid 38",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a queue problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-39",
+    "title": "Math Challenge: Evaluate Reverse Polish 39",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a math problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-40",
+    "title": "Sorting Challenge: Find the maximum 40",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sorting problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-41",
+    "title": "Searching Challenge: Find the longest 41",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a searching problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-42",
+    "title": "Greedy Challenge: Rotate the array 42",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a greedy problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-43",
+    "title": "Backtracking Challenge: Merge overlapping intervals 43",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a backtracking problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-44",
+    "title": "Bit Manipulation Challenge: Find the first 44",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a bit manipulation problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-45",
+    "title": "Array Challenge: Find peak element 45",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a array problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-46",
+    "title": "String Challenge: Count palindromic substrings 46",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a string problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-47",
+    "title": "Matrix Challenge: Find Kth largest 47",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a matrix problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-48",
+    "title": "Two Pointers Challenge: Check if valid 48",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a two pointers problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-49",
+    "title": "Sliding Window Challenge: Evaluate Reverse Polish 49",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sliding window problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-50",
+    "title": "HashMap Challenge: Find the maximum 50",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a hashmap problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-51",
+    "title": "Dynamic Programming Challenge: Find the longest 51",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a dynamic programming problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-52",
+    "title": "Stack Challenge: Rotate the array 52",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a stack problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-53",
+    "title": "Queue Challenge: Merge overlapping intervals 53",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a queue problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-54",
+    "title": "Math Challenge: Find the first 54",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a math problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-55",
+    "title": "Sorting Challenge: Find peak element 55",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sorting problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-56",
+    "title": "Searching Challenge: Count palindromic substrings 56",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a searching problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-57",
+    "title": "Greedy Challenge: Find Kth largest 57",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a greedy problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-58",
+    "title": "Backtracking Challenge: Check if valid 58",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a backtracking problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-59",
+    "title": "Bit Manipulation Challenge: Evaluate Reverse Polish 59",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a bit manipulation problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-60",
+    "title": "Array Challenge: Find the maximum 60",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a array problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-61",
+    "title": "String Challenge: Find the longest 61",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a string problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-62",
+    "title": "Matrix Challenge: Rotate the array 62",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a matrix problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-63",
+    "title": "Two Pointers Challenge: Merge overlapping intervals 63",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a two pointers problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-64",
+    "title": "Sliding Window Challenge: Find the first 64",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sliding window problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-65",
+    "title": "HashMap Challenge: Find peak element 65",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a hashmap problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-66",
+    "title": "Dynamic Programming Challenge: Count palindromic substrings 66",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a dynamic programming problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-67",
+    "title": "Stack Challenge: Find Kth largest 67",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a stack problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-68",
+    "title": "Queue Challenge: Check if valid 68",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a queue problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-69",
+    "title": "Math Challenge: Evaluate Reverse Polish 69",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a math problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-70",
+    "title": "Sorting Challenge: Find the maximum 70",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sorting problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-71",
+    "title": "Searching Challenge: Find the longest 71",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a searching problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-72",
+    "title": "Greedy Challenge: Rotate the array 72",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a greedy problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-73",
+    "title": "Backtracking Challenge: Merge overlapping intervals 73",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a backtracking problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-74",
+    "title": "Bit Manipulation Challenge: Find the first 74",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a bit manipulation problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-75",
+    "title": "Array Challenge: Find peak element 75",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a array problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-76",
+    "title": "String Challenge: Count palindromic substrings 76",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a string problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-77",
+    "title": "Matrix Challenge: Find Kth largest 77",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a matrix problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-78",
+    "title": "Two Pointers Challenge: Check if valid 78",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a two pointers problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-79",
+    "title": "Sliding Window Challenge: Evaluate Reverse Polish 79",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sliding window problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-80",
+    "title": "HashMap Challenge: Find the maximum 80",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a hashmap problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-81",
+    "title": "Dynamic Programming Challenge: Find the longest 81",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a dynamic programming problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-82",
+    "title": "Stack Challenge: Rotate the array 82",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a stack problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-83",
+    "title": "Queue Challenge: Merge overlapping intervals 83",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a queue problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-84",
+    "title": "Math Challenge: Find the first 84",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a math problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-85",
+    "title": "Sorting Challenge: Find peak element 85",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sorting problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-86",
+    "title": "Searching Challenge: Count palindromic substrings 86",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a searching problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-87",
+    "title": "Greedy Challenge: Find Kth largest 87",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a greedy problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-88",
+    "title": "Backtracking Challenge: Check if valid 88",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a backtracking problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-89",
+    "title": "Bit Manipulation Challenge: Evaluate Reverse Polish 89",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a bit manipulation problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-90",
+    "title": "Array Challenge: Find the maximum 90",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a array problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-91",
+    "title": "String Challenge: Find the longest 91",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a string problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-92",
+    "title": "Matrix Challenge: Rotate the array 92",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a matrix problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-93",
+    "title": "Two Pointers Challenge: Merge overlapping intervals 93",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a two pointers problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-94",
+    "title": "Sliding Window Challenge: Find the first 94",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sliding window problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-95",
+    "title": "HashMap Challenge: Find peak element 95",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a hashmap problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-96",
+    "title": "Dynamic Programming Challenge: Count palindromic substrings 96",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a dynamic programming problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-97",
+    "title": "Stack Challenge: Find Kth largest 97",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a stack problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-98",
+    "title": "Queue Challenge: Check if valid 98",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a queue problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-99",
+    "title": "Math Challenge: Evaluate Reverse Polish 99",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a math problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-100",
+    "title": "Sorting Challenge: Find the maximum 100",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sorting problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-101",
+    "title": "Searching Challenge: Find the longest 101",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a searching problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-102",
+    "title": "Greedy Challenge: Rotate the array 102",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a greedy problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-103",
+    "title": "Backtracking Challenge: Merge overlapping intervals 103",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a backtracking problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-104",
+    "title": "Bit Manipulation Challenge: Find the first 104",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a bit manipulation problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-105",
+    "title": "Array Challenge: Find peak element 105",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a array problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-106",
+    "title": "String Challenge: Count palindromic substrings 106",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a string problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-107",
+    "title": "Matrix Challenge: Find Kth largest 107",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a matrix problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-108",
+    "title": "Two Pointers Challenge: Check if valid 108",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a two pointers problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-109",
+    "title": "Sliding Window Challenge: Evaluate Reverse Polish 109",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sliding window problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-110",
+    "title": "HashMap Challenge: Find the maximum 110",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a hashmap problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-111",
+    "title": "Dynamic Programming Challenge: Find the longest 111",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a dynamic programming problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-112",
+    "title": "Stack Challenge: Rotate the array 112",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a stack problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-113",
+    "title": "Queue Challenge: Merge overlapping intervals 113",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a queue problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-114",
+    "title": "Math Challenge: Find the first 114",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a math problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-115",
+    "title": "Sorting Challenge: Find peak element 115",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sorting problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-116",
+    "title": "Searching Challenge: Count palindromic substrings 116",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a searching problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-117",
+    "title": "Greedy Challenge: Find Kth largest 117",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a greedy problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-118",
+    "title": "Backtracking Challenge: Check if valid 118",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a backtracking problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-119",
+    "title": "Bit Manipulation Challenge: Evaluate Reverse Polish 119",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a bit manipulation problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-120",
+    "title": "Array Challenge: Find the maximum 120",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a array problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-121",
+    "title": "String Challenge: Find the longest 121",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a string problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-122",
+    "title": "Matrix Challenge: Rotate the array 122",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a matrix problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-123",
+    "title": "Two Pointers Challenge: Merge overlapping intervals 123",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a two pointers problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-124",
+    "title": "Sliding Window Challenge: Find the first 124",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sliding window problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-125",
+    "title": "HashMap Challenge: Find peak element 125",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a hashmap problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-126",
+    "title": "Dynamic Programming Challenge: Count palindromic substrings 126",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a dynamic programming problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-127",
+    "title": "Stack Challenge: Find Kth largest 127",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a stack problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-128",
+    "title": "Queue Challenge: Check if valid 128",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a queue problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-129",
+    "title": "Math Challenge: Evaluate Reverse Polish 129",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a math problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-130",
+    "title": "Sorting Challenge: Find the maximum 130",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sorting problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-131",
+    "title": "Searching Challenge: Find the longest 131",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a searching problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-132",
+    "title": "Greedy Challenge: Rotate the array 132",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a greedy problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-133",
+    "title": "Backtracking Challenge: Merge overlapping intervals 133",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a backtracking problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-134",
+    "title": "Bit Manipulation Challenge: Find the first 134",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a bit manipulation problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-135",
+    "title": "Array Challenge: Find peak element 135",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a array problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-136",
+    "title": "String Challenge: Count palindromic substrings 136",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a string problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-137",
+    "title": "Matrix Challenge: Find Kth largest 137",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a matrix problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-138",
+    "title": "Two Pointers Challenge: Check if valid 138",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a two pointers problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-139",
+    "title": "Sliding Window Challenge: Evaluate Reverse Polish 139",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sliding window problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-140",
+    "title": "HashMap Challenge: Find the maximum 140",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a hashmap problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-141",
+    "title": "Dynamic Programming Challenge: Find the longest 141",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a dynamic programming problem, find the longest substring without repeating characters. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abcabcbb",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-142",
+    "title": "Stack Challenge: Rotate the array 142",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a stack problem, rotate the array by k steps. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 4 5\\n2",
+    "expectedOutput": "4 5 1 2 3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-143",
+    "title": "Queue Challenge: Merge overlapping intervals 143",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a queue problem, merge overlapping intervals. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 3 2 6 8 10 15 18",
+    "expectedOutput": "1 6 8 10 15 18",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-144",
+    "title": "Math Challenge: Find the first 144",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a math problem, find the first missing positive integer. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 4 -1 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-145",
+    "title": "Sorting Challenge: Find peak element 145",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a sorting problem, find peak element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 2 3 1",
+    "expectedOutput": "2",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-146",
+    "title": "Searching Challenge: Count palindromic substrings 146",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a searching problem, count palindromic substrings. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "abc",
+    "expectedOutput": "3",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-147",
+    "title": "Greedy Challenge: Find Kth largest 147",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a greedy problem, find kth largest element. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "3 2 1 5 6 4\\n2",
+    "expectedOutput": "5",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-148",
+    "title": "Backtracking Challenge: Check if valid 148",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a backtracking problem, check if valid parenthesis. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "()[]{}",
+    "expectedOutput": "true",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-149",
+    "title": "Bit Manipulation Challenge: Evaluate Reverse Polish 149",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a bit manipulation problem, evaluate reverse polish notation. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "2 1 + 3 *",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  },
+  {
+    "id": "med-coding-150",
+    "title": "Array Challenge: Find the maximum 150",
+    "difficulty": "Medium",
+    "description": "Given a dataset representing a array problem, find the maximum subarray sum. Ensure your algorithm is optimized for O(N) or O(N log N) time complexity.",
+    "inputTestCase": "1 -2 3 4 -1 2 1 -5 4",
+    "expectedOutput": "9",
+    "starterCode": "const fs = require('fs');\nconst input = fs.readFileSync(0, 'utf8').trim().split('\\n');\n\n// Write your optimal solution here\nfunction solve(input) {\n  \n}\n\nconsole.log(solve(input));"
+  }
+]
