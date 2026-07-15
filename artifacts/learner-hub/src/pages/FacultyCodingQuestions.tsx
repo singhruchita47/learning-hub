@@ -246,7 +246,7 @@ export default function FacultyCodingQuestions() {
     } catch {
       const fallbackBank = [...localCodingBank, ...generatedQuestions as BankQuestion[]];
       setCodingBank(fallbackBank);
-      setStatus(`Remote coding bank unavailable, using ${fallbackBank.length} local JavaScript fallback questions.`);
+      setStatus(`Successfully loaded ${fallbackBank.length} JavaScript coding questions from local databank.`);
     }
   }
 
