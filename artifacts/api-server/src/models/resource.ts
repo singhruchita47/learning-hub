@@ -5,7 +5,7 @@ export interface IResource extends Document {
   category: "Lecture Notes" | "Video Lectures" | "Practice Papers" | "Cheat Sheets";
   courseCode: string;
   fileUrl: string;
-  format: "PDF" | "Video";
+  format: string;
   size?: string;
   pages?: number;
   createdAt: Date;
@@ -22,7 +22,7 @@ const ResourceSchema = new Schema<IResource>(
     },
     courseCode: { type: String, required: true, trim: true },
     fileUrl: { type: String, required: true, trim: true },
-    format: { type: String, enum: ["PDF", "Video"], required: true },
+    format: { type: String, required: true },
     size: { type: String, default: "1.2 MB" },
     pages: { type: Number, default: 0 },
   },
