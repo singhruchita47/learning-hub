@@ -33,7 +33,7 @@ export default function Classes() {
       } catch {
         // Fallback static list
         const dateNow = new Date();
-        setLiveClasses([
+        const fallbackData: any[] = [
           {
             _id: "lc1",
             title: "Data Structures Lab",
@@ -61,7 +61,13 @@ export default function Classes() {
             meetingUrl: "https://meet.google.com/xyz-uvwx-yz",
             status: "scheduled",
           }
-        ]);
+        ];
+        const local = JSON.parse(localStorage.getItem('local_live_classes') || '[]');
+        if (local.length > 0) {
+          setLiveClasses(local);
+        } else {
+          setLiveClasses(fallbackData);
+        }
       } finally {
         setLoading(false);
       }
@@ -72,7 +78,7 @@ export default function Classes() {
   const activeClass = liveClasses.find((c) => c.status === "live");
   const liveCount = liveClasses.filter(c => c.status === "live").length;
   const scheduledCount = liveClasses.filter(c => c.status === "scheduled").length;
-  const completedCount = liveClasses.filter(c => c.status === "completed").length;
+  const completedCount = liveClasses.filter(c => c.status === "completed" || c.status === "ended").length;
 
   function handleJoinClass(meetingUrl?: string) {
     const url = meetingUrl || "#";
@@ -138,7 +144,7 @@ export default function Classes() {
             <section className="grid gap-5">
               {liveClasses.map((item, index) => {
                 const isLive = item.status === "live";
-                const isCompleted = item.status === "completed";
+                const isCompleted = item.status === "completed" || item.status === "ended";
                 const startTimeStr = new Date(item.startsAt).toLocaleTimeString("en-IN", {
                   hour: "2-digit",
                   minute: "2-digit"
@@ -203,7 +209,7 @@ export default function Classes() {
                             : "bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-200"
                         }`}
                       >
-                        {isLive ? "Join Now" : isCompleted ? "Completed" : "Open link"}
+                        {isLive ? "Join Now" : isCompleted ? "Class Ended" : "Open link"}
                       </button>
                     </div>
                   </motion.article>

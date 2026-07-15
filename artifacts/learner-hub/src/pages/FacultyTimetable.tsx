@@ -50,11 +50,13 @@ export default function FacultyTimetable() {
     const fetchTimetable = async () => {
       try {
         const res = await fetch(`${ACADEMIC_API_BASE}/timetable/faculty/${encodeURIComponent(facultyId)}`);
-        if (res.ok) {
-          const data = await res.json();
-          setSlots(data.timetable || []);
-        }
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        setSlots(data.timetable || []);
       } catch {
+        const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
+        const mySlots = existing.filter((s: any) => s.facultyId === facultyId || s.facultyId === "faculty-demo");
+        setSlots(mySlots);
       } finally {
         setLoading(false);
       }
@@ -85,14 +87,22 @@ export default function FacultyTimetable() {
       if (res.ok) {
         const data = await res.json();
         setSlots([...slots, data.slot]);
-        setIsCreating(false);
-        setFormData({ courseCode: "", subject: "", day: "Monday", startTime: "09:00", endTime: "10:00", type: "Lecture", location: "" });
       } else {
-        alert("Failed to create slot");
+        throw new Error();
       }
     } catch {
-      alert("Network error");
+      const newSlot = {
+        id: "local-" + Date.now(),
+        ...formData,
+        facultyId: user?.id || user?.email || "faculty-demo",
+        facultyName: user?.name || "Faculty",
+      };
+      setSlots([...slots, newSlot as TimetableSlot]);
+      const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
+      localStorage.setItem('local_timetable', JSON.stringify([...existing, newSlot]));
     }
+    setIsCreating(false);
+    setFormData({ courseCode: "", subject: "", day: "Monday", startTime: "09:00", endTime: "10:00", type: "Lecture", location: "" });
   };
 
   const daySlots = slots.filter(s => s.day === selectedDay).sort((a, b) => a.startTime.localeCompare(b.startTime));

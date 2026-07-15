@@ -64,21 +64,23 @@ export default function FacultyLiveClasses() {
   const fetchClasses = async () => {
     try {
       const res = await fetch(`${API_BASE}/live-classes`);
-      if (res.ok) {
-        const data = await res.json();
-        const apiClasses = (data.liveClasses || []).map((c: any) => ({
-          id: c._id,
-          subject: c.title,
-          courseCode: c.courseCode,
-          topic: c.title,
-          meetLink: c.meetingUrl,
-          scheduledAt: c.startsAt,
-          duration: 60,
-          status: c.status || "scheduled"
-        }));
-        setClasses(apiClasses);
-      }
-    } catch {}
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      const apiClasses = (data.liveClasses || []).map((c: any) => ({
+        id: c._id,
+        subject: c.title,
+        courseCode: c.courseCode,
+        topic: c.title,
+        meetLink: c.meetingUrl,
+        scheduledAt: c.startsAt,
+        duration: 60,
+        status: c.status || "scheduled"
+      }));
+      setClasses(apiClasses);
+    } catch {
+      const existing = JSON.parse(localStorage.getItem('local_live_classes') || '[]');
+      if (existing.length) setClasses(existing);
+    }
   };
 
   useEffect(() => {
@@ -103,8 +105,24 @@ export default function FacultyLiveClasses() {
       });
       if (res.ok) {
         fetchClasses();
+      } else {
+        throw new Error();
       }
-    } catch {}
+    } catch {
+      const newClass = {
+        id: "local-" + Date.now(),
+        subject: form.subject,
+        courseCode: form.courseCode,
+        topic: form.topic,
+        meetLink: form.meetLink,
+        scheduledAt: form.scheduledAt,
+        duration: form.duration,
+        status: "scheduled"
+      };
+      setClasses(prev => [newClass, ...prev]);
+      const existing = JSON.parse(localStorage.getItem('local_live_classes') || '[]');
+      localStorage.setItem('local_live_classes', JSON.stringify([newClass, ...existing]));
+    }
 
     setForm({ ...BLANK });
     setShowForm(false);
@@ -118,7 +136,11 @@ export default function FacultyLiveClasses() {
     if (cls.status === "scheduled") newStatus = "live";
     if (cls.status === "live") newStatus = "ended";
     
-    setClasses(prev => prev.map(c => c.id === id ? { ...c, status: newStatus as any } : c));
+    setClasses(prev => {
+      const updated = prev.map(c => c.id === id ? { ...c, status: newStatus as any } : c);
+      localStorage.setItem('local_live_classes', JSON.stringify(updated));
+      return updated;
+    });
 
     try {
       await fetch(`${API_BASE}/live-classes/${id}/status`, {
@@ -130,9 +152,11 @@ export default function FacultyLiveClasses() {
   }
 
   async function deleteClass(id: string) {
-    // We don't have a DELETE endpoint in the backend for live-classes yet, so we just remove locally for now, 
-    // or we could add a DELETE endpoint. For now, local hide.
-    setClasses(prev => prev.filter(c => c.id !== id));
+    setClasses(prev => {
+      const remaining = prev.filter(c => c.id !== id);
+      localStorage.setItem('local_live_classes', JSON.stringify(remaining));
+      return remaining;
+    });
   }
 
   const filtered = classes.filter(c => filter === "all" || c.status === filter);

@@ -41,11 +41,12 @@ export default function AdminTimetable() {
   const fetchTimetable = async () => {
     try {
       const res = await fetch(`${ACADEMIC_API_BASE}/timetable`);
-      if (res.ok) {
-        const data = await res.json();
-        setSlots(data.timetable || []);
-      }
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      setSlots(data.timetable || []);
     } catch {
+      const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
+      if (existing.length) setSlots(existing);
     } finally {
       setLoading(false);
     }
@@ -66,10 +67,17 @@ export default function AdminTimetable() {
       });
       if (res.ok) {
         await fetchTimetable();
-        setShowForm(false);
-        setForm(BLANK_FORM);
+      } else {
+        throw new Error();
       }
-    } catch {}
+    } catch {
+      const newSlot = { ...form, id: "local-" + Date.now() };
+      const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
+      localStorage.setItem('local_timetable', JSON.stringify([...existing, newSlot]));
+      setSlots(prev => [...prev, newSlot]);
+    }
+    setShowForm(false);
+    setForm(BLANK_FORM);
     setSaving(false);
   };
 

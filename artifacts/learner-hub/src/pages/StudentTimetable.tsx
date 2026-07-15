@@ -46,11 +46,12 @@ export default function StudentTimetable() {
     const fetchTimetable = async () => {
       try {
         const res = await fetch(`${ACADEMIC_API_BASE}/timetable/student/${encodeURIComponent(studentId)}`);
-        if (res.ok) {
-          const data = await res.json();
-          setSlots(data.timetable || []);
-        }
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        setSlots(data.timetable || []);
       } catch {
+        const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
+        setSlots(existing);
       } finally {
         setLoading(false);
       }
