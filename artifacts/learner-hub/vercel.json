@@ -1,4 +1,7 @@
 {
+  "installCommand": "echo 'Skipping install'",
+  "buildCommand": "echo 'Skipping build'",
+  "outputDirectory": "dist/public",
   "rewrites": [
     {
       "source": "/(.*)",
