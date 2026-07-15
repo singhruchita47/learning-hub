@@ -3,6 +3,7 @@ import { CheckSquare, Code2, Database, Send, Sparkles, UploadCloud, Loader } fro
 import { ACADEMIC_API_BASE } from "@/lib/api";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import generatedQuestions from "@/services/coding_questions.json";
+import graphQuestions from "@/services/graph_coding_questions.json";
 
 const API_BASE = ACADEMIC_API_BASE;
 const CODING_BANK_API = "https://api.jsonbin.io/v3/b/66ebfa4ae41b4d34e433145a?meta=false";
@@ -202,6 +203,7 @@ export default function FacultyCodingQuestions() {
   });
   const [status, setStatus] = useState("");
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [topicFilter, setTopicFilter] = useState("All");
 
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -238,13 +240,13 @@ export default function FacultyCodingQuestions() {
       const data = await response.json();
       const remoteQuestions = listFromApi(data).slice(0, 50).map(mapRemoteBankQuestion);
       
-      const combinedBank = [...remoteQuestions, ...generatedQuestions as BankQuestion[]];
+      const combinedBank = [...remoteQuestions, ...generatedQuestions as BankQuestion[], ...graphQuestions as BankQuestion[]];
       
       setCodingBank(combinedBank);
       setSelectedBankIds([]);
       setStatus(`${combinedBank.length} JavaScript coding questions available in the question bank.`);
     } catch {
-      const fallbackBank = [...localCodingBank, ...generatedQuestions as BankQuestion[]];
+      const fallbackBank = [...localCodingBank, ...generatedQuestions as BankQuestion[], ...graphQuestions as BankQuestion[]];
       setCodingBank(fallbackBank);
       setStatus(`Successfully loaded ${fallbackBank.length} JavaScript coding questions from local databank.`);
     }
@@ -529,6 +531,17 @@ export default function FacultyCodingQuestions() {
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-3">
+                <div className="flex items-center gap-2 rounded-2xl border border-violet-100 bg-white px-3 py-2 shadow-sm">
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider whitespace-nowrap">Topic:</span>
+                  <select
+                    value={topicFilter}
+                    onChange={(e) => setTopicFilter(e.target.value)}
+                    className="bg-transparent text-xs font-bold text-violet-700 outline-none cursor-pointer"
+                  >
+                    <option value="All">All Topics</option>
+                    <option value="Graph">Graph</option>
+                  </select>
+                </div>
                 <span className="rounded-full border border-violet-100 bg-white px-4 py-2 text-xs font-black text-violet-700 shadow-sm">
                   {selectedBankIds.length}/{codingBank.length} selected
                 </span>
@@ -568,7 +581,7 @@ export default function FacultyCodingQuestions() {
 
           <div className="max-h-[560px] overflow-y-auto bg-slate-50/70 p-5 [scrollbar-width:thin]">
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-            {codingBank.map((question, index) => {
+            {codingBank.filter(q => topicFilter === "All" || q.title.toLowerCase().includes(topicFilter.toLowerCase())).map((question, index) => {
               const selected = selectedBankIds.includes(question.id);
 
               return (
