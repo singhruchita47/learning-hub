@@ -1,6 +1,4 @@
 {
-  "installCommand": "npm install -g pnpm@9.15.4 && pnpm install --no-frozen-lockfile",
-  "buildCommand": "pnpm run build",
   "rewrites": [
     {
       "source": "/(.*)",
