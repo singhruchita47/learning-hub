@@ -9,6 +9,8 @@ function formatTimer(seconds: number) {
   return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
 }
 
+import { createPortal } from "react-dom";
+
 export default function ExamPage({ test, onExit }: { test: PublishedTest; onExit: () => void }) {
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, string>>({});
   const [remainingSeconds, setRemainingSeconds] = useState(test.durationMinutes * 60);
@@ -39,8 +41,8 @@ export default function ExamPage({ test, onExit }: { test: PublishedTest; onExit
     return () => window.clearInterval(interval);
   }, [submitted]);
 
-  return (
-    <main className="fixed inset-0 z-50 overflow-y-auto bg-white text-slate-900">
+  return createPortal(
+    <main className="fixed inset-0 z-[9999] overflow-y-auto bg-white text-slate-900 w-screen h-screen">
       <header className="sticky top-0 z-10 border-b border-gray-100 bg-white/95 px-6 py-4 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4">
           <div>
@@ -180,6 +182,7 @@ export default function ExamPage({ test, onExit }: { test: PublishedTest; onExit
           </button>
         )}
       </section>
-    </main>
+    </main>,
+    document.body
   );
 }
