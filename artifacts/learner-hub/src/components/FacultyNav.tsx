@@ -192,9 +192,9 @@ export default function FacultyNav({
         </div>
 
         {/* ── Secondary Nav row with Horizontal links ── */}
-        <div className="border-t border-slate-100 bg-white px-4 md:px-8 py-2 overflow-x-auto no-scrollbar">
-          <div className="mx-auto max-w-[1540px]">
-            <nav className="flex items-center gap-1.5 py-0.5">
+        <div className="border-t border-slate-100 bg-white">
+          <div className="mx-auto max-w-[1540px] px-4 md:px-8 py-2 overflow-x-auto no-scrollbar">
+            <nav className="flex items-center gap-1.5 py-0.5 w-max">
               {facultyLinks.map(({ href, label, icon: Icon, color, bg }) => {
                 const isActive = path === href || (href !== "/" && path.startsWith(href));
                 return (
