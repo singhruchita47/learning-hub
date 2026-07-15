@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": "usr_admin_default",
+      "name": "System Admin",
+      "email": "admin@learning.hub",
+      "role": "admin",
+      "passwordHash": "a8822f4de2b775f1942335c834e462d5:ac8845928ece04a9e9cd57faf3fc929a760a226810cdf3338f69cab897a24734592325030a6f83bf10ca8cc231bd6074760e591f71a5938cde6b5e82f9850d59"
+    }
+  ]
+}

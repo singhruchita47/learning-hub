@@ -6,6 +6,11 @@
       "destination": "api/index.cjs"
     }
   ],
+  "functions": {
+    "api/index.cjs": {
+      "includeFiles": "dist/**"
+    }
+  },
   "headers": [
     {
       "source": "/api/(.*)",

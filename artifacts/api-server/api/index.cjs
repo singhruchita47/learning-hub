@@ -1,5 +1,6 @@
+const req = eval("require");
 try {
-  const app = require("../dist/vercel-entry.cjs").default;
+  const app = req("../dist/vercel-entry.cjs").default;
   module.exports = app;
 } catch (error) {
   module.exports = (req, res) => {
