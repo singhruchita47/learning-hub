@@ -194,7 +194,7 @@ export default function Courses() {
             <div key={label} className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100/50 flex items-center gap-4 min-h-[90px]">
               <Icon className={`h-8 w-8 ${txt} shrink-0`} />
               <div>
-                <span className={`text-3xl font-black ${txt}`}>{value}</span>
+                <span className="text-3xl font-black text-slate-900">{value}</span>
                 <p className="text-xs font-bold text-slate-400 mt-0.5">{label}</p>
               </div>
             </div>
