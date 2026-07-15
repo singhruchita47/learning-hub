@@ -1,4 +1,6 @@
 {
+  "installCommand": "npm install -g pnpm@9.15.4 && pnpm install",
+  "buildCommand": "pnpm run build",
   "rewrites": [
     {
       "source": "/(.*)",
