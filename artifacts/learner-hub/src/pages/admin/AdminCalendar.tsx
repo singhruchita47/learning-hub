@@ -48,9 +48,7 @@ export default function AdminCalendar() {
         throw new Error();
       }
     } catch {
-      // Offline fallback handled below
-    } finally {
-      // Always save locally to ensure it persists for the demo
+      // Offline fallback handled here
       const newEventData = { ...eventPayload, _id: "local-" + Date.now() };
       setEvents(prev => {
         const isDuplicate = prev.some(e => e._id === newEventData._id);
@@ -60,6 +58,7 @@ export default function AdminCalendar() {
       const existing = JSON.parse(localStorage.getItem('local_events') || '[]');
       localStorage.setItem('local_events', JSON.stringify([...existing, newEventData]));
     }
+    
     setShowAddForm(false);
     setNewEvent({ title: "", date: "", time: "", type: "Event", location: "" });
   };
@@ -100,10 +99,11 @@ export default function AdminCalendar() {
             </div>
           </div>
 
-          {/* Mini Calendar Widget */}
           <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm mt-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-black text-slate-900">August 2026</h3>
+              <h3 className="text-sm font-black text-slate-900">
+                {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+              </h3>
               <div className="flex gap-1">
                 <button className="h-6 w-6 rounded hover:bg-slate-100 flex items-center justify-center text-slate-400 font-bold">&lt;</button>
                 <button className="h-6 w-6 rounded hover:bg-slate-100 flex items-center justify-center text-slate-400 font-bold">&gt;</button>
@@ -115,19 +115,26 @@ export default function AdminCalendar() {
               ))}
             </div>
             <div className="grid grid-cols-7 gap-1 text-center">
-              {[...Array(31)].map((_, i) => {
-                const isEvent = i + 1 === 20;
-                const isExam = i + 1 === 15;
-                const isHoliday = i + 1 === 12;
+              {[...Array(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate())].map((_, i) => {
+                const dayStr = String(i + 1).padStart(2, '0');
+                const monthStr = String(new Date().getMonth() + 1).padStart(2, '0');
+                const yearStr = new Date().getFullYear();
+                const currentDateString = `${yearStr}-${monthStr}-${dayStr}`;
+                
+                const dayEvents = events.filter(e => e.date === currentDateString);
+                const isEvent = dayEvents.some(e => e.type === "Event");
+                const isExam = dayEvents.some(e => e.type === "Exam");
+                const isHoliday = dayEvents.some(e => e.type === "Holiday");
                 
                 let bgClass = "hover:bg-slate-50 text-slate-700";
-                if (isEvent) bgClass = "bg-violet-100 text-violet-700 font-black";
-                if (isExam) bgClass = "bg-red-100 text-red-700 font-black";
-                if (isHoliday) bgClass = "bg-emerald-100 text-emerald-700 font-black";
+                if (isEvent) bgClass = "bg-violet-100 text-violet-700 font-black shadow-sm shadow-violet-200/50";
+                else if (isExam) bgClass = "bg-red-100 text-red-700 font-black shadow-sm shadow-red-200/50";
+                else if (isHoliday) bgClass = "bg-emerald-100 text-emerald-700 font-black shadow-sm shadow-emerald-200/50";
 
                 return (
                   <div 
                     key={i} 
+                    title={dayEvents.map(e => e.title).join(", ")}
                     className={`h-8 w-full flex items-center justify-center rounded-lg text-xs font-semibold cursor-pointer transition ${bgClass}`}
                   >
                     {i + 1}
