@@ -51,80 +51,119 @@ export default function StudentAssignmentsPanel({ filter = "All" }: { filter?: s
   });
 
   return (
-    <div className="grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {filteredAssignments.length > 0 ? (
         filteredAssignments.map((assignment) => {
           let statusText = "Pending";
-          let statusColor = "bg-amber-50 text-amber-700 border-amber-100";
+          let statusColor = "bg-amber-50 text-amber-600";
+          let iconBg = "bg-violet-50 text-violet-600";
+          
           if (assignment.submittedFileName) {
             statusText = "Submitted";
-            statusColor = "bg-blue-50 text-blue-700 border-blue-100";
+            statusColor = "bg-blue-50 text-blue-600";
           }
           if (assignment.feedback) {
             statusText = "Graded";
-            statusColor = "bg-emerald-50 text-emerald-700 border-emerald-100";
+            statusColor = "bg-emerald-50 text-emerald-600";
+            iconBg = "bg-emerald-50 text-emerald-600";
           }
 
           return (
             <article
               key={assignment.id}
-              className="rounded-xl bg-white p-3 shadow-sm border border-slate-200 flex flex-col justify-between gap-2 transition hover:shadow-md aspect-square max-h-[220px]"
+              className="rounded-[2rem] bg-white p-6 shadow-sm border border-slate-100/50 flex flex-col gap-4 transition hover:shadow-md animate-in fade-in duration-300"
             >
-              <div className="flex flex-col h-full overflow-hidden">
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className={`rounded border px-1.5 py-0.5 text-[8px] font-black uppercase ${statusColor}`}>
+              <div className="flex items-start justify-between">
+                <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${iconBg}`}>
+                  <FileText className="h-5 w-5" />
+                </div>
+                <div className="flex flex-col items-end gap-1.5">
+                  <span className={`rounded-full px-3 py-0.5 text-[10px] font-black uppercase tracking-wider ${statusColor}`}>
                     {statusText}
                   </span>
-                  <span className="text-[8px] font-black uppercase text-slate-400">
-                    {formatDate(assignment.dueDate)}
+                  <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1">
+                    <CalendarDays className="h-3 w-3" /> {formatDate(assignment.dueDate)}
                   </span>
                 </div>
+              </div>
 
-                <h3 className="text-xs font-black text-slate-800 line-clamp-1">{assignment.title}</h3>
-                <p className="mt-0.5 text-[9px] font-semibold text-slate-500 line-clamp-2 leading-tight">
+              <div className="flex-1">
+                <h3 className="text-base font-extrabold text-slate-800 leading-snug">{assignment.title}</h3>
+                <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-500 line-clamp-2">
                   {assignment.description}
                 </p>
-
+                
                 {assignment.imageUrl && (
-                  <div className="mt-1.5 rounded bg-slate-50 flex-1 min-h-0 overflow-hidden flex items-center justify-center border border-slate-100">
-                    <img src={assignment.imageUrl} alt="Ref" className="max-h-full max-w-full object-cover" />
+                  <div className="mt-3 rounded-xl overflow-hidden bg-slate-50 border border-slate-100 p-1">
+                    <img src={assignment.imageUrl} alt="Reference" className="w-full h-16 object-contain rounded-lg" />
                   </div>
                 )}
-                
-                {!assignment.imageUrl && <div className="flex-1" />}
+              </div>
 
-                <div className="mt-2 border-t border-slate-100 pt-2 shrink-0">
-                  {assignment.submittedFileName ? (
-                    <div className="rounded bg-emerald-50 p-1.5 flex flex-col items-center justify-center text-center">
-                      <CheckCircle2 className="h-3 w-3 text-emerald-600 mb-0.5" />
-                      <span className="text-[8px] font-black text-emerald-700 truncate w-full">Uploaded</span>
+              <div className="flex flex-col gap-2.5">
+                {assignment.submittedFileName ? (
+                  <div className="rounded-2xl bg-slate-50 p-3 text-xs font-bold text-slate-700 flex flex-col gap-1 border border-slate-100">
+                    <div className="flex items-center gap-1.5 font-black text-emerald-600">
+                      <CheckCircle2 className="h-4 w-4" />
+                      <span>Uploaded Successfully</span>
                     </div>
-                  ) : (
-                    <label className="flex h-6 w-full cursor-pointer items-center justify-center gap-1 rounded bg-violet-600 text-[9px] font-black text-white hover:bg-violet-700 transition">
-                      {uploadingId === assignment.id ? <Loader className="h-3 w-3 animate-spin" /> : <Upload className="h-3 w-3" />}
-                      {uploadingId === assignment.id ? "..." : "Upload"}
+                    {assignment.submittedFileUrl ? (
+                      <a href={assignment.submittedFileUrl} target="_blank" rel="noreferrer" className="underline text-slate-600 font-bold truncate hover:text-slate-800">
+                        {assignment.submittedFileName}
+                      </a>
+                    ) : (
+                      <span className="truncate">{assignment.submittedFileName}</span>
+                    )}
+                  </div>
+                ) : null}
+
+                {assignment.feedback && (
+                  <div className="rounded-2xl bg-violet-50/50 p-3 border border-violet-100 space-y-1.5">
+                    <div className="flex items-center justify-between text-violet-700 font-black text-xs">
+                      <span className="flex items-center gap-1">
+                        <MessageSquareText className="h-4 w-4" /> Feedback
+                      </span>
+                      {assignment.marks !== undefined && <span>{assignment.marks} Marks</span>}
+                    </div>
+                    <p className="text-xs font-semibold text-slate-600 italic line-clamp-2">"{assignment.feedback}"</p>
+                  </div>
+                )}
+
+                {!assignment.feedback && (
+                  <div className="flex gap-2.5 mt-1">
+                    <input
+                      value={notes[assignment.id] ?? ""}
+                      onChange={(e) => setNotes(c => ({ ...c, [assignment.id]: e.target.value }))}
+                      placeholder="Add note..."
+                      className="flex-1 h-11 w-full rounded-2xl border border-slate-200 bg-white px-3 text-xs font-bold text-slate-700 outline-none focus:border-violet-300 transition"
+                    />
+                    <label className="flex h-11 px-4 cursor-pointer items-center justify-center gap-2 rounded-2xl bg-violet-600 text-xs font-black text-white hover:bg-violet-700 shadow-sm transition-all shrink-0">
+                      {uploadingId === assignment.id ? <Loader className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+                      {uploadingId === assignment.id ? "..." : assignment.submittedFileName ? "Re-upload" : "Upload"}
                       <input
                         type="file"
                         className="hidden"
                         disabled={uploadingId === assignment.id}
-                        onChange={(event) => {
-                          const file = event.target.files?.[0];
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
                           if (file) void handleUpload(assignment.id, file);
                         }}
                       />
                     </label>
-                  )}
-                  {uploadError[assignment.id] && (
-                    <p className="text-[8px] text-center font-bold text-red-600 mt-0.5">{uploadError[assignment.id]}</p>
-                  )}
-                </div>
+                  </div>
+                )}
+                
+                {uploadError[assignment.id] && (
+                  <p className="text-[10px] font-bold text-red-600 text-center">{uploadError[assignment.id]}</p>
+                )}
               </div>
             </article>
           );
         })
       ) : (
-        <div className="col-span-full py-8 text-center text-slate-400 font-bold text-xs border border-dashed border-slate-200 rounded-xl bg-white">
-          No assignments found.
+        <div className="col-span-full py-16 text-center">
+          <div className="text-4xl mb-3">📁</div>
+          <p className="text-slate-400 font-extrabold text-sm">No assignments found in this section.</p>
         </div>
       )}
     </div>
