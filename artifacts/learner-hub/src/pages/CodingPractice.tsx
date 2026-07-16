@@ -160,7 +160,7 @@ export default function CodingPractice() {
         const localQuestions = JSON.parse(localStorage.getItem('local_coding_questions') || '[]');
         const combined = [...localQuestions, ...apiQuestions];
         const mapped = combined.map((question) => {
-          const isTest = question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
+          const isTest = question.questionType === "Coding Test" || question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
           return {
             id: `faculty-${question._id}`,
             title: question.title,
@@ -189,7 +189,7 @@ export default function CodingPractice() {
         if (!mounted) return;
         const localQuestions = JSON.parse(localStorage.getItem('local_coding_questions') || '[]');
         const mapped = localQuestions.map((question: any) => {
-          const isTest = question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
+          const isTest = question.questionType === "Coding Test" || question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
           return {
             id: `faculty-${question._id}`,
             title: question.title,
