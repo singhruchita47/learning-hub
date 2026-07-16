@@ -73,9 +73,10 @@ export default function AdminTimetable() {
     } catch {
       // Offline fallback removed
     } finally {
-    setShowForm(false);
-    setForm(BLANK_FORM);
-    setSaving(false);
+      setShowForm(false);
+      setForm(BLANK_FORM);
+      setSaving(false);
+    }
   };
 
   const handleDelete = async (id: string) => {
