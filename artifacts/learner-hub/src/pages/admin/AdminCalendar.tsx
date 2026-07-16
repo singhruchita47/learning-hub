@@ -142,34 +142,51 @@ export default function AdminCalendar() {
           </div>
 
           <div className="grid gap-4">
-            {events.map(event => (
-                <div key={event._id || event.id} className="flex gap-4 p-4 hover:bg-slate-50/50 transition border border-transparent hover:border-slate-100 rounded-2xl">
-                  <div className="flex flex-col items-center justify-center w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 shrink-0">
-                    <span className="text-xs font-bold text-slate-400 uppercase">
+            {events.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-12 px-4 rounded-2xl border border-dashed border-slate-300 bg-slate-50/50">
+                <CalendarIcon className="h-10 w-10 text-slate-300 mb-3" />
+                <p className="text-sm font-bold text-slate-500">No events scheduled yet.</p>
+              </div>
+            ) : (
+              events.map((event) => (
+                <div 
+                  key={event._id || event.id} 
+                  className="group flex flex-col sm:flex-row gap-5 p-5 bg-white shadow-sm border border-slate-200 rounded-[1.5rem] hover:shadow-xl hover:shadow-slate-200/50 hover:border-violet-200 transition-all duration-300"
+                >
+                  <div className="flex flex-col items-center justify-center w-16 h-16 rounded-[1.25rem] bg-slate-50 border border-slate-100 shrink-0 group-hover:bg-violet-50 group-hover:border-violet-100 group-hover:text-violet-600 transition-colors">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 group-hover:text-violet-400">
                       {new Date(event.date).toLocaleDateString('en-US', { month: 'short' })}
                     </span>
-                    <span className="text-xl font-black text-slate-800">
+                    <span className="text-2xl font-black text-slate-800 group-hover:text-violet-700">
                       {new Date(event.date).getDate() || event.date.split("-")[2]}
                     </span>
                   </div>
-                  <div className="flex-1">
+                  <div className="flex-1 flex flex-col justify-center">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className={`inline-block w-2 h-2 rounded-full ${
-                        event.type === 'Event' ? 'bg-violet-500' : 
-                        event.type === 'Exam' ? 'bg-red-500' : 'bg-emerald-500'
-                      }`} />
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                      <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded-md text-[9px] font-black uppercase tracking-widest ${
+                        event.type === 'Event' ? 'bg-violet-100 text-violet-700' : 
+                        event.type === 'Exam' ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'
+                      }`}>
                         {event.type}
                       </span>
                     </div>
-                    <h3 className="text-lg font-black text-slate-900">{event.title}</h3>
-                    <div className="mt-2 flex flex-wrap gap-4 text-xs font-bold text-slate-500">
-                      <div className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {event.time}</div>
-                      <div className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> {event.location}</div>
+                    <h3 className="text-lg font-black text-slate-900 group-hover:text-violet-900 transition-colors">{event.title}</h3>
+                    <div className="mt-2.5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-bold text-slate-500">
+                      <div className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-slate-400" /> {event.time}</div>
+                      <div className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-slate-400" /> {event.location}</div>
                     </div>
                   </div>
+                  
+                  {/* Action or Decorative element on the right side if needed, or just let it breathe */}
+                  <div className="hidden sm:flex items-center justify-center pr-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button className="h-8 w-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-violet-100 hover:text-violet-600 transition-colors">
+                      <span className="sr-only">Options</span>
+                      ...
+                    </button>
+                  </div>
                 </div>
-              ))}
+              ))
+            )}
           </div>
         </div>
       </div>
