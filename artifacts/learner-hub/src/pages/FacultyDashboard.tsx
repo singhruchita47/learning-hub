@@ -80,25 +80,25 @@ function StatCard({ label, value, icon: Icon, color }: { label: string; value: s
 
 function FacultyIllustration() {
   return (
-    <div className="relative flex h-full min-h-[260px] items-center justify-center select-none pointer-events-none">
+    <div className="relative flex h-full min-h-[160px] items-center justify-center select-none pointer-events-none">
       {/* Floating Badges */}
-      <div className="absolute -top-4 left-4 z-10 rounded-2xl bg-white px-4 py-2.5 shadow-md border border-slate-100 flex items-center gap-2">
-        <span className="text-blue-500">📝</span>
-        <div className="text-[10px] leading-tight">
+      <div className="absolute -top-2 left-0 z-10 rounded-2xl bg-white px-3 py-1.5 shadow-sm border border-slate-100 flex items-center gap-1.5 scale-90">
+        <span className="text-blue-500 text-xs">📝</span>
+        <div className="text-[9px] leading-tight">
           <p className="font-extrabold text-slate-800">New Submissions</p>
           <p className="font-semibold text-slate-400">12 Pending</p>
         </div>
       </div>
-      <div className="absolute top-8 right-6 z-10 rounded-2xl bg-white px-4 py-2.5 shadow-md border border-slate-100 flex items-center gap-2">
-        <span className="text-base">📅</span>
-        <div className="text-[10px] leading-tight">
+      <div className="absolute top-4 right-0 z-10 rounded-2xl bg-white px-3 py-1.5 shadow-sm border border-slate-100 flex items-center gap-1.5 scale-90">
+        <span className="text-sm">📅</span>
+        <div className="text-[9px] leading-tight">
           <p className="font-extrabold text-amber-600">Next Class</p>
           <p className="font-semibold text-slate-400">In 2 hours</p>
         </div>
       </div>
 
       {/* SVG Illustration */}
-      <div className="relative z-0 w-80 h-80 lg:w-[320px] lg:h-[320px] mt-4 lg:mt-0 rounded-full overflow-hidden shadow-[0_20px_50px_rgba(108,_92,_231,_0.2)] ring-8 ring-white bg-[#f8f7ff] flex items-center justify-center">
+      <div className="relative z-0 w-48 h-48 lg:w-[200px] lg:h-[200px] mt-2 lg:mt-0 rounded-full overflow-hidden shadow-[0_10px_30px_rgba(108,_92,_231,_0.15)] ring-4 ring-white bg-[#f8f7ff] flex items-center justify-center">
         <svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="100" cy="100" r="80" fill="#ede9fe" opacity="0.5" />
           {/* Laptop/Screen */}
@@ -399,8 +399,8 @@ export default function FacultyDashboard({
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
 
             {/* ── Hero Banner ── */}
-            <section className="relative overflow-hidden rounded-[2.5rem] bg-[#f3f0ff] p-8 md:p-12 shadow-sm border border-purple-100/40 mb-6">
-              <div className="relative grid lg:grid-cols-[1fr_360px] gap-8 items-center">
+            <section className="relative overflow-hidden rounded-[2rem] bg-[#f3f0ff] p-6 md:p-8 shadow-sm border border-purple-100/40 mb-6">
+              <div className="relative grid lg:grid-cols-[1fr_240px] gap-6 items-center">
                 <div>
                   <div className="mb-5 inline-flex items-center gap-1.5 rounded-full bg-violet-100 border border-violet-200 px-3.5 py-1.5 text-xs font-bold text-violet-800">
                     <span className="h-2 w-2 rounded-full bg-violet-500 animate-pulse" />
