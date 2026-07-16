@@ -112,7 +112,7 @@ async function runWithJudge0(problem: PracticeProblem, sourceCode: string, langu
 
 export default function CodingPractice() {
   const [location, setLocation] = useLocation();
-  const [selectedLanguage, setSelectedLanguage] = useState<LanguageKey | "">("");
+  const [selectedLanguage, setSelectedLanguage] = useState<LanguageKey>(languages[0].key);
   const [facultyProblems, setFacultyProblems] = useState<PracticeProblem[]>([]);
   const [solutions, setSolutions] = useState<Record<string, string>>({});
   const [runStates, setRunStates] = useState<Record<string, RunState>>({});
@@ -634,8 +634,8 @@ export default function CodingPractice() {
           </PanelResizeHandle>
 
           {/* Right Side Editor & Console */}
-          <Panel defaultSize={60} minSize={30} className="flex h-full flex-col min-h-0 bg-white">
-            <PanelGroup direction="vertical">
+          <Panel defaultSize={60} minSize={30} className="h-full bg-white relative">
+            <PanelGroup direction="vertical" className="h-full w-full">
               
               {/* Code Editor Panel */}
               <Panel defaultSize={70} minSize={30} className="flex flex-col min-h-0 relative">

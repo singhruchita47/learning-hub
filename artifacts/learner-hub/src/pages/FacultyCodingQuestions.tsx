@@ -339,20 +339,20 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
     }
 
     try {
-      const saved = await Promise.all(
-        selectedQuestions.map((question) =>
-          saveQuestion({
-            title: question.title,
-            difficulty: question.difficulty,
-            description: question.description,
-            inputTestCase: question.inputTestCase,
-            expectedOutput: question.expectedOutput,
-            starterCode: question.starterCode,
-            imageUrl: question.imageUrl,
-            questionType: bankQuestionType,
-          }),
-        ),
-      );
+      const saved = [];
+      for (const question of selectedQuestions) {
+        const result = await saveQuestion({
+          title: question.title,
+          difficulty: question.difficulty,
+          description: question.description,
+          inputTestCase: question.inputTestCase,
+          expectedOutput: question.expectedOutput,
+          starterCode: question.starterCode,
+          imageUrl: question.imageUrl,
+          questionType: bankQuestionType,
+        });
+        saved.push(result);
+      }
       setQuestions((current) => [...saved.map((item) => item.codingQuestion), ...current]);
       setSelectedBankIds([]);
       setStatus(`${saved.length} coding bank question${saved.length > 1 ? "s" : ""} published to student Coding Practice.`);
