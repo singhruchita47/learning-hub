@@ -14,12 +14,12 @@ export default function AdminCalendar() {
       const res = await fetch(`${API_ROOT}/admin/events`);
       if (!res.ok) throw new Error();
       const data = await res.json();
-      if (data.events) {
-        setEvents(data.events);
-      }
+      const apiEvents = data.events || [];
+      const existing = JSON.parse(localStorage.getItem('local_events') || '[]');
+      setEvents([...apiEvents, ...existing]);
     } catch {
       const existing = JSON.parse(localStorage.getItem('local_events') || '[]');
-      if (existing.length) setEvents(existing);
+      setEvents(existing);
     }
   };
 
@@ -48,8 +48,15 @@ export default function AdminCalendar() {
         throw new Error();
       }
     } catch {
+      // Offline fallback handled below
+    } finally {
+      // Always save locally to ensure it persists for the demo
       const newEventData = { ...eventPayload, _id: "local-" + Date.now() };
-      setEvents(prev => [...prev, newEventData].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
+      setEvents(prev => {
+        const isDuplicate = prev.some(e => e._id === newEventData._id);
+        if (isDuplicate) return prev;
+        return [...prev, newEventData].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      });
       const existing = JSON.parse(localStorage.getItem('local_events') || '[]');
       localStorage.setItem('local_events', JSON.stringify([...existing, newEventData]));
     }

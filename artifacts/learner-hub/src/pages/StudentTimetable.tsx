@@ -50,12 +50,11 @@ export default function StudentTimetable() {
         const data = await res.json();
         const apiSlots = data.timetable || [];
         const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-        const myLocalSlots = existing.filter((s: any) => s.courseCode === "BCA" || s.courseCode === "BBA");
-        setSlots([...apiSlots, ...myLocalSlots]);
+        // Removed filter for demo purposes so all admin entries show up
+        setSlots([...apiSlots, ...existing]);
       } catch {
         const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-        const myLocalSlots = existing.filter((s: any) => s.courseCode === "BCA" || s.courseCode === "BBA");
-        setSlots(myLocalSlots);
+        setSlots(existing);
       } finally {
         setLoading(false);
       }

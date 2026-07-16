@@ -55,8 +55,15 @@ export default function Calendar() {
       .catch(() => {});
 
     fetch(`${API_ROOT}/admin/events`)
-      .then((r) => r.json())
-      .then((d: { events?: any[] }) => setAcademicEvents(d.events || []))
+      .then((r) => {
+        if (!r.ok) throw new Error();
+        return r.json();
+      })
+      .then((d: { events?: any[] }) => {
+        const apiEvents = d.events || [];
+        const existing = JSON.parse(localStorage.getItem('local_events') || '[]');
+        setAcademicEvents([...apiEvents, ...existing]);
+      })
       .catch(() => {
         const existing = JSON.parse(localStorage.getItem('local_events') || '[]');
         setAcademicEvents(existing);

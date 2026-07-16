@@ -54,12 +54,11 @@ export default function FacultyTimetable() {
         const data = await res.json();
         const apiSlots = data.timetable || [];
         const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-        const mySlots = existing.filter((s: any) => s.facultyId === facultyId || s.facultyId === "faculty-demo");
-        setSlots([...apiSlots, ...mySlots]);
+        // Removed filter for demo purposes so all admin entries show up
+        setSlots([...apiSlots, ...existing]);
       } catch {
         const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-        const mySlots = existing.filter((s: any) => s.facultyId === facultyId || s.facultyId === "faculty-demo");
-        setSlots(mySlots);
+        setSlots(existing);
       } finally {
         setLoading(false);
       }

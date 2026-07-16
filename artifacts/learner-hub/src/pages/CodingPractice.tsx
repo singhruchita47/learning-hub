@@ -656,8 +656,8 @@ export default function CodingPractice() {
           </PanelResizeHandle>
 
           {/* Right Side Editor & Console */}
-          <Panel defaultSize={60} minSize={30} className="h-full bg-white relative">
-            <PanelGroup direction="vertical" className="h-full w-full">
+          <Panel defaultSize={60} minSize={30} className="flex flex-col h-full bg-white relative">
+            <PanelGroup direction="vertical" className="flex-1 w-full min-h-0">
               
               {/* Code Editor Panel */}
               <Panel defaultSize={70} minSize={30} className="flex flex-col min-h-0 relative">
