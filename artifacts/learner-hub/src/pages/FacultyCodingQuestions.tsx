@@ -894,7 +894,7 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
                   <p className="mt-2 text-xs font-semibold text-slate-500 leading-relaxed whitespace-pre-wrap min-h-[60px] max-h-[120px] overflow-y-auto">
                     {form.description || "Describe the programming challenge instructions here..."}
                   </p>
-                  {form.imageUrl && (
+                  {form.imageUrl && form.imageUrl.trim() !== "" && form.imageUrl !== "null" && (
                     <img src={form.imageUrl} alt="Problem visual" className="mt-4 max-h-40 w-auto rounded-xl border border-slate-200 object-cover shadow-sm" />
                   )}
                 </div>
@@ -1159,8 +1159,8 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
                 <p className="text-sm font-bold text-slate-700 leading-relaxed whitespace-pre-wrap">{previewQuestion.description}</p>
               </div>
 
-              {previewQuestion.imageUrl && (
-                <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4 flex justify-center">
+              {previewQuestion.imageUrl && previewQuestion.imageUrl.trim() !== "" && previewQuestion.imageUrl !== "null" && (
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-2">
                   <img src={previewQuestion.imageUrl} alt="Question Visual" className="max-h-[250px] w-auto rounded-lg shadow-sm" />
                 </div>
               )}
