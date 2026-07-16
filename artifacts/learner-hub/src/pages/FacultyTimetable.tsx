@@ -53,12 +53,9 @@ export default function FacultyTimetable() {
         if (!res.ok) throw new Error();
         const data = await res.json();
         const apiSlots = data.timetable || [];
-        const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-        // Removed filter for demo purposes so all admin entries show up
-        setSlots([...apiSlots, ...existing]);
+        setSlots(apiSlots);
       } catch {
-        const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-        setSlots(existing);
+        setSlots([]);
       } finally {
         setLoading(false);
       }
@@ -93,15 +90,7 @@ export default function FacultyTimetable() {
         throw new Error();
       }
     } catch {
-      const newSlot = {
-        id: "local-" + Date.now(),
-        ...formData,
-        facultyId: user?.id || user?.email || "faculty-demo",
-        facultyName: user?.name || "Faculty",
-      };
-      setSlots([...slots, newSlot as TimetableSlot]);
-      const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-      localStorage.setItem('local_timetable', JSON.stringify([...existing, newSlot]));
+      // Offline fallback removed
     }
     setIsCreating(false);
     setFormData({ courseCode: "", subject: "", day: "Monday", startTime: "09:00", endTime: "10:00", type: "Lecture", location: "" });

@@ -44,11 +44,9 @@ export default function AdminTimetable() {
       if (!res.ok) throw new Error();
       const data = await res.json();
       const apiSlots = data.timetable || [];
-      const localSlots = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-      setSlots([...apiSlots, ...localSlots]);
+      setSlots(apiSlots);
     } catch {
-      const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-      setSlots(existing);
+      setSlots([]);
     } finally {
       setLoading(false);
     }
@@ -73,14 +71,8 @@ export default function AdminTimetable() {
         throw new Error();
       }
     } catch {
-      // Offline fallback
+      // Offline fallback removed
     } finally {
-      // Always save to local storage so it's "permanent" on this device
-      const newSlot = { ...form, id: "local-" + Date.now() };
-      const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-      localStorage.setItem('local_timetable', JSON.stringify([...existing, newSlot]));
-      setSlots(prev => [...prev, newSlot]);
-    }
     setShowForm(false);
     setForm(BLANK_FORM);
     setSaving(false);

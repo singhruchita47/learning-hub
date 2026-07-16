@@ -49,12 +49,9 @@ export default function StudentTimetable() {
         if (!res.ok) throw new Error();
         const data = await res.json();
         const apiSlots = data.timetable || [];
-        const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-        // Removed filter for demo purposes so all admin entries show up
-        setSlots([...apiSlots, ...existing]);
+        setSlots(apiSlots);
       } catch {
-        const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-        setSlots(existing);
+        setSlots([]);
       } finally {
         setLoading(false);
       }
