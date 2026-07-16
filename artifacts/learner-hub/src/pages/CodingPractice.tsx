@@ -121,6 +121,7 @@ export default function CodingPractice() {
   const [runStates, setRunStates] = useState<Record<string, RunState>>({});
   const [solvedIds, setSolvedIds] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<"test" | "practice">("practice");
+  const [consoleTab, setConsoleTab] = useState<"testcase" | "result">("testcase");
 
   const activeId = location.startsWith("/coding-practice/")
     ? decodeURIComponent(location.split("/").filter(Boolean).at(-1) ?? "")
@@ -284,6 +285,7 @@ export default function CodingPractice() {
   async function handleRun(submit = false) {
     if (!selectedLanguage || !language || !activeProblem) return;
 
+    setConsoleTab("result");
     setRunStates((current) => ({
       ...current,
       [solutionKey]: {
@@ -727,9 +729,47 @@ export default function CodingPractice() {
                 </PanelResizeHandle>
 
                 {/* Console Output */}
-                <Panel defaultSize={30} minSize={15} className="flex flex-col min-h-0 bg-white">
-                  <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-20">
-                    {currentRun ? (
+                <Panel defaultSize={30} minSize={15} className="flex flex-col min-h-0 bg-white border-t border-slate-200">
+                  {/* Console Tabs */}
+                  <div className="flex items-center gap-4 border-b border-slate-100 bg-slate-50 px-4 pt-2 shrink-0">
+                    <button 
+                      onClick={() => setConsoleTab("testcase")}
+                      className={`border-b-2 px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 transition-colors ${consoleTab === "testcase" ? 'border-emerald-500 text-slate-800' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
+                    >
+                      <TerminalSquare className="h-3.5 w-3.5" /> Testcase
+                    </button>
+                    <button 
+                      onClick={() => setConsoleTab("result")}
+                      className={`border-b-2 px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 transition-colors ${consoleTab === "result" ? 'border-emerald-500 text-slate-800' : 'border-transparent text-slate-500 hover:text-slate-700'}`}
+                    >
+                      <CheckCircle2 className="h-3.5 w-3.5" /> Test Result
+                    </button>
+                  </div>
+
+                  <div className="flex-1 overflow-y-auto p-4 pb-20 [scrollbar-width:thin]">
+                    {consoleTab === "testcase" ? (
+                      <div className="space-y-6">
+                        {activeProblem.examples.map((ex, i) => (
+                          <div key={i} className="max-w-2xl">
+                            <div className="text-xs font-bold text-slate-700 mb-2">Test Case {i + 1}</div>
+                            <div className="space-y-3">
+                              <div>
+                                <span className="text-[10px] uppercase font-bold opacity-60 ml-1">Input:</span>
+                                <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 mt-1 font-mono text-xs text-slate-800 shadow-sm whitespace-pre-wrap min-h-[40px]">
+                                  {ex.input}
+                                </div>
+                              </div>
+                              <div>
+                                <span className="text-[10px] uppercase font-bold opacity-60 ml-1">Expected Output:</span>
+                                <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 mt-1 font-mono text-xs text-slate-800 shadow-sm whitespace-pre-wrap">
+                                  {ex.output}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : currentRun ? (
                       <div className={`rounded-xl border p-4 text-sm font-mono ${
                         currentRun.status === "accepted"
                           ? "border-emerald-200 bg-emerald-50 text-emerald-900"
@@ -749,11 +789,11 @@ export default function CodingPractice() {
                             <div className="grid gap-3 md:grid-cols-2">
                               <div>
                                 <p className="text-[10px] uppercase font-bold opacity-60 mb-1">Input</p>
-                                <div className="rounded bg-black/5 p-2 text-xs">{activeProblem.stdin}</div>
+                                <div className="rounded bg-black/5 p-2 text-xs whitespace-pre-wrap">{activeProblem.stdin}</div>
                               </div>
                               <div>
                                 <p className="text-[10px] uppercase font-bold opacity-60 mb-1">Expected Output</p>
-                                <div className="rounded bg-black/5 p-2 text-xs">{activeProblem.expectedOutput}</div>
+                                <div className="rounded bg-black/5 p-2 text-xs whitespace-pre-wrap">{activeProblem.expectedOutput}</div>
                               </div>
                             </div>
                           )}
@@ -780,7 +820,7 @@ export default function CodingPractice() {
             </div>
 
             {/* Bottom Action Footer (Fixed at bottom of right panel) */}
-            <div className="absolute bottom-0 left-0 right-0 border-t border-slate-200 bg-white px-4 py-3 flex items-center justify-between shrink-0 shadow-[0_-4px_6px_-1px_rgb(0,0,0,0.05)]">
+            <div className="absolute bottom-0 left-0 right-0 border-t border-slate-200 bg-white px-4 py-3 flex items-center justify-between shrink-0 shadow-[0_-4px_6px_-1px_rgb(0,0,0,0.05)] z-20">
               <button className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-800 transition">
                 <TerminalSquare className="h-4 w-4" /> Custom Input
               </button>
