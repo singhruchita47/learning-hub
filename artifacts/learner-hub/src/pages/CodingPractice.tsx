@@ -656,10 +656,11 @@ export default function CodingPractice() {
           </PanelResizeHandle>
 
           {/* Right Side Editor & Console */}
-          <Panel defaultSize={60} minSize={30} className="flex flex-col h-full bg-white relative">
-            <PanelGroup direction="vertical" className="flex-1 w-full min-h-0">
-              
-              {/* Code Editor Panel */}
+          <Panel defaultSize={60} minSize={30}>
+            <div className="flex flex-col h-full w-full bg-white relative overflow-hidden">
+              <PanelGroup direction="vertical" className="h-full w-full">
+                
+                {/* Code Editor Panel */}
               <Panel defaultSize={70} minSize={30} className="flex flex-col min-h-0 relative">
                 <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3 shrink-0">
                   <div className="flex items-center gap-2 text-sm font-extrabold text-slate-800">
@@ -763,6 +764,7 @@ export default function CodingPractice() {
               </Panel>
               
             </PanelGroup>
+            </div>
           </Panel>
         </PanelGroup>
       </div>
