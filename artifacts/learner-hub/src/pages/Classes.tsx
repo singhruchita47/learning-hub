@@ -162,7 +162,7 @@ export default function Classes() {
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.06 }}
-                    className="rounded-[2rem] bg-white p-6 shadow-sm border border-slate-100/50 flex flex-col justify-between gap-5 transition hover:shadow-md"
+                    className="rounded-2xl bg-white p-6 shadow border border-slate-200 flex flex-col justify-between gap-5 transition hover:shadow-md hover:border-slate-300"
                   >
                     <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
                       <div className="flex items-start gap-4">
