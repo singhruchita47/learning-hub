@@ -69,43 +69,43 @@ export default function StudentAssignmentsPanel({ filter = "All" }: { filter?: s
           return (
             <article
               key={assignment.id}
-              className="rounded-[2rem] bg-white p-6 shadow-sm border border-slate-100/60 flex flex-col justify-between gap-4 transition hover:shadow-md animate-in fade-in duration-300"
+              className="rounded-2xl bg-white p-4 shadow-sm border border-slate-100/60 flex flex-col justify-between gap-3 transition hover:shadow-md animate-in fade-in duration-300"
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-50 text-violet-600">
-                    <FileText className="h-5 w-5" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-violet-50 text-violet-600">
+                    <FileText className="h-4 w-4" />
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider ${statusColor}`}>
+                    <span className={`rounded-full border px-2 py-0.5 text-[9px] font-black uppercase tracking-wider ${statusColor}`}>
                       {statusText}
                     </span>
-                    <span className="text-[10px] font-black uppercase bg-slate-50 border border-slate-100 px-2 py-0.5 rounded-lg text-slate-500">
+                    <span className="text-[9px] font-black uppercase bg-slate-50 border border-slate-100 px-2 py-0.5 rounded-md text-slate-500">
                       {assignment.courseCode || "CSE"}
                     </span>
                   </div>
                 </div>
 
-                <h3 className="text-base font-extrabold text-slate-800 mt-3.5 leading-snug">{assignment.title}</h3>
-                <p className="mt-2 text-xs font-semibold leading-relaxed text-slate-400">
+                <h3 className="text-sm font-extrabold text-slate-800 mt-2.5 leading-snug">{assignment.title}</h3>
+                <p className="mt-1.5 text-xs font-semibold leading-relaxed text-slate-400 line-clamp-2">
                   {assignment.description}
                 </p>
 
                 {/* Render attached reference image */}
                 {assignment.imageUrl && (
-                  <div className="mt-3.5 rounded-2xl overflow-hidden border border-slate-100 max-h-[160px] bg-slate-50 shadow-inner p-1">
+                  <div className="mt-2.5 rounded-xl overflow-hidden border border-slate-100 max-h-[100px] bg-slate-50 shadow-inner p-1">
                     <img
                       src={assignment.imageUrl}
                       alt="Reference attachment"
-                      className="w-full h-full object-contain rounded-xl max-h-[145px]"
+                      className="w-full h-full object-contain rounded-lg max-h-[90px]"
                     />
                   </div>
                 )}
               </div>
 
-              <div className="space-y-3 pt-3 border-t border-slate-100">
-                <div className="flex items-center gap-2 text-xs font-bold text-slate-400">
-                  <CalendarDays className="h-4 w-4 text-violet-500" />
+              <div className="space-y-2.5 pt-2.5 border-t border-slate-100">
+                <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-400">
+                  <CalendarDays className="h-3.5 w-3.5 text-violet-500" />
                   Due {formatDate(assignment.dueDate)}
                 </div>
 
