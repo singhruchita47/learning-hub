@@ -33,6 +33,7 @@ const navItems = [
   { icon: Trophy,          label: "Leaderboard",     href: "/leaderboard",     color: "text-orange-600",  activeBg: "from-orange-500 to-amber-500"  },
   { icon: Users,           label: "Community",       href: "/community",       color: "text-teal-600",    activeBg: "from-teal-600 to-emerald-600"  },
   { icon: Award,           label: "Certificates",    href: "/certificates",    color: "text-yellow-600",  activeBg: "from-yellow-500 to-orange-500" },
+  { icon: HelpCircle,      label: "Feedback",        href: "/feedback",        color: "text-amber-600",   activeBg: "from-amber-500 to-orange-500"  },
   { icon: FileSpreadsheet, label: "Grade Card",      href: "/grade-card",      color: "text-emerald-600", activeBg: "from-emerald-500 to-teal-500"  },
   { icon: FileText,        label: "AI Resume",       href: "/resume-generator",color: "text-fuchsia-600", activeBg: "from-fuchsia-600 to-pink-600"  },
 ];
