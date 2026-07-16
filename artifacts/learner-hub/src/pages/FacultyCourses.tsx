@@ -158,15 +158,6 @@ export default function FacultyCourses() {
                 ))}
               </div>
             </div>
-            {/* Live class widget */}
-            <div className="shrink-0 rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-700 p-4 text-white shadow-xl shadow-violet-400/30 min-w-[200px]">
-              <p className="text-[9px] font-black uppercase tracking-wider text-white/70">Today's Live Class</p>
-              <p className="mt-1 text-base font-black leading-snug">Data Structures Lab</p>
-              <p className="mt-0.5 text-xs font-semibold text-white/70">09:30 AM – 10:30 AM</p>
-              <button className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-white/20 py-2 text-xs font-black hover:bg-white/30 transition cursor-pointer">
-                <RadioIcon className="h-3.5 w-3.5" /> Start Live Now
-              </button>
-            </div>
           </div>
         </section>
 
