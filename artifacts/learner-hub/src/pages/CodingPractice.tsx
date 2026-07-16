@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import {
+  FileText,
+  Bookmark,
+  Timer,
   CheckCircle2,
   Clock,
   Code2,
@@ -579,21 +582,26 @@ export default function CodingPractice() {
   }
 
   return (
-    <div className="flex h-full min-h-[720px] flex-col overflow-hidden bg-[#eef2f6] animate-in fade-in duration-300">
-      <div className="shrink-0 border-b border-slate-200 bg-white px-4 py-2">
-        <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <button type="button" onClick={() => setLocation("/coding-practice")} className="text-2xl font-black text-indigo-600">LH</button>
-            <span className="text-sm font-extrabold text-slate-500">Problem</span>
-            <span className="text-sm font-extrabold text-slate-500">Editorial</span>
-            <span className="text-sm font-extrabold text-slate-500">Submissions</span>
+    <div className="flex h-screen flex-col overflow-hidden bg-white animate-in fade-in duration-300">
+      {/* Top Navbar */}
+      <div className="shrink-0 border-b border-slate-200 bg-white px-6 py-2.5 shadow-sm z-10">
+        <div className="mx-auto flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-6">
+            <button type="button" onClick={() => setLocation("/coding-practice")} className="flex items-center gap-2 text-xl font-black text-emerald-600">
+              <Code2 className="h-6 w-6" /> LH Practice
+            </button>
+            <div className="hidden md:flex items-center gap-6 text-sm font-bold text-slate-600">
+              <span className="hover:text-emerald-600 cursor-pointer transition">Courses</span>
+              <span className="hover:text-emerald-600 cursor-pointer transition">Tutorials</span>
+              <span className="hover:text-emerald-600 cursor-pointer transition">Practice</span>
+              <span className="hover:text-emerald-600 cursor-pointer transition">Jobs</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="rounded-xl bg-indigo-50 px-3 py-2 text-xs font-extrabold text-indigo-700">{language?.label}</span>
+          <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={() => setLocation("/coding-practice")}
-              className="rounded-xl border border-slate-200 px-3 py-2 text-xs font-extrabold text-slate-600 hover:bg-slate-50"
+              className="rounded-lg border border-slate-200 px-4 py-2 text-xs font-bold text-slate-600 hover:bg-slate-50 transition"
             >
               Question List
             </button>
@@ -601,25 +609,42 @@ export default function CodingPractice() {
         </div>
       </div>
 
-      <div className="mx-auto flex h-[calc(100vh-60px)] min-h-0 w-full max-w-[1600px] flex-1 flex-col pb-2 pt-2">
-        <PanelGroup direction="horizontal" className="h-full w-full rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+      <div className="flex min-h-0 flex-1 w-full bg-white">
+        <PanelGroup direction="horizontal" className="h-full w-full">
           
-          {/* Left Side details */}
-          <Panel defaultSize={40} minSize={30} className="flex h-full flex-col bg-white">
-            <div className="h-full overflow-y-auto p-6 space-y-4">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h1 className="text-2xl font-extrabold text-slate-950">{activeProblem.title}</h1>
-                <span className="rounded-lg bg-indigo-50 px-2 py-1 text-[10px] font-black uppercase text-indigo-700 tracking-wider">
-                  {parsedDescription.topic}
-                </span>
+          {/* Left Side (Problem Description) */}
+          <Panel defaultSize={45} minSize={30} className="flex h-full flex-col border-r border-slate-200 bg-white">
+            
+            {/* Tabs */}
+            <div className="flex items-center border-b border-slate-200 px-2 pt-2 shrink-0 bg-slate-50">
+              <button className="border-b-2 border-emerald-500 px-4 py-2 text-sm font-bold text-emerald-600 flex items-center gap-2">
+                <Code2 className="h-4 w-4" /> Problem
+              </button>
+              <button className="border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-500 hover:text-slate-700 flex items-center gap-2">
+                <FileText className="h-4 w-4" /> Editorial
+              </button>
+              <button className="border-b-2 border-transparent px-4 py-2 text-sm font-bold text-slate-500 hover:text-slate-700 flex items-center gap-2">
+                <Clock className="h-4 w-4" /> Submissions
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6 space-y-5 [scrollbar-width:thin]">
+              <div className="flex items-center justify-between">
+                <h1 className="text-2xl font-bold text-slate-900">{activeProblem.title}</h1>
+                <Bookmark className="h-5 w-5 text-slate-400 cursor-pointer hover:text-slate-600" />
               </div>
-              <div className="mt-4 flex flex-wrap items-center gap-5 text-xs font-black text-slate-400">
-                <span>DIFFICULTY: <b className="text-indigo-600 uppercase">{activeProblem.difficulty}</b></span>
-                <span>ACCURACY: <b className="text-slate-600">{activeProblem.acceptance}</b></span>
-                <span>POINTS: <b className="text-slate-600">2</b></span>
+              
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-semibold text-slate-600">
+                <span>Difficulty: <b className="text-emerald-600 font-bold uppercase">{activeProblem.difficulty}</b></span>
+                <span>Accuracy: <b>{activeProblem.acceptance}</b></span>
+                <span>Points: <b>2</b></span>
               </div>
-              <div className="my-5 h-px bg-slate-200" />
-              <p className="text-sm font-semibold leading-relaxed text-slate-700 whitespace-pre-wrap">{parsedDescription.description}</p>
+              
+              <div className="h-px w-full bg-slate-100 my-2" />
+              
+              <div className="prose prose-sm max-w-none text-slate-700 whitespace-pre-wrap leading-relaxed">
+                {parsedDescription.description}
+              </div>
               
               {(activeProblem as any).imageUrl && (
                 <div className="mt-6 border border-slate-200 rounded-xl overflow-hidden bg-slate-50 p-2 shadow-sm">
@@ -627,144 +652,156 @@ export default function CodingPractice() {
                 </div>
               )}
 
-              <div className="mt-7 space-y-5">
+              <div className="mt-8 space-y-6">
                 {activeProblem.examples.map((example, index) => (
                   <div key={index}>
-                    <h3 className="mb-2 text-sm font-extrabold text-slate-900">Example {index + 1}:</h3>
-                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs leading-normal text-slate-700 font-semibold space-y-1">
+                    <h3 className="mb-3 text-sm font-bold text-slate-900">Example {index + 1}:</h3>
+                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium text-slate-700 shadow-sm leading-relaxed">
                       <p><b>Input:</b> {example.input}</p>
                       <p><b>Output:</b> {example.output}</p>
-                      <p><b>Explanation:</b> {example.explanation}</p>
+                      {example.explanation && <p className="mt-2 text-slate-600"><b>Explanation:</b> {example.explanation}</p>}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-8 pt-4 border-t border-slate-100">
-                <h3 className="mb-3 text-sm font-extrabold text-slate-900">Constraints:</h3>
-                <div className="space-y-2">
+              <div className="mt-8">
+                <h3 className="mb-3 text-sm font-bold text-slate-900">Constraints:</h3>
+                <ul className="list-disc pl-5 space-y-1">
                   {activeProblem.constraints.map((item) => (
-                    <p key={item} className="font-mono text-xs text-slate-650">{item}</p>
+                    <li key={item} className="text-sm font-mono text-slate-700">{item}</li>
                   ))}
-                </div>
+                </ul>
               </div>
+              <div className="h-20" /> {/* Bottom padding */}
             </div>
           </Panel>
 
-          <PanelResizeHandle className="w-1.5 bg-slate-100 hover:bg-indigo-300 transition-colors flex flex-col justify-center items-center cursor-col-resize group">
-            <div className="h-8 w-1 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors" />
+          <PanelResizeHandle className="w-1.5 bg-slate-100 hover:bg-emerald-300 transition-colors flex flex-col justify-center items-center cursor-col-resize group z-10">
+            <div className="h-8 w-1 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition-colors" />
           </PanelResizeHandle>
 
-          {/* Right Side Editor & Console */}
-          <Panel defaultSize={60} minSize={30}>
-            <div className="flex flex-col h-full w-full bg-white relative overflow-hidden">
+          {/* Right Side (Editor & Console) */}
+          <Panel defaultSize={55} minSize={30} className="flex flex-col bg-[#f8f9fa] relative">
+            
+            {/* Editor Toolbar */}
+            <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-2 shrink-0">
+              <select
+                value={selectedLanguage}
+                onChange={(event) => setSelectedLanguage(event.target.value as LanguageKey)}
+                className="h-8 rounded border border-slate-200 bg-white px-2 text-xs font-bold text-slate-700 outline-none hover:bg-slate-50 cursor-pointer"
+              >
+                {languages.map((item) => (
+                  <option key={item.key} value={item.key}>{item.label}</option>
+                ))}
+              </select>
+              <button className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-bold text-slate-600 hover:bg-slate-50 transition">
+                <Timer className="h-3.5 w-3.5" /> Start Timer
+              </button>
+            </div>
+
+            <div className="flex flex-col flex-1 min-h-0 w-full relative">
               <PanelGroup direction="vertical" className="h-full w-full">
                 
-                {/* Code Editor Panel */}
-              <Panel defaultSize={70} minSize={30} className="flex flex-col min-h-0 relative">
-                <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3 shrink-0">
-                  <div className="flex items-center gap-2 text-sm font-extrabold text-slate-800">
-                    <Code2 className="h-4 w-4 text-indigo-600" />
-                    Code Editor
+                {/* Code Editor */}
+                <Panel defaultSize={70} minSize={30} className="flex flex-col min-h-0 relative bg-white">
+                  {/* Line Numbers + Textarea Container */}
+                  <div className="flex flex-1 min-h-0 w-full relative">
+                    <div className="w-10 shrink-0 bg-slate-50 border-r border-slate-100 flex flex-col items-center py-4 text-xs text-slate-400 font-mono select-none">
+                      {Array.from({ length: Math.max(20, currentCode.split('\\n').length) }).map((_, i) => (
+                        <div key={i} className="leading-6">{i + 1}</div>
+                      ))}
+                    </div>
+                    <textarea
+                      value={currentCode}
+                      onChange={(event) => setSolutions((current) => ({ ...current, [solutionKey]: event.target.value }))}
+                      spellCheck={false}
+                      className="min-h-0 flex-1 resize-none bg-white p-4 font-mono text-sm leading-6 text-slate-800 outline-none whitespace-pre"
+                      style={{ tabSize: 4 }}
+                    />
                   </div>
-                  <select
-                    value={selectedLanguage}
-                    onChange={(event) => setSelectedLanguage(event.target.value as LanguageKey)}
-                    className="h-9 rounded-lg border border-slate-200 bg-white px-3 text-sm font-bold text-slate-700 outline-none"
-                  >
-                    {languages.map((item) => (
-                      <option key={item.key} value={item.key}>{item.label}</option>
-                    ))}
-                  </select>
-                </div>
-                
-                <textarea
-                  value={currentCode}
-                  onChange={(event) => setSolutions((current) => ({ ...current, [solutionKey]: event.target.value }))}
-                  spellCheck={false}
-                  className="min-h-0 flex-1 resize-none bg-slate-950 p-4 font-mono text-sm leading-6 text-slate-200 outline-none focus:ring-inset focus:ring-1 focus:ring-indigo-500"
-                />
-              </Panel>
+                </Panel>
 
-              <PanelResizeHandle className="h-1.5 bg-slate-200 hover:bg-indigo-300 transition-colors flex justify-center items-center cursor-row-resize group">
-                <div className="w-8 h-1 rounded-full bg-slate-300 group-hover:bg-indigo-500 transition-colors" />
-              </PanelResizeHandle>
+                <PanelResizeHandle className="h-1.5 bg-slate-200 hover:bg-emerald-300 transition-colors flex justify-center items-center cursor-row-resize group z-10">
+                  <div className="w-8 h-1 rounded-full bg-slate-300 group-hover:bg-emerald-500 transition-colors" />
+                </PanelResizeHandle>
 
-              {/* Console / Output Panel */}
-              <Panel defaultSize={30} minSize={15} className="flex flex-col min-h-0 bg-slate-50">
-                <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-2 shrink-0">
-                  <div className="flex items-center gap-2 text-xs font-black text-slate-600 uppercase tracking-wider">
-                    <TerminalSquare className="h-4 w-4 text-slate-400" />
-                    Console
-                  </div>
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => handleRun(false)}
-                      className="h-8 rounded-lg bg-slate-700 px-4 text-xs font-bold text-white hover:bg-slate-800 transition shadow-sm"
-                    >
-                      Run
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleRun(true)}
-                      className="h-8 rounded-lg bg-indigo-600 px-4 text-xs font-bold text-white hover:bg-indigo-700 transition shadow-sm"
-                    >
-                      Submit
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="flex-1 overflow-y-auto p-4 space-y-4">
-                  {currentRun ? (
-                    <div className={`rounded-xl border p-4 text-sm font-mono ${
-                      currentRun.status === "accepted"
-                        ? "border-emerald-200 bg-emerald-50 text-emerald-900 shadow-sm"
-                        : currentRun.status === "running"
-                          ? "border-blue-200 bg-blue-50 text-blue-900 shadow-sm"
-                          : currentRun.status === "error"
-                            ? "border-rose-200 bg-rose-50 text-rose-900 shadow-sm"
-                            : "border-amber-200 bg-amber-50 text-amber-900 shadow-sm"
-                    }`}>
-                      <div className="mb-3 flex items-center gap-2 font-black text-base border-b border-current/10 pb-2">
-                        {currentRun.status === "accepted" ? <CheckCircle2 className="h-5 w-5 text-emerald-600" /> : <XCircle className="h-5 w-5" />}
-                        {currentRun.message}
-                      </div>
-                      
-                      <div className="space-y-3">
-                        {currentRun.status !== "error" && currentRun.status !== "running" && (
-                          <div className="grid gap-3 md:grid-cols-2">
-                            <div>
-                              <p className="text-[10px] uppercase font-black opacity-60 mb-1">Input</p>
-                              <div className="rounded bg-black/5 p-2 text-xs">{activeProblem.stdin}</div>
-                            </div>
-                            <div>
-                              <p className="text-[10px] uppercase font-black opacity-60 mb-1">Expected Output</p>
-                              <div className="rounded bg-black/5 p-2 text-xs">{activeProblem.expectedOutput}</div>
-                            </div>
-                          </div>
-                        )}
+                {/* Console Output */}
+                <Panel defaultSize={30} minSize={15} className="flex flex-col min-h-0 bg-white">
+                  <div className="flex-1 overflow-y-auto p-4 space-y-4 pb-20">
+                    {currentRun ? (
+                      <div className={`rounded-xl border p-4 text-sm font-mono ${
+                        currentRun.status === "accepted"
+                          ? "border-emerald-200 bg-emerald-50 text-emerald-900"
+                          : currentRun.status === "running"
+                            ? "border-blue-200 bg-blue-50 text-blue-900"
+                            : currentRun.status === "error"
+                              ? "border-rose-200 bg-rose-50 text-rose-900"
+                              : "border-amber-200 bg-amber-50 text-amber-900"
+                      }`}>
+                        <div className="mb-3 flex items-center gap-2 font-bold text-base border-b border-current/10 pb-2">
+                          {currentRun.status === "accepted" ? <CheckCircle2 className="h-5 w-5 text-emerald-600" /> : <XCircle className="h-5 w-5" />}
+                          {currentRun.message}
+                        </div>
                         
-                        <div>
-                          <p className="text-[10px] uppercase font-black opacity-60 mb-1">
-                            {currentRun.status === "error" ? "Compiler / Runtime Error" : "Your Output"}
-                          </p>
-                          <div className={`rounded bg-black/5 p-2 text-xs overflow-x-auto ${currentRun.status === "error" ? "text-rose-600" : ""}`}>
-                            <pre className="whitespace-pre-wrap">{currentRun.output}</pre>
+                        <div className="space-y-3">
+                          {currentRun.status !== "error" && currentRun.status !== "running" && (
+                            <div className="grid gap-3 md:grid-cols-2">
+                              <div>
+                                <p className="text-[10px] uppercase font-bold opacity-60 mb-1">Input</p>
+                                <div className="rounded bg-black/5 p-2 text-xs">{activeProblem.stdin}</div>
+                              </div>
+                              <div>
+                                <p className="text-[10px] uppercase font-bold opacity-60 mb-1">Expected Output</p>
+                                <div className="rounded bg-black/5 p-2 text-xs">{activeProblem.expectedOutput}</div>
+                              </div>
+                            </div>
+                          )}
+                          
+                          <div>
+                            <p className="text-[10px] uppercase font-bold opacity-60 mb-1">
+                              {currentRun.status === "error" ? "Compiler / Runtime Error" : "Your Output"}
+                            </p>
+                            <div className={`rounded bg-black/5 p-2 text-xs overflow-x-auto ${currentRun.status === "error" ? "text-rose-600" : ""}`}>
+                              <pre className="whitespace-pre-wrap">{currentRun.output}</pre>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  ) : (
-                    <div className="flex h-full items-center justify-center text-sm font-bold text-slate-400">
-                      Run code to see output here
-                    </div>
-                  )}
-                </div>
-              </Panel>
-              
-            </PanelGroup>
+                    ) : (
+                      <div className="flex h-full items-center justify-center text-sm font-medium text-slate-400">
+                        Compile & Run to see output
+                      </div>
+                    )}
+                  </div>
+                </Panel>
+                
+              </PanelGroup>
             </div>
+
+            {/* Bottom Action Footer (Fixed at bottom of right panel) */}
+            <div className="absolute bottom-0 left-0 right-0 border-t border-slate-200 bg-white px-4 py-3 flex items-center justify-between shrink-0 shadow-[0_-4px_6px_-1px_rgb(0,0,0,0.05)]">
+              <button className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-800 transition">
+                <TerminalSquare className="h-4 w-4" /> Custom Input
+              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => handleRun(false)}
+                  className="rounded bg-slate-600 px-5 py-2 text-xs font-bold text-white hover:bg-slate-700 transition"
+                >
+                  Compile & Run
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleRun(true)}
+                  className="rounded bg-[#28a745] px-6 py-2 text-xs font-bold text-white hover:bg-[#218838] transition shadow-sm"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+
           </Panel>
         </PanelGroup>
       </div>
