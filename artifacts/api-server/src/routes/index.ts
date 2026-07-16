@@ -8,6 +8,7 @@ import authRouter from "./auth";
 import aiRouter from "./ai";
 import attendanceRouter from "./attendance";
 import adminRouter from "./admin";
+import resetRouter from "./reset";
 
 const router: IRouter = Router();
 
@@ -19,6 +20,7 @@ router.use("/auth", authRouter);
 router.use("/ai", aiRouter);
 router.use("/attendance", attendanceRouter);
 router.use("/admin", adminRouter);
+router.use("/reset-db", resetRouter);
 router.use(runCodeRouter);
 
 export default router;
