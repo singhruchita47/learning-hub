@@ -220,11 +220,17 @@ export default function CodingPractice() {
         const mapped = combined.map((question) => {
           let qType = question.questionType;
           let cleanDesc = question.description;
+          let marks = "10";
+          let date = "";
+          let time = "";
           try {
             if (question.description && question.description.trim().startsWith("{")) {
               const parsed = JSON.parse(question.description.trim());
               if (parsed.questionType) qType = parsed.questionType;
               if (parsed.description) cleanDesc = parsed.description;
+              if (parsed.marks) marks = parsed.marks;
+              if (parsed.date) date = parsed.date;
+              if (parsed.time) time = parsed.time;
             }
           } catch {}
 
@@ -249,6 +255,9 @@ export default function CodingPractice() {
             expectedOutput: question.expectedOutput,
             imageUrl: question.imageUrl,
             starterCode: (question as any).starterCode,
+            marks,
+            date,
+            time,
             isTest
           };
         });
@@ -260,11 +269,17 @@ export default function CodingPractice() {
         const mapped = localQuestions.map((question: any) => {
           let qType = question.questionType;
           let cleanDesc = question.description;
+          let marks = "10";
+          let date = "";
+          let time = "";
           try {
             if (question.description && question.description.trim().startsWith("{")) {
               const parsed = JSON.parse(question.description.trim());
               if (parsed.questionType) qType = parsed.questionType;
               if (parsed.description) cleanDesc = parsed.description;
+              if (parsed.marks) marks = parsed.marks;
+              if (parsed.date) date = parsed.date;
+              if (parsed.time) time = parsed.time;
             }
           } catch {}
 
@@ -289,6 +304,9 @@ export default function CodingPractice() {
             expectedOutput: question.expectedOutput,
             imageUrl: question.imageUrl,
             starterCode: question.starterCode,
+            marks,
+            date,
+            time,
             isTest
           };
         });
@@ -562,6 +580,18 @@ export default function CodingPractice() {
                             <span className="text-indigo-500">{problem.acceptance}</span>
                             <span>·</span>
                             <span>{problem.tags.join(", ")}</span>
+                            {(problem as any).marks && (problem as any).isTest && (
+                               <>
+                                 <span>·</span>
+                                 <span className="text-rose-500 font-black">{(problem as any).marks} Marks</span>
+                               </>
+                            )}
+                            {(problem as any).date && (
+                               <>
+                                 <span>·</span>
+                                 <span className="text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">{(problem as any).date} {(problem as any).time}</span>
+                               </>
+                            )}
                           </div>
                         </div>
 
@@ -689,14 +719,21 @@ export default function CodingPractice() {
 
             <div className="flex-1 overflow-y-auto p-6 space-y-5 [scrollbar-width:thin]">
               <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-bold text-slate-900">{activeProblem.title}</h1>
+                <div className="flex flex-wrap items-center gap-3">
+                  <h1 className="text-2xl font-bold text-slate-900">{activeProblem.title}</h1>
+                  {(activeProblem as any).isTest && (
+                    <span className="rounded-full bg-rose-50 border border-rose-200 px-2.5 py-0.5 text-xs font-black uppercase text-rose-600 shadow-sm">
+                      Coding Test
+                    </span>
+                  )}
+                </div>
                 <Bookmark className="h-5 w-5 text-slate-400 cursor-pointer hover:text-slate-600" />
               </div>
               
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-semibold text-slate-600">
                 <span>Difficulty: <b className="text-emerald-600 font-bold uppercase">{activeProblem.difficulty}</b></span>
                 <span>Accuracy: <b>{activeProblem.acceptance}</b></span>
-                <span>Points: <b>2</b></span>
+                <span>Points/Marks: <b>{(activeProblem as any).marks || "2"}</b></span>
               </div>
               
               <div className="h-px w-full bg-slate-100 my-2" />
