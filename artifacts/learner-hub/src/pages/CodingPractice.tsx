@@ -79,7 +79,11 @@ function runJavaScript(sourceCode: string, stdin: string, expected: string): Run
     const runner = new Function("require", "console", sourceCode);
     runner(fakeRequire, fakeConsole);
     const output = logs.join("\n").trim();
-    const accepted = output === expected.trim();
+    // Lenient comparison ignoring all whitespace
+    const cleanOutput = output.replace(/\s+/g, "");
+    const cleanExpected = expected.replace(/\s+/g, "");
+    const accepted = cleanOutput === cleanExpected;
+    
     return {
       status: accepted ? "accepted" : "wrong",
       output: output || "(no output)",
@@ -93,6 +97,56 @@ function runJavaScript(sourceCode: string, stdin: string, expected: string): Run
       output: errObj.stack || errObj.message || "Runtime error",
       expected,
       message: "Runtime Error",
+    };
+  }
+}
+
+async function runPythonLocal(sourceCode: string, stdin: string, expected: string): Promise<RunState> {
+  try {
+    if (!(window as any).loadPyodide) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js";
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+    if (!(window as any).pyodide) {
+      (window as any).pyodide = await (window as any).loadPyodide({
+        stdout: (msg: string) => { (window as any).pyodide_stdout += msg + "\n"; }
+      });
+    }
+    const pyodide = (window as any).pyodide;
+    (window as any).pyodide_stdout = "";
+    
+    // Inject stdin safely
+    const safeStdin = stdin.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+    const wrapper = `
+import sys
+import io
+sys.stdin = io.StringIO("""${safeStdin}""")
+`;
+    await pyodide.runPythonAsync(wrapper);
+    await pyodide.runPythonAsync(sourceCode);
+    
+    const output = ((window as any).pyodide_stdout || "").trim();
+    const cleanOutput = output.replace(/\s+/g, "");
+    const cleanExpected = expected.replace(/\s+/g, "");
+    const accepted = cleanOutput === cleanExpected;
+    
+    return {
+      status: accepted ? "accepted" : "wrong",
+      output: output || "(no output)",
+      expected,
+      message: accepted ? "Accepted" : "Wrong Answer",
+    };
+  } catch (error: any) {
+    return {
+      status: "error",
+      output: error.message || String(error),
+      expected,
+      message: "Runtime Error"
     };
   }
 }
@@ -300,6 +354,8 @@ export default function CodingPractice() {
       let result: RunState;
       if (selectedLanguage === "javascript") {
         result = runJavaScript(currentCode, activeProblem.stdin, activeProblem.expectedOutput);
+      } else if (selectedLanguage === "python") {
+        result = await runPythonLocal(currentCode, activeProblem.stdin, activeProblem.expectedOutput);
       } else {
         const judgeResult = await runWithJudge0(activeProblem, currentCode, language.judge0Id);
         const accepted = judgeResult.status?.description === "Accepted";
