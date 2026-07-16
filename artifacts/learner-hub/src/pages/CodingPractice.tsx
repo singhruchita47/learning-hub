@@ -584,9 +584,9 @@ export default function CodingPractice() {
   }
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden bg-white animate-in fade-in duration-300">
+    <div className="flex min-h-screen flex-col bg-slate-50 animate-in fade-in duration-300">
       {/* Top Navbar */}
-      <div className="shrink-0 border-b border-slate-200 bg-white px-6 py-2.5 shadow-sm z-10">
+      <div className="shrink-0 border-b border-slate-200 bg-white px-6 py-2.5 shadow-sm z-10 sticky top-0">
         <div className="mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-6">
             <button type="button" onClick={() => setLocation("/coding-practice")} className="flex items-center gap-2 text-xl font-black text-emerald-600">
@@ -611,7 +611,8 @@ export default function CodingPractice() {
         </div>
       </div>
 
-      <div className="flex min-h-0 flex-1 w-full bg-white">
+      <div className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col p-4">
+        <div className="h-[850px] w-full rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden flex">
         <PanelGroup direction="horizontal" className="h-full w-full">
           
           {/* Left Side (Problem Description) */}
@@ -746,7 +747,7 @@ export default function CodingPractice() {
                     </button>
                   </div>
 
-                  <div className="flex-1 overflow-y-auto p-4 pb-20 [scrollbar-width:thin]">
+                  <div className="flex-1 overflow-y-auto p-4 [scrollbar-width:thin]">
                     {consoleTab === "testcase" ? (
                       <div className="space-y-6">
                         {activeProblem.examples.map((ex, i) => (
@@ -819,8 +820,8 @@ export default function CodingPractice() {
               </PanelGroup>
             </div>
 
-            {/* Bottom Action Footer (Fixed at bottom of right panel) */}
-            <div className="absolute bottom-0 left-0 right-0 border-t border-slate-200 bg-white px-4 py-3 flex items-center justify-between shrink-0 shadow-[0_-4px_6px_-1px_rgb(0,0,0,0.05)] z-20">
+            {/* Bottom Action Footer (Natural flow) */}
+            <div className="border-t border-slate-200 bg-white px-4 py-3 flex items-center justify-between shrink-0 shadow-[0_-4px_6px_-1px_rgb(0,0,0,0.05)] z-20">
               <button className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-800 transition">
                 <TerminalSquare className="h-4 w-4" /> Custom Input
               </button>
@@ -828,14 +829,14 @@ export default function CodingPractice() {
                 <button
                   type="button"
                   onClick={() => handleRun(false)}
-                  className="rounded bg-slate-600 px-5 py-2 text-xs font-bold text-white hover:bg-slate-700 transition"
+                  className="rounded bg-slate-600 px-6 py-2.5 text-sm font-bold text-white hover:bg-slate-700 transition"
                 >
                   Compile & Run
                 </button>
                 <button
                   type="button"
                   onClick={() => handleRun(true)}
-                  className="rounded bg-[#28a745] px-6 py-2 text-xs font-bold text-white hover:bg-[#218838] transition shadow-sm"
+                  className="rounded bg-[#28a745] px-8 py-2.5 text-sm font-bold text-white hover:bg-[#218838] transition shadow-md hover:shadow-lg"
                 >
                   Submit
                 </button>
@@ -844,6 +845,7 @@ export default function CodingPractice() {
 
           </Panel>
         </PanelGroup>
+        </div>
       </div>
     </div>
   );
