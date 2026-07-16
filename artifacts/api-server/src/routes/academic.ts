@@ -1329,4 +1329,45 @@ router.post("/permissions", async (req: Request, res: Response) => {
   return res.json({ message: "Permissions updated successfully", permissions: db.permissions, storage: "memory" });
 });
 
+// Feedback Endpoints
+// ==========================================
+router.get("/feedback", async (_req: Request, res: Response) => {
+  if (!mongoReady()) {
+    return res.json({ feedback: memoryStore.feedback || [], storage: "memory" });
+  }
+  const feedback = await Feedback.find().sort({ createdAt: -1 });
+  return res.json({ feedback });
+});
+
+router.post("/feedback", async (req: Request, res: Response) => {
+  const { studentId, courseCode, rating, comments } = req.body;
+  if (!studentId || !courseCode || rating === undefined || !comments) {
+    return res.status(400).json({ message: "Missing fields" });
+  }
+  
+  if (!mongoReady()) {
+    const feedback = {
+      _id: memoryId("feedback"),
+      studentId,
+      courseCode,
+      rating: Number(rating),
+      comments,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    if (!memoryStore.feedback) memoryStore.feedback = [];
+    memoryStore.feedback.unshift(feedback);
+    saveMemoryStore("feedback");
+    return res.status(201).json({ feedback, storage: "memory" });
+  }
+  
+  const feedback = await Feedback.create({ 
+    studentId, 
+    courseCode, 
+    rating: Number(rating), 
+    comments 
+  });
+  return res.status(201).json({ feedback });
+});
+
 export default router;
