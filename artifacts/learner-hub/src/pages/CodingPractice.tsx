@@ -678,12 +678,6 @@ export default function CodingPractice() {
             <button type="button" onClick={() => setLocation("/coding-practice")} className="flex items-center gap-2 text-xl font-black text-emerald-600">
               <Code2 className="h-6 w-6" /> LH Practice
             </button>
-            <div className="hidden md:flex items-center gap-6 text-sm font-bold text-slate-600">
-              <span className="hover:text-emerald-600 cursor-pointer transition">Courses</span>
-              <span className="hover:text-emerald-600 cursor-pointer transition">Tutorials</span>
-              <span className="hover:text-emerald-600 cursor-pointer transition">Practice</span>
-              <span className="hover:text-emerald-600 cursor-pointer transition">Jobs</span>
-            </div>
           </div>
           <div className="flex items-center gap-3">
             <button
