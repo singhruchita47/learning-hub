@@ -102,27 +102,27 @@ export default function StudentTimetable() {
           <p className="mt-4 text-sm font-black text-slate-500">Free day! No classes scheduled for {selectedDay}.</p>
         </div>
       ) : (
-        <div className="space-y-4 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 before:to-transparent">
+        <div className="space-y-6 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px before:h-full before:w-0.5 before:bg-slate-200">
           {daySlots.map(slot => (
-            <div key={slot.id} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-violet-100 text-violet-600 shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow-sm z-10 ml-0 md:ml-auto md:mr-auto">
-                <Clock className="h-4 w-4" />
+            <div key={slot.id} className="relative flex items-start gap-6">
+              <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white bg-violet-100 text-violet-600 shrink-0 shadow-sm z-10">
+                <Clock className="h-5 w-5" />
               </div>
-              <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-5 rounded-[1.5rem] border border-slate-200 bg-white shadow-sm hover:shadow-md transition ml-4 md:ml-0">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="rounded-md bg-violet-50 px-2 py-0.5 text-[10px] font-black uppercase text-violet-600">{slot.courseCode}</span>
-                  <span className={`rounded-md px-2 py-0.5 text-[10px] font-black uppercase ${
+              <div className="flex-1 max-w-3xl p-6 rounded-[1.5rem] border border-slate-200 bg-white shadow-sm hover:shadow-md transition">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="rounded-md bg-violet-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-violet-600">{slot.courseCode}</span>
+                  <span className={`rounded-md px-2.5 py-1 text-[10px] font-black uppercase tracking-wider ${
                     slot.type === "Lecture" ? "bg-blue-50 text-blue-600" : 
                     slot.type === "Lab" ? "bg-emerald-50 text-emerald-600" : "bg-orange-50 text-orange-600"
                   }`}>
                     {slot.type}
                   </span>
                 </div>
-                <h3 className="text-base font-black text-slate-800 leading-tight mb-2">{slot.subject}</h3>
-                <div className="flex flex-wrap gap-4 text-xs font-semibold text-slate-500">
-                  <div className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {slot.startTime} - {slot.endTime}</div>
-                  <div className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> {slot.location}</div>
-                  <div className="flex items-center gap-1.5"><User className="h-3.5 w-3.5" /> {slot.facultyName}</div>
+                <h3 className="text-lg font-black text-slate-800 leading-tight mb-3">{slot.subject}</h3>
+                <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-slate-500">
+                  <div className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-slate-400" /> {slot.startTime} - {slot.endTime}</div>
+                  <div className="flex items-center gap-1.5"><MapPin className="h-4 w-4 text-slate-400" /> {slot.location}</div>
+                  <div className="flex items-center gap-1.5"><User className="h-4 w-4 text-slate-400" /> {slot.facultyName}</div>
                 </div>
               </div>
             </div>
