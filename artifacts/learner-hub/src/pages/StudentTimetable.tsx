@@ -48,10 +48,14 @@ export default function StudentTimetable() {
         const res = await fetch(`${ACADEMIC_API_BASE}/timetable/student/${encodeURIComponent(studentId)}`);
         if (!res.ok) throw new Error();
         const data = await res.json();
-        setSlots(data.timetable || []);
+        const apiSlots = data.timetable || [];
+        const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
+        const myLocalSlots = existing.filter((s: any) => s.courseCode === "BCA" || s.courseCode === "BBA");
+        setSlots([...apiSlots, ...myLocalSlots]);
       } catch {
         const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
-        setSlots(existing);
+        const myLocalSlots = existing.filter((s: any) => s.courseCode === "BCA" || s.courseCode === "BBA");
+        setSlots(myLocalSlots);
       } finally {
         setLoading(false);
       }

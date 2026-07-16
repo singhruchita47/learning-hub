@@ -205,6 +205,11 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
   const [status, setStatus] = useState("");
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [topicFilter, setTopicFilter] = useState("All");
+  
+  // New states for Coding Test scheduling and marks
+  const [bankTestDate, setBankTestDate] = useState("");
+  const [bankTestTime, setBankTestTime] = useState("");
+  const [bankTestMarks, setBankTestMarks] = useState("10");
   const [previewQuestion, setPreviewQuestion] = useState<BankQuestion | null>(null);
 
   async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -271,6 +276,9 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
     starterCode: string;
     imageUrl?: string;
     questionType?: string;
+    testDate?: string;
+    testTime?: string;
+    marks?: string;
   }) {
     const user = (() => {
       try {
@@ -350,6 +358,9 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
           starterCode: question.starterCode,
           imageUrl: question.imageUrl,
           questionType: bankQuestionType,
+          testDate: bankQuestionType === "Coding Test" ? bankTestDate : undefined,
+          testTime: bankQuestionType === "Coding Test" ? bankTestTime : undefined,
+          marks: bankQuestionType === "Coding Test" ? bankTestMarks : undefined,
         });
         saved.push(result);
       }
@@ -589,6 +600,33 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
                     <option value="Coding Test">🧪 Coding Test</option>
                   </select>
                 </div>
+                
+                {bankQuestionType === "Coding Test" && (
+                  <div className="flex items-center gap-2 rounded-2xl border border-violet-100 bg-white px-3 py-2 shadow-sm">
+                    <input 
+                      type="date" 
+                      value={bankTestDate} 
+                      onChange={e => setBankTestDate(e.target.value)} 
+                      className="bg-transparent text-xs font-bold text-slate-700 outline-none w-24"
+                    />
+                    <input 
+                      type="time" 
+                      value={bankTestTime} 
+                      onChange={e => setBankTestTime(e.target.value)} 
+                      className="bg-transparent text-xs font-bold text-slate-700 outline-none w-20 border-l border-slate-100 pl-2"
+                    />
+                    <div className="flex items-center gap-1 border-l border-slate-100 pl-2">
+                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Marks:</span>
+                      <input 
+                        type="number" 
+                        min="1"
+                        value={bankTestMarks} 
+                        onChange={e => setBankTestMarks(e.target.value)} 
+                        className="bg-transparent text-xs font-bold text-violet-700 outline-none w-12 text-center"
+                      />
+                    </div>
+                  </div>
+                )}
 
                 <button
                   type="button"

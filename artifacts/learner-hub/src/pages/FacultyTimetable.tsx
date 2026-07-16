@@ -52,7 +52,10 @@ export default function FacultyTimetable() {
         const res = await fetch(`${ACADEMIC_API_BASE}/timetable/faculty/${encodeURIComponent(facultyId)}`);
         if (!res.ok) throw new Error();
         const data = await res.json();
-        setSlots(data.timetable || []);
+        const apiSlots = data.timetable || [];
+        const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
+        const mySlots = existing.filter((s: any) => s.facultyId === facultyId || s.facultyId === "faculty-demo");
+        setSlots([...apiSlots, ...mySlots]);
       } catch {
         const existing = JSON.parse(localStorage.getItem('local_timetable') || '[]');
         const mySlots = existing.filter((s: any) => s.facultyId === facultyId || s.facultyId === "faculty-demo");

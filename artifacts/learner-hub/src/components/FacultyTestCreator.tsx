@@ -30,6 +30,7 @@ export default function FacultyTestCreator() {
   const [testDate, setTestDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [durationMinutes, setDurationMinutes] = useState("30");
+  const [testMarks, setTestMarks] = useState("100");
   const [published, setPublished] = useState(false);
 
   // AI Generation States
@@ -85,6 +86,7 @@ export default function FacultyTestCreator() {
       testDate,
       startTime,
       durationMinutes: Number(durationMinutes),
+      marks: Number(testMarks),
       questions: selectedQuestions,
     });
 
@@ -93,6 +95,7 @@ export default function FacultyTestCreator() {
     setTestDate("");
     setStartTime("");
     setDurationMinutes("30");
+    setTestMarks("100");
     setPublished(true);
     window.setTimeout(() => setPublished(false), 2200);
   }
@@ -300,8 +303,8 @@ export default function FacultyTestCreator() {
           </label>
         </div>
 
-        {/* Date & Time Settings */}
-        <div className="grid gap-4 md:grid-cols-3 border-t border-slate-100 pt-4">
+        {/* Date, Time & Marks Settings */}
+        <div className="grid gap-4 md:grid-cols-4 border-t border-slate-100 pt-4">
           <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
             Test Date
             <input
@@ -327,6 +330,16 @@ export default function FacultyTestCreator() {
               min="1"
               value={durationMinutes}
               onChange={(event) => setDurationMinutes(event.target.value)}
+              className="h-11 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold outline-none focus:border-violet-350 focus:bg-white transition"
+            />
+          </label>
+          <label className="grid gap-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">
+            Total Marks
+            <input
+              type="number"
+              min="1"
+              value={testMarks}
+              onChange={(event) => setTestMarks(event.target.value)}
               className="h-11 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold outline-none focus:border-violet-350 focus:bg-white transition"
             />
           </label>
