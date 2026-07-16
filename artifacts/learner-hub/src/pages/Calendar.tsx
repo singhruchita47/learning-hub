@@ -57,7 +57,10 @@ export default function Calendar() {
     fetch(`${API_ROOT}/admin/events`)
       .then((r) => r.json())
       .then((d: { events?: any[] }) => setAcademicEvents(d.events || []))
-      .catch(() => {});
+      .catch(() => {
+        const existing = JSON.parse(localStorage.getItem('local_events') || '[]');
+        setAcademicEvents(existing);
+      });
   }, []);
 
   const scheduleItems = useMemo<CalendarEvent[]>(() => {
