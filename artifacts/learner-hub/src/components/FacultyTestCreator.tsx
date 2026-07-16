@@ -38,6 +38,7 @@ export default function FacultyTestCreator() {
   const [aiGenerating, setAiGenerating] = useState(false);
   const [showAiPreview, setShowAiPreview] = useState(false);
   const [aiQuestions, setAiQuestions] = useState<Question[]>([]);
+  const [aiTopic, setAiTopic] = useState("");
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editQuestionText, setEditQuestionText] = useState("");
   const [editOptions, setEditOptions] = useState<string[]>(["", "", "", ""]);
@@ -110,6 +111,7 @@ export default function FacultyTestCreator() {
         body: JSON.stringify({
           subject: selectedCategory,
           count: Number(aiCount),
+          topic: aiTopic,
         }),
       });
 
@@ -122,7 +124,7 @@ export default function FacultyTestCreator() {
       // Local mock fallback if api fails
       const fallbacks: Question[] = Array.from({ length: Number(aiCount) }).map((_, idx) => ({
         id: Date.now() + idx,
-        questionText: `AI generated sample question on ${selectedCategory} topic #${idx + 1}`,
+        questionText: `AI generated sample question on ${aiTopic || selectedCategory} topic #${idx + 1}`,
         options: ["Option A details", "Option B details", "Option C details", "Option D details"],
         correctAnswer: "Option A details",
         category: selectedCategory,
@@ -239,24 +241,33 @@ export default function FacultyTestCreator() {
                 <p className="text-[10px] text-slate-400 font-bold mt-0.5">Generate high-quality questions for {selectedCategory} instantly.</p>
               </div>
             </div>
-            <div className="flex items-center justify-between gap-3 pt-1">
-              <select
-                value={aiCount}
-                onChange={(e) => setAiCount(e.target.value)}
-                className="h-9 rounded-xl border border-violet-200 bg-white px-3 text-xs font-bold text-slate-700 outline-none"
-              >
-                <option value="3">3 Questions</option>
-                <option value="5">5 Questions</option>
-                <option value="10">10 Questions</option>
-              </select>
-              <button
-                type="button"
-                onClick={handleAiGenerate}
-                disabled={aiGenerating}
-                className="flex h-9 items-center justify-center gap-2 rounded-xl bg-violet-600 px-4 text-xs font-black text-white hover:bg-violet-700 disabled:opacity-50 cursor-pointer"
-              >
-                {aiGenerating ? "Generating..." : "Generate AI"}
-              </button>
+            <div className="flex flex-col gap-3 pt-1">
+              <input
+                type="text"
+                placeholder="Enter specific topic (e.g. 'Indian Rivers', 'Time and Work')"
+                value={aiTopic}
+                onChange={(e) => setAiTopic(e.target.value)}
+                className="h-9 w-full rounded-xl border border-violet-200 bg-white px-3 text-xs font-semibold text-slate-700 outline-none focus:border-violet-400"
+              />
+              <div className="flex items-center justify-between gap-3">
+                <select
+                  value={aiCount}
+                  onChange={(e) => setAiCount(e.target.value)}
+                  className="h-9 rounded-xl border border-violet-200 bg-white px-3 text-xs font-bold text-slate-700 outline-none"
+                >
+                  <option value="3">3 Questions</option>
+                  <option value="5">5 Questions</option>
+                  <option value="10">10 Questions</option>
+                </select>
+                <button
+                  type="button"
+                  onClick={handleAiGenerate}
+                  disabled={aiGenerating}
+                  className="flex h-9 items-center justify-center gap-2 rounded-xl bg-violet-600 px-4 text-xs font-black text-white hover:bg-violet-700 disabled:opacity-50 cursor-pointer"
+                >
+                  {aiGenerating ? "Generating..." : "Generate AI"}
+                </button>
+              </div>
             </div>
           </div>
         </div>

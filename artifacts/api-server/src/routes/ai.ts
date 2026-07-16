@@ -33,7 +33,7 @@ const mockTimelineSummaries: string[] = [
 
 // POST /api/ai/generate-questions
 router.post("/generate-questions", async (req: Request, res: Response) => {
-  const { subject, count = 5 } = req.body;
+  const { subject, count = 5, topic } = req.body;
 
   if (!subject) {
     return res.status(400).json({ message: "subject is required." });
@@ -45,9 +45,13 @@ router.post("/generate-questions", async (req: Request, res: Response) => {
 
   for (let i = 0; i < Number(count); i++) {
     const template = baseQuestions[i % baseQuestions.length];
+    const customizedText = topic 
+      ? `[${topic}] ${template.questionText}` 
+      : template.questionText;
+      
     generated.push({
       id: Math.floor(Math.random() * 10000) + 1000,
-      questionText: `${template.questionText} (AI Gen #${i + 1})`,
+      questionText: `${customizedText} (AI Gen #${i + 1})`,
       options: [...template.options],
       correctAnswer: template.correctAnswer,
       category: subject,
