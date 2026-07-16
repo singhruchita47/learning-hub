@@ -87,7 +87,6 @@ export default function FacultyTestCreator() {
       testDate,
       startTime,
       durationMinutes: Number(durationMinutes),
-      marks: Number(testMarks),
       questions: selectedQuestions,
     });
 

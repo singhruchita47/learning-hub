@@ -134,7 +134,7 @@ function Router({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
           <Route path="/faculty/submissions" component={FacultySubmissions} />
           <Route path="/assignments" component={FacultySubmissions} />
           <Route path="/faculty/quiz-marks" component={FacultyQuizMarks} />
-          <Route path="/faculty/coding-questions" component={FacultyCodingQuestions} />
+          <Route path="/faculty/coding-questions" component={() => <FacultyCodingQuestions />} />
           <Route path="/faculty/analytics" component={() => <FacultyDashboard user={user} onLogout={onLogout} />} />
           <Route path="/faculty/attendance" component={FacultyAttendance} />
           <Route path="/faculty/timetable" component={FacultyTimetable} />

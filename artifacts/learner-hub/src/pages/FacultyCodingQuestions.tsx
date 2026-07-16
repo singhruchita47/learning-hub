@@ -359,7 +359,7 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
     }
 
     try {
-      const saved = [];
+      const saved: any[] = [];
       for (const question of selectedQuestions) {
         const result = await saveQuestion({
           title: question.title,

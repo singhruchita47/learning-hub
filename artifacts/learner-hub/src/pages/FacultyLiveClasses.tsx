@@ -117,7 +117,7 @@ export default function FacultyLiveClasses() {
         meetLink: form.meetLink,
         scheduledAt: form.scheduledAt,
         duration: form.duration,
-        status: "scheduled"
+        status: "scheduled" as const
       };
       setClasses(prev => [newClass, ...prev]);
       const existing = JSON.parse(localStorage.getItem('local_live_classes') || '[]');

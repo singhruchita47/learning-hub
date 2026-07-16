@@ -78,7 +78,7 @@ export default function Classes() {
   const activeClass = liveClasses.find((c) => c.status === "live");
   const liveCount = liveClasses.filter(c => c.status === "live").length;
   const scheduledCount = liveClasses.filter(c => c.status === "scheduled").length;
-  const completedCount = liveClasses.filter(c => c.status === "completed" || c.status === "ended").length;
+  const completedCount = liveClasses.filter(c => (c.status as string) === "completed" || (c.status as string) === "ended").length;
 
   function handleJoinClass(meetingUrl?: string) {
     const url = meetingUrl || "#";
@@ -144,7 +144,7 @@ export default function Classes() {
             <section className="grid gap-5">
               {liveClasses.map((item, index) => {
                 const isLive = item.status === "live";
-                const isCompleted = item.status === "completed" || item.status === "ended";
+                const isCompleted = (item.status as string) === "completed" || (item.status as string) === "ended";
                 const startTimeStr = new Date(item.startsAt).toLocaleTimeString("en-IN", {
                   hour: "2-digit",
                   minute: "2-digit"

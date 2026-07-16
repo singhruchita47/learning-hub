@@ -496,7 +496,7 @@ export default function CodingPractice() {
               </span>
               <button
                 type="button"
-                onClick={() => setSelectedLanguage("")}
+                onClick={() => setSelectedLanguage("" as any)}
                 className="rounded-2xl bg-[#6c5ce7] px-4 py-2.5 text-xs font-black text-white hover:bg-[#584ac2] shadow-sm transition"
               >
                 Change Language
