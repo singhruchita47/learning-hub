@@ -375,29 +375,27 @@ export default function FacultyDashboard({
               </div>
             </section>
 
-            {/* ── Premium Square Stat Cards (Balanced Size) ── */}
-            <div className="flex flex-wrap items-center justify-between gap-5 w-full">
+            {/* ── Premium Stat Cards (Horizontal Balance) ── */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
               {[
-                { label: "Attendance",          value: `${attendanceList.length || 42}`, sub: "Checked in", icon: Users,         from: "from-violet-500",  to: "to-indigo-600", shadow: "shadow-violet-200/50", txt: "text-violet-600" },
-                { label: "Courses",             value: "4",                              sub: "Running",    icon: BookOpen,      from: "from-blue-500",    to: "to-cyan-500",   shadow: "shadow-blue-200/50",  txt: "text-blue-600"   },
-                { label: "Reviews",             value: String(reviewItems.length || 12), sub: "Waiting",    icon: ClipboardList, from: "from-rose-500",   to: "to-pink-500",   shadow: "shadow-rose-200/50",  txt: "text-rose-600"  },
-                { label: "Avg Score",           value: markItems.length ? `${Math.round((markItems.reduce((sum, item) => sum + item.score / Math.max(item.total, 1), 0) / markItems.length) * 100)}%` : "78%", sub: "Average",   icon: Star, from: "from-emerald-500", to: "to-teal-500", shadow: "shadow-emerald-200/50", txt: "text-emerald-600" },
-              ].map(({ label, value, sub, icon: Icon, from, to, shadow, txt }) => (
-                <div key={label} className="group relative overflow-hidden rounded-[2rem] bg-white w-48 h-48 sm:w-56 sm:h-56 xl:w-64 xl:h-64 flex flex-col items-center justify-center text-center p-4 shadow-xl shadow-slate-200/40 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-slate-100 flex-1 sm:flex-none">
-                  {/* Faint Background Watermark Icon */}
-                  <Icon className={`absolute -right-4 -bottom-4 h-28 w-28 xl:h-36 xl:w-36 opacity-[0.03] group-hover:scale-110 group-hover:-rotate-12 transition-transform duration-500 ${txt}`} />
-                  
-                  {/* Top Floating Gradient Icon */}
-                  <div className={`relative flex h-12 w-12 xl:h-14 xl:w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${from} ${to} shadow-lg ${shadow} mb-3 group-hover:-translate-y-1 group-hover:scale-110 transition-all duration-300`}>
-                    <Icon className="h-5 w-5 xl:h-6 xl:w-6 text-white" />
+                { label: "Attendance",          value: `${attendanceList.length || 42}`, sub: "Checked in", icon: Users,         from: "from-violet-500",  to: "to-indigo-600", shadow: "shadow-violet-200/50", txt: "text-violet-600", bg: "bg-violet-50" },
+                { label: "Courses",             value: "4",                              sub: "Running",    icon: BookOpen,      from: "from-blue-500",    to: "to-cyan-500",   shadow: "shadow-blue-200/50",  txt: "text-blue-600", bg: "bg-blue-50"   },
+                { label: "Reviews",             value: String(reviewItems.length || 12), sub: "Waiting",    icon: ClipboardList, from: "from-rose-500",   to: "to-pink-500",   shadow: "shadow-rose-200/50",  txt: "text-rose-600", bg: "bg-rose-50"  },
+                { label: "Avg Score",           value: markItems.length ? `${Math.round((markItems.reduce((sum, item) => sum + item.score / Math.max(item.total, 1), 0) / markItems.length) * 100)}%` : "78%", sub: "Average",   icon: Star, from: "from-emerald-500", to: "to-teal-500", shadow: "shadow-emerald-200/50", txt: "text-emerald-600", bg: "bg-emerald-50" },
+              ].map(({ label, value, sub, icon: Icon, from, to, shadow, txt, bg }) => (
+                <div key={label} className="group relative overflow-hidden rounded-[1.5rem] bg-white p-6 shadow-sm border border-slate-100 hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between">
+                  <div className="flex items-start justify-between mb-6">
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${bg} ${txt} transition-transform duration-300 group-hover:scale-110`}>
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <span className={`text-[10px] font-black uppercase tracking-wider ${txt} bg-slate-50 px-2 py-1 rounded-lg border border-slate-100`}>{sub}</span>
                   </div>
-                  
-                  {/* Main Value */}
-                  <p className="relative text-4xl xl:text-5xl font-black text-slate-900 tracking-tight mb-1 xl:mb-2 group-hover:scale-110 transition-transform duration-300 origin-bottom">{value}</p>
-                  
-                  {/* Labels */}
-                  <p className="relative font-black text-slate-700 text-xs xl:text-sm uppercase tracking-widest">{label}</p>
-                  <p className="relative mt-1 text-[10px] xl:text-xs font-bold text-slate-400">{sub}</p>
+                  <div>
+                    <h3 className="text-3xl font-black text-slate-900 tracking-tight">{value}</h3>
+                    <p className="mt-1 text-xs font-bold uppercase tracking-wider text-slate-500">{label}</p>
+                  </div>
+                  {/* Subtle Accent Line */}
+                  <div className={`absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r ${from} ${to} transition-all duration-500 group-hover:w-full`} />
                 </div>
               ))}
             </div>
