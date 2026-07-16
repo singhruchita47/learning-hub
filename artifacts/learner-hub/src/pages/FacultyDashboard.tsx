@@ -399,32 +399,47 @@ export default function FacultyDashboard({
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
 
             {/* ── Hero Banner ── */}
-            <section className="relative overflow-hidden rounded-[2rem] bg-[#f3f0ff] p-6 md:p-8 shadow-sm border border-purple-100/40 mb-6">
-              <div className="relative grid lg:grid-cols-[1fr_240px] gap-6 items-center">
+            <section className="relative mb-6 overflow-hidden rounded-[2rem] bg-white p-6 md:p-8 shadow-sm ring-1 ring-slate-100/80">
+              <div className="pointer-events-none absolute right-0 top-0 h-full w-2/5 bg-gradient-to-l from-violet-50 via-indigo-50 to-transparent" />
+              <div className="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-violet-200/20 blur-3xl" />
+
+              <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                  <div className="mb-5 inline-flex items-center gap-1.5 rounded-full bg-violet-100 border border-violet-200 px-3.5 py-1.5 text-xs font-bold text-violet-800">
-                    <span className="h-2 w-2 rounded-full bg-violet-500 animate-pulse" />
-                    Faculty Dashboard
-                  </div>
-
-                  <h1 className="text-4xl md:text-5xl font-black leading-tight text-slate-900 tracking-tight">
-                    Welcome back,<br />
-                    <span className="text-violet-600">{user.name}!</span>
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-violet-500">Faculty Dashboard</p>
+                  <h1 className="mt-1 text-3xl font-black text-slate-900">
+                    Welcome back, <span className="text-violet-600">{user.name}!</span>
                   </h1>
-
-                  <p className="mt-4 max-w-md text-sm font-semibold text-slate-500 leading-relaxed">
+                  <p className="mt-1.5 max-w-xl text-xs font-semibold text-slate-400 leading-relaxed">
                     Manage students, publish tests, review submissions, schedule live classes and track academic activity.
                   </p>
-
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    <span className="inline-flex items-center rounded-lg bg-violet-100 px-4 py-2 text-xs font-black text-violet-700 ring-1 ring-violet-200">
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    <span className="inline-flex items-center rounded-lg bg-violet-100 px-3 py-1 text-xs font-black text-violet-700 ring-1 ring-violet-200">
                       SGSU Faculty
                     </span>
                   </div>
                 </div>
                 
-                <div className="hidden lg:block">
-                  <FacultyIllustration />
+                <div className="hidden md:block shrink-0">
+                  <div className="relative w-[160px] h-[160px] rounded-full overflow-hidden shadow-[0_10px_30px_rgba(108,_92,_231,_0.1)] ring-4 ring-white bg-[#f8f7ff] flex items-center justify-center scale-90">
+                    <svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="100" cy="100" r="80" fill="#ede9fe" opacity="0.5" />
+                      {/* Laptop/Screen */}
+                      <rect x="50" y="70" width="100" height="70" rx="4" fill="#1e293b" />
+                      <rect x="55" y="75" width="90" height="55" rx="2" fill="#0ea5e9" />
+                      <path d="M40 140 L160 140 A5 5 0 0 1 165 145 L165 148 A2 2 0 0 1 163 150 L37 150 A2 2 0 0 1 35 148 L35 145 A5 5 0 0 1 40 140 Z" fill="#94a3b8" />
+                      <rect x="90" y="142" width="20" height="3" rx="1" fill="#cbd5e1" />
+                      {/* Chart on screen */}
+                      <rect x="65" y="100" width="10" height="20" rx="1" fill="#fff" opacity="0.8" />
+                      <rect x="85" y="90" width="10" height="30" rx="1" fill="#fff" opacity="0.8" />
+                      <rect x="105" y="110" width="10" height="10" rx="1" fill="#fff" opacity="0.8" />
+                      <rect x="125" y="80" width="10" height="40" rx="1" fill="#fff" opacity="0.8" />
+                      {/* Floating Elements */}
+                      <path d="M40 50 L42 40 L52 38 L42 36 L40 26 L38 36 L28 38 L38 40 Z" fill="#fbbf24"/>
+                      <path d="M150 70 L151.5 62 L159 60.5 L151.5 59 L150 51 L148.5 59 L141 60.5 L148.5 62 Z" fill="#a78bfa"/>
+                      <circle cx="160" cy="120" r="4" fill="#38bdf8"/>
+                      <circle cx="30" cy="130" r="5" fill="#f472b6"/>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </section>
