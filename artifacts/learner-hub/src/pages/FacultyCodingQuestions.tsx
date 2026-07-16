@@ -290,12 +290,23 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
     })();
     const facultyId = user?.email ?? user?.id ?? "faculty-demo";
 
+    // Wrap metadata in description so backend saves it
+    const metadataDesc = JSON.stringify({
+      topic: payload.questionType === "Coding Test" ? "Coding Test" : "Coding Challenge",
+      description: payload.description,
+      questionType: payload.questionType ?? "Practice Set",
+      testDate: payload.testDate,
+      testTime: payload.testTime,
+      marks: payload.marks
+    });
+
     try {
       const response = await fetch(`${API_BASE}/coding-questions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...payload,
+          description: metadataDesc,
           questionType: payload.questionType ?? "Practice Set",
           facultyId,
         }),
@@ -306,6 +317,7 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
       const offlineQuestion = {
         _id: "local-" + Date.now() + Math.floor(Math.random() * 1000),
         ...payload,
+        description: metadataDesc, // Save JSON locally too for consistency
         questionType: payload.questionType ?? "Practice Set",
         facultyId,
         createdAt: new Date().toISOString()

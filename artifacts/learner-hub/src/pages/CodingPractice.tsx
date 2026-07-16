@@ -160,14 +160,25 @@ export default function CodingPractice() {
         const localQuestions = JSON.parse(localStorage.getItem('local_coding_questions') || '[]');
         const combined = [...localQuestions, ...apiQuestions];
         const mapped = combined.map((question) => {
-          const isTest = question.questionType === "Coding Test" || question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
+          let qType = question.questionType;
+          let cleanDesc = question.description;
+          try {
+            if (question.description && question.description.trim().startsWith("{")) {
+              const parsed = JSON.parse(question.description.trim());
+              if (parsed.questionType) qType = parsed.questionType;
+              if (parsed.description) cleanDesc = parsed.description;
+            }
+          } catch {}
+
+          const isTest = qType === "Coding Test" || question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
+          
           return {
             id: `faculty-${question._id}`,
             title: question.title,
             difficulty: "Easy" as const,
             tags: [isTest ? "Coding Test" : "Practice Question", "Faculty Assigned"],
             acceptance: "New",
-            description: question.description,
+            description: cleanDesc,
             examples: [
               {
                 input: question.inputTestCase,
@@ -189,14 +200,25 @@ export default function CodingPractice() {
         if (!mounted) return;
         const localQuestions = JSON.parse(localStorage.getItem('local_coding_questions') || '[]');
         const mapped = localQuestions.map((question: any) => {
-          const isTest = question.questionType === "Coding Test" || question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
+          let qType = question.questionType;
+          let cleanDesc = question.description;
+          try {
+            if (question.description && question.description.trim().startsWith("{")) {
+              const parsed = JSON.parse(question.description.trim());
+              if (parsed.questionType) qType = parsed.questionType;
+              if (parsed.description) cleanDesc = parsed.description;
+            }
+          } catch {}
+
+          const isTest = qType === "Coding Test" || question.isTest || question.title.toLowerCase().includes("test") || question.title.toLowerCase().includes("exam");
+          
           return {
             id: `faculty-${question._id}`,
             title: question.title,
             difficulty: "Easy" as const,
             tags: [isTest ? "Coding Test" : "Practice Question", "Faculty Assigned"],
             acceptance: "New",
-            description: question.description,
+            description: cleanDesc,
             examples: [
               {
                 input: question.inputTestCase,
