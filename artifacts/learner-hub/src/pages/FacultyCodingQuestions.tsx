@@ -282,6 +282,7 @@ export default function FacultyCodingQuestions({ isAdmin = false }: { isAdmin?: 
     })();
     const facultyId = user?.email ?? user?.id ?? "faculty-demo";
 
+    try {
       const response = await fetch(`${API_BASE}/coding-questions`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
