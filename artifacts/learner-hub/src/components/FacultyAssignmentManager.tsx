@@ -14,6 +14,7 @@ export default function FacultyAssignmentManager() {
     publishedCodingQuestions.map((question) => question.id),
   );
   const [feedbackDrafts, setFeedbackDrafts] = useState<Record<string, string>>({});
+  const [marksDrafts, setMarksDrafts] = useState<Record<string, string>>({});
 
   function handleCreateAssignment(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -186,12 +187,12 @@ export default function FacultyAssignmentManager() {
                 </div>
               </div>
 
-              <div className="mt-4 rounded-2xl border border-gray-100 bg-slate-50 p-3">
-                <label className="mb-2 flex items-center gap-2 text-xs font-extrabold text-slate-600">
+              <div className="mt-4 rounded-2xl border border-indigo-100 bg-indigo-50/50 p-4 shadow-sm">
+                <label className="mb-3 flex items-center gap-2 text-xs font-black text-indigo-800">
                   <MessageSquareText className="h-4 w-4 text-indigo-600" />
-                  Faculty Feedback
+                  Evaluate & Feedback
                 </label>
-                <div className="flex flex-col gap-2 md:flex-row">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
                   <textarea
                     value={draft}
                     onChange={(event) =>
@@ -200,16 +201,32 @@ export default function FacultyAssignmentManager() {
                         [assignment.id]: event.target.value,
                       }))
                     }
-                    placeholder="Write feedback for this submission..."
-                    className="min-h-[76px] flex-1 resize-none rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm font-medium outline-none transition-all focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
+                    placeholder="Write constructive feedback for the student..."
+                    className="min-h-[80px] flex-1 resize-none rounded-xl border border-indigo-100 bg-white px-3 py-2.5 text-sm font-semibold outline-none transition-all focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100/50"
                   />
-                  <button
-                    type="button"
-                    onClick={() => addAssignmentFeedback(assignment.id, draft)}
-                    className="h-11 rounded-xl bg-slate-950 px-4 text-sm font-extrabold text-white transition-all hover:bg-slate-800 md:self-end"
-                  >
-                    Save Feedback
-                  </button>
+                  <div className="flex w-full flex-col gap-2 sm:w-32 shrink-0">
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={marksDrafts[assignment.id] ?? assignment.marks ?? ""}
+                      onChange={(event) =>
+                        setMarksDrafts((current) => ({
+                          ...current,
+                          [assignment.id]: event.target.value,
+                        }))
+                      }
+                      placeholder="Marks / 100"
+                      className="h-11 w-full rounded-xl border border-indigo-100 bg-white px-3 text-center text-sm font-black text-indigo-900 outline-none transition-all focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100/50"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => addAssignmentFeedback(assignment.id, draft, marksDrafts[assignment.id] ? Number(marksDrafts[assignment.id]) : undefined)}
+                      className="h-11 w-full rounded-xl bg-indigo-600 px-4 text-xs font-black text-white shadow-md shadow-indigo-200 transition-all hover:bg-indigo-700 hover:shadow-lg active:scale-95"
+                    >
+                      Save Evaluation
+                    </button>
+                  </div>
                 </div>
               </div>
             </article>

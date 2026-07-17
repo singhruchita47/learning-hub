@@ -54,7 +54,7 @@ interface AcademicContextValue {
   reloadAssignments: () => Promise<void>;
   addAssignment: (assignment: Omit<SharedAssignment, "id" | "createdAt">) => void;
   submitAssignment: (assignmentId: string, fileName: string, fileUrl?: string, note?: string) => void;
-  addAssignmentFeedback: (assignmentId: string, feedback: string) => void;
+  addAssignmentFeedback: (assignmentId: string, feedback: string, marks?: number) => void;
   publishTest: (test: Omit<PublishedTest, "id" | "createdAt">) => void;
   publishCodingQuestions: (questions: CodingQuestion[]) => void;
   addQuestionsToBank: (questions: Question[]) => void;
@@ -274,17 +274,13 @@ export function AcademicProvider({ children, user }: { children: React.ReactNode
           ),
         );
       },
-      addAssignmentFeedback: (assignmentId, feedback) => {
+      addAssignmentFeedback: (assignmentId, feedback, marks) => {
         setAssignments((current) =>
-          current.map((assignment) =>
-            assignment.id === assignmentId
-              ? {
-                  ...assignment,
-                  feedback,
-                }
-              : assignment,
-          ),
+          current.map((a) => (a.id === assignmentId ? { ...a, feedback, marks } : a)),
         );
+
+        // Optionally persist to API if submission exists
+        // (Assuming you have a submission ID mapping, or adapting API to update by assignment ID)
       },
       publishTest: (test) => {
         // Save to API first, then update local state
