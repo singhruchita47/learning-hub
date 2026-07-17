@@ -118,14 +118,20 @@ export default function StudentAssignmentsPanel({ filter = "All" }: { filter?: s
                 ) : null}
 
                 {assignment.feedback && (
-                  <div className="rounded-2xl bg-violet-50/50 p-3 border border-violet-100 space-y-1.5">
-                    <div className="flex items-center justify-between text-violet-700 font-black text-xs">
-                      <span className="flex items-center gap-1">
-                        <MessageSquareText className="h-4 w-4" /> Feedback
+                  <div className="rounded-2xl bg-gradient-to-br from-violet-50 to-indigo-50 p-4 border border-violet-100 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <span className="flex items-center gap-1.5 text-xs font-black text-violet-700">
+                        <MessageSquareText className="h-4 w-4" /> Faculty Feedback
                       </span>
-                      {assignment.marks !== undefined && <span>{assignment.marks} Marks</span>}
+                      {assignment.marks !== undefined && (
+                        <span className="flex items-center gap-1 rounded-full bg-emerald-600 px-3 py-1 text-xs font-black text-white shadow-sm">
+                          🎯 {assignment.marks} / 100
+                        </span>
+                      )}
                     </div>
-                    <p className="text-xs font-semibold text-slate-600 italic line-clamp-2">"{assignment.feedback}"</p>
+                    <p className="text-xs font-semibold text-slate-600 italic leading-relaxed">
+                      "{assignment.feedback}"
+                    </p>
                   </div>
                 )}
 

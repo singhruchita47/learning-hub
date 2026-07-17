@@ -1262,23 +1262,11 @@ router.delete("/timetable/:id", async (req: Request, res: Response) => {
 });
 
 router.get("/timetable/student/:studentId", async (req: Request, res: Response) => {
-  const { studentId } = req.params;
   const db = getDB();
   if (!db.timetable) db.timetable = [];
-  if (!db.enrollments) db.enrollments = [];
 
-  // Get courses the student is enrolled in
-  // Mocking: If the student has no enrollments, we just return all timetable slots as a fallback/demo, 
-  // or return specific courses. For a demo, returning all if empty might be better, or standard CS301.
-  const studentEnrollments = db.enrollments.filter((e: any) => e.studentId === studentId);
-  let courseCodes = studentEnrollments.map((e: any) => e.courseId);
-  
-  // If no enrollments, return a default mock schedule based on CS301, CS302, CS303
-  if (courseCodes.length === 0) {
-    courseCodes = ["CS301", "CS302", "CS303"];
-  }
-
-  const slots = db.timetable.filter((t: any) => courseCodes.includes(t.courseCode));
+  // Return all timetable slots — students see the full campus schedule
+  const slots = db.timetable;
   return res.json({ timetable: slots, storage: "memory" });
 });
 
@@ -1294,6 +1282,65 @@ router.get("/timetable/faculty/:facultyId", async (req: Request, res: Response) 
   }
   
   return res.json({ timetable: slots, storage: "memory" });
+});
+
+// ==========================================
+// Published Tests endpoints (Quiz/Exam)
+// ==========================================
+router.get("/published-tests", async (_req: Request, res: Response) => {
+  const db = getDB();
+  if (!db.publishedTests) db.publishedTests = [];
+  return res.json({ tests: db.publishedTests, storage: "memory" });
+});
+
+router.post("/published-tests", async (req: Request, res: Response) => {
+  const { title, testDate, startTime, durationMinutes, questions } = req.body;
+  if (!title || !questions || !Array.isArray(questions)) {
+    return res.status(400).json({ message: "title and questions are required." });
+  }
+
+  const db = getDB();
+  if (!db.publishedTests) db.publishedTests = [];
+
+  const test = {
+    id: `test-${Date.now()}`,
+    title,
+    testDate: testDate || new Date().toISOString().slice(0, 10),
+    startTime: startTime || "09:00",
+    durationMinutes: durationMinutes || 30,
+    questions,
+    createdAt: new Date().toISOString(),
+  };
+
+  db.publishedTests.unshift(test);
+  updateDB("publishedTests", db.publishedTests);
+
+  // Notify students
+  if (!db.notifications) db.notifications = [];
+  db.notifications.unshift({
+    _id: memoryId("notification"),
+    title: "New Test Published",
+    message: `A new test "${title}" has been published for you.`,
+    audience: "student",
+    type: "general",
+    readBy: [],
+    createdAt: new Date().toISOString(),
+  });
+  updateDB("notifications", db.notifications);
+
+  return res.status(201).json({ test, storage: "memory" });
+});
+
+router.delete("/published-tests/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const db = getDB();
+  if (!db.publishedTests) db.publishedTests = [];
+  const index = db.publishedTests.findIndex((t: any) => t.id === id);
+  if (index !== -1) {
+    db.publishedTests.splice(index, 1);
+    updateDB("publishedTests", db.publishedTests);
+  }
+  return res.json({ message: "Test deleted." });
 });
 
 // ==========================================

@@ -137,6 +137,20 @@ export function AcademicProvider({ children, user }: { children: React.ReactNode
   const [questionsLoading, setQuestionsLoading] = useState(false);
   const [questionsError, setQuestionsError] = useState("");
 
+  // Load published tests from API on mount
+  useEffect(() => {
+    async function loadPublishedTests() {
+      try {
+        const res = await fetch(`${API_BASE}/published-tests`);
+        if (res.ok) {
+          const data = await res.json() as { tests?: PublishedTest[] };
+          if (data.tests && data.tests.length > 0) setPublishedTests(data.tests);
+        }
+      } catch { /* ignore */ }
+    }
+    void loadPublishedTests();
+  }, []);
+
   const reloadQuestions = useCallback(async () => {
     setQuestionsLoading(true);
     setQuestionsError("");
@@ -273,14 +287,30 @@ export function AcademicProvider({ children, user }: { children: React.ReactNode
         );
       },
       publishTest: (test) => {
-        setPublishedTests((current) => [
-          {
-            ...test,
-            id: `test-${Date.now()}`,
-            createdAt: new Date().toISOString(),
-          },
-          ...current,
-        ]);
+        // Save to API first, then update local state
+        void fetch(`${API_BASE}/published-tests`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(test),
+        })
+          .then((res) => res.ok ? res.json() : null)
+          .then((data: { test?: PublishedTest } | null) => {
+            if (data?.test) {
+              setPublishedTests((current) => [data.test!, ...current]);
+            } else {
+              // Fallback: add locally
+              setPublishedTests((current) => [
+                { ...test, id: `test-${Date.now()}`, createdAt: new Date().toISOString() },
+                ...current,
+              ]);
+            }
+          })
+          .catch(() => {
+            setPublishedTests((current) => [
+              { ...test, id: `test-${Date.now()}`, createdAt: new Date().toISOString() },
+              ...current,
+            ]);
+          });
       },
       publishCodingQuestions: (questions) => {
         setPublishedCodingQuestions(questions);
