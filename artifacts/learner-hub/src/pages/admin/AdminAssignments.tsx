@@ -344,68 +344,98 @@ export default function AdminAssignments() {
               </div>
             )}
 
-            <div className="grid gap-4">
+            <div className="grid gap-5">
               {filteredSubmissions.length > 0 ? filteredSubmissions.map(item => {
                 const feedbackValue = feedbackDrafts[item._id] ?? item.feedback ?? "";
                 const markValue = markDrafts[item._id] ?? (item.marks ? String(item.marks) : "");
+                const hasMarks = item.marks !== undefined && item.marks !== null;
+                const hasFeedback = !!item.feedback;
                 return (
-                  <article key={item._id} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                      <div>
-                        <h3 className="text-base font-black text-slate-950">{item.assignment?.title ?? "Assignment submission"}</h3>
-                        <p className="mt-1 text-sm font-bold text-slate-500">
-                          {item.studentId} · {item.assignment?.courseCode ?? "LMS"} · {new Date(item.createdAt).toLocaleString("en-IN")}
-                        </p>
-                        <p className="mt-1.5 text-sm font-semibold text-slate-600">File: {item.fileName}</p>
-                        {item.note && <p className="mt-1 text-xs font-bold text-slate-500">Note: {item.note}</p>}
+                  <article key={item._id} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-lg shadow-slate-200/50 transition hover:shadow-violet-100/80">
+                    {/* ── Card Header ── */}
+                    <div className="flex flex-col gap-4 p-5 md:flex-row md:items-start md:justify-between">
+                      <div className="flex items-start gap-3.5">
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-violet-50 text-violet-600">
+                          <FileCheck2 className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <h3 className="text-base font-black text-slate-900 leading-snug">{item.assignment?.title ?? "Assignment submission"}</h3>
+                          <p className="mt-1 text-xs font-bold text-slate-400">
+                            {item.studentId} · <span className="text-violet-600">{item.assignment?.courseCode ?? "LMS"}</span> · {new Date(item.createdAt).toLocaleString("en-IN")}
+                          </p>
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            <span className="flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-0.5 text-[10px] font-bold text-slate-600">
+                              📄 {item.fileName}
+                            </span>
+                            {item.note && (
+                              <span className="flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-bold text-amber-700">
+                                💬 {item.note}
+                              </span>
+                            )}
+                          </div>
+                        </div>
                       </div>
+
+                      {/* Badges + View File */}
                       <div className="flex flex-wrap items-center gap-2 shrink-0">
-                        <span className="rounded-full bg-violet-50 px-3 py-1 text-xs font-black text-violet-700">
-                          Marks: {item.marks ?? "Pending"}
+                        <span className={`rounded-full px-3 py-1.5 text-xs font-black border ${hasMarks ? "bg-emerald-50 text-emerald-700 border-emerald-100" : "bg-orange-50 text-orange-600 border-orange-100"}`}>
+                          {hasMarks ? `🎯 ${item.marks} / 100` : "⏳ Marks Pending"}
                         </span>
-                        <span className={`rounded-full px-3 py-1 text-xs font-black ${item.feedback ? "bg-indigo-50 text-indigo-700" : "bg-orange-50 text-orange-700"}`}>
-                          {item.feedback ? "Feedback sent" : "Needs feedback"}
+                        <span className={`rounded-full px-3 py-1.5 text-xs font-black border ${hasFeedback ? "bg-indigo-50 text-indigo-700 border-indigo-100" : "bg-slate-100 text-slate-500 border-slate-200"}`}>
+                          {hasFeedback ? "✅ Feedback sent" : "📝 Needs feedback"}
                         </span>
                         {item.fileUrl ? (
                           <a href={item.fileUrl} target="_blank" rel="noreferrer"
-                            className="flex h-10 items-center gap-2 rounded-xl bg-slate-900 px-4 text-xs font-black text-white hover:bg-slate-800">
-                            <Download className="h-4 w-4" /> View File
+                            className="flex h-9 items-center gap-2 rounded-xl bg-slate-900 px-4 text-xs font-black text-white hover:bg-slate-700 transition">
+                            <Download className="h-3.5 w-3.5" /> View File
                           </a>
                         ) : (
                           <button onClick={() => window.open(item.fileName, "_blank")}
-                            className="flex h-10 items-center gap-2 rounded-xl bg-slate-900 px-4 text-xs font-black text-white hover:bg-slate-800">
-                            <Download className="h-4 w-4" /> View File
+                            className="flex h-9 items-center gap-2 rounded-xl bg-slate-900 px-4 text-xs font-black text-white hover:bg-slate-700 transition cursor-pointer">
+                            <Download className="h-3.5 w-3.5" /> View File
                           </button>
                         )}
                       </div>
                     </div>
-                    <div className="mt-4 grid gap-3 rounded-2xl border border-violet-100 bg-white p-4 md:grid-cols-[140px_1fr_auto] md:items-end">
-                      <label className="grid gap-2">
-                        <span className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">Marks</span>
-                        <input
-                          type="number"
-                          value={markValue}
-                          onChange={e => setMarkDrafts(p => ({ ...p, [item._id]: e.target.value }))}
-                          placeholder="0"
-                          className="h-11 rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm font-bold outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-100"
-                        />
-                      </label>
-                      <label className="grid gap-2">
-                        <span className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">Feedback</span>
-                        <textarea
-                          value={feedbackValue}
-                          onChange={e => setFeedbackDrafts(p => ({ ...p, [item._id]: e.target.value }))}
-                          placeholder="Write feedback for this student..."
-                          rows={2}
-                          className="resize-none rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold outline-none focus:border-violet-300 focus:ring-4 focus:ring-violet-100"
-                        />
-                      </label>
-                      <button
-                        onClick={() => saveFeedback(item._id)}
-                        className="h-11 rounded-xl bg-violet-600 px-5 text-xs font-black text-white shadow-lg shadow-violet-600/20 transition hover:bg-violet-700 cursor-pointer"
-                      >
-                        Save Feedback
-                      </button>
+
+                    {/* ── Evaluate Section ── */}
+                    <div className="border-t border-violet-50 bg-gradient-to-br from-violet-50/60 to-indigo-50/40 p-5">
+                      <p className="mb-3 text-[10px] font-black uppercase tracking-widest text-violet-600">📋 Evaluate Submission</p>
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+                        {/* Marks input */}
+                        <div className="flex flex-col gap-1.5 sm:w-36 shrink-0">
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Marks / 100</label>
+                          <input
+                            type="number"
+                            min="0"
+                            max="100"
+                            value={markValue}
+                            onChange={e => setMarkDrafts(p => ({ ...p, [item._id]: e.target.value }))}
+                            placeholder="e.g. 85"
+                            className="h-12 rounded-xl border border-violet-100 bg-white px-4 text-center text-lg font-black text-violet-800 outline-none shadow-sm focus:border-violet-400 focus:ring-4 focus:ring-violet-100/60 transition"
+                          />
+                        </div>
+
+                        {/* Feedback textarea */}
+                        <div className="flex flex-1 flex-col gap-1.5">
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Feedback Message</label>
+                          <textarea
+                            value={feedbackValue}
+                            onChange={e => setFeedbackDrafts(p => ({ ...p, [item._id]: e.target.value }))}
+                            placeholder="Write your feedback for this student's submission..."
+                            rows={2}
+                            className="resize-none rounded-xl border border-violet-100 bg-white p-3 text-sm font-semibold text-slate-700 outline-none shadow-sm focus:border-violet-400 focus:ring-4 focus:ring-violet-100/60 transition placeholder:text-slate-400"
+                          />
+                        </div>
+
+                        {/* Save button */}
+                        <button
+                          onClick={() => saveFeedback(item._id)}
+                          className="h-12 shrink-0 rounded-xl bg-violet-600 px-6 text-xs font-black text-white shadow-lg shadow-violet-300/50 transition hover:bg-violet-700 hover:shadow-violet-400/40 active:scale-95 cursor-pointer"
+                        >
+                          Save Feedback
+                        </button>
+                      </div>
                     </div>
                   </article>
                 );
